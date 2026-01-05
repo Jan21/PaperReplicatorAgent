@@ -1,0 +1,565 @@
+# COMPLETE REPRODUCTION PLAN FOR NEURAL HEURISTICS FOR SAT SOLVING
+
+```yaml
+complete_reproduction_plan:
+  paper_info:
+    title: "Neural Heuristics for SAT Solving"
+    core_contribution: "Graph neural networks with message-passing and attention mechanisms learn effective branching heuristics for SAT solvers (DPLL and CDCL), outperforming traditional heuristics on larger problems"
+
+  # SECTION 1: File Structure Design (800-1000 chars)
+  
+  file_structure: |
+    neural-sat-heuristics/
+    ├── README.md                          # [LAST] Project overview and setup
+    ├── requirements.txt                   # [LAST] Dependencies
+    ├── setup.py                          # [LAST] Package installation
+    │
+    ├── src/
+    │   ├── models/                       # [FIRST] Core neural architecture
+    │   │   ├── graph_network.py         # Main GNN model
+    │   │   ├── message_passing.py       # Message passing layer
+    │   │   ├── attention.py             # Attention aggregation
+    │   │   ├── mlp_blocks.py            # MLP components
+    │   │   └── predictors.py            # SAT/policy prediction heads
+    │   │
+    │   ├── solvers/                      # [SECOND] SAT solving algorithms
+    │   │   ├── dpll.py                  # DPLL implementation
+    │   │   ├── heuristics.py            # Neural, JW-OS, DLIS, Hybrid
+    │   │   ├── cdcl_wrapper.py          # CDCL integration
+    │   │   └── simplify.py              # Unit propagation, clause elimination
+    │   │
+    │   ├── data/                         # [SECOND] Data generation
+    │   │   ├── sr_generator.py          # SR(n) formula generator
+    │   │   ├── label_generator.py       # MiniSat label generation
+    │   │   ├── graph_constructor.py     # CNF to graph conversion
+    │   │   └── dataset.py               # Dataset loading/batching
+    │   │
+    │   ├── training/                     # [THIRD] Training infrastructure
+    │   │   ├── trainer.py               # Training loop
+    │   │   ├── loss.py                  # Loss computation
+    │   │   └── metrics.py               # Evaluation metrics
+    │   │
+    │   └── utils/
+    │       ├── cnf_parser.py            # DIMACS CNF parsing
+    │       └── config.py                # Configuration management
+    │
+    ├── experiments/                      # [THIRD] Experiment scripts
+    │   ├── train_models.py              # Train SR(30/50/70/100)
+    │   ├── experiment_1.py              # Baseline comparison
+    │   ├── experiment_2.py              # Hybrid vs JW-OS
+    │   └── experiment_3.py              # Attention ablation
+    │
+    ├── configs/                          # [FOURTH] Configuration files
+    │   ├── sr30.yaml
+    │   ├── sr50.yaml
+    │   ├── sr70.yaml
+    │   └── sr100.yaml
+    │
+    └── tests/                            # [FOURTH] Unit tests
+        ├── test_graph_network.py
+        ├── test_dpll.py
+        └── test_data.py
+
+  # SECTION 2: Implementation Components (3000-4000 chars)
+
+  implementation_components: |
+    ## CORE ALGORITHMS AND MODELS
+    
+    ### 1. GRAPH NEURAL NETWORK (src/models/graph_network.py)
+    **Purpose**: Learn branching heuristics via message passing on formula graphs
+    **Location**: Section 3 of paper
+    
+    **Architecture**:
+    - Bipartite graph: literal nodes + clause nodes
+    - Edges: clause-literal (containment) + literal-literal (negation)
+    - Trainable initial embeddings (separate for literals/clauses)
+    - T iterations (20-40) of message passing
+    - Output: SAT prediction + per-literal policy predictions
+    
+    **Message Passing (3 stages per iteration)**:
+    Stage 1 - Message Generation:
+      - Each node generates V (value vector) via 3-layer MLP
+      - With attention: also generates K (key vector)
+      - MLPs: [embedding_dim] → [hidden, hidden] → [message_dim]
+      - Activations: LeakyReLU, LeakyReLU, Linear
+    
+    Stage 2 - Aggregation:
+      Average: aggregated = mean(V_i for incoming V_i)
+      Attention: aggregated = Σ(V_i * sigmoid(K_i · Q))
+        where Q = MLP_query(receiver_embedding)
+      Modified attention uses sigmoid (not softmax) for independent acceptance
+    
+    Stage 3 - Update:
+      - Input: concat(old_embedding, aggregated_messages)
+      - 3-layer MLP: [emb_dim + msg_dim] → [hidden, hidden] → [emb_dim]
+      - Activations: LeakyReLU, LeakyReLU, Sigmoid (constrains to [0,1])
+    
+    **Prediction Heads**:
+    - SAT: linear(literal_emb) for each literal → sum → sigmoid
+    - Policy: logistic(literal_emb) for each literal → sigmoid
+    - Parameters shared across iterations
+    
+    **Key Formulas**:
+    - Attention: Σ_i V_i * sigmoid(K_i · Q) [modified from standard]
+    - SAT loss: CrossEntropy(sat_pred, sat_label)
+    - Policy loss: if UNSAT: 0; if SAT: mean(CrossEntropy(policy_pred_l, label_l))
+    - Total loss: Σ_iterations (sat_loss + policy_loss)
+    
+    ### 2. DPLL WITH NEURAL HEURISTIC (src/solvers/dpll.py)
+    **Purpose**: Backtracking SAT solver using neural branching
+    **Location**: Algorithm 1, Section 1
+    
+    **Pseudocode**:
+    ```
+    DPLL(Φ):
+      Φ = simplify(Φ)  # unit propagation + clause elimination
+      if Φ is empty: return True
+      if Φ has empty clause: return False
+      literal = choose_literal(Φ)  # NEURAL HEURISTIC HERE
+      if DPLL(Φ ∧ literal): return True
+      if DPLL(Φ ∧ ¬literal): return True
+      return False
+    ```
+    
+    **Neural choose_literal**:
+    1. Convert current formula to graph
+    2. Run T iterations of message passing
+    3. Extract policy predictions for unassigned literals
+    4. Return literal with max policy value
+    
+    ### 3. BASELINE HEURISTICS (src/solvers/heuristics.py)
+    
+    **JW-OS (Jeroslow-Wang One-Sided)**:
+    - Formula: J(l) = Σ_{l∈c} 2^(-|c|)
+    - Weight each clause by 2^(-length)
+    - Select literal with maximum J(l)
+    
+    **DLIS (Dynamic Largest Individual Sum)**:
+    - Count occurrences in unsatisfied clauses
+    - Select most frequent literal
+    
+    **Hybrid Heuristic**:
+    - If neural SAT prediction < 0.3: use JW-OS
+    - Else: use neural policy prediction
+    - Combines strengths of both approaches
+    
+    ### 4. DATA GENERATION (src/data/)
+    
+    **SR(n) Generator**:
+    - Random 3-SAT formulas with n variables
+    - Balanced: 50% SAT, 50% UNSAT
+    - Variable clause counts
+    - Reference: NeuroSAT paper distribution
+    
+    **Label Generation**:
+    - Run MiniSat 2.2 to get SAT/UNSAT label
+    - For SAT formulas: test each literal (Φ ∧ l)
+    - Generate binary policy labels
+    - Cache results for training
+    
+    **Graph Construction**:
+    - Parse CNF formula (DIMACS format)
+    - Create node for each literal (not variable)
+    - Create node for each clause
+    - Build adjacency matrices:
+      CCL: [num_clauses × num_literals] for containment
+      CLL: [num_literals × num_literals] for negation
+    
+    ### 5. TRAINING PROCEDURE (src/training/trainer.py)
+    
+    **Configuration per problem size**:
+    SR(30): batch=128, steps=1.2M, time=20h (TPU v2)
+    SR(50): batch=64, steps=600K, time=12h
+    SR(70): batch=64, steps=600K, time=22h
+    SR(100): batch=32, steps=1.2M, time=28h
+    
+    **Training Loop**:
+    1. Sample batch of formulas
+    2. Forward: message passing → predictions at each iteration
+    3. Compute loss: Σ_iterations (sat_loss + policy_loss)
+    4. Backward: clip gradients (norm=1.0)
+    5. Update: Adam optimizer
+    6. Validate periodically, checkpoint models
+    
+    **Stability**:
+    - Train 5 replicas per configuration
+    - Exclude models with loss std dev > 1
+    - Use 3-5 stable models for evaluation
+    
+    **Expected Metrics** (from Table 1):
+    SR(30): loss=28.2±0.7, sat_err=0.08±0.004, policy_err=0.05±0.002
+    SR(50): loss=32.0±0.6, sat_err=0.23±0.017, policy_err=0.11±0.006
+    SR(70): loss=33.0±0.5, sat_err=0.27±0.033, policy_err=0.11±0.007
+    SR(100): loss=34.2±0.1, sat_err=0.32±0.007, policy_err=0.12±0.002
+    
+    ### 6. MLP ARCHITECTURES (src/models/mlp_blocks.py)
+    
+    All MLPs: 3 layers with shared parameters across iterations
+    
+    **Message V/K Generation**:
+    - Input: [embedding_dim]
+    - Hidden: [hidden_dim, hidden_dim]
+    - Output: [message_dim]
+    - Activations: LeakyReLU → LeakyReLU → Linear
+    
+    **Query Generation**:
+    - Same as message generation
+    
+    **Embedding Update**:
+    - Input: [embedding_dim + message_dim]
+    - Hidden: [hidden_dim, hidden_dim]
+    - Output: [embedding_dim]
+    - Activations: LeakyReLU → LeakyReLU → Sigmoid
+    
+    **SAT/Policy Heads**:
+    - SAT: Linear [embedding_dim] → [1]
+    - Policy: Linear [embedding_dim] → [1] + Sigmoid
+    
+    ### 7. CDCL INTEGRATION (src/solvers/cdcl_wrapper.py)
+    - Use external CDCL implementation (github.com/zlii/pysat)
+    - Replace branching heuristic with neural model
+    - Maintain conflict learning and backjumping
+    - Used in Experiment 2 comparisons
+
+  # SECTION 3: Validation Approach (2000-2500 chars)
+
+  validation_approach: |
+    ## EXPERIMENT REPRODUCTION
+    
+    ### Experiment 1: Baseline Comparison (Figure 3)
+    **Goal**: Verify neural models outperform on larger problems
+    
+    **Setup**:
+    - Models: SR(30), SR(50), SR(70), SR(100) trained networks
+    - Baselines: JW-OS, DLIS
+    - Test problems: 100 SAT formulas each for SR(30) through SR(110)
+    - Solver: DPLL with 1000 step limit
+    - Metric: Percentage solved within limit
+    
+    **Expected Results**:
+    - JW-OS best on SR(50), SR(70) (>80-90% solved)
+    - Neural models competitive on SR(90)
+    - Neural models best on SR(110) (>60% vs <50% for JW-OS)
+    
+    **Validation**:
+    - Generate bar chart matching Figure 3 layout
+    - Verify trend: traditional good on small, neural better on large
+    - Check specific values within ±10%
+    
+    ### Experiment 2: Hybrid Evaluation (Figure 4)
+    **Goal**: Hybrid approach wins majority of comparisons
+    
+    **Setup**:
+    - Model: SR(50) + JW-OS hybrid (threshold=0.3)
+    - Comparison: Pure JW-OS
+    - Solvers: Both DPLL and CDCL
+    - Test problems: Various SR(n) formulas
+    - Metric: Win/loss/draw based on step count (no limit)
+    
+    **Expected Results**:
+    - DPLL: Hybrid wins ~60-70% of cases
+    - CDCL: Hybrid wins ~60-70% of cases
+    - Horizontal bar charts showing win distribution
+    
+    **Validation**:
+    - Count wins/losses/draws for each solver type
+    - Generate charts matching Figure 4 format
+    - Verify hybrid advantage consistent across problem sizes
+    
+    ### Experiment 3: Attention Ablation (Figure 5)
+    **Goal**: Attention mechanism improves performance
+    
+    **Setup**:
+    - Train models with/without attention
+    - Problem sizes: SR(30), SR(50), SR(70), SR(100)
+    - Iterations: 20 and 40 (level 20, level 40)
+    - Metric: Policy error on evaluation set
+    - Replicas: 3-5 per configuration for error bars
+    
+    **Expected Results**:
+    - Attention improves most configurations
+    - Exception: SR(30) level 20 slightly worse
+    - SR(50) level 40 within standard deviation
+    - Error bars computed from replica variance
+    
+    **Validation**:
+    - Generate bar chart with error bars
+    - Verify improvement pattern
+    - Check magnitudes: policy error 0.05-0.15 range
+    
+    ## TRAINING VALIDATION
+    
+    **Loss Convergence**:
+    - Monitor sat_loss and policy_loss separately
+    - Verify total_loss decreases over training
+    - Check final losses match Table 1 within std dev
+    
+    **Metric Validation**:
+    - SAT error: Mean absolute error for satisfiability
+    - Policy error: Mean absolute error for branching
+    - Compare against Table 1 reported values
+    
+    **Stability Checks**:
+    - Train 5 replicas per SR(n) configuration
+    - Compute loss std dev across replicas
+    - Exclude models with std dev > 1 (as paper does)
+    - Document exclusion rate
+    
+    ## QUALITATIVE VALIDATION
+    
+    **Branching Quality**:
+    - Visualize policy predictions on sample formulas
+    - Verify high predictions correlate with satisfiability
+    - Check that neural heuristic makes sensible choices
+    
+    **SAT Prediction**:
+    - Test correlation between SAT probability and difficulty
+    - Verify low predictions trigger hybrid fallback
+    - Analyze threshold sensitivity (0.2, 0.3, 0.4)
+    
+    **Generalization**:
+    - Test SR(50) model on SR(60), SR(70)
+    - Test SR(100) model on SR(110), SR(120)
+    - Document performance degradation on out-of-distribution
+    
+    ## SUCCESS CRITERIA
+    
+    **Must Achieve**:
+    - Training metrics within ±20% of Table 1
+    - Figure 3 trend: neural best on large problems
+    - Figure 4: Hybrid wins majority
+    - Models train stably (3+ successful runs per config)
+    
+    **Should Achieve**:
+    - Training metrics within ±10% of Table 1
+    - Figure 5: Attention improves most cases
+    - CDCL integration functional
+    - Hybrid threshold analysis complete
+    
+    **Nice to Have**:
+    - Exact reproduction of all figures
+    - Extended problem sizes (SR(150)+)
+    - Performance optimization for faster inference
+
+  # SECTION 4: Environment Setup (800-1000 chars)
+
+  environment_setup: |
+    ## SOFTWARE DEPENDENCIES
+    
+    **Core Framework**:
+    - Python: 3.8+
+    - PyTorch: 2.0+ OR TensorFlow: 2.8+
+      (Paper uses TensorFlow, but PyTorch acceptable)
+    
+    **SAT Solving**:
+    - PySAT: Latest (MiniSat 2.2 interface)
+    - python-sat: Latest (alternative solver interface)
+    
+    **Scientific Computing**:
+    - NumPy: 1.19+
+    - SciPy: 1.7+ (sparse matrices)
+    
+    **Utilities**:
+    - PyYAML: 6.0+ (configuration)
+    - Matplotlib: 3.5+ (visualization)
+    - Pandas: 1.3+ (result analysis)
+    
+    **Optional**:
+    - Weights & Biases OR TensorBoard (logging)
+    - pytest (testing)
+    
+    ## HARDWARE REQUIREMENTS
+    
+    **Training**:
+    - Recommended: TPU v2/v3 (as paper) or GPU (A100/V100)
+    - Minimum: GPU with 16GB+ VRAM
+    - CPU training possible but very slow (100x slower)
+    - RAM: 32GB+ for larger models
+    - Storage: 50-100GB for datasets
+    
+    **Expected Training Times**:
+    - With TPU v2 (paper): 20-28 hours per model
+    - With A100 GPU: 40-60 hours per model
+    - With V100 GPU: 60-100 hours per model
+    
+    **Inference**:
+    - CPU sufficient for evaluation
+    - GPU speeds up batch evaluation
+    
+    ## INSTALLATION
+    
+    ```bash
+    # Create environment
+    conda create -n neural-sat python=3.9
+    conda activate neural-sat
+    
+    # Install PyTorch (with CUDA)
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+    
+    # Install dependencies
+    pip install -r requirements.txt
+    
+    # Install PySAT
+    pip install python-sat
+    
+    # Install package
+    pip install -e .
+    ```
+    
+    ## EXTERNAL TOOLS
+    
+    **MiniSat 2.2**:
+    - Interface via PySAT (automatic)
+    - Used for label generation only
+    
+    **CDCL Solver**:
+    - Source: github.com/zlii/pysat (referenced in paper)
+    - Optional: Only needed for Experiment 2 CDCL tests
+
+  # SECTION 5: Implementation Strategy (1500-2000 chars)
+
+  implementation_strategy: |
+    ## PHASE 1: FOUNDATION (Weeks 1-2)
+    **Priority: CRITICAL - Everything depends on this**
+    
+    **Step 1.1**: Data infrastructure
+    - Implement DIMACS CNF parser (utils/cnf_parser.py)
+    - Create SR(n) generator (data/sr_generator.py)
+    - Build MiniSat interface for labels (data/label_generator.py)
+    - Generate datasets: SR(30), SR(50), SR(70), SR(100)
+    - Cache labels to avoid regeneration
+    - **Checkpoint**: Can load formula, generate labels
+    
+    **Step 1.2**: Graph construction
+    - Implement CNF to graph conversion (data/graph_constructor.py)
+    - Build adjacency matrices CCL and CLL
+    - Create batching utilities for variable-sized graphs
+    - Test on small formulas (10-20 variables)
+    - **Checkpoint**: Graph properties verified (bipartite, invariance)
+    
+    **Step 1.3**: Basic SAT solver
+    - Implement DPLL core (solvers/dpll.py)
+    - Add unit propagation and simplification
+    - Implement JW-OS and DLIS baselines
+    - Test correctness on small SAT/UNSAT problems
+    - **Checkpoint**: Baselines solve problems correctly
+    
+    ## PHASE 2: NEURAL ARCHITECTURE (Weeks 3-5)
+    **Priority: CRITICAL - Core of the method**
+    
+    **Step 2.1**: MLP components
+    - Build 3-layer MLP class (models/mlp_blocks.py)
+    - Support different activations (LeakyReLU, Sigmoid, Linear)
+    - Test forward pass and gradients
+    - **Checkpoint**: MLPs produce correct output shapes
+    
+    **Step 2.2**: Message passing
+    - Implement average aggregation (models/message_passing.py)
+    - Implement attention aggregation (models/attention.py)
+    - Create single message passing layer
+    - Test on toy graph (5 literals, 3 clauses)
+    - **Checkpoint**: Embeddings update correctly
+    
+    **Step 2.3**: Full graph network
+    - Stack T iterations of message passing (models/graph_network.py)
+    - Add trainable initial embeddings
+    - Implement SAT and policy prediction heads
+    - Test end-to-end forward pass
+    - **Checkpoint**: Network outputs predictions
+    
+    **Step 2.4**: Loss and training
+    - Implement loss computation (training/loss.py)
+    - Create training loop (training/trainer.py)
+    - Add metrics tracking (training/metrics.py)
+    - Train on tiny dataset (100 formulas) to verify learning
+    - **Checkpoint**: Loss decreases during training
+    
+    ## PHASE 3: INTEGRATION (Weeks 6-7)
+    **Priority: HIGH - Connect components**
+    
+    **Step 3.1**: Neural heuristic
+    - Wrap model as choose_literal function (solvers/heuristics.py)
+    - Integrate with DPLL
+    - Test on formulas model can solve
+    - **Checkpoint**: DPLL+neural solves problems
+    
+    **Step 3.2**: Hybrid approach
+    - Implement threshold-based switching
+    - Test with different thresholds (0.2, 0.3, 0.4)
+    - Compare pure neural vs hybrid
+    - **Checkpoint**: Hybrid switches correctly
+    
+    **Step 3.3**: Configuration system
+    - Create YAML configs (configs/*.yaml)
+    - Load hyperparameters from config
+    - Support multiple model configurations
+    - **Checkpoint**: Can train different SR(n) models
+    
+    ## PHASE 4: TRAINING (Weeks 8-10)
+    **Priority: HIGH - Generate models for experiments**
+    
+    **Step 4.1**: SR(30) model
+    - Train 5 replicas with config from Table 1
+    - Monitor loss, sat_error, policy_error
+    - Exclude unstable replicas (std dev > 1)
+    - **Checkpoint**: Metrics match Table 1
+    
+    **Step 4.2**: SR(50), SR(70), SR(100) models
+    - Train each size with appropriate config
+    - Adjust batch size and steps per Table 1
+    - Track training time and resource usage
+    - **Checkpoint**: All models trained successfully
+    
+    **Step 4.3**: Attention ablation
+    - Train models without attention (average only)
+    - Both 20 and 40 iterations
+    - **Checkpoint**: Ready for Experiment 3
+    
+    ## PHASE 5: EXPERIMENTS (Weeks 11-12)
+    **Priority: MEDIUM - Validate results**
+    
+    **Step 5.1**: Experiment 1 (experiments/experiment_1.py)
+    - Compare all models vs baselines
+    - Test on SR(30) through SR(110)
+    - Generate Figure 3
+    - **Checkpoint**: Neural best on large problems
+    
+    **Step 5.2**: Experiment 2 (experiments/experiment_2.py)
+    - Implement CDCL wrapper if not done
+    - Run hybrid vs JW-OS (DPLL and CDCL)
+    - Generate Figure 4
+    - **Checkpoint**: Hybrid wins majority
+    
+    **Step 5.3**: Experiment 3 (experiments/experiment_3.py)
+    - Compare attention vs average
+    - Compute error bars from replicas
+    - Generate Figure 5
+    - **Checkpoint**: Attention improves most cases
+    
+    ## HANDLING MISSING DETAILS
+    
+    **Embedding dimensions**: Start with 128, scale to 256 for SR(100)
+    **Learning rate**: Try 1e-4, tune if unstable
+    **Hidden dimensions**: Use 2x embedding_dim
+    **Optimizer**: Adam (standard choice)
+    **Gradient clipping**: Norm=1.0 (standard for message passing)
+    
+    ## DEBUGGING STRATEGY
+    
+    - Start with smallest problem size (SR(30))
+    - Test each component in isolation
+    - Verify gradients flow to all parameters
+    - Check for NaN/Inf values in training
+    - Monitor both losses (sat and policy) separately
+    - Compare embeddings at different iterations
+    - Visualize attention weights on toy examples
+    
+    ## VALIDATION THROUGHOUT
+    
+    After each phase:
+    - Run unit tests
+    - Verify on small examples
+    - Check against paper descriptions
+    - Document any deviations or assumptions
+    - Adjust hyperparameters if needed
+```

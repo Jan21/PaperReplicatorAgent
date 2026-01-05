@@ -53,6 +53,22 @@ def get_llm_provider() -> str:
     return config.get("llm_provider", "openai")
 
 
+def _patch_anthropic_streaming_limit():
+    """Patch Anthropic SDK to allow higher max_tokens without requiring streaming."""
+    try:
+        from anthropic._base_client import SyncAPIClient, AsyncAPIClient
+        from httpx import Timeout
+
+        def patched_timeout(self, max_tokens, max_nonstreaming_tokens=None):
+            # Return a long timeout instead of raising ValueError
+            return Timeout(60 * 60)  # 1 hour timeout
+
+        SyncAPIClient._calculate_nonstreaming_timeout = patched_timeout
+        AsyncAPIClient._calculate_nonstreaming_timeout = patched_timeout
+    except Exception:
+        print("Warning: Could not patch Anthropic SDK for streaming token limit.")
+
+
 def setup_llm_api_keys():
     """
     Set up API keys from secrets file as environment variables.
@@ -66,6 +82,7 @@ def setup_llm_api_keys():
         api_key = anthropic_secrets.get("api_key", "")
         if api_key:
             os.environ["ANTHROPIC_API_KEY"] = api_key
+        _patch_anthropic_streaming_limit()
     else:  # openai
         openai_secrets = secrets.get("openai", {})
         api_key = openai_secrets.get("api_key", "")
