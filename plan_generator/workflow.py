@@ -15,6 +15,7 @@ Or programmatically:
 
 import os
 import sys
+import re
 import argparse
 from pathlib import Path
 
@@ -32,6 +33,14 @@ from .prompts import (
     CODE_PLANNING_PROMPT,
 )
 from .llm_utils import get_token_limits, get_llm_params, get_tracing_config, get_agent_servers
+
+
+def extract_page_number(filename: str) -> int:
+    """Extract page number from filename like 'paper_page_1.txt' -> 1"""
+    match = re.search(r'_page_(\d+)\.txt$', filename)
+    if match:
+        return int(match.group(1))
+    return -1
 
 
 # Get the path to the config file in this module's directory
@@ -60,7 +69,7 @@ class AnalyzePaperWorkflow(Workflow[str]):
         Execute the code analysis workflow.
 
         Args:
-            paper_dir: Directory path containing the research paper (.md file)
+            paper_dir: Directory path containing the research paper page files (*_page_N.txt)
 
         Returns:
             WorkflowResult containing the YAML implementation plan
@@ -68,23 +77,37 @@ class AnalyzePaperWorkflow(Workflow[str]):
         print(f"Code analysis workflow started")
         print(f"   Paper directory: {paper_dir}")
 
-        # STEP 1: Read paper file
+        # STEP 1: Read paper files
         paper_content = None
-        paper_file_path = None
 
         try:
+            # Find all .txt page files and sort by page number
+            txt_files = []
             for filename in os.listdir(paper_dir):
-                if filename.endswith(".md"):
-                    paper_file_path = os.path.join(paper_dir, filename)
-                    with open(paper_file_path, "r", encoding="utf-8") as f:
-                        paper_content = f.read()
-                    print(f"Paper file loaded: {paper_file_path} ({len(paper_content)} chars)")
-                    break
+                if filename.endswith(".txt") and "_page_" in filename:
+                    page_num = extract_page_number(filename)
+                    if page_num > 0:
+                        txt_files.append((page_num, filename))
 
-            if not paper_content:
-                return WorkflowResult(value="No paper file found")
+            # Sort by page number
+            txt_files.sort(key=lambda x: x[0])
+
+            # Concatenate all pages in order
+            paper_parts = []
+            for page_num, filename in txt_files:
+                file_path = os.path.join(paper_dir, filename)
+                with open(file_path, "r", encoding="utf-8") as f:
+                    paper_parts.append(f.read())
+
+            paper_content = "\n\n\n".join(paper_parts)
+
+            if paper_content:
+                print(f"Loaded {len(txt_files)} page(s) from {paper_dir} ({len(paper_content)} chars)")
+            else:
+                return WorkflowResult(value="No paper page files found")
+
         except Exception as e:
-            print(f"Error reading paper file: {e}")
+            print(f"Error reading paper files: {e}")
             return WorkflowResult(value=f"Error reading paper: {e}")
 
         # STEP 2: Configure agents from config
@@ -206,21 +229,21 @@ if __name__ == "__main__":
     import asyncio
 
     parser = argparse.ArgumentParser(description="Analyze research paper and generate implementation plan")
-    parser.add_argument("--paper-dir", required=True, help="Directory containing the paper (.md file)")
+    parser.add_argument("--paper-dir", required=True, help="Directory containing paper page files (*_page_N.txt)")
     parser.add_argument("--output", "-o", help="Output file path for the result")
     args = parser.parse_args()
 
     # Verify directory exists
     if not os.path.isdir(args.paper_dir):
-        print(f"Error: Directory {args.paper_dir} does not exist!")
+        print(f"Error: Directory does not exist: {args.paper_dir}")
         sys.exit(1)
 
-    # Verify it contains .md file
-    md_files = [f for f in os.listdir(args.paper_dir) if f.endswith('.md')]
-    if not md_files:
-        print(f"Error: No .md file found in directory {args.paper_dir}!")
+    # Verify it contains page files
+    page_files = [f for f in os.listdir(args.paper_dir) if f.endswith('.txt') and '_page_' in f]
+    if not page_files:
+        print(f"Error: No page files (*_page_N.txt) found in: {args.paper_dir}")
         sys.exit(1)
 
-    print(f"Found .md files: {md_files}")
+    print(f"Found {len(page_files)} page file(s)")
 
     asyncio.run(run_workflow(args.paper_dir, args.output))
