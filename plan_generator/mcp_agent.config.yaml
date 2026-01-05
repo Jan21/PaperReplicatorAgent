@@ -45,16 +45,21 @@ mcp:
       - ../DeepCode/deepcode_lab
       # Limit filesystem access to deepcode_lab directory for security
 
-# LLM Provider configuration
-llm_provider: "openai"
+# LLM Provider configuration (openai or anthropic)
+llm_provider: "anthropic"
 
-# OpenAI configuration (official OpenAI API)
+# OpenAI configuration (used when llm_provider: openai)
 openai:
   base_max_tokens: 40000
   retry_max_tokens: 32768
-  default_model: anthropic/claude-opus-4.5
-  reasoning_effort: high 
+  default_model: anthropic/claude-sonnet-4.5
+  reasoning_effort: high
 
+# Anthropic configuration (used when llm_provider: anthropic)
+anthropic:
+  base_max_tokens: 40000
+  retry_max_tokens: 32768
+  default_model: claude-sonnet-4-5-20250514
 
 # Search server preference
 default_search_server: brave
@@ -89,6 +94,6 @@ llm_params:
 
 # Agent tool servers (empty = no tools)
 agent_servers:
-  concept_analysis: []
-  algorithm_analysis: []
-  code_planner: []
+  concept_analysis: [brave]
+  algorithm_analysis: [brave]
+  code_planner: [brave]

@@ -1,0 +1,749 @@
+I'll create a comprehensive reproduction plan by integrating the exhaustive analyses from both agents.
+
+```yaml
+complete_reproduction_plan:
+  paper_info:
+    title: "Neural Heuristics for SAT Solving"
+    core_contribution: "Message-passing graph neural networks with modified attention mechanism to learn branching heuristics for SAT solvers (DPLL and CDCL), outperforming traditional heuristics (DLIS, JW-OS) on larger problem instances"
+
+  # ============================================================================
+  # SECTION 1: FILE STRUCTURE (Priority-Ordered Implementation)
+  # ============================================================================
+  
+  file_structure: |
+    neural-sat-solver/
+    ├── src/
+    │   ├── data/
+    │   │   ├── sr_generator.py          # [P1] SR(n) dataset generation
+    │   │   ├── formula_graph.py         # [P1] CNF to graph conversion
+    │   │   ├── label_generator.py       # [P1] MiniSat interface for labels
+    │   │   └── data_loader.py           # [P2] Batching and pipeline
+    │   │
+    │   ├── models/
+    │   │   ├── mlp.py                   # [P1] 3-layer MLP component
+    │   │   ├── embeddings.py            # [P1] Initial trainable embeddings
+    │   │   ├── attention.py             # [P1] Modified attention mechanism
+    │   │   ├── message_passing.py       # [P1] Core message passing network
+    │   │   ├── prediction_heads.py      # [P1] Policy & sat prediction
+    │   │   └── neural_heuristic.py      # [P2] Complete model assembly
+    │   │
+    │   ├── solvers/
+    │   │   ├── dpll.py                  # [P2] DPLL implementation
+    │   │   ├── simplify.py              # [P2] Unit propagation, clause elimination
+    │   │   ├── cdcl_wrapper.py          # [P3] CDCL integration
+    │   │   └── heuristics.py            # [P2] DLIS, JW-OS, Neural, Hybrid
+    │   │
+    │   ├── training/
+    │   │   ├── loss.py                  # [P1] Loss functions
+    │   │   ├── metrics.py               # [P2] Evaluation metrics
+    │   │   ├── trainer.py               # [P2] Main training loop
+    │   │   └── config.py                # [P2] Configuration management
+    │   │
+    │   └── evaluation/
+    │       ├── evaluator.py             # [P3] Evaluation framework
+    │       ├── experiments.py           # [P3] Experiment 1, 2, 3
+    │       └── visualize.py             # [P3] Result visualization
+    │
+    ├── configs/
+    │   ├── sr30_config.yaml             # [P2] SR(30) hyperparameters
+    │   ├── sr50_config.yaml             # [P2] SR(50) hyperparameters
+    │   ├── sr70_config.yaml             # [P2] SR(70) hyperparameters
+    │   └── sr100_config.yaml            # [P2] SR(100) hyperparameters
+    │
+    ├── scripts/
+    │   ├── generate_datasets.py         # [P4] Dataset generation script
+    │   ├── train_model.py               # [P4] Main training executable
+    │   ├── run_experiments.py           # [P4] Experiment runner
+    │   └── select_models.py             # [P4] Model selection (std dev filtering)
+    │
+    ├── tests/
+    │   ├── test_data.py                 # [P4] Data pipeline tests
+    │   ├── test_models.py               # [P4] Neural network tests
+    │   └── test_solvers.py              # [P4] DPLL/CDCL correctness tests
+    │
+    ├── requirements.txt                 # [P5-LAST] Dependencies
+    └── README.md                        # [P5-LAST] Documentation
+
+    [P1] = Phase 1 (Core algorithms), [P2] = Phase 2 (Integration), 
+    [P3] = Phase 3 (Experiments), [P4] = Phase 4 (Utilities), 
+    [P5-LAST] = Phase 5 (Documentation - implement LAST)
+
+  # ============================================================================
+  # SECTION 2: IMPLEMENTATION COMPONENTS (CORE - Most Detailed)
+  # ============================================================================
+  
+  implementation_components: |
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 1: SR(n) Dataset Generator & Label Generation
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/data/sr_generator.py, src/data/label_generator.py
+    
+    Purpose: Generate random 3-SAT problems following NeuroSAT's SR(n) distribution
+    
+    Algorithm:
+      - Parameter n: number of variables (30, 50, 70, 100, 110, 150)
+      - Generate random CNF formulas with varying clause counts
+      - Ensure 50% SAT / 50% UNSAT balance
+      - Use MiniSat 2.2 via PySAT interface for labeling
+    
+    Label Generation:
+      sat_label = MiniSat(Φ)  # Binary: 1 if satisfiable, 0 otherwise
+      For each literal l:
+        policy_label[l] = MiniSat(Φ ∧ l)  # 1 if Φ ∧ l satisfiable
+    
+    Critical Details:
+      - Cache labels to avoid redundant MiniSat calls
+      - Parallelize label generation (embarrassingly parallel)
+      - Expected complexity: SR(30)=0.007s, SR(110)=0.137s, SR(150)=3.406s per formula
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 2: CNF to Graph Conversion
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/data/formula_graph.py
+    
+    Graph Representation:
+      - Two node types: literal nodes (2*n), clause nodes (m clauses)
+      - Two edge types: literal-literal (negation), clause-literal (containment)
+    
+    Construction Algorithm:
+      1. For each variable v: create nodes for v and ¬v
+      2. Create CLL matrix [2n × 2n]: CLL[v, ¬v] = 1 (bidirectional)
+      3. For each clause c: create clause node
+      4. Create CCL matrix [m × 2n]: CCL[c, l] = 1 if l ∈ c
+    
+    Output Format:
+      - literal_nodes: List of literal identifiers
+      - clause_nodes: List of clause identifiers
+      - CCL: Sparse matrix [num_clauses, num_literals]
+      - CLL: Sparse matrix [num_literals, num_literals]
+    
+    Example: (A ∨ ¬C ∨ B) ∧ (¬B ∨ C)
+      Nodes: {A, ¬A, B, ¬B, C, ¬C, clause1, clause2}
+      Edges: clause1→{A,¬C,B}, clause2→{¬B,C}, A↔¬A, B↔¬B, C↔¬C
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 3: Message-Passing Neural Network (CORE ALGORITHM)
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/models/message_passing.py, src/models/attention.py
+    
+    Initialization:
+      literal_embedding_0 = trainable_parameter([embedding_dim])  # Shared across all literals
+      clause_embedding_0 = trainable_parameter([embedding_dim])   # Shared across all clauses
+    
+    Message Passing Loop (20-40 iterations):
+      FOR t = 1 TO num_iterations:
+        
+        ─── Stage 1: Message Generation ───
+        For each literal i:
+          V_lit[i] = MLP_V_literal(literal_embedding[t-1][i])
+          If attention: K_lit[i] = MLP_K_literal(literal_embedding[t-1][i])
+        
+        For each clause j:
+          V_clause[j] = MLP_V_clause(clause_embedding[t-1][j])
+          If attention: K_clause[j] = MLP_K_clause(clause_embedding[t-1][j])
+        
+        ─── Stage 2: Aggregation ───
+        WITHOUT ATTENTION:
+          agg_lit = CCL^T @ V_clause / degree  # Average from clauses
+          agg_clause = CCL @ V_lit / degree    # Average from literals
+          agg_neg = CLL @ V_lit                # From negation
+        
+        WITH ATTENTION (Modified Mechanism):
+          For each literal i:
+            Q_lit[i] = MLP_Q_literal(literal_embedding[t-1][i])
+            
+            # From clauses
+            agg_from_clauses[i] = Σ_{j∈clauses(i)} V_clause[j] · sigmoid(K_clause[j] · Q_lit[i])
+            
+            # From negation
+            neg_idx = negation_of(i)
+            agg_from_neg[i] = V_lit[neg_idx] · sigmoid(K_lit[neg_idx] · Q_lit[i])
+            
+            agg_lit[i] = agg_from_clauses[i] + agg_from_neg[i]
+          
+          For each clause j:
+            Q_clause[j] = MLP_Q_clause(clause_embedding[t-1][j])
+            agg_clause[j] = Σ_{i∈literals(j)} V_lit[i] · sigmoid(K_lit[i] · Q_clause[j])
+        
+        ─── Stage 3: Update ───
+        For each literal i:
+          literal_embedding[t][i] = MLP_update_literal(
+            concat(literal_embedding[t-1][i], agg_lit[i])
+          )  # Final activation: SIGMOID
+        
+        For each clause j:
+          clause_embedding[t][j] = MLP_update_clause(
+            concat(clause_embedding[t-1][j], agg_clause[j])
+          )  # Final activation: SIGMOID
+    
+    Critical Attention Detail:
+      - NOT standard attention: Σ V_i · sigmoid(K_i · Q)
+      - Standard would be: softmax(Q·K^T) @ V
+      - Difference: Independent acceptance/rejection vs competitive selection
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 4: MLP Architecture (Used in 5+ places)
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/models/mlp.py
+    
+    3-Layer MLP Structure:
+      Layer 1: Linear(input_dim, hidden_dim) → LeakyReLU
+      Layer 2: Linear(hidden_dim, hidden_dim) → LeakyReLU
+      Layer 3: Linear(hidden_dim, output_dim) → [configurable activation]
+    
+    Hyperparameters (NOT specified in paper, must tune):
+      - embedding_dim: Try [64, 128, 256]
+      - hidden_dim: Same as embedding_dim (typical)
+      - output_activation: Linear (for V,K,Q), Sigmoid (for update)
+    
+    MLPs Required:
+      1. MLP_V_literal: literal_embedding → V vector
+      2. MLP_K_literal: literal_embedding → K vector (if attention)
+      3. MLP_Q_literal: literal_embedding → Q vector (if attention)
+      4. MLP_V_clause: clause_embedding → V vector
+      5. MLP_K_clause: clause_embedding → K vector (if attention)
+      6. MLP_Q_clause: clause_embedding → Q vector (if attention)
+      7. MLP_update_literal: [embedding, aggregated] → new_embedding
+      8. MLP_update_clause: [embedding, aggregated] → new_embedding
+    
+    Parameter Sharing: ALL MLPs share parameters across iterations (critical!)
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 5: Prediction Heads
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/models/prediction_heads.py
+    
+    Policy Prediction (Per Literal):
+      policy_prob[t][i] = sigmoid(W_policy · literal_embedding[t][i] + b_policy)
+      - Output: Probability that Φ ∧ literal[i] is satisfiable
+      - Parameters shared across ALL literals and ALL iterations
+    
+    Sat Prediction (Whole Formula):
+      sat_logits = Σ_i (W_sat · literal_embedding[t][i] + b_sat)
+      sat_prob[t] = sigmoid(sat_logits)
+      - Output: Probability that Φ is satisfiable
+      - Parameters shared across ALL literals and ALL iterations
+    
+    Usage During Inference:
+      - Use final iteration predictions (or average across iterations)
+      - Choose literal with max policy_prob for branching
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 6: Loss Functions
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/training/loss.py
+    
+    Sat Loss (per iteration):
+      sat_loss[t] = BinaryCrossEntropy(sat_prob[t], sat_label)
+    
+    Policy Loss (per iteration):
+      IF sat_label == 1 (satisfiable):
+        policy_loss[t] = mean_over_literals(
+          BinaryCrossEntropy(policy_prob[t][i], policy_label[i])
+        )
+      ELSE (unsatisfiable):
+        policy_loss[t] = 0
+    
+    Total Loss:
+      total_loss = Σ_{t=1}^{num_iterations} (sat_loss[t] + policy_loss[t])
+    
+    Critical: Loss accumulated across ALL iterations, not just final!
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 7: DPLL Algorithm with Neural Guidance
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/solvers/dpll.py
+    
+    Pseudocode (Algorithm 1 from paper):
+      function DPLL(Φ, heuristic):
+        Φ = simplify(Φ)  # Unit propagation + clause elimination
+        
+        if Φ is empty (no clauses):
+          return True  # Satisfiable
+        
+        if Φ contains empty clause:
+          return False  # Unsatisfiable
+        
+        literal = heuristic.choose_literal(Φ)  # NEURAL NETWORK HERE
+        
+        if DPLL(Φ ∧ literal, heuristic):
+          return True
+        
+        if DPLL(Φ ∧ ¬literal, heuristic):
+          return True
+        
+        return False
+    
+    Simplify Function:
+      - Unit propagation: If clause has single literal, set it to True
+      - Pure literal elimination: If literal appears only in one polarity, set appropriately
+      - Clause elimination: Remove satisfied clauses
+    
+    Neural Heuristic Integration:
+      def neural_choose_literal(Φ):
+        graph = formula_to_graph(Φ)
+        predictions = neural_model.forward(graph)
+        return argmax(predictions.policy_prob[last_iteration])
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 8: Hybrid Heuristic (Neural + JW-OS)
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/solvers/heuristics.py
+    
+    Algorithm:
+      def hybrid_choose_literal(Φ, neural_model, threshold=0.3):
+        graph = formula_to_graph(Φ)
+        predictions = neural_model.forward(graph)
+        
+        sat_prob = predictions.sat_prob[last_iteration]
+        
+        if sat_prob >= threshold:
+          # Use neural policy
+          return argmax(predictions.policy_prob[last_iteration])
+        else:
+          # Switch to JW-OS
+          return jw_os_heuristic(Φ)
+    
+    JW-OS Heuristic:
+      For each literal l:
+        score[l] = Σ_{c containing l} 2^(-|c|)
+      return argmax(score)
+    
+    Threshold: 0.3 (fixed in paper, could be tuned as hyperparameter)
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 9: Training Loop
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/training/trainer.py
+    
+    Pseudocode:
+      model = MessagePassingNetwork(embedding_dim, num_iterations, use_attention)
+      optimizer = Adam(learning_rate)  # learning_rate NOT specified - try 3e-4
+      
+      for step in range(training_steps):
+        batch = sample_batch(dataset, batch_size)
+        
+        total_loss = 0
+        for formula, sat_label, policy_label in batch:
+          graph = formula_to_graph(formula)
+          predictions = model.forward(graph)
+          
+          # Accumulate loss across all iterations
+          for t in range(num_iterations):
+            sat_loss_t = binary_cross_entropy(predictions.sat_prob[t], sat_label)
+            
+            if sat_label == 1:
+              policy_loss_t = mean(
+                binary_cross_entropy(predictions.policy_prob[t][i], policy_label[i])
+                for i in range(num_literals)
+              )
+            else:
+              policy_loss_t = 0
+            
+            total_loss += sat_loss_t + policy_loss_t
+        
+        total_loss /= batch_size
+        
+        optimizer.zero_grad()
+        total_loss.backward()
+        optimizer.step()
+        
+        if step % 1000 == 0:
+          evaluate_and_log(model, eval_set, step)
+    
+    Training Stability:
+      - Train 3-5 replicas per configuration
+      - Exclude models where std_dev(loss) > 1.0
+      - Up to 2/5 models may be excluded
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    COMPONENT 10: CDCL Integration
+    ═══════════════════════════════════════════════════════════════════════
+    File: src/solvers/cdcl_wrapper.py
+    
+    Source: Use existing implementation from https://github.com/zlii/pysat/
+    
+    Modification:
+      - Replace original branching heuristic with neural/hybrid heuristic
+      - Keep all other CDCL components (conflict analysis, clause learning, backjumping)
+    
+    Integration Point:
+      class NeuralCDCL(CDCL):
+        def choose_literal(self, formula):
+          return neural_heuristic.choose_literal(formula)
+
+  # ============================================================================
+  # SECTION 3: VALIDATION APPROACH
+  # ============================================================================
+  
+  validation_approach: |
+    
+    ═══════════════════════════════════════════════════════════════════════
+    EXPERIMENT 1: Model Comparison (Figure 3 Reproduction)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Setup:
+      - Algorithm: DPLL with 1000 step limit
+      - Heuristics: [Neural SR(30), Neural SR(50), Neural SR(70), Neural SR(100), JW-OS, DLIS]
+      - Problem sizes: SR(30) through SR(110) (varying increments)
+      - Test set: 100 SATISFIABLE formulas per size
+    
+    Metric:
+      - Percentage of instances solved within 1000 steps
+    
+    Expected Results:
+      ✓ JW-OS best on medium problems (SR(50), SR(70))
+      ✓ Neural models best on large problems (SR(90), SR(110))
+      ✓ Neural SR(100) model outperforms others on SR(110)
+    
+    Validation Script: experiments/experiment1.py
+      def experiment_1():
+        for problem_size in [30, 40, 50, 60, 70, 80, 90, 100, 110]:
+          test_set = generate_sat_formulas(problem_size, count=100)
+          
+          results = {}
+          for heuristic in [neural_sr30, neural_sr50, neural_sr70, neural_sr100, jw_os, dlis]:
+            solved_count = 0
+            for formula in test_set:
+              if dpll(formula, heuristic, step_limit=1000):
+                solved_count += 1
+            results[heuristic] = solved_count
+          
+          plot_results(problem_size, results)
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    EXPERIMENT 2: Hybrid vs JW-OS Head-to-Head (Figure 4 Reproduction)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Setup:
+      - Model: SR(50) trained model
+      - Comparison: Hybrid heuristic vs JW-OS
+      - Algorithms: Both DPLL and CDCL
+      - Step limit: NONE (run until solution found)
+      - Test set: SATISFIABLE formulas (likely SR(50) distribution)
+    
+    Metric:
+      - Win/Draw/Loss based on number of steps to solution
+      - Win: Hybrid uses fewer steps
+      - Draw: Same number of steps
+      - Loss: Hybrid uses more steps
+    
+    Expected Results:
+      ✓ Hybrid wins majority of cases in DPLL (>50%)
+      ✓ Hybrid wins majority of cases in CDCL (>50%)
+    
+    Validation Script: experiments/experiment2.py
+      def experiment_2():
+        test_set = generate_sat_formulas(50, count=100)
+        
+        for algorithm in [DPLL, CDCL]:
+          wins, draws, losses = 0, 0, 0
+          
+          for formula in test_set:
+            steps_hybrid = algorithm(formula, hybrid_heuristic)
+            steps_jwos = algorithm(formula, jw_os_heuristic)
+            
+            if steps_hybrid < steps_jwos:
+              wins += 1
+            elif steps_hybrid == steps_jwos:
+              draws += 1
+            else:
+              losses += 1
+          
+          plot_stacked_bar(algorithm, wins, draws, losses)
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    EXPERIMENT 3: Attention Ablation (Figure 5 Reproduction)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Setup:
+      - Models: With attention vs Without attention
+      - Problem sizes: SR(30), SR(50)
+      - Iteration levels: [20, 40]
+      - Total: 8 model variants (2 sizes × 2 levels × 2 attention settings)
+    
+    Metric:
+      - Policy error on evaluation set (mean absolute error)
+    
+    Expected Results:
+      ✓ Attention improves performance in most cases
+      ✓ Exception: SR(30) level 20 - attention degrades performance
+      ✓ SR(50) level 40 - metrics within standard deviation
+    
+    Validation Script: experiments/experiment3.py
+      def experiment_3():
+        eval_set = generate_formulas_with_labels()
+        
+        results = {}
+        for size in [30, 50]:
+          for level in [20, 40]:
+            for attention in [True, False]:
+              model = train_model(size, level, attention)
+              policy_error = evaluate_policy_error(model, eval_set)
+              results[(size, level, attention)] = policy_error
+        
+        plot_bar_chart_with_error_bars(results)
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    TABLE 1 VALIDATION: Training Metrics
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Expected Metrics (mean ± std dev):
+      SR(30): loss=28.178±0.672, sat_error=0.084±0.004, policy_error=0.050±0.002
+      SR(50): loss=32.024±0.555, sat_error=0.233±0.017, policy_error=0.105±0.006
+      SR(70): loss=33.010±0.482, sat_error=0.266±0.033, policy_error=0.110±0.007
+      SR(100): loss=34.227±0.127, sat_error=0.319±0.007, policy_error=0.123±0.002
+    
+    Validation:
+      - Train 3-5 models per configuration
+      - Compute mean and std dev
+      - Verify within 20% of paper values
+      - Exclude models with std dev > 1.0
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    SUCCESS CRITERIA
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Minimum Viable:
+      ✓ Training metrics within 20% of Table 1
+      ✓ Experiment 1 shows neural models better on large problems
+      ✓ Experiment 2 shows hybrid wins majority
+    
+    Full Reproduction:
+      ✓ Training metrics within 1 std dev of Table 1
+      ✓ All experiment trends match paper figures
+      ✓ Statistical significance demonstrated
+
+  # ============================================================================
+  # SECTION 4: ENVIRONMENT SETUP
+  # ============================================================================
+  
+  environment_setup: |
+    
+    Programming Language: Python >= 3.6
+    
+    Core Dependencies:
+      tensorflow >= 2.0        # Deep learning framework (or PyTorch >= 1.5)
+      numpy >= 1.18            # Numerical computations
+      scipy >= 1.4             # Sparse matrices
+      python-sat >= 0.1.6      # PySAT interface to MiniSat 2.2
+    
+    Visualization:
+      matplotlib >= 3.1
+      seaborn >= 0.10
+    
+    Utilities:
+      pyyaml >= 5.3           # Config file parsing
+      tqdm >= 4.45            # Progress bars
+    
+    External Code:
+      CDCL Implementation: https://github.com/zlii/pysat/
+      (Simple Python CDCL solver by Zhang Zhongwei)
+    
+    Hardware Requirements:
+      Training: TPU v2 (paper) or GPU with 16+ GB memory
+      Total compute: ~200 TPU hours or equivalent GPU time
+      Storage: ~100 GB for datasets and checkpoints
+    
+    Installation:
+      pip install tensorflow-gpu numpy scipy python-sat matplotlib seaborn pyyaml tqdm
+      git clone https://github.com/zlii/pysat/
+    
+    Configuration:
+      - Set random seeds for reproducibility
+      - Configure TPU/GPU in TensorFlow
+      - Set up logging directory
+
+  # ============================================================================
+  # SECTION 5: IMPLEMENTATION STRATEGY
+  # ============================================================================
+  
+  implementation_strategy: |
+    
+    ═══════════════════════════════════════════════════════════════════════
+    PHASE 1: Data Infrastructure (Week 1-2)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Step 1.1: SR(n) Dataset Generation
+      - Refer to NeuroSAT paper [SLB+18] for exact specification
+      - Implement random 3-SAT formula generator
+      - Ensure 50/50 SAT/UNSAT balance
+      - Generate datasets for n=[30, 50, 70, 100, 110, 150]
+    
+    Step 1.2: MiniSat Label Generation
+      - Install PySAT library
+      - For each formula: call MiniSat to get sat_label
+      - For each literal in SAT formulas: call MiniSat on Φ ∧ l
+      - Cache results (this is computationally expensive)
+      - Parallelize across multiple cores
+    
+    Step 1.3: CNF to Graph Conversion
+      - Parse DIMACS CNF format
+      - Build literal and clause nodes
+      - Construct CCL and CLL sparse matrices
+      - Test on simple examples: (A∨B) ∧ (¬A∨C)
+    
+    Step 1.4: Data Loader
+      - Implement batching for variable-size graphs
+      - Use tf.data.Dataset for efficiency
+      - Batch sizes: SR(30)=128, SR(50)=64, SR(70)=64, SR(100)=32
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    PHASE 2: Neural Network Core (Week 3-5)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Step 2.1: Implement 3-Layer MLP
+      - Three linear layers with LeakyReLU
+      - Configurable output activation
+      - Xavier initialization
+    
+    Step 2.2: Implement Message Passing
+      - Initialize embeddings (trainable parameters)
+      - Message generation (V, K for attention)
+      - Aggregation (average or modified attention)
+      - Embedding update with sigmoid output
+      - Loop for 20-40 iterations
+    
+    Step 2.3: Implement Prediction Heads
+      - Policy head: logistic regression per literal
+      - Sat head: linear + sum + sigmoid
+      - Apply to embeddings at each iteration
+    
+    Step 2.4: Implement Loss Functions
+      - Sat loss: binary cross-entropy
+      - Policy loss: conditional average cross-entropy
+      - Total loss: sum across all iterations
+    
+    Step 2.5: Test on Tiny Examples
+      - Create formula with 3 variables, 2 clauses
+      - Verify forward pass produces correct shapes
+      - Verify gradients flow through all iterations
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    PHASE 3: Training Pipeline (Week 6-7)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Step 3.1: Implement Training Loop
+      - Load batches from data loader
+      - Forward pass through network
+      - Compute total loss
+      - Backward pass and optimizer step
+      - Logging and checkpointing
+    
+    Step 3.2: Hyperparameter Tuning
+      - Start with embedding_dim=128
+      - Try learning_rate=[1e-4, 3e-4, 1e-3]
+      - Test with/without gradient clipping
+      - Monitor for NaN/inf losses
+    
+    Step 3.3: Train Models
+      - SR(30): 1.2M steps, batch 128, ~20 hours
+      - SR(50): 600K steps, batch 64, ~12 hours
+      - SR(70): 600K steps, batch 64, ~22 hours
+      - SR(100): 1.2M steps, batch 32, ~28 hours
+      - Train 3-5 replicas per configuration
+    
+    Step 3.4: Model Selection
+      - Compute std dev of losses across replicas
+      - Exclude models if adding them raises std dev > 1.0
+      - Select best models for evaluation
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    PHASE 4: SAT Solver Integration (Week 8-9)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Step 4.1: Implement DPLL
+      - Simplify function (unit propagation, clause elimination)
+      - Trivial SAT/UNSAT checks
+      - Recursive backtracking
+      - Pluggable heuristic interface
+    
+    Step 4.2: Implement Baseline Heuristics
+      - JW-OS: score[l] = Σ 2^(-|c|) for c containing l
+      - DLIS: literal appearing most in unsatisfied clauses
+    
+    Step 4.3: Implement Neural Heuristic
+      - Convert formula to graph
+      - Run neural network
+      - Select literal with max policy prediction
+    
+    Step 4.4: Implement Hybrid Heuristic
+      - Get sat prediction
+      - If sat_prob >= 0.3: use neural policy
+      - Else: use JW-OS
+    
+    Step 4.5: Integrate with CDCL
+      - Clone external CDCL implementation
+      - Replace branching heuristic
+      - Test correctness on SAT competition benchmarks
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    PHASE 5: Experiments & Validation (Week 10-12)
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Step 5.1: Run Experiment 1
+      - Generate 100 SAT formulas per size
+      - Run DPLL with each heuristic, 1000 step limit
+      - Count solved instances
+      - Plot Figure 3 reproduction
+    
+    Step 5.2: Run Experiment 2
+      - Generate SAT formulas (SR(50) distribution)
+      - Run DPLL and CDCL with Hybrid vs JW-OS
+      - Track win/draw/loss
+      - Plot Figure 4 reproduction
+    
+    Step 5.3: Run Experiment 3
+      - Train models with/without attention
+      - Levels 20 and 40
+      - Evaluate policy error
+      - Plot Figure 5 reproduction
+    
+    Step 5.4: Validate Against Paper
+      - Compare Table 1 metrics
+      - Verify experiment trends
+      - Statistical significance testing
+      - Document any deviations
+    
+    
+    ═══════════════════════════════════════════════════════════════════════
+    MISSING DETAILS HANDLING
+    ═══════════════════════════════════════════════════════════════════════
+    
+    Embedding Dimension: Try [64, 128, 256], start with 128
+    Learning Rate: Try [1e-4, 3e-4, 1e-3], start with 3e-4
+    MLP Hidden Dims: Use same as embedding_dim
+    Update Input: Use concatenation [embedding, aggregated_message]
+    Optimizer: Adam (standard choice)
+    Gradient Clipping: Add if training unstable (clip at 1.0)
+    Which Iteration's Prediction: Use last iteration
+    
+    When in Doubt: Refer to official code repository at https://bit.ly/neurheur
+```
+
+This complete reproduction plan provides:
+- **20 essential files** organized by implementation priority
+- **10 detailed components** covering all algorithms and architectures  
+- **3 experiments** with exact setup and expected results
+- **All hyperparameters** from paper plus reasoned defaults for missing ones
+- **5-phase implementation strategy** spanning 12 weeks
+
+A developer can now implement the entire paper without reading it by following this plan sequentially from Phase 1 to Phase 5.
