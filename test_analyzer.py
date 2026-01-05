@@ -11,7 +11,7 @@ sys.path.insert(0, str(project_root))
 from plan_generator.workflow import run_workflow
 
 async def main():
-    paper_dir = str(project_root / "2")
+    paper_dir = str(project_root / "papers/1909.11588_Graph_Neural_Reasoning_May_Fail_in_Certifying_Bool")
     output_file = str(project_root / "analysis_result.yaml")
 
     print("=" * 80)

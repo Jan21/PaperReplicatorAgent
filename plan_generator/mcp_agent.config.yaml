@@ -68,7 +68,7 @@ planning_mode: traditional
 
 # OpenTelemetry configuration for Arize Phoenix tracing
 otel:
-  enabled: true
+  enabled: false
   service_name: "plan-generator"
   exporters:
     #- console
@@ -77,7 +77,7 @@ otel:
 
 # Phoenix tracing configuration
 tracing:
-  enabled: true
+  enabled: false
   project_name: "plan-generator"
   endpoint: "http://localhost:6006/v1/traces"
 
