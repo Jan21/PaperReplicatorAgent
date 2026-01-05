@@ -57,9 +57,9 @@ openai:
 
 # Anthropic configuration (used when llm_provider: anthropic)
 anthropic:
-  base_max_tokens: 40000
-  retry_max_tokens: 32768
-  default_model: claude-sonnet-4-5-20250514
+  base_max_tokens: 16384
+  retry_max_tokens: 8192
+  default_model: claude-sonnet-4-5-20250929
 
 # Search server preference
 default_search_server: brave
@@ -94,6 +94,6 @@ llm_params:
 
 # Agent tool servers (empty = no tools)
 agent_servers:
-  concept_analysis: [brave]
-  algorithm_analysis: [brave]
-  code_planner: [brave]
+  concept_analysis: []
+  algorithm_analysis: []
+  code_planner: []

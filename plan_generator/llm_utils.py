@@ -98,10 +98,10 @@ def get_token_limits() -> Tuple[int, int]:
     """
     config = _load_config()
     provider = get_llm_provider()
-    provider_config = config.get(provider, config.get("openai", {}))
+    provider_config = config.get(provider, {})
 
-    base_tokens = provider_config.get("base_max_tokens", 40000)
-    retry_tokens = provider_config.get("retry_max_tokens", 32768)
+    base_tokens = provider_config.get("base_max_tokens", 16384)
+    retry_tokens = provider_config.get("retry_max_tokens", 8192)
 
     return base_tokens, retry_tokens
 
