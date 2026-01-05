@@ -1,0 +1,170 @@
+"""Algorithm analysis prompt sections and assembled prompt."""
+
+INTRO = (
+    "You are extracting COMPLETE implementation details from a research paper. "
+    "Your goal is to capture EVERY algorithm, formula, and technical detail needed "
+    "for perfect reproduction."
+)
+
+DOC_READING_STRATEGY = """# DOCUMENT READING STRATEGY
+
+## TRADITIONAL APPROACH: Full Document Reading
+Read the complete document to ensure comprehensive coverage of all algorithmic details:"""
+
+EXTRACTION_PROTOCOL = """# DETAILED EXTRACTION PROTOCOL
+
+## 1. COMPREHENSIVE ALGORITHM SCAN
+Read through the entire document systematically:
+- Method/Algorithm sections
+- Implementation Details
+- Hyperparameters and training details
+- Mathematical formulations
+
+## 2. ALGORITHM DEEP EXTRACTION
+For EVERY algorithm/method/procedure mentioned:
+
+### Algorithm Structure
+```yaml
+algorithm_name: "[Exact name from paper]"
+section: "[e.g., Section 3.2]"
+algorithm_box: "[e.g., Algorithm 1 on page 4]"
+
+pseudocode: |
+  [COPY THE EXACT PSEUDOCODE FROM PAPER]
+  Input: ...
+  Output: ...
+  1. Initialize ...
+  2. For each ...
+     2.1 Calculate ...
+  [Keep exact formatting and numbering]
+
+mathematical_formulation:
+  - equation: "[Copy formula EXACTLY, e.g., L = L_task + λ*L_explain]"
+    equation_number: "[e.g., Eq. 3]"
+    where:
+      L_task: "task loss"
+      L_explain: "explanation loss"
+      λ: "weighting parameter (default: 0.5)"
+
+step_by_step_breakdown:
+  1. "[Detailed explanation of what step 1 does]"
+  2. "[What step 2 computes and why]"
+
+implementation_details:
+  - "Uses softmax temperature τ = 0.1"
+  - "Gradient clipping at norm 1.0"
+  - "Initialize weights with Xavier uniform"
+```
+
+## 3. COMPONENT EXTRACTION
+For EVERY component/module mentioned:
+
+### Component Details
+```yaml
+component_name: "[e.g., Mask Network, Critic Network]"
+purpose: "[What this component does in the system]"
+architecture:
+  input: "[shape and meaning]"
+  layers:
+    - "[Conv2d(3, 64, kernel=3, stride=1)]"
+    - "[ReLU activation]"
+    - "[BatchNorm2d(64)]"
+  output: "[shape and meaning]"
+
+special_features:
+  - "[Any unique aspects]"
+  - "[Special initialization]"
+```
+
+## 4. TRAINING PROCEDURE
+Extract the COMPLETE training process:
+
+```yaml
+training_loop:
+  outer_iterations: "[number or condition]"
+  inner_iterations: "[number or condition]"
+
+  steps:
+    1. "Sample batch of size B from buffer"
+    2. "Compute importance weights using..."
+    3. "Update policy with loss..."
+
+  loss_functions:
+    - name: "policy_loss"
+      formula: "[exact formula]"
+      components: "[what each term means]"
+
+  optimization:
+    optimizer: "Adam"
+    learning_rate: "3e-4"
+    lr_schedule: "linear decay to 0"
+    gradient_norm: "clip at 0.5"
+```
+
+## 5. HYPERPARAMETERS HUNT
+Search EVERYWHERE (text, tables, captions) for:
+
+```yaml
+hyperparameters:
+  # Training
+  batch_size: 64
+  buffer_size: 1e6
+  discount_gamma: 0.99
+
+  # Architecture
+  hidden_units: [256, 256]
+  activation: "ReLU"
+
+  # Algorithm-specific
+  explanation_weight: 0.5
+  exploration_bonus_scale: 0.1
+  reset_probability: 0.3
+
+  # Found in:
+  location_references:
+    - "batch_size: Table 1"
+    - "hidden_units: Section 4.1"
+```
+"""
+
+OUTPUT_FORMAT = """# OUTPUT FORMAT
+```yaml
+complete_algorithm_extraction:
+  paper_structure:
+    method_sections: "[3, 3.1, 3.2, 3.3, 4]"
+    algorithm_count: "[total number found]"
+
+  main_algorithm:
+    [COMPLETE DETAILS AS ABOVE]
+
+  supporting_algorithms:
+    - [EACH SUPPORTING ALGORITHM WITH FULL DETAILS]
+
+  components:
+    - [EVERY COMPONENT WITH ARCHITECTURE]
+
+  training_details:
+    [COMPLETE TRAINING PROCEDURE]
+
+  all_hyperparameters:
+    [EVERY PARAMETER WITH VALUE AND SOURCE]
+
+  implementation_notes:
+    - "[Any implementation hint from paper]"
+    - "[Tricks mentioned in text]"
+
+  missing_but_critical:
+    - "[What's not specified but essential]"
+    - "[With suggested defaults]"
+```
+
+BE EXHAUSTIVE. A developer should be able to implement the ENTIRE paper using only your extraction."""
+
+PAPER_ALGORITHM_ANALYSIS_PROMPT = "\n\n".join(
+    [
+        INTRO,
+        DOC_READING_STRATEGY,
+        EXTRACTION_PROTOCOL,
+        OUTPUT_FORMAT,
+    ]
+)

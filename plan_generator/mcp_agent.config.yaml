@@ -1,0 +1,93 @@
+# MCP Agent Configuration for Plan Generator
+# This configuration sets up the MCP servers needed for code analysis
+
+$schema: ../DeepCode/schema/mcp-agent.config.schema.json
+
+# Execution engine
+execution_engine: asyncio
+#execution_engine: temporal
+# temporal:
+#   host: "localhost:7233"
+#   namespace: "default"
+#   task_queue: "mcp-agent-tasks"
+
+# Logger configuration
+logger:
+  level: info
+  progress_display: false
+  transports:
+  - console
+  - file
+  path_settings:
+    path_pattern: ../logs/plan-generator-{unique_id}.jsonl
+    timestamp_format: '%Y%m%d_%H%M%S'
+    unique_id: timestamp
+
+# MCP Servers configuration
+mcp:
+  servers:
+    # Brave search server for web searches
+    brave:
+      command: npx
+      args:
+      - -y
+      - '@modelcontextprotocol/server-brave-search'
+      #env:
+        
+    
+    # Filesystem server for file operations
+    filesystem:
+      command: npx
+      args:
+      - -y
+      - '@modelcontextprotocol/server-filesystem'
+      - ../DeepCode/deepcode_lab
+      # Limit filesystem access to deepcode_lab directory for security
+
+# LLM Provider configuration
+llm_provider: "openai"
+
+# OpenAI configuration (official OpenAI API)
+openai:
+  base_max_tokens: 40000
+  retry_max_tokens: 32768
+  default_model: deepseek/deepseek-v3.2
+  reasoning_effort: high 
+
+
+# Search server preference
+default_search_server: brave
+
+# Document segmentation (disabled for traditional mode)
+document_segmentation:
+  enabled: false
+  size_threshold_chars: 50000
+
+# Planning mode
+planning_mode: traditional
+
+# OpenTelemetry configuration for Arize Phoenix tracing
+otel:
+  enabled: true
+  service_name: "plan-generator"
+  exporters:
+    #- console
+    - otlp:
+        endpoint: "http://localhost:6006/v1/traces" #"http://localhost:6006/v1/traces" 6006 phoenix, 4317 jaeger
+
+# Phoenix tracing configuration
+tracing:
+  enabled: true
+  project_name: "plan-generator"
+  endpoint: "http://localhost:6006/v1/traces"
+
+# LLM Request Parameters
+llm_params:
+  temperature: 0.3
+  max_iterations: 10
+
+# Agent tool servers (empty = no tools)
+agent_servers:
+  concept_analysis: []
+  algorithm_analysis: []
+  code_planner: []
