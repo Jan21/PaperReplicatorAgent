@@ -32,7 +32,8 @@ mcp:
       args:
       - -y
       - '@modelcontextprotocol/server-brave-search'
-      #env:
+      env:
+        BRAVE_API_KEY: ${BRAVE_API_KEY}
         
     
     # Filesystem server for file operations
@@ -51,7 +52,7 @@ llm_provider: "openai"
 openai:
   base_max_tokens: 40000
   retry_max_tokens: 32768
-  default_model: deepseek/deepseek-v3.2
+  default_model: anthropic/claude-opus-4.5
   reasoning_effort: high 
 
 
@@ -68,18 +69,18 @@ planning_mode: traditional
 
 # OpenTelemetry configuration for Arize Phoenix tracing
 otel:
-  enabled: true
+  enabled: false
   service_name: "plan-generator"
   exporters:
     #- console
     - otlp:
-        endpoint: "http://localhost:6006/v1/traces" #"http://localhost:6006/v1/traces" 6006 phoenix, 4317 jaeger
+        endpoint: "http://localhost:6007/v1/traces" #"http://localhost:6006/v1/traces" 6006 phoenix, 4317 jaeger
 
 # Phoenix tracing configuration
 tracing:
-  enabled: true
+  enabled: false
   project_name: "plan-generator"
-  endpoint: "http://localhost:6006/v1/traces"
+  endpoint: "http://localhost:6007/v1/traces"
 
 # LLM Request Parameters
 llm_params:
