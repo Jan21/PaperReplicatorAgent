@@ -32,7 +32,8 @@ mcp:
       args:
       - -y
       - '@modelcontextprotocol/server-brave-search'
-      #env:
+      env:
+        BRAVE_API_KEY: ${BRAVE_API_KEY}
         
     
     # Filesystem server for file operations
@@ -44,16 +45,21 @@ mcp:
       - ../DeepCode/deepcode_lab
       # Limit filesystem access to deepcode_lab directory for security
 
-# LLM Provider configuration
-llm_provider: "openai"
+# LLM Provider configuration (openai or anthropic)
+llm_provider: "anthropic"
 
-# OpenAI configuration (official OpenAI API)
+# OpenAI configuration (used when llm_provider: openai)
 openai:
   base_max_tokens: 40000
   retry_max_tokens: 32768
-  default_model: deepseek/deepseek-v3.2
-  reasoning_effort: high 
+  default_model: anthropic/claude-sonnet-4.5
+  reasoning_effort: high
 
+# Anthropic configuration (used when llm_provider: anthropic)
+anthropic:
+  base_max_tokens: 40000
+  retry_max_tokens: 32768
+  default_model: claude-sonnet-4-5-20250929
 
 # Search server preference
 default_search_server: brave
@@ -73,13 +79,13 @@ otel:
   exporters:
     #- console
     - otlp:
-        endpoint: "http://localhost:6006/v1/traces" #"http://localhost:6006/v1/traces" 6006 phoenix, 4317 jaeger
+        endpoint: "http://localhost:6007/v1/traces" #"http://localhost:6006/v1/traces" 6006 phoenix, 4317 jaeger
 
 # Phoenix tracing configuration
 tracing:
   enabled: false
   project_name: "plan-generator"
-  endpoint: "http://localhost:6006/v1/traces"
+  endpoint: "http://localhost:6007/v1/traces"
 
 # LLM Request Parameters
 llm_params:

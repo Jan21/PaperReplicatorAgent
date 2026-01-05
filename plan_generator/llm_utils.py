@@ -4,11 +4,13 @@ LLM utility functions for the plan_generator module.
 Provides functions for configuration and LLM settings.
 """
 
+import os
 import yaml
 from typing import Tuple, Dict, List
 from pathlib import Path
 
 from mcp_agent.workflows.llm.augmented_llm_openai import OpenAIAugmentedLLM
+from mcp_agent.workflows.llm.augmented_llm_anthropic import AnthropicAugmentedLLM
 
 
 def _get_module_dir() -> Path:
@@ -28,28 +30,95 @@ def _load_config() -> dict:
     return {}
 
 
-def get_llm_class():
+def _load_secrets() -> dict:
+    """Load the secrets file and return it."""
+    secrets_path = _get_module_dir() / "mcp_agent.secrets.yaml"
+    try:
+        if secrets_path.exists():
+            with open(secrets_path, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+    except Exception as e:
+        print(f"Error reading secrets: {e}")
+    return {}
+
+
+def get_llm_provider() -> str:
     """
-    Get the LLM class to use for workflows.
+    Get the LLM provider from config.
 
     Returns:
-        The OpenAIAugmentedLLM class for use as llm_factory.
+        str: 'openai' or 'anthropic'
     """
+    config = _load_config()
+    return config.get("llm_provider", "openai")
+
+
+def _patch_anthropic_streaming_limit():
+    """Patch Anthropic SDK to allow higher max_tokens without requiring streaming."""
+    try:
+        from anthropic._base_client import SyncAPIClient, AsyncAPIClient
+        from httpx import Timeout
+
+        def patched_timeout(self, max_tokens, max_nonstreaming_tokens=None):
+            # Return a long timeout instead of raising ValueError
+            return Timeout(60 * 60)  # 1 hour timeout
+
+        SyncAPIClient._calculate_nonstreaming_timeout = patched_timeout
+        AsyncAPIClient._calculate_nonstreaming_timeout = patched_timeout
+    except Exception:
+        print("Warning: Could not patch Anthropic SDK for streaming token limit.")
+
+
+def setup_llm_api_keys():
+    """
+    Set up API keys from secrets file as environment variables.
+    This should be called before initializing LLM classes.
+    """
+    secrets = _load_secrets()
+    provider = get_llm_provider()
+
+    if provider == "anthropic":
+        anthropic_secrets = secrets.get("anthropic", {})
+        api_key = anthropic_secrets.get("api_key", "")
+        if api_key:
+            os.environ["ANTHROPIC_API_KEY"] = api_key
+        _patch_anthropic_streaming_limit()
+    else:  # openai
+        openai_secrets = secrets.get("openai", {})
+        api_key = openai_secrets.get("api_key", "")
+        base_url = openai_secrets.get("base_url", "")
+        if api_key:
+            os.environ["OPENAI_API_KEY"] = api_key
+        if base_url:
+            os.environ["OPENAI_BASE_URL"] = base_url
+
+
+def get_llm_class():
+    """
+    Get the LLM class to use for workflows based on llm_provider config.
+
+    Returns:
+        The appropriate AugmentedLLM class for use as llm_factory.
+    """
+    provider = get_llm_provider()
+    if provider == "anthropic":
+        return AnthropicAugmentedLLM
     return OpenAIAugmentedLLM
 
 
 def get_token_limits() -> Tuple[int, int]:
     """
-    Get token limits from mcp_agent.config.yaml.
+    Get token limits from mcp_agent.config.yaml based on active provider.
 
     Returns:
         tuple: (base_max_tokens, retry_max_tokens)
     """
     config = _load_config()
-    openai_config = config.get("openai", {})
+    provider = get_llm_provider()
+    provider_config = config.get(provider, {})
 
-    base_tokens = openai_config.get("base_max_tokens", 40000)
-    retry_tokens = openai_config.get("retry_max_tokens", 32768)
+    base_tokens = provider_config.get("base_max_tokens", 16384)
+    retry_tokens = provider_config.get("retry_max_tokens", 8192)
 
     return base_tokens, retry_tokens
 

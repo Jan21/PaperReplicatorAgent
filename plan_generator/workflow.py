@@ -24,15 +24,20 @@ from mcp_agent.agents.agent import Agent
 from mcp_agent.executor.workflow import Workflow, WorkflowResult
 from mcp_agent.workflows.llm.augmented_llm import RequestParams
 from mcp_agent.workflows.parallel.parallel_llm import ParallelLLM
-from mcp_agent.workflows.llm.augmented_llm_openai import OpenAIAugmentedLLM
-
 from .tracing import setup_tracing, workflow_span
 from .prompts import (
     PAPER_ALGORITHM_ANALYSIS_PROMPT,
     PAPER_CONCEPT_ANALYSIS_PROMPT,
     CODE_PLANNING_PROMPT,
 )
-from .llm_utils import get_token_limits, get_llm_params, get_tracing_config, get_agent_servers
+from .llm_utils import (
+    get_token_limits,
+    get_llm_params,
+    get_tracing_config,
+    get_agent_servers,
+    get_llm_class,
+    setup_llm_api_keys,
+)
 
 
 def extract_page_number(filename: str) -> int:
@@ -140,7 +145,7 @@ class AnalyzePaperWorkflow(Workflow[str]):
         code_aggregator_agent = ParallelLLM(
             fan_in_agent=code_planner_agent,
             fan_out_agents=[concept_analysis_agent, algorithm_analysis_agent],
-            llm_factory=OpenAIAugmentedLLM,
+            llm_factory=get_llm_class(),
         )
 
         base_max_tokens, _ = get_token_limits()
@@ -186,6 +191,9 @@ async def run_workflow(paper_dir: str, output_file: str = None):
 
     Works with both asyncio and temporal execution engines automatically.
     """
+    # Setup API keys from secrets
+    setup_llm_api_keys()
+
     # Initialize Phoenix tracing from config
     tracing_enabled, tracing_project, tracing_endpoint = get_tracing_config()
     setup_tracing(
