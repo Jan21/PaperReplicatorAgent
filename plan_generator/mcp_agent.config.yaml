@@ -46,7 +46,7 @@ mcp:
       # Limit filesystem access to deepcode_lab directory for security
 
 # LLM Provider configuration (openai or anthropic)
-llm_provider: "anthropic"
+llm_provider: "openai"
 
 # OpenAI configuration (used when llm_provider: openai)
 openai:
