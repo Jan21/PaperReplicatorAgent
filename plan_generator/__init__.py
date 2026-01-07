@@ -55,12 +55,17 @@ Configuration:
 # Main workflow interface (works with both asyncio and temporal)
 from .workflow import app, run_workflow
 
+# Code generation workflow
+from .code_generator import run_code_generation, code_gen_app
+
 # Legacy asyncio-only interface
 #from .analyzer import run_code_analyzer
 
 __all__ = [
     "app",
     "run_workflow",
+    "run_code_generation",
+    "code_gen_app",
 #    "run_code_analyzer",
 ]
 __version__ = "1.0.0"
