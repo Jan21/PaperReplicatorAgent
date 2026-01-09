@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "S.5 Analysis of the Evolution of Literal Embeddings",
+    "section_purpose": "This section analyzes whether the evolution of literal embeddings in NeuroSAT corresponds to an optimization process that maximizes the SDP objective function for MaxSAT, and investigates the gap between NeuroSAT's achieved objective and that of an SDP solver.",
+    "key_points": [
+        "The experiment tests if NeuroSAT's message-passing iterations implicitly optimize the SDP objective function for MAX-2-SAT by computing the objective from embeddings at each iteration.",
+        "Results show NeuroSAT embeddings increase the SDP objective value over iterations, indicating alignment with SDP optimization, but a gap remains compared to a dedicated SDP solver.",
+        "The gap is hypothesized to be partially caused by suboptimal estimation of the vector y0 (representing TRUE), as NeuroSAT does not explicitly represent it.",
+        "Post-processing the final NeuroSAT-derived matrix Y with a gradient-based SDP solver closes the gap for most instances, supporting the hypothesis about y0.",
+        "Analysis of matrix changes during optimization shows largest changes occur in entries involving y0, confirming its estimation is a key limitation."
+    ],
+    "technical_details": {
+        "algorithms": ["Method to compute Gram matrix Y(t) = L^(t)L^(t)T from NeuroSAT embeddings after each iteration t", "Gradient-based SDP solver implemented in PyTorch for post-optimization"],
+        "formulas": ["SDP objective function is a linear function of the Gram matrix Y", "Y(t) = L^(t)L^(t)T where L^(t) is matrix of centered/normalized positive literal embeddings with estimated y0 concatenated as first row"],
+        "architectures": ["NeuroSAT GNN (referenced from supplementary S.2)"],
+        "hyperparameters": {"MP iteration steps": 40},
+        "datasets": ["Several hundred 2-CNF formulas (sampled, details likely in S.3)"]
+    },
+    "dependencies": ["S.1 Derivation of the SDP relaxation for MAX-2-SAT (for objective function expressions)", "S.2 The NeuroSAT Architecture (for understanding GNN structure)", "S.3 Datasets (for formula sampling details)", "Background on SDP for Boolean Satisfiability (section 2.3)"],
+    "reproducibility_notes": ["Method for computing Gram matrix Y from NeuroSAT embeddings: using only positive literals, estimating y0 by averaging TRUE-assigned literals, centering and normalizing vectors", "Number of MP iterations tracked (t=40)", "Use of gradient-based SDP solver for post-optimization", "Need to sample 2-CNF formulas as per dataset description"]
+}
+```

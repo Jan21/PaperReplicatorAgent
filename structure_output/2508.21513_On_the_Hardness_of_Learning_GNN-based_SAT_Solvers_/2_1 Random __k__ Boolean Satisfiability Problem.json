@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.1 Random \\(k\\) Boolean Satisfiability Problem",
+    "section_purpose": "This section introduces the random k-SAT problem, defines its formal structure, and explains the phase transitions in problem hardness based on clause density.",
+    "key_points": [
+        "The random k-SAT problem involves N binary variables and M clauses, each a disjunction of k literals (variables or their negations).",
+        "The problem is expressed in Conjunctive Normal Form (CNF) and the goal is to find a satisfying assignment for all clauses.",
+        "Problem hardness exhibits distinct phases based on the clause density parameter α = M/N.",
+        "In the thermodynamic limit, two key transitions occur: the dynamical transition α_d(k) where solutions cluster, and the critical transition α_c(k) where solutions condense into the largest clusters.",
+        "These phase transitions significantly impact algorithm performance, making problems with α > α_c(k) extremely difficult for existing solvers when k ≥ 4."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Definition of clause density: α = M/N", "Example of a 3-SAT clause: (x_i ∨ ¬x_j ∨ x_h)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of Boolean satisfiability problems and statistical physics concepts mentioned in references [33, 34, 26, 37, 50]"],
+    "reproducibility_notes": ["Definition of the random k-SAT problem structure (N variables, M clauses, k literals per clause)", "The clause density parameter α = M/N as the key control parameter", "Reference to the thermodynamic limit (M, N → ∞) for phase transition analysis"]
+}
+```

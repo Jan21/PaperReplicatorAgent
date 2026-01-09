@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B.5 MAX-k-SAT",
+    "section_purpose": "This section describes the experimental setup, training data distribution, and baseline configurations for evaluating the proposed GNN method on the MAX-k-SAT problem.",
+    "key_points": [
+        "Uses the same reduction from Boolean CNF formulas to CSPs as for 3-SAT, but with denser formulas.",
+        "Training distribution includes k-CNF formulas with 100 variables and arity k ∈ {3,4}, with specific clause/variable ratios.",
+        "Validation uses formulas with 200 variables but identical density distribution.",
+        "Baselines include MaxWalkSAT (a WalkSAT variant optimized for MAXSAT) with tuned noise parameter, plus CCLS and SATLike in default configurations.",
+        "No 5-CNF formulas are used during training or model selection."
+    ],
+    "technical_details": {
+        "algorithms": ["MaxWalkSAT (version of WalkSAT optimized for MAXSAT)", "CCLS", "SATLike"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {"MaxWalkSAT noise parameter": "10^-3"},
+        "datasets": ["Training distribution Ω_MSAT contains k-CNF formulas with 100 variables, arity k∈{3,4}", "Clause/variable ratio sampled uniformly from [5,8] for k=3 and [10,16] for k=4", "Validation on formulas with 200 variables with identical density distribution"]
+    },
+    "dependencies": ["Section 4 (Method) for understanding the GNN approach", "Section B.4 (3-SAT) for understanding the reduction from Boolean CNF to CSPs", "General CSP formulation from Section 3 (Preliminaries)"],
+    "reproducibility_notes": ["Training data specification: 100 variables, k∈{3,4}, clause/variable ratios [5,8] for k=3 and [10,16] for k=4", "Validation data specification: 200 variables, identical density distribution", "Baseline configurations: MaxWalkSAT noise parameter = 10^-3, CCLS and SATLike in default configurations", "Exclusion of 5-CNF formulas from training and model selection"]
+}
+```

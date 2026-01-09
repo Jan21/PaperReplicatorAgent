@@ -1,0 +1,20 @@
+{
+  "section_title": "2 RLAF-guided SAT Solvers",
+  "section_purpose": "This section introduces the RLAF-guided SAT solving framework, establishing the core interaction loop where a Graph Neural Network policy guides a traditional SAT solver's branching decisions based on solver feedback.",
+  "key_points": [
+    "Introduces the Reinforcement Learning from Algorithm Feedback (RLAF) framework for integrating learned guidance into SAT solvers.",
+    "Describes the core interaction where a GNN policy observes the solver state and proposes variable assignments, which the solver then executes to generate new state and reward.",
+    "Highlights the policy's role in replacing the standard heuristic within the DPLL algorithm to improve search efficiency.",
+    "Establishes the reward signal based on solver progress (e.g., clauses reduced) to train the policy.",
+    "Sets up the foundational components for the guided solver: the branching heuristic, graph representation, guidance policy, and optimization method."
+  ],
+  "technical_details": {
+    "algorithms": ["RLAF-guided SAT solving loop", "DPLL algorithm with a guided branching heuristic replacing the standard heuristic"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Knowledge of the DPLL algorithm (Algorithm 1)", "Understanding of standard SAT solver heuristics (Algorithm 2)", "Basic concepts of reinforcement learning and policy guidance"],
+  "reproducibility_notes": ["Definition of the RLAF interaction loop (agent policy, environment=solver, action=variable assignment, state=solver state, reward)", "The role of the policy as a replacement for the standard decision heuristic within the solver framework"]
+}

@@ -1,0 +1,28 @@
+{
+  "section_title": "A. Experiment Settings",
+  "section_purpose": "To describe the experimental setup used to evaluate DeepGate2, including dataset preparation, evaluation metrics, and model configuration details.",
+  "key_points": [
+    "The dataset is constructed from circuits in DeepGate, which originate from ITC'99, IWLS'05, EPFL, and OpenCore, totaling 10,824 AIGs. For training, it creates 894,151 node pairs from incomplete truth tables using 15,000 random patterns and an 80/20 train/test split.",
+    "Two main evaluation tasks are defined: predicting logic probability for each gate (measured by average prediction error PE) and identifying logic equivalence gates (measured by Recall, Precision, F1-Score, and AUC).",
+    "The model configuration specifies the one-round GNN uses 64-dimensional embeddings for both structure and function, and the MLPs have one hidden layer with 32 neurons and ReLU activation.",
+    "Training details include 60-80 epochs, batch size 16, Adam optimizer with a learning rate of 1e-4 and weight decay 1e-10, using an Nvidia V100 GPU.",
+    "Performance is benchmarked on 10 industrial circuits, with Table I previewing DeepGate2's improvement over DeepGate (V1) in both prediction error (PE) and inference time."
+  ],
+  "technical_details": {
+    "algorithms": ["One-round GNN model for circuit representation learning"],
+    "formulas": ["PE = (1/|V|) * sum(|P_i - \u005cP_i|) over all logic gates V, where P_i is the true logic probability and \u005cP_i is the predicted probability", "Definitions for TP, TN, FP, FN based on truth table Hamming distance D_{(i,j)}^T and similarity S_{(i,j)} between embeddings, with threshold \u03b8 determined by ROC"],
+    "architectures": ["GNN model producing structural embedding hs and functional embedding hf (dimension 64 each)", "MLP_prob and MLP_rc each with 1 hidden layer of 32 neurons and ReLU activation"],
+    "hyperparameters": {
+      "embedding_dimension": 64,
+      "mlp_hidden_neurons": 32,
+      "epochs": 60,
+      "training_epochs": 80,
+      "batch_size": 16,
+      "learning_rate": "10^{-4}",
+      "weight_decay": "10^{-10}"
+    },
+    "datasets": ["Circuits from DeepGate (derived from ITC'99, IWLS'05, EPFL, OpenCore), 10,824 AIGs, gate sizes 36 to 3,214", "Industrial circuits for evaluation (10 circuits, sizes 3.18k to 40.50k gates)", "Dataset of 894,151 node pairs from 15,000 random patterns, 80/20 train/test split"]
+  },
+  "dependencies": ["Section III-B (Dataset Preparation)", "DeepGate framework [7]", "ROC analysis for threshold determination"],
+  "reproducibility_notes": ["Dataset sources: ITC'99, IWLS'05, EPFL, OpenCore circuits processed as in DeepGate", "Data generation method: 15,000 random patterns to create incomplete truth tables and node pairs", "Model architecture details: embedding dimensions (64), MLP layers (1 hidden, 32 neurons, ReLU)", "Training hyperparameters: optimizer (Adam), learning rate (1e-4), weight decay (1e-10), batch size (16), epochs (60-80)", "Evaluation metrics formulas (PE, TP/TN/FP/FN definitions) and threshold selection via ROC"]
+}

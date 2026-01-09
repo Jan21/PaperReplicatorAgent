@@ -1,0 +1,26 @@
+```json
+{
+    "section_title": "4.4 Benchmarks and Data Generation",
+    "section_purpose": "This section describes the two benchmark generators (SR and 3-SAT) used to create datasets for training and evaluating the neural SAT solving models, explaining their purpose and generation processes.",
+    "key_points": [
+        "Two benchmark generators are used: the SR generator and a 3-SAT generator set near the phase transition ratio.",
+        "The SR generator creates formula pairs (satisfiable/unsatisfiable) differing by a single literal flip, preventing models from relying on superficial statistical features.",
+        "The 3-SAT generator creates problems at the critical clause-to-variable ratio of 4.26, where instances are empirically most challenging.",
+        "SR generator uses a solver-driven approach, iteratively adding random clauses until unsatisfiability is reached, then creates a satisfiable counterpart.",
+        "3-SAT focuses on natural problem difficulty, with each clause containing exactly 3 literals selected uniformly from variables."
+    ],
+    "technical_details": {
+        "algorithms": ["SR generator algorithm: iterative clause sampling with SAT solver checks after each addition", "3-SAT generation algorithm: uniform random selection of variables with 0.5 negation probability"],
+        "formulas": ["Clause-to-variable ratio for 3-SAT: 4.26 (phase transition point)"],
+        "architectures": [],
+        "hyperparameters": {
+            "3_SAT_clause_variable_ratio": "4.26",
+            "literal_negation_probability": "0.5",
+            "3_SAT_clause_length": "3"
+        },
+        "datasets": ["SR generator datasets (from Selsam et al., 2018)", "3-SAT generator datasets at phase transition"]
+    },
+    "dependencies": ["Understanding of Boolean Satisfiability (Section 3.1)", "Knowledge of SAT problem difficulty concepts like phase transition (mentioned but not detailed)"],
+    "reproducibility_notes": ["Details of SR generator algorithm: iterative sampling with solver checks", "Specific clause generation process for SR: sampling k based on Bernoulli/geometric distributions", "3-SAT generator parameters: clause-variable ratio of 4.26, exactly 3 literals per clause", "Literal negation probability of 0.5 in both generators"]
+}
+```

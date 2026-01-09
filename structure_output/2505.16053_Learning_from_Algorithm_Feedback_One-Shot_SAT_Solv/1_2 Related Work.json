@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "1.2 Related Work",
+    "section_purpose": "To situate the paper's approach within the broader field of deep learning for combinatorial optimization, specifically surveying prior work on enhancing SAT solvers with graph neural networks.",
+    "key_points": [
+        "Deep learning for combinatorial optimization is a major research area applied to problems like SAT solving, Mixed-Integer Programming, and Constraint Satisfaction Problems.",
+        "One line of related work uses GNNs to predict predefined variable properties (e.g., UNSAT core membership, backbone literals) to guide branching heuristics, often requiring tuning and being specific to certain solver types.",
+        "Another line of work uses pure reinforcement learning (e.g., Q-learning, Monte Carlo Forest Search) to train branching policies end-to-end without expert supervision, but suffers from computational bottlenecks due to frequent GNN inference.",
+        "The paper positions its RLAF (Reinforcement Learning from Algorithm Feedback) method as addressing limitations of these prior approaches."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of SAT solving and branching heuristics (from 1.1 Background)", "Basic knowledge of Graph Neural Networks and Reinforcement Learning"],
+    "reproducibility_notes": []
+}
+```

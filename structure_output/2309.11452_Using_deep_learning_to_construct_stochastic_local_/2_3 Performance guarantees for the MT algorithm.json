@@ -1,0 +1,38 @@
+```json
+{
+    "section_title": "2.3 Performance guarantees for the MT algorithm",
+    "section_purpose": "This section establishes theoretical performance bounds for stochastic local search (SLS) algorithms using oracles, specifically the Moser-Tardos (MT) algorithm, and motivates the construction of oracles that satisfy these bounds.",
+    "key_points": [
+        "A 'perfect' oracle sampling uniformly from satisfying assignments leads to immediate convergence, but imperfect oracles can also guarantee efficient solutions.",
+        "Proposition 2.1 provides a sufficient condition (Equation 6) on an oracle's clause violation probabilities to guarantee that the MT algorithm finds a solution in expected ∑μ(j) steps for satisfiable formulas.",
+        "The uniform oracle over all assignments satisfies condition (6) for k-SAT instances with bounded variable occurrence, demonstrating that untuned oracles can still provide guarantees.",
+        "Proposition 2.2 extends the results to unsatisfiable instances or approximately satisfying oracles, bounding the probability that a clause is violated in the output.",
+        "The theoretical framework motivates constructing oracles that minimize the violation error terms ε_{O,μ}(j) even when exact satisfaction of condition (6) is not possible."
+    ],
+    "technical_details": {
+        "algorithms": ["MT algorithm (Moser-Tardos algorithm)"],
+        "formulas": [
+            "P_O(J|φ) = Σ_{x: c_j(x)=1} P_O(x) - probability that a sample from oracle O violates clauses J",
+            "Condition for statistical dependence: P_O({j,j′}|φ) ≠ P_O(j|φ)·P_O(j′|φ)",
+            "Proposition 2.1 condition: P_O(j|φ)·Π_{j′∈Γ⁺(j)}(1+μ(j′)) ≤ μ(j)",
+            "Proposition 2.2 violation probability bound: Prob(c_j(x)=1) ≤ max(0, ε_{O,μ}(j))",
+            "ε_{O,μ}(j) = P_O(j|φ)·Π_{j′∈Γ⁺(j)}(1+μ(j′)) - μ(j)"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of SAT problems and CNF formulas",
+        "Basic knowledge of stochastic local search (SLS) algorithms",
+        "Knowledge of oracle-based SLS from Section 2.2",
+        "Familiarity with probability concepts and statistical independence"
+    ],
+    "reproducibility_notes": [
+        "The precise condition (Equation 6) that must be satisfied by oracle output probabilities for performance guarantees",
+        "The definition of the dependency graph D_O(φ) based on statistical independence of clause violations",
+        "The bound on expected number of steps ∑μ(j) for both propositions",
+        "The extension of the MT algorithm for Proposition 2.2 that takes μ and oracle O as input"
+    ]
+}
+```

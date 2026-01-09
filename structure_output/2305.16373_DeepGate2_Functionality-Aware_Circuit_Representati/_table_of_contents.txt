@@ -1,0 +1,22 @@
+DeepGate2: Functionality-Aware Circuit Representation Learning
+  I. INTRODUCTION
+  II. RELATED WORK
+    A. Circuit Representation Learning
+    B. DeepGate Framework
+  III. METHODOLOGY
+    A. Problem Formulation
+    B. Dataset Preparation
+    C. Functionality-Aware Loss Function
+    D. One-round GNN Model
+    E. Model Training Strategies
+  IV. EXPERIMENTS
+    A. Experiment Settings
+    B. Comparison with DeepGate on Probability Prediction
+    C. Comparison with other Models on Logic Equivalence Gates Identification
+    D. Effectiveness of PI Encoding Strategy
+    E. Effectiveness of Training Strategies
+  V. DOWNSTREAM TASKS
+    A. Logic Synthesis
+    B. Boolean Satisfiability Solving
+  VI. CONCLUSION
+  REFERENCES

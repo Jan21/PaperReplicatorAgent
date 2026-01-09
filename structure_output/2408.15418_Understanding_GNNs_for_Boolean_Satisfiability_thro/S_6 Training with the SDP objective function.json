@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "S.6 Training with the SDP objective function",
+    "section_purpose": "To explore training the GNN (NeuroSAT) with a loss function derived from the MAX-SAT SDP relaxation objective, which directly aims to maximize the number of satisfied clauses, in order to further investigate connections to SDP-based approximation algorithms.",
+    "key_points": [
+        "Proposes a multilinear objective function for training GNNs on general MAX-SAT that is minimized when the maximum number of clauses is satisfied.",
+        "Lifts Boolean variables to unit vectors in a high-dimensional space to make the objective differentiable, enabling optimization via gradient descent.",
+        "Variable assignments are extracted by computing the inner product of variable vectors with a fixed reference vector x0 (representing true).",
+        "A model trained with this SDP objective achieved ~73% classification accuracy (vs. ~85% with NeuroSAT's original loss), but trains faster and improves even without a curriculum on large formulas.",
+        "Suggests that combining the SDP objective (maximizing satisfied clauses) with a classification loss could be beneficial, a direction for future work."
+    ],
+    "technical_details": {
+        "algorithms": ["Differentiable optimization of unit vector embeddings to minimize the SDP-derived objective function", "Assignment extraction via inner product with a fixed reference vector"],
+        "formulas": ["v(C) = Σ_{c∈C} ( Π_{l∈c} (1 - sgn(l) * x_l ⋅ x_0)/2 ) where x_l ∈ X are variables taking values -1 or 1, and sgn(l) is 1 for positive literal, -1 for negative", "Same formula applied in vector space: variables x_0, x_1,..., x_n become unit vectors, x_l ⋅ x_0 is their scalar product"],
+        "architectures": ["NeuroSAT (as the underlying GNN architecture)"],
+        "hyperparameters": {},
+        "datasets": ["Formulas with up to 40 variables (mentioned as largest size used)"]
+    },
+    "dependencies": ["Section S.5 (for comparison of experimental setup)", "Background on MAX-SAT and SDP relaxations (Section 2.3)", "NeuroSAT architecture (Section 2.4 and S.2)"],
+    "reproducibility_notes": ["The specific multilinear objective function v(C) used as loss", "The method of lifting variables to unit vectors and keeping x0 fixed", "Initialization: variable vectors sampled randomly, fed as initial embeddings, normalized after each update", "Supervision details for negative literals: sgn(l) returns -1 for positive, 1 for negative literal", "Assignment extraction rule: variable assigned true if inner product with x0 is positive, else false"]
+}
+```

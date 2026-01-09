@@ -1,0 +1,20 @@
+{
+  "section_title": "3 ARCHITECTURE",
+  "section_purpose": "This section describes the neural network architecture used to represent and process SAT formulas, detailing the graph-based message-passing framework, aggregation methods, and prediction heads.",
+  "key_points": [
+    "The architecture uses a graph representation with literal and clause node types and literal-literal (negation) and clause-literal edge types, inheriting invariance properties from NeuroSAT.",
+    "Processing involves iterative message-passing stages (Message, Aggregate, Update) over 20-40 steps using MLPs with LeakyReLU activations.",
+    "Two aggregation methods are explored: a simple average of message vectors and a modified attention mechanism using key (K) and query (Q) vectors for selective message filtering.",
+    "The model produces two predictions: a global satisfiability (sat) prediction and per-literal policy predictions for solution existence.",
+    "The total loss combines a cross-entropy sat loss and a conditional policy loss (zero for unsatisfiable formulas, average cross-entropy for satisfiable ones), summed across iterations."
+  ],
+  "technical_details": {
+    "algorithms": ["Message-passing graph neural network based on NeuroSAT", "Three-stage iterative update (Message, Aggregate, Update)", "Two aggregation methods: average aggregation and modified attention mechanism"],
+    "formulas": ["Aggregation with modified attention: ∑_i V_i sigmoid(K_i · Q)", "Policy prediction via logistic regression on literal embeddings", "Sat prediction via linear regression on literal embeddings followed by sigmoid on sum"],
+    "architectures": ["Graph representation with two node types (literal, clause) and two edge types (literal-literal for negation, clause-literal for inclusion)", "MLPs with three layers and LeakyReLU activations for message generation and node updates", "Shared MLP parameters across iterations"],
+    "hyperparameters": {"iteration_count": "20 to 40", "activation_functions": ["LeakyReLU for hidden layers", "linear for final message layer", "sigmoid for final update layer"]},
+    "datasets": []
+  },
+  "dependencies": ["NeuroSAT [SLB+ 18] for foundational graph representation and architecture", "Figure 2 for visual explanation of graph structure and message-passing flow", "Standard attention mechanism [VCC+ 17] for comparison"],
+  "reproducibility_notes": ["Graph construction rules for SAT formulas (node types, edge types)", "Number of message-passing iterations (20-40 range)", "MLP architecture details (3 layers, LeakyReLU activations)", "Aggregation method choice (average or modified attention)", "Loss function composition (sat loss + policy loss, summed per iteration)", "Initialization method (trainable embeddings per node type)"]
+}

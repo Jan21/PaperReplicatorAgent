@@ -1,0 +1,58 @@
+```json
+{
+    "section_title": "4.2 Architecture Variants",
+    "section_purpose": "This section details the specific Graph Neural Network (GNN) architecture designs and variants used in the paper, explaining the message-passing mechanisms, update functions, and graph representations for SAT solving.",
+    "key_points": [
+        "The GNN architectures are derived from the recurrent NeuroSAT architecture, allowing theoretically unlimited message-passing iterations.",
+        "Two primary graph representations are used: the literal-clause graph (with separate nodes for positive/negative literals) and the variable-clause graph (with one node per variable and edge polarities).",
+        "The core message-passing is a two-phase RNN-based procedure that alternates between updating clause and variable/literal embeddings, configurable for T iterations.",
+        "The variable-clause graph representation is computationally more efficient than the literal-clause graph as it avoids the expensive 'Flip' operation.",
+        "After message passing, a linear layer produces assignment predictions from variable embeddings, and the model is trained with cross-entropy loss against ground truth assignments."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "RNN-based message-passing update mechanism for GNNs (Equation 6)",
+            "Message transformation functions MLP_pos and MLP_neg for handling edge polarity (Equation 8)",
+            "'Flip' operation for literal-clause graph to exchange embeddings of complementary literals (Equation 10)",
+            "LSTM-based update functions (mentioned as an alternative)",
+            "L2 normalization of node embeddings after each update step (Equation 11)",
+            "Linear layer for node classification after T iterations to produce assignment logits"
+        ],
+        "formulas": [
+            "Message passing update equations for variable-clause graph (Eq. 6): h_c^(t) = RNN_c(∑_v M_vc(h_v^(t-1), p_vc), h_c^(t-1)); h_v^(t) = RNN_v(∑_c M_cv(h_c^(t), p_vc), h_v^(t-1))",
+            "Message transformation function M_vc(h_v, p) = MLP_pos(h_v) if p>0 else MLP_neg(h_v) (Eq. 8)",
+            "Message passing update for literal-clause graph (Eq. 10): h_c^(t) = RNN_c(∑_l h_l^(t-1), h_c^(t-1)); h_l^(t) = RNN_l([∑_c h_c^(t), Flip(h_l^(t-1))], h_l^(t-1))",
+            "L2 normalization: h_i^(t) = h_i^(t) / ||h_i^(t)||_2 (Eq. 11)",
+            "Assignment prediction: y_v = W h_v^(T) + b; â_v = argmax_i(softmax(y_v)_i)"
+        ],
+        "architectures": [
+            "Recurrent GNN architecture derived from NeuroSAT",
+            "Bipartite graph representations: literal-clause graph (2n literal nodes + m clause nodes) and variable-clause graph (n variable nodes + m clause nodes)",
+            "Two-phase message passing alternating between clause and variable/literal updates",
+            "RNN-based or LSTM-based update functions for node embeddings"
+        ],
+        "hyperparameters": {
+            "embedding_dimension_d": "64",
+            "message_passing_iterations_T": "configurable"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.3 Graph Neural Networks for GNN background",
+        "Section 4.1 Data Representation and Graph Structure for graph types",
+        "NeuroSAT architecture (Selsam et al., 2018) referenced as inspiration",
+        "Section 5.3 for discussion on iteration effects"
+    ],
+    "reproducibility_notes": [
+        "Choice of graph representation: literal-clause vs. variable-clause graph",
+        "Embedding dimension d=64",
+        "Random initialization of embeddings from standard normal distribution",
+        "RNN-based vs. LSTM-based update function selection",
+        "Message transformation functions MLP_pos and MLP_neg for edge polarity",
+        "Use of 'Flip' operation for literal-clause graph",
+        "L2 normalization after each update step",
+        "Number of message-passing iterations T",
+        "Linear layer parameters (W, b) for final classification"
+    ]
+}
+```

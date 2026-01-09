@@ -1,0 +1,28 @@
+IB-Net: Initial Branch Network for Variable Decision in Boolean Satisfiability
+  Abstract
+  1 Introduction
+  2 Related Work
+  3 IB-Net approach
+    3.1 Overview
+    3.2 Graph Formulation
+    3.3 Neural Network Model
+    3.4 Training
+    3.5 Interaction with Solver
+  CDCL WorkFlow
+  Queue & Score Based Branching
+  4 Experimental Settings
+    4.1 Datasets
+    4.2 Experimental Setup
+    4.3 Evaluation metrics
+  5 Experimental Results
+    5.1 Main Results
+  UNSAT-core Prediction
+  Runtime Reduction Performance
+    5.2 Ablation Study
+  Graph Construction
+  Supervision Signals
+  Loss Functions
+    5.3 Circuit Study
+    5.4 Scalability
+  6 Conclusion
+  References

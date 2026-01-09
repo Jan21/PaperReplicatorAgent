@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "A3 Pattern-Based Dataset",
+    "section_purpose": "To describe the methodology for generating a pattern-based training dataset that approximates circuit truth tables through simulation with random input patterns, serving as a bootstrapping method for model training.",
+    "key_points": [
+        "Generates pattern-based training traces using simulation with 20,000 random patterns per circuit to approximate full truth tables, which are impractical for large circuits.",
+        "Samples 100 random patterns per circuit per training epoch from the 20,000 patterns, with the subset refreshed each epoch to promote generalization.",
+        "Records logic probability values for every circuit node based on the sampled patterns to create supervisory signals.",
+        "Computes node probabilities from the sampled patterns as training targets to encourage the GNN to capture fine-grained functional behavior."
+    ],
+    "technical_details": {
+        "algorithms": ["Pattern-based dataset generation via circuit simulation with random primary input assignments", "Epoch-based random sampling of patterns from a larger simulation set"],
+        "formulas": ["Random pattern probability: \\(\\hat{P}_{\\mathrm{rand}}(v) = \\frac{1}{100}\\sum_{i = 1}^{100}\\mathbf{1}(v = 1\\mathrm{~in~row~}i)\\) (Equation A4)"],
+        "architectures": [],
+        "hyperparameters": {
+            "total_simulation_patterns_per_circuit": "20,000",
+            "patterns_sampled_per_epoch_per_circuit": "100"
+        },
+        "datasets": ["Pattern-based dataset: Simulated truth tables with random primary input patterns for circuit nodes"]
+    },
+    "dependencies": ["Section 3.3 (Two-Stage Training Strategy) - context on training approach", "Section 4.1 (Dataset Generation) - overall dataset creation framework"],
+    "reproducibility_notes": ["Need to generate 20,000 random patterns per circuit for simulation", "Must sample 100 random patterns per circuit per training epoch", "Must compute node probabilities using Equation A4 as supervisory signals", "Pattern sampling must be refreshed each epoch for different local views"]
+}
+```

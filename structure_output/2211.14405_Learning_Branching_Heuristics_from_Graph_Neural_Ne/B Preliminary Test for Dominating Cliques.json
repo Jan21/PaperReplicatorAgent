@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "B Preliminary Test for Dominating Cliques",
+    "section_purpose": "This section describes a preliminary experiment to validate the effectiveness of the proposed loss function (Equation 5) for the GNN model in the context of finding dominating cliques, by testing it on synthetic graph instances across different parameter ranges.",
+    "key_points": [
+        "The test creates synthetic graph instances using the G(n,p) random graph model across a range of parameters to evaluate the loss function.",
+        "The loss function values output by the trained GNN model are examined for instances with varying likelihoods of containing dominating cliques.",
+        "The results show a correlation between loss function values and the known phase transition: instances with low edge probability (p=0.1) have higher loss (lower probability of a dominating clique), while instances with high edge probability (p=0.9) have lower loss (higher probability).",
+        "The experimental data is visualized in Figure 3, plotting average loss against graph size (n) for different edge probabilities (p)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Equation (5) - referenced as the loss function being tested"],
+        "architectures": ["probabilistic-method GNN model (previously trained)"],
+        "hyperparameters": {
+            "Graph generation parameters n (number of vertices)": "25 to 400 in increments of 25",
+            "Graph generation parameters p (edge probability)": "0.1 to 0.9 in increments of 0.2",
+            "Instances per parameter pair": "32"
+        },
+        "datasets": ["Synthetic graphs generated from the G(n,p) random graph model"]
+    },
+    "dependencies": [
+        "Equation (5) from the main text (the loss function being validated)",
+        "The trained probabilistic-method GNN model described in Section 3",
+        "Understanding of the phase transition property for dominating cliques in random graphs"
+    ],
+    "reproducibility_notes": [
+        "The exact parameters for generating test instances: n from 25 to 400 step 25, p from 0.1 to 0.9 step 0.2, 32 instances per parameter pair.",
+        "The use of the G(n,p) random graph generation model.",
+        "The need for the already-trained probabilistic-method GNN model to compute loss function values.",
+        "The method for averaging loss function values across the 32 instances per parameter pair."
+    ]
+}
+```

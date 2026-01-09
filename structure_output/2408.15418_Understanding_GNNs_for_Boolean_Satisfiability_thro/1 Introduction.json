@@ -1,0 +1,20 @@
+{
+  "section_title": "1 Introduction",
+  "section_purpose": "To introduce the research problem of understanding how Graph Neural Networks (GNNs) solve combinatorial problems, specifically Boolean Satisfiability (SAT), by drawing connections to approximation algorithms like Semidefinite Programming and Belief Propagation, and to outline the paper's contributions.",
+  "key_points": [
+    "GNNs are used for combinatorial problems like SAT, but their design and loss functions are often ad hoc; this paper aims to understand the mechanism by which GNNs find approximate solutions.",
+    "The GNN learns to predict satisfiability by converting the SAT decision problem to the MAX-SAT optimization problem, and its message-passing process can be interpreted as optimizing a continuous relaxation.",
+    "Connections exist between GNN message-passing and approximation algorithms: Semidefinite Programming (SDP) optimizes vectors representing variables, and Belief Propagation operates on similar factor graphs.",
+    "These connections provide insights into GNN operation and lead to improvements in training speed and accuracy.",
+    "Contributions include demonstrating similarities between GNNs and approximation algorithms, designing a training curriculum that speeds up training, and proposing a sampling and decimation procedure that increases the number of solved problems."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": []
+}

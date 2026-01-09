@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.1 Datasets",
+    "section_purpose": "To describe the G4SATBench benchmark's dataset composition, including the sources of SAT instances, their diversity across domains and difficulty levels, and the generation parameters to ensure non-trivial problems.",
+    "key_points": [
+        "G4SATBench contains 7 datasets from three domains: random problems (SR, 3-SAT), pseudo-industrial problems (CA, PS models), and combinatorial problems (k-Clique, k-Dominating Set, k-Vertex Cover translations).",
+        "Each dataset has three difficulty levels (easy, medium, hard) defined by increasing instance sizes (e.g., for SR: 10-40, 40-200, and 200-400 variables, respectively).",
+        "Data splits: 80k training, 10k validation, and 10k test pairs for easy/medium datasets; 10k test pairs only for hard datasets.",
+        "Generation parameters are chosen to avoid trivial cases, e.g., random 3-SAT formulas are generated at the phase-transition region, and k-Clique problems use a specific Erdős-Rényi graph parameterization.",
+        "Dataset diversity and controlled difficulty levels enable fine-grained analysis of GNN performance across different SAT problem types and complexities."
+    ],
+    "technical_details": {
+        "algorithms": ["SR generator from NeuroSAT", "3-SAT generator from CNFGen", "Community Attachment (CA) model", "Popularity-Similarity (PS) model", "CNFGen generators for combinatorial problems (k-Clique, k-Dominating Set, k-Vertex Cover translations)"],
+        "formulas": ["Phase-transition region for random 3-SAT: m = 4.258n + 58.26n^{-2/3}", "Erdős-Rényi graph parameter for k-Clique: edge probability p = (v choose k)^{-1/(v choose 2)}"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["SR (random, three difficulty levels)", "3-SAT (random, three difficulty levels)", "Community Attachment (CA) model (pseudo-industrial, three difficulty levels)", "Popularity-Similarity (PS) model (pseudo-industrial, three difficulty levels)", "k-Clique (combinatorial, three difficulty levels)", "k-Dominating Set (combinatorial, three difficulty levels)", "k-Vertex Cover (combinatorial, three difficulty levels)"]
+    },
+    "dependencies": ["Section 3 (Preliminaries) for background on SAT problems and GNNs", "Appendix A for detailed dataset statistics"],
+    "reproducibility_notes": ["Specific formula for phase-transition region (m = 4.258n + 58.26n^{-2/3})", "Erdős-Rényi graph parameter p for k-Clique generation", "Difficulty level definitions (variable ranges for each dataset, e.g., SR easy: 10-40 variables)", "Data split sizes (80k/10k/10k for train/val/test)", "Reference to external generators: NeuroSAT (SR), CNFGen (3-SAT, combinatorial), CA and PS models"]
+}
+```

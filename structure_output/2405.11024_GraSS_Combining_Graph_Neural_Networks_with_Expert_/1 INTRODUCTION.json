@@ -1,0 +1,20 @@
+{
+  "section_title": "1 INTRODUCTION",
+  "section_purpose": "To introduce the Boolean satisfiability problem, motivate the need for machine learning-based solver selection due to structural differences in SAT instances, critique existing feature-based methods, and present the GraSS approach using graph neural networks with expert knowledge.",
+  "key_points": [
+    "SAT is a fundamental NP-complete problem with applications in planning, verification, and circuit design.",
+    "Solver selection is critical because different solvers perform better on different instances, motivating data-driven approaches.",
+    "Existing methods like SATzilla use fixed-dimensional features, limiting their ability to capture complete instance information.",
+    "GraSS proposes the first GNN-based method, using literal-clause graphs with hand-designed features and positional encodings for full instance representation.",
+    "Contributions include novel architecture, features, runtime-sensitive loss, and state-of-the-art performance on benchmarks."
+  ],
+  "technical_details": {
+    "algorithms": ["SATzilla as a prior machine learning method for solver selection", "Graph neural network-based method (GraSS) for solver selection"],
+    "formulas": ["Example Boolean formula: (x1 OR NOT x2) AND (NOT x1 OR x2 OR x3) AND NOT x1"],
+    "architectures": ["Literal-clause graph representation with attributes", "Heterogeneous graph convolutions", "Node-specific pooling before linear classifier with softmax"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Knowledge of SAT problem and NP-completeness", "Familiarity with machine learning and graph neural networks", "References to related work in SAT solver selection and GNN applications in combinatorial optimization"],
+  "reproducibility_notes": ["Representation of SAT instances as literal-clause graphs with attributes", "Use of hand-designed features and positional encodings for clauses", "GNN architecture with heterogeneous convolutions and pooling", "Supervised training with runtime-sensitive classification loss"]
+}

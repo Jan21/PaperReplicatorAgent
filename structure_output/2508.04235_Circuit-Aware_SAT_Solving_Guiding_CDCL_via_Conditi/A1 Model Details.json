@@ -1,0 +1,36 @@
+{
+  "section_title": "A1 Model Details",
+  "section_purpose": "To provide detailed technical specifications of the model architecture used in the paper, based on the DEEPGATE4 framework with adaptations for circuit gate types and level-by-level propagation.",
+  "key_points": [
+    "Adoption of the DEEPGATE4 framework with structural and functional embeddings updated via self-attention.",
+    "Implementation of type-specific aggregation and update functions for gate types: and, not, and div, handling logical semantics like negation and conjunction.",
+    "Use of attention weights in AND gates to reflect relative importance of inputs, such as controlling inputs.",
+    "Incorporation of positional encodings for the div gate to distinguish asymmetric roles of numerator and denominator inputs.",
+    "Level-by-level propagation algorithm based on topological levels, involving separate structural and functional aggregations."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Level-by-level propagation algorithm where embeddings are updated sequentially from primary inputs to primary outputs using topological levels."
+    ],
+    "formulas": [
+      "Equation (A1): h_v^s ← Agg_g^s({h_u^s | u ∈ P(v), L(u) = ℓ - 1}) and h_v^f ← Agg_g^f({h_u^f, h_u^s | u ∈ P(v), L(u) = ℓ - 1}), where P(v) is predecessor nodes, L(v) is topological level, and Agg are type-specific aggregators."
+    ],
+    "architectures": [
+      "Based on DEEPGATE4 framework (Zheng et al. 2025).",
+      "Uses self-attention (Vaswani et al. 2017) for embedding updates.",
+      "Gate types: and, not, div with custom aggregators."
+    ],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "DEEPGATE4 framework (Zheng et al. 2025) and self-attention mechanism (Vaswani et al. 2017).",
+    "Prior sections on graph construction (likely Section 3.2) for understanding topological levels and gate representations.",
+    "Knowledge of circuit structures and gate semantics from earlier methodology sections."
+  ],
+  "reproducibility_notes": [
+    "Model architecture details: use of DEEPGATE4 framework and adaptations for gate types.",
+    "Specific aggregator functions for AND, NOT, and DIV gates, including positional encodings for DIV.",
+    "Level-by-level propagation algorithm as defined in equation (A1) for updating embeddings based on topological order."
+  ]
+}

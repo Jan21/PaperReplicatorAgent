@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "3.4.3 Categorical Posterior Sampling",
+    "section_purpose": "To explain the inference procedure for the categorical diffusion model, specifically how the model's prediction of the uncorrupted input is used to sample the previous step in the reverse diffusion process.",
+    "key_points": [
+        "The model is trained to predict the uncorrupted input x_0 directly, and this prediction is used during inference to sample x_{t-1} given x_t.",
+        "Categorical posterior sampling involves using the learned distribution p_θ(x_0|x_t, t) to compute the posterior p(x_{t-1}|x_t, x_0).",
+        "The sampling equation is derived using Bayes' rule and the Markov property, approximating p(x_{t-1}|x_t) as a sum over possible x_0.",
+        "A key practical feature is that the number of sampling steps during inference can be chosen independently after training is complete."
+    ],
+    "technical_details": {
+        "algorithms": ["Categorical posterior sampling procedure for inference in the reverse diffusion process."],
+        "formulas": ["p(x_{t-1}|x_t) ≈ Σ_{x_0} p(x_{t-1}|x_t, x_0) p_θ(x_0|x_t, t) (Equation 4)", "p(x_{t-1}|x_t) ≈ Σ_{x_0} [p(x_{t-1}|x_0) p(x_t|x_{t-1}) / p(x_t|x_0)] p_θ(x_0|x_t, t) (Equation 5)"],
+        "architectures": ["The distribution p_θ(x_0|x_t, t) is replaced by a function approximator, specifically a Graph Neural Network (GNN) f_θ(x_t, t)."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of the categorical diffusion process (Section 3.4.1)", "Knowledge of the model's training objective to predict x_0 (Section 3.4.2)"],
+    "reproducibility_notes": ["The specific derived equations (4 and 5) for computing the sampling distribution p(x_{t-1}|x_t).", "The fact that the inference sampling schedule (number of steps) is a user-chosen hyperparameter separate from training."]
+}
+```

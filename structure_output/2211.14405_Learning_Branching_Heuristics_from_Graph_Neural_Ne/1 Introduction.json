@@ -1,0 +1,27 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the motivation for using machine learning (especially GNNs) to learn branching heuristics for exact backtracking search in combinatorial optimization problems, specifically targeting the dominating-clique problem as a challenging test case.",
+    "key_points": [
+        "Machine learning (especially deep learning) has been applied to CSPs and COPs, e.g., in portfolio SAT solvers (SATzilla) and using CNNs/GNNs for prediction or learning greedy heuristics.",
+        "This work uses GNNs to learn branching heuristics for exact backtracking search methods, differing from prior ML approaches that focus on portfolio selection, direct solution sampling, or approximation algorithms.",
+        "The approach is inspired by prior work introducing the probabilistic method into GNNs; node features from GNNs are interpreted as probability distributions, and information entropy guides the branching heuristic.",
+        "The paper focuses on the dominating-clique problem because: (1) prior empirical studies show hard instances resist human-designed heuristics (small variance vs. average branch count), and (2) it involves non-trivial global conditions beyond local properties (unlike, e.g., maximum clique)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Basic knowledge of constraint satisfaction problems (CSPs), combinatorial optimization problems (COPs), and backtracking search.",
+        "Familiarity with graph neural networks (GNNs) and the probabilistic method in combinatorics.",
+        "Understanding of the dominating-clique problem and its phase transition studies (referenced from [9])."
+    ],
+    "reproducibility_notes": [
+        "No specific technical or reproducibility details are provided in this introductory section; later sections will contain the necessary information."
+    ]
+}
+```

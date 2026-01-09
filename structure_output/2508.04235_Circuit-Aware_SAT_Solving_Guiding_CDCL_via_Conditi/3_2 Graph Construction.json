@@ -1,0 +1,47 @@
+```json
+{
+    "section_title": "3.2 Graph Construction",
+    "section_purpose": "This section details the construction of directed acyclic graphs (DAGs) from logic circuits to enable probability-aware learning, introducing virtual gates to model joint and conditional probabilities directly within the graph structure.",
+    "key_points": [
+        "Standard DAGs are constructed where nodes represent logic gates (and, not) and edges represent signal propagation, following prior frameworks like DeepGate4.",
+        "Virtual 'and' gates are inserted to directly model joint probabilities (e.g., P(A∧C)) as observable nodes, avoiding intermediate computations.",
+        "Virtual 'div' gates are introduced to directly model conditional probabilities (e.g., P(A|C)) to mitigate error amplification from dividing by small probabilities.",
+        "Polar nodes (with truth-table probabilities < 0.1) are identified as problematic due to being hard to learn and amplifying errors, necessitating special attention.",
+        "The construction uses specific aggregator functions (Aggr_and, Aggr_not, Aggr_div) to compute node embeddings for the virtual gates, which are then passed to a prediction head."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "DAG construction for circuit representation",
+            "Insertion of virtual and gates for joint probability nodes",
+            "Insertion of virtual div gates for conditional probability nodes"
+        ],
+        "formulas": [
+            "Equation (3): A_joint = A ∧ C (definition of virtual and gate for joint event)",
+            "Equation (4): h^{A_joint} = Aggr(h^A, h^C), P̂(A_joint) = φ(h^{A_joint}) (embedding and prediction for joint probability)",
+            "Equation (5): P(A|C) = P(A∧C) / P(C) = P(A_joint) / P(C) (definition of conditional probability)",
+            "Equation (6): h^{A_cond} = Aggr_div(h^{A_joint}, h^C) (embedding for conditional probability)",
+            "Equation (7): P̂(A_cond) = φ(h^{A_cond}) (prediction for conditional probability)"
+        ],
+        "architectures": [
+            "Graph uses and and not gates as basic node types",
+            "Virtual and gates inserted for joint probabilities",
+            "Virtual div gates inserted for conditional probabilities"
+        ],
+        "hyperparameters": {
+            "polar_node_threshold": "0.1 (truth-table probability threshold)"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Prior work on circuit representation learning (Shi et al., Zheng et al., Liu et al.)",
+        "DeepGate4 framework for aggregator functions Aggr_and and Aggr_not",
+        "Appendix A2 for details on error amplification with small denominators"
+    ],
+    "reproducibility_notes": [
+        "Specific aggregator functions Aggr_and, Aggr_not, and Aggr_div must be implemented as per the referenced DeepGate4 framework or defined.",
+        "Threshold for identifying polar nodes (probability < 0.1) must be applied during graph construction.",
+        "Procedure for inserting virtual and and div gates given a base circuit graph must be followed.",
+        "Task head φ is specified as a 3-layer MLP."
+    ]
+}
+```

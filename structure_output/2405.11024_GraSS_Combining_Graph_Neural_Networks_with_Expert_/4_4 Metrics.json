@@ -1,0 +1,28 @@
+{
+  "section_title": "4.4 Metrics",
+  "section_purpose": "This section defines and explains the evaluation metrics used to assess the performance of SAT solver selection methods in the experiments, including how results are aggregated and reported.",
+  "key_points": [
+    "Three key metrics are reported: Average Runtime (Avg Runtime, lower is better), Percentage of Solved Instances (Solved, higher is better within a 500s cutoff), and Classification Accuracy (ACC, higher is better for selecting the optimal solver).",
+    "Results are averaged over five train-test folds, with both the average and standard deviation reported to account for variability.",
+    "Statistical significance testing is performed using the Wilcoxon signed-rank test, with p-values <0.05 indicated by an asterisk in the results tables.",
+    "The metrics are applied to two benchmarks: LEC and SC, as shown in detailed comparison tables."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 4.2 (Datasets) for details on the LEC and SC benchmarks used in the metrics.",
+    "Section 4.1 (Base solvers) and 4.3 (Baselines) to understand the methods being evaluated.",
+    "Section 3 (APPROACH) for the GraSS model and other methods referenced in the results."
+  ],
+  "reproducibility_notes": [
+    "Definitions of metrics: Avg Runtime (mean runtime per instance), Solved (percentage solved within 500s cutoff), and ACC (accuracy in selecting the optimal solver).",
+    "Use of five train-test folds for averaging results and reporting standard deviations.",
+    "Cutoff time of 500 seconds for the Solved metric.",
+    "Application of Wilcoxon signed-rank test for statistical significance comparison between methods."
+  ]
+}

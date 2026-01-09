@@ -1,0 +1,40 @@
+{
+  "section_title": "B.4 3-SAT",
+  "section_purpose": "To explain the modeling of 3-SAT problems as constraint satisfaction problems (CSP) and describe the experimental setup, including data generation, baseline methods, and evaluation protocol for the 3-SAT experiments.",
+  "key_points": [
+    "Modeling a Boolean CNF formula as a CSP instance with Boolean variables (domain {0,1}) and constraints derived from clauses, where each constraint excludes the single unsatisfying assignment.",
+    "Training data consists of random uniform 3SAT instances with 100 variables and a clause/variable ratio between 4 and 5, near the satisfiability threshold; validation uses 200 variables with the same density.",
+    "Baseline methods include PDP (trained on the same distribution), RLSAT (trained with a curriculum learning sequence), WalkSAT (with tuned parameters but defaults used), and probSAT (default configuration).",
+    "Experimental setup involves running each method for 10,000 steps per instance, with 10 runs for non-deterministic methods and taking the best attempt as the output."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Modeling of 3-SAT as CSP: variables correspond to Boolean variables with domain {0,1}, constraints correspond to clauses with relation R^C = {0,1}^k \\ {t_c}, where k is clause arity and t_c is the unsatisfying assignment.",
+      "Baseline algorithms: PDP (trained on Ω_3SAT), RLSAT (trained with curriculum learning on increasing variable counts), WalkSAT (with parameter tuning), probSAT (default configuration)."
+    ],
+    "formulas": [
+      "Constraint relation for a clause: R^C = {0,1}^k \\ {t_c}, where k is the arity of the clause and t_c ∈ {0,1}^k is the unsatisfying assignment combination."
+    ],
+    "architectures": [],
+    "hyperparameters": {
+      "RLSAT_curriculum": "Variable counts: 5, 10, 25, 50, 100",
+      "WalkSAT_parameters": "Default configuration used after tuning",
+      "probSAT_configuration": "Default configuration"
+    },
+    "datasets": [
+      "Training distribution Ω_3SAT: random uniform 3SAT instances with 100 variables, clause/variable ratio uniformly sampled between 4 and 5.",
+      "Validation dataset: 3SAT instances with 200 variables and the same clause/variable ratio distribution."
+    ]
+  },
+  "dependencies": [
+    "Understanding of CSP modeling from Preliminaries or earlier sections",
+    "Familiarity with baseline methods PDP, RLSAT, WalkSAT, probSAT from Related Work or previous experiment sections",
+    "Knowledge of experimental setup from section 5 Experiments or other parts of Appendix B"
+  ],
+  "reproducibility_notes": [
+    "Data generation parameters for training and validation: variable counts, clause/variable ratio distribution.",
+    "Baseline configurations: PDP default, RLSAT curriculum sequence, WalkSAT and probSAT default parameters.",
+    "Experimental protocol: 10,000 steps per instance, 10 runs per instance for non-deterministic methods, best attempt output for PDP only once.",
+    "Modeling details for converting 3-SAT to CSP instances."
+  ]
+}

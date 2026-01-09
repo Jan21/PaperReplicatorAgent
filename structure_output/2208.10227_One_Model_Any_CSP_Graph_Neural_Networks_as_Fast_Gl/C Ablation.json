@@ -1,0 +1,38 @@
+```json
+{
+    "section_title": "C Ablation",
+    "section_purpose": "This section presents an empirical ablation study to evaluate the impact of two major design choices in the ANYcSP model: the exponentially-sized action space versus a local search alternative, and the specific reward scheme used for training.",
+    "key_points": [
+        "The study compares the original ANYcSP against two modified versions: ANYcSP_loc (local search) and ANYcSP_qual (alternative reward scheme).",
+        "ANYcSP_loc modifies the policy to sample a single value for one variable per iteration, making it a local search heuristic that changes only one variable at a time.",
+        "ANYcSP_qual replaces the original reward scheme with a reward based on the quality of the current assignment minus the quality of the initial assignment.",
+        "The experiments test these modifications on graph coloring, MAXCUT, and MAX-k-SAT problems using the same training data and hyperparameters as the original ANYcSP.",
+        "The goal is to empirically validate the benefits of the global/exponential action space and the designed reward scheme over simpler alternatives."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "ANYcSP_loc: A local search variant where the policy output is a probability distribution over the disjoint union of all variable domains. A single value is sampled, and only its corresponding variable is updated per iteration.",
+            "ANYcSP_qual: A variant trained with a reward defined as the quality of the current assignment minus the quality of the initial assignment."
+        ],
+        "formulas": [
+            "Equation (23): Defines the policy output for ANYcSP_loc as a softmax over scores for all values in the disjoint union of domains V: φ^(t+1)(v) = exp(o^(t)(v)) / (sum over v' in V of exp(o^(t)(v')))",
+            "Equation (25): Describes the sampling and assignment update for ANYcSP_loc: Sample v ~ φ^(t+1), then set α^(t+1) = α^(t)[X_v = v]",
+            "Equation (26): Defines the alternative reward for ANYcSP_qual: r^(t) = Q_I(α^(t)) - Q_I(α^(0)), where Q_I is the quality function for the CSP instance I."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4.2 (Global Search as an RL Problem) for understanding the original reward scheme and policy formulation.",
+        "Section 4.3 (Implementation and Hyperparameters) for details on the original training setup."
+    ],
+    "reproducibility_notes": [
+        "Equation (23) and (25) for implementing the local search policy modification (ANYcSP_loc).",
+        "Equation (26) for implementing the alternative reward scheme (ANYcSP_qual).",
+        "The note that training ANYcSP_qual required using the initial assignment quality as a baseline to stabilize training.",
+        "The specific problems used for ablation: graph coloring, MAXCUT, and MAX-k-SAT.",
+        "The use of identical training data and hyperparameters as the original ANYcSP for fair comparison."
+    ]
+}
+```

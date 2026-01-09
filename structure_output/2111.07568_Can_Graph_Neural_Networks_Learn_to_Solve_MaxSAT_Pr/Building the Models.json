@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "Building the Models",
+    "section_purpose": "This section provides implementation details for two GNN models (MS-NSFG and MS-ESFG) designed to solve MaxSAT problems, explaining how key components like aggregation and update functions are implemented.",
+    "key_points": [
+        "Two specific GNN models are built: MS-NSFG (using NSFG graph representation) and MS-ESFG (using ESFG graph representation), both following previously described frameworks.",
+        "Aggregation functions are implemented using a two-step process: an MLP module maps node embeddings to message vectors, then messages from relevant nodes are summed.",
+        "Update functions are implemented using LSTM modules, where node embeddings serve as hidden states and aggregated messages as inputs.",
+        "Complete model frameworks are provided in the Appendix, with this section focusing on key component implementations."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "MS-NSFG model using NSFG graph representation",
+            "MS-ESFG model using ESFG graph representation",
+            "Aggregation functions implemented via MLP + message summation",
+            "Update functions implemented via LSTM modules"
+        ],
+        "formulas": [
+            "AGG_L function in MS-NSFG: ∑_{(i,j)∈E} MLP(L_i) where L_i is embedding of literal i",
+            "Four aggregation functions in MS-ESFG: AGG_L^+, AGG_L^-, AGG_C^+, AGG_C^-"
+        ],
+        "architectures": [
+            "MLP modules for mapping node embeddings to message vectors",
+            "LSTM modules for updating node embeddings using aggregated messages as input"
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3 (GNN Models for MaxSAT) which describes the general frameworks",
+        "Equation (3) and (4) mentioned as structural references",
+        "Appendix containing complete model frameworks"
+    ],
+    "reproducibility_notes": [
+        "Need to know which graph representation (NSFG vs ESFG) each model uses",
+        "Implementation details for aggregation functions: MLP + summation approach",
+        "Use of LSTM modules for update functions",
+        "Reference to complete frameworks in Appendix for full model structure"
+    ]
+}
+```

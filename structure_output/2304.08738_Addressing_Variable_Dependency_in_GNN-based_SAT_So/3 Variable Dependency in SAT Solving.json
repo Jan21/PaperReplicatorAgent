@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 Variable Dependency in SAT Solving",
+    "section_purpose": "To introduce and explain the problem of variable dependency in SAT solving, highlighting how symmetric nodes in SAT/Circuit-SAT problems present a fundamental limitation for existing GNN-based approaches that use equal initial embeddings and predict assignments in parallel.",
+    "key_points": [
+        "SAT and Circuit-SAT solving must 'remember' prior predictions (variable dependencies) to make consistent assignments, as illustrated by the 2-input XOR example where x and y are symmetric but must be assigned different values.",
+        "Symmetry is common in SAT problems; symmetric formulas produce symmetric AIG/CNF graphs where symmetric nodes have identical neighbor structures, leading to identical node embeddings in standard message-passing GNNs if initial embeddings are equal.",
+        "Existing GNN-based SAT solvers (NeuroSAT, DG-DAGRNN) use equal initial embeddings for all nodes and predict variable assignments in parallel, which prevents them from distinguishing symmetric nodes and solving formulas that require asymmetric assignments (like XOR).",
+        "Random or biased node initialization alone cannot solve the symmetry problem; random provides no distinguishing information, while biased initialization introduces artifacts and lacks generalizability.",
+        "The proposed solution is a sequential prediction approach using a recurrent neural network, which will be detailed in the next section, to incorporate variable dependency by 'remembering' previous assignments."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["2-input XOR: (x ⊕ y) used as an illustrative example of a symmetric formula requiring asymmetric variable assignments"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2 (Background) for understanding SAT, Circuit-SAT, and GNN-based solving basics", "Figure 1 (referred to, showing symmetric AIG/CNF structures)", "Prior works: Selsam et al., 2018 (NeuroSAT); Amizadeh et al., 2018 (DG-DAGRNN); Zhang et al., 2020"],
+    "reproducibility_notes": ["Key limitation identified: GNN-based solvers with equal initial embeddings and parallel prediction fail on symmetric problems requiring asymmetric assignments (e.g., XOR).", "Logical argument supported by experimental results in the appendix (mentioned but not detailed here)."]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Related Work",
+    "section_purpose": "This section provides a comprehensive survey of existing literature on using Graph Neural Networks (GNNs) for SAT solving and discusses the limitations of current SAT datasets used for training GNN models.",
+    "key_points": [
+        "Existing GNN-based SAT solvers are categorized into two branches: standalone neural solvers that directly solve SAT instances, and neural-guided solvers that integrate GNNs with traditional SAT solvers to improve search heuristics.",
+        "Standalone neural solvers focus on either predicting formula satisfiability or constructing satisfying assignments, while neural-guided solvers use GNNs for tasks like unsat-core variable prediction, satisfying assignment prediction, or use reinforcement learning to model the search process.",
+        "Despite extensive research on GNNs for SAT solving, there is currently no benchmark study to evaluate and compare the performance of different GNN models, which G4SATBench aims to address.",
+        "Traditional SAT benchmarks like SATLIB and SAT Competition instances are unsuitable for GNN training due to being either too small (less than 100 instances per domain) or too large (over 10 million variables/clauses).",
+        "Existing synthetic SAT instance generators produce datasets that are limited in domain diversity (less than 3 generators), size (less than 10k instances), or difficulty (less than 40 variables), and lack standardization - problems that G4SATBench seeks to resolve."
+    ],
+    "technical_details": {
+        "algorithms": ["Standalone neural solvers for satisfiability prediction", "Standalone neural solvers for satisfying assignment construction", "Neural-guided solvers for unsat-core variable prediction", "Neural-guided solvers for glue variable prediction", "Neural-guided solvers for assignment marginal prediction", "Reinforcement learning approaches modeling SAT search as Markov Decision Process"],
+        "formulas": [],
+        "architectures": ["Graph Neural Network (GNN) based architectures for SAT solving"],
+        "hyperparameters": {},
+        "datasets": ["SATLIB benchmark", "SAT Competition datasets", "Synthetic SAT instance generators (unspecified but mentioned)"]
+    },
+    "dependencies": ["Basic understanding of SAT solving and Graph Neural Networks (GNNs)", "Familiarity with the distinction between SAT solving approaches"],
+    "reproducibility_notes": []
+}
+```

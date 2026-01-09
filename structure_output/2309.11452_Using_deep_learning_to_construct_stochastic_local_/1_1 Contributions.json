@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1.1 Contributions",
+    "section_purpose": "To enumerate and summarize the key contributions of the paper, highlighting the novel aspects of the work and its empirical results.",
+    "key_points": [
+        "The work connects machine learning methods with theoretical computer science to create application-specific solvers that have performance guarantees.",
+        "Introduces a new, theoretically motivated loss function called the Lovász Local loss (LLL loss), designed to reward oracles that exploit local structure in SAT instances.",
+        "Constructs and trains two oracle-based Stochastic Local Search (SLS) solvers using an Interaction Network architecture.",
+        "Empirical evaluation on random 3-SAT shows ML-based solvers solve instances with ~17% higher clause-to-variable ratio (α), in ~35% fewer steps, and with an >8x improvement in median step count.",
+        "Shows that continuous oracle access during search yields significantly better results than only using an oracle for initialization."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Interaction network [16] used as oracle factory for SLS solvers"],
+        "hyperparameters": {},
+        "datasets": ["Random 3-SAT instances with varying difficulty measured by α (clause-to-variable ratio)"]
+    },
+    "dependencies": ["Basic understanding of SAT problem and Stochastic Local Search (SLS) algorithms (referenced from Sections 2.1 and 2.2)", "Knowledge of Graph Neural Networks and Interaction Networks (referenced from Section 2.5)"],
+    "reproducibility_notes": ["The new Lovász Local loss function (details likely in Section 2.4)", "Architecture choice: Interaction Network for oracle factories", "Training setup for the two oracle-based SLS solvers", "Evaluation protocol: random 3-SAT instances across α values"]
+}
+```

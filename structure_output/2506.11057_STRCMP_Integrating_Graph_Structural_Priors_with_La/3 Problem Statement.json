@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 Problem Statement",
+    "section_purpose": "This section formally defines the combinatorial optimization problem the paper addresses and specifies the generation task of synthesizing algorithms via code snippets.",
+    "key_points": [
+        "A general combinatorial optimization problem (Q) is defined as a constrained discrete optimization problem, with specific examples being Boolean Satisfiability (SAT) and Mixed Integer Linear Programming (MILP).",
+        "For an instance (q) of problem Q, the formal objective is to minimize a composite function comprising an objective cost c(x;q) and a constraint penalty f(x;q) over a feasible solution space S(q).",
+        "SAT problems lack an objective function (c(x;q) is absent), focusing solely on constraint satisfaction, whereas MILP problems include both an objective and constraints.",
+        "The primary task of the paper is defined as finding an algorithm (A) that minimizes the expected composite cost over problem instances from Q, with algorithms represented as executable code snippets.",
+        "The algorithm search space A is restricted to symbolic representations (code snippets) that can be executed by a combinatorial optimization solver, framing the task as a code generation problem for a generative model."
+    ],
+    "technical_details": {
+        "algorithms": ["The section mentions the target is algorithm synthesis via code generation, but no specific algorithm is detailed here."],
+        "formulas": ["Equation (1): min_{x in S(q)} [c(x;q) + f(x;q)], where x are decision variables, S(q) is the solution space, c is the objective function, and f is the constraint penalty.", "Equation (2): min_{A ~ A} E_{q ~ Q, x ~ A(q)}[c(x;q) + f(x;q)], defining the objective of finding an algorithm A that minimizes expected cost."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Reference [33] for the general combinatorial optimization formulation.", "Figure 2 (referenced in the content) for an overview of the proposed STRCMP solution.", "Basic understanding of combinatorial optimization, SAT, and MILP problems (likely from Introduction or Related Work)."],
+    "reproducibility_notes": ["The formal mathematical definitions of the optimization problem (Equations 1 and 2).", "The specification that algorithms must be representable as executable code snippets for a target solver.", "The clarification on the differences between SAT (no objective function) and MILP (has objective function) problem formulations."]
+}
+```

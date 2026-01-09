@@ -1,0 +1,29 @@
+Circuit-Aware SAT Solving: Guiding CDCL via Conditional Probabilities
+  Abstract
+  1 Introduction
+  2 Related Work
+    2.1 Circuit Representation Learning
+    2.2 Circuit Satisfiability
+  3 Methodology
+    3.1 Problem Definition
+    3.2 Graph Construction
+    3.3 Two-Stage Training Strategy
+    3.4 Multiple Condition Probability
+  4 Experiments
+    4.1 Dataset Generation
+    4.2 Experiment Setting
+    4.3 Performance on Conditional Probability Prediction
+    4.4 Ablation Study
+  5 Application to Circuit SAT
+    5.1 Experiment Setting
+    5.2 Node Probability for Phase Selection
+    5.3 Clause Probability for Clause Management
+    5.4 Effectiveness of Inprocessing Beyond Preprocessing
+  6 Conclusion
+  References
+  A1 Model Details
+  A2 Effectiveness of div Gate
+  A3 Pattern-Based Dataset
+  A4 Workload-Based Dataset
+  A5 Analysis of Probability-Based Metric
+  A6 Applying Probability-Based Phase Selection for UNSAT Case

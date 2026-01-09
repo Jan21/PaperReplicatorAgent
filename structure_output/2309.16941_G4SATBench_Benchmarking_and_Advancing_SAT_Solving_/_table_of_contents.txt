@@ -1,0 +1,32 @@
+G4SATBench: Benchmarking and Advancing SAT Solving with Graph Neural Networks
+  Abstract
+  1 Introduction
+  2 Related Work
+  3 Preliminaries
+  4 G4SATBench: A Benchmark Study on GNNs for SAT Solving
+    4.1 Datasets
+    4.2 GNN Baselines
+    4.3 Supported Tasks, Training and Testing Settings
+  5 Benchmarking Evaluation on G4SATBench
+    5.1 Satisfiability Prediction
+    5.2 Satisfying Assignment Prediction
+    5.3 Unsat-core Variable Prediction
+  6 Advancing Evaluation on G4SATBench
+    6.1 Comparison with the CDCL Heuristic
+    6.2 Comparison with the LS Heuristic
+  7 Discussions
+    7.1 Limitations and Future Work
+    7.2 Conclusion
+  Acknowledgments
+  References
+  A Datasets
+  B GNN Models
+  C Benchmarking Evaluation
+    C.1 Implementation Details
+  C.2 Satisfiability Prediction
+  C.3 Satisfying Assignment Prediction
+  Evaluation with unsatisfiable training in-
+  C.4 Unsat-core Variable Prediction
+  D Advancing Evaluation
+  D.1 Implementation details
+  D.2 Comparisons with State-of-the-art SAT Solvers

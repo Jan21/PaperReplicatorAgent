@@ -1,0 +1,19 @@
+{
+  "section_title": "2.1 Boolean Satisfiability Problem",
+  "section_purpose": "To introduce the Boolean satisfiability problem (SAT), including its definition, common representations (conjunctive normal form and circuits), and methods for converting formulas, setting the foundation for understanding GNN-based SAT solving.",
+  "key_points": [
+    "SAT involves deciding if assignments exist to Boolean variables to make a propositional logic formula true, with outcomes being satisfiable (SAT) or unsatisfiable (UNSAT).",
+    "SAT inputs are typically in conjunctive normal form (CNF), where literals form clauses with disjunctions (∨), and clauses are connected with conjunctions (∧).",
+    "Tseitin transformation converts arbitrary Boolean formulas to equi-satisfiable CNF with a linear size increase relative to the number of operators.",
+    "SAT can also be represented as circuits, which are directed acyclic graphs (DAGs) with nodes for inputs, logic gates, and outputs, convertible to and from CNF."
+  ],
+  "technical_details": {
+    "algorithms": ["Tseitin transformation for CNF conversion"],
+    "formulas": ["Boolean operators: ∧ (and), ∨ (or), ¬ (not)"],
+    "architectures": ["Circuit form as a directed acyclic graph (DAG) with nodes for inputs, logic gates, and outputs"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Basic knowledge of propositional logic and Boolean algebra"],
+  "reproducibility_notes": ["Definition of SAT problem and CNF representation", "Tseitin transformation method for converting formulas to CNF"]
+}

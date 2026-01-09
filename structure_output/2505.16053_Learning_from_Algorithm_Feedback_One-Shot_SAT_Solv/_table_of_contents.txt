@@ -1,0 +1,35 @@
+Learning from Algorithm Feedback: One-Shot SAT Solver Guidance with GNNs
+  Abstract
+  1 Introduction
+    1.1 Background
+    1.2 Related Work
+Algorithm 1 DPLL Solver
+Algorithm 2 Decision Heuristic
+Algorithm 3 Guided Decision Heuristic
+  2 RLAF-guided SAT Solvers
+    2.1 Guided Branching Heuristics
+    2.2 Graph Representation and Architecture
+    2.3 Guidance Policy
+    2.4 Policy Optimization
+    2.5 Training Setup
+  3 Experiments
+    3.1 Main Results
+    3.2 Comparison to Supervised Approaches
+    3.3 Exploring Learned Variable Weights
+  4 Discussion
+  References
+  A Method Details
+  A.1 Graph Representation and Architecture
+  A.2 Message-Passing Neural Network
+  A.3 SAT Solver Details
+  Glucose
+  March
+  B Experiment Details
+  B.1 Data
+  B.2 Hyperparameters
+  B.3 Training
+  B.4 Supervised UNSAT-Core and Backbone Prediction
+  UNSAT-Core
+  Backbone
+  Supervised Comparison with March
+  B.5 GNN Overhead

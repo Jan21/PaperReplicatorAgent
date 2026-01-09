@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "3.1 Main Results",
+  "section_purpose": "To present the core experimental findings comparing the RLAF-guided GNN approach against base solvers Glucose and March across different problem classes, focusing on runtime improvements.",
+  "key_points": [
+    "RLAF-guided training consistently accelerates base solvers (Glucose and March), though improvement margin varies by solver and problem class.",
+    "For 3SAT(400) problems, RLAF reduces mean runtime of Glucose by 69% (satisfiable) and 41% (unsatisfiable). Substantial improvements also seen for satisfiable 3-coloring and cryptographic instances.",
+    "The smallest improvement (or negative impact) is observed for March on unsatisfiable 3SAT instances, where GNN overhead outweighs decision reduction benefit.",
+    "The GNN forward pass runtime (~0.1s) is included in measurements and is negligible compared to solver runtimes on harder problems.",
+    "Results demonstrate that training on easier problems generalizes to more complex problems at test time."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["3SAT(400) problems", "3-coloring problems", "cryptographic instances"]
+  },
+  "dependencies": ["Section 2 (RLAF-guided SAT Solvers - for method explanation)", "Algorithms 1-3 (for solver and heuristic context)", "Appendix Table 5 (for GNN overhead details)"],
+  "reproducibility_notes": ["Specific runtime reduction percentages per problem class and solver (e.g., 69% for Glucose on satisfiable 3SAT(400))", "Note that GNN forward pass runtime (~0.1s) is included in all measurements", "Reference to Table 1 and Figure 4 for complete numerical results"]
+}
+```

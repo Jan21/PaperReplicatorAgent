@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "2.1 SAT",
+    "section_purpose": "To formally define the Boolean satisfiability problem (SAT) and establish the notation that will be used throughout the paper for representing formulas, assignments, and clause satisfaction.",
+    "key_points": [
+        "SAT is the decision problem of determining whether a Boolean formula has a variable assignment that makes the entire formula true.",
+        "Any Boolean formula can be converted to an equivalent conjunctive normal form (CNF), which is a conjunction of disjunctive clauses.",
+        "SAT is NP-complete and has many practical applications in hardware/software verification, planning, scheduling, and cryptography.",
+        "The section establishes crucial notation for variables, clauses, assignments, and clause violation counting that will be used throughout the paper."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "CNF formula: φ = (c₁ ∧ c₂ ∧ ... ∧ cₘ)",
+            "Clause structure: cⱼ = (l₁⁽ʲ⁾ ∨ l₂⁽ʲ⁾ ∨ ... ∨ lₖ⁽ʲ⁾)"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of computational complexity and Boolean logic"],
+    "reproducibility_notes": [
+        "Understanding of CNF representation of Boolean formulas",
+        "Clarification that [n] ≡ {1,...,n} denotes variable indices",
+        "Definition of V⁺(c) and V⁻(c) for positive and negative literals in clauses",
+        "Definition of φ(x) = Σⱼ cⱼ(x) as the count of violated clauses"
+    ]
+}
+```

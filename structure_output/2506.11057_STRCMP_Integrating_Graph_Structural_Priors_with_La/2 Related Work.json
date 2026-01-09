@@ -1,0 +1,20 @@
+{
+  "section_title": "2 Related Work",
+  "section_purpose": "To review and categorize existing research in neural combinatorial optimization (NCO) and language models (LLMs) for combinatorial optimization, identifying key limitations such as scalability, interpretability, neglect of structural priors, and computational inefficiency that the proposed method aims to address.",
+  "key_points": [
+    "Neural Combinatorial Optimization (NCO) encompasses end-to-end solvers, ML-augmented algorithm configuration, and hybrid methods, but suffers from scalability issues with large problem sizes and lack of interpretability due to opaque models.",
+    "Pointer Networks use attention mechanisms for CO problems but struggle with generalization to extreme problem sizes, a common limitation in neural solver architectures.",
+    "Language Models (LLMs) are applied to CO via direct solution generation (e.g., OPRO) or automated solver-compatible code generation (e.g., FunSearch, EoH), but often ignore structural characteristics of CO problems.",
+    "Evolutionary frameworks combined with LLMs, such as FunSearch and Evolution of Heuristics (EoH), require multiple iterations and incur high computational overhead from repeated solver evaluations.",
+    "The proposed approach integrates graph structural priors to enhance solution quality and efficiency, providing interpretability through solver-executable code generation, addressing gaps in NCO and LLM-based methods."
+  ],
+  "technical_details": {
+    "algorithms": ["Pointer Networks using attention mechanisms as dynamic pointers", "GCNs trained via imitation learning to replace branching heuristics in branch-and-bound", "OPRO (Optimization by PROmpting) for iterative refinement via LLM inference", "FunSearch for evolutionary program synthesis with LLMs", "Evolution of Heuristics (EoH) for co-optimizing natural language thoughts and code"],
+    "formulas": [],
+    "architectures": ["Attention mechanisms in Pointer Networks", "Graph Convolutional Networks (GCNs) for graph representations", "Large Language Models (LLMs) integrated with evolutionary algorithms"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Citations to prior work in NCO and LLMs (e.g., references [7, 14, 18, 20, 21])", "Section 3: Problem Statement for definitions of combinatorial optimization problems", "General background in machine learning, graph neural networks, and combinatorial optimization"],
+  "reproducibility_notes": ["No direct implementation details; this section summarizes related work and its limitations.", "References to baseline methods (e.g., Pointer Networks, GCNs, OPRO, FunSearch) that may be required for comparative evaluation."]
+}

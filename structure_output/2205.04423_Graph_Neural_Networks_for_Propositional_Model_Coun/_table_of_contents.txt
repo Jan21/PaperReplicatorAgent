@@ -1,0 +1,21 @@
+Graph Neural Networks for Propositional Model Counting
+  1 Introduction
+  2 Background
+    2.1 Belief Propagation and #SAT
+    2.2 Graph Attention Networks
+  3 Method
+    3.1 Belief Propagation Neural Networks
+    3.2 Neural Belief Propagation with Attention
+  4 Experimental Evaluation
+    4.1 Experimental Setting
+    4.2 Results
+  5 Related Work
+  6 Conclusions
+  References
+  A Extended Background
+  A.1 Factor Graphs and Belief Propagation
+  A.2 Graph Neural Networks
+  B Comparison with BPNN
+  C Configuration and Ablation Studies
+  C.1 BPGAT Parameter Tuning
+  C.2 Ablation Studies on GAT Layers

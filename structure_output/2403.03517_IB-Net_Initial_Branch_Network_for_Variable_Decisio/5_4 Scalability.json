@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "5.4 Scalability",
+    "section_purpose": "To evaluate and compare the scalability, in terms of computational resource efficiency, of the proposed WGCN-based model against an LSTM baseline, focusing on memory consumption and training time across varying problem sizes.",
+    "key_points": [
+        "The WGCN (Weighted Graph Convolutional Network) model uses significantly less memory than an LSTM model across all tested data sample sizes, consuming only about 30% of the LSTM's memory.",
+        "WGCN demonstrates faster training speeds than LSTM across all data sample sizes, with an average speed improvement of approximately 40%.",
+        "The memory efficiency of WGCN suggests it is suitable for solving large or complex problems without straining GPU resources.",
+        "The speed advantage of WGCN can reduce overall training time, thereby increasing the efficiency of the model development process."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Weighted Graph Convolutional Network (WGCN)", "LSTM (baseline architecture)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.3 Neural Network Model (for description of WGCN architecture)", "Experimental sections for context on baseline LSTM model and training setup"],
+    "reproducibility_notes": ["The specific metric: WGCN uses ~30% of the memory of LSTM.", "The specific metric: WGCN trains ~40% faster than LSTM on average.", "Figure 6 contains the scatter graphs plotting memory cost and training time against the number of variables."]
+}
+```

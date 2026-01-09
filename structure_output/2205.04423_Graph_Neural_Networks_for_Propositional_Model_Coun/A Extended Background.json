@@ -1,0 +1,5 @@
+{
+  "section_title": "A Extended Background",
+  "status": "skipped",
+  "reason": "This is an appendix section providing extended background information. It is not part of the core technical contributions of the paper and likely reviews standard concepts (like Factor Graphs, Belief Propagation, and Graph Neural Networks) already covered or referenced in the main Background section (2)."
+}

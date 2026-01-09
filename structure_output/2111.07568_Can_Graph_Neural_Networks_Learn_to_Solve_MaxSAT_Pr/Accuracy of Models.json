@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "Accuracy of Models",
+    "section_purpose": "This section evaluates the performance of two GNN models for solving MaxSAT by reporting two accuracy metrics and analyzing their convergence during training.",
+    "key_points": [
+        "Two accuracy metrics are used: gap to optimal objective (difference between predicted and optimal number of satisfied clauses) and accuracy of assignments (percentage of correctly classified variables).",
+        "The gap to optimal objective is considered a better indicator since MaxSAT problems can have multiple optimal solutions.",
+        "Both models (MS-NSFG and MS-ESFG) converge within 150 epochs and achieve high performance with average gaps less than 2 clauses (>99.5% approximation ratio).",
+        "Assignment accuracy is around 92% for Max2SAT and 83% for Max3SAT, with MS-ESFG performing slightly better than MS-NSFG.",
+        "Experimental results confirm that both GNN models can effectively learn to solve MaxSAT problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "training_epochs": "150"
+        },
+        "datasets": ["R2 (60, 600)", "R2 (60, 800)", "R3 (30, 300)"]
+    },
+    "dependencies": ["Preliminaries sections on SAT/MaxSAT and GNNs", "GNN Models for MaxSAT section describing MS-NSFG and MS-ESFG", "Data Generation section explaining dataset notations"],
+    "reproducibility_notes": ["Training duration of 150 epochs", "Specific evaluation metrics: gap to optimal objective and accuracy of assignments", "Dataset specifications used for training: R2 (60, 600), R2 (60, 800), R3 (30, 300)"]
+}
+```

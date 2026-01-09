@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.1 Problem Definition",
+    "section_purpose": "To formally define the two key CDCL heuristics—phase selection and clause filtering—as conditional probability prediction problems based on circuit structure, and establish their probabilistic formulations.",
+    "key_points": [
+        "Phase selection (variable polarity assignment) is reformulated as estimating the conditional probability P(s=1 | PO=1) that a gate variable s equals 1 given the primary output is 1.",
+        "A threshold τ governs phase assignment: assign 0 if probability < τ, assign 1 if probability > 1-τ, otherwise use default heuristic.",
+        "Clause management is reformulated using a new metric called 'clause probability' P(C) = P(l₁ ∨ l₂ ∨ ... ∨ lₖ), where a learned clause is treated as a k-input OR gate.",
+        "Clauses with lower probability P(C) represent stronger constraints that are harder to satisfy and are thus more informative, so they are prioritized during clause database elimination.",
+        "Both heuristics leverage circuit structural semantics via embeddings from the DEEPGATE4 framework for probability estimation, moving beyond CNF-level features."
+    ],
+    "technical_details": {
+        "algorithms": ["Phase selection via conditional probability estimation with threshold-based assignment", "Clause filtering based on clause probability metric for database elimination"],
+        "formulas": ["P(s = 1 | PO = 1) - conditional probability for phase selection", "v_s = { 0 if P(s=1|PO=1) < τ, 1 if P(s=1|PO=1) > 1-τ, default otherwise } - phase assignment rule with threshold τ", "P(C) = P(l₁ ∨ l₂ ∨ ... ∨ lₖ) - clause probability as OR of literals"],
+        "architectures": ["DEEPGATE4 framework is adopted as the encoder E for generating circuit gate embeddings"],
+        "hyperparameters": {"τ": "Threshold parameter in (0, 0.5) for phase assignment"},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of CDCL solving process (decision making, conflict analysis, clause management)", "Concept of circuit structures and CNF formulas from earlier sections", "Graph construction method (implied from 3.2)"],
+    "reproducibility_notes": ["Threshold parameter τ value for phase assignment (though exact value not specified here)", "Formula for computing clause probability P(C) from literal probabilities", "Use of DEEPGATE4 as the embedding encoder", "The phase assignment decision rule with three cases"]
+}
+```

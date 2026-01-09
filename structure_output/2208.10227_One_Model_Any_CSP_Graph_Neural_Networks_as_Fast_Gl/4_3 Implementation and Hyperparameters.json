@@ -1,0 +1,24 @@
+{
+  "section_title": "4.3 Implementation and Hyperparameters",
+  "section_purpose": "This section details the software implementation choices, computational efficiency improvements, and specific hyperparameter settings used to train and evaluate the ANYCSP model.",
+  "key_points": [
+    "The implementation is in PyTorch, with GPU-compatible, custom CUDA code for sparse matrix multiplication to optimize message passing efficiency.",
+    "Key hyperparameters include a hidden dimension of 128, training for 500K steps with Adam, a batch size of 25, and an upper training iteration limit of 40.",
+    "Models are trained on a massive, dynamically generated dataset of 12.5 million instances, with validation on pre-sampled sets of 200 instances per distribution."
+  ],
+  "technical_details": {
+    "algorithms": ["Generalized sparse matrix multiplication implemented in CUDA using COO format"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "hidden_dimension": "128",
+      "optimizer": "Adam",
+      "training_steps": "500000",
+      "batch_size": "25",
+      "T_train (upper training iterations)": "40"
+    },
+    "datasets": ["Dynamically sampled training instances totaling 12.5 million", "Fixed validation sets of 200 instances per distribution"]
+  },
+  "dependencies": ["Section 4.1 (Architecture) for context on the model being implemented", "Section 4.2 (Global Search as an RL Problem) for the training framework", "Appendix A and B for detailed hyperparameters and data generation"],
+  "reproducibility_notes": ["Use of PyTorch and custom CUDA extension for sparse ops", "Hidden dimension of 128", "Adam optimizer with 500K training steps, batch size 25", "Training iteration limit T_train=40", "Dynamic data loading procedures for each distribution", "Validation set size of 200 instances per distribution"]
+}

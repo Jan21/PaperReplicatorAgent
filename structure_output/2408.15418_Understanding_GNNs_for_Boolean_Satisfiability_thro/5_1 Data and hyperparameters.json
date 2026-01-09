@@ -1,0 +1,31 @@
+```json
+{
+    "section_title": "5.1 Data and hyperparameters",
+    "section_purpose": "To describe the data generation process used for training and testing the GNN models, and to detail the architectural simplifications and training hyperparameters implemented in the experiments.",
+    "key_points": [
+        "Training data is generated using both a modified version of Selsam's random SAT formula generative model (to avoid superficial features) and structured problems (Latin squares, Sudoku, logical circuits).",
+        "The model architecture is a significantly simplified version of NeuroSAT, involving removal of MLP message generators, replacement of the voting MLP with a linear layer, removal of LayerNorm, and reduction of LSTM hidden state dimension from 128 to 16.",
+        "The training loop employs a curriculum learning strategy (from Section 3) where formula size increases based on validation accuracy thresholds, starting from size 5 and incrementing by 2.",
+        "The training dataset size is reduced to 10,000 formulas (vs. 100,000 in original NeuroSAT) with variables sampled from [5, 40], while the test set SR(40) remains for evaluation on 40-variable problems.",
+        "Key changes to the training hyperparameters include setting the learning rate to 2e-3, while most other parameters follow the original NeuroSAT implementation."
+    ],
+    "technical_details": {
+        "algorithms": ["Curriculum learning with incremental formula size based on validation accuracy thresholds", "Data generation via Selsam's random SAT formula model (modified)", "Data generation for structured problems (Latin squares, Sudoku, logical circuits)"],
+        "formulas": [],
+        "architectures": ["Simplified NeuroSAT architecture: LSTMs with hidden state dimension 16, no message-generating MLPs, linear voting layer, no LayerNorm"],
+        "hyperparameters": {
+            "learning_rate": "2e-3",
+            "training_formula_count": "10,000",
+            "training_variable_range": "[5, 40]",
+            "test_variable_count": "40",
+            "initial_training_size": "5",
+            "size_increment": "2",
+            "max_epochs_per_size": "200",
+            "validation_threshold_range": "0.65 to 0.85"
+        },
+        "datasets": ["SR(40) test set (40-variable random SAT formulas)", "Structured problems: Latin squares, Sudoku, logical circuits", "Training formulas generated via modified Selsam procedure"]
+    },
+    "dependencies": ["Section 3 (Curriculum for Training GNNs)", "Supplementary materials S3.1 and S3.2 (for detailed data generation)", "Original NeuroSAT architecture (for comparison)", "Selsam et al. [29] (for data generation reference)"],
+    "reproducibility_notes": ["Data generation procedure (modified Selsam model + structured problems)", "Simplified NeuroSAT architecture specifications (LSTM dim 16, no MLPs, linear layer)", "Curriculum training parameters (start size 5, increment 2, thresholds 0.65-0.85, max 200 epochs)", "Learning rate 2e-3", "Training dataset size of 10,000 formulas with variable range [5,40]"]
+}
+```

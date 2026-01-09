@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "5.2 Quantitative Evaluation",
+    "section_purpose": "To present the key performance metrics used to compare different architectural variants and supervision methods, defining how model performance is measured quantitatively.",
+    "key_points": [
+        "Defines five key performance metrics for evaluating neural SAT solvers: Average Gap, Gap on SAT, Gap on UNSAT, SAT Accuracy, and Decision Accuracy.",
+        "Explains that Average Gap measures average unsatisfied clauses across all instances, with lower values (0 for SAT instances) indicating better performance.",
+        "Clarifies that SAT Accuracy is the percentage of satisfiable instances where a satisfying assignment is found.",
+        "Describes Decision Accuracy as the percentage of instances correctly classified as satisfiable or unsatisfiable, with a specific operational definition for unsatisfiable instances.",
+        "Notes that for unsatisfiable instances, the model's performance reflects how close it gets to minimizing unsatisfied clauses since formal refutation isn't performed."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4 (Experimental Setup) for understanding the architectural variants and supervision methods being compared",
+        "Section 5.1 (Training and Evaluation Methodology) for the overall evaluation framework",
+        "Section 3.1 (Boolean Satisfiability and Maximum Satisfiability) for understanding SAT/UNSAT concepts"
+    ],
+    "reproducibility_notes": [
+        "The five defined performance metrics must be computed exactly as described for comparable results.",
+        "For Decision Accuracy, the specific operational rule must be followed: classify instance as unsatisfiable when model fails to find a satisfying assignment.",
+        "Average Gap, Gap on SAT, and Gap on UNSAT require separate calculation for satisfiable and unsatisfiable instances."
+    ]
+}
+```

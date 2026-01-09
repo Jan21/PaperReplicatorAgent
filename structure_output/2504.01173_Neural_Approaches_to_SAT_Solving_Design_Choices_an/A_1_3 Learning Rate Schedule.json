@@ -1,0 +1,23 @@
+{
+  "section_title": "A.1.3 Learning Rate Schedule",
+  "section_purpose": "To describe the custom learning rate schedule implemented for training, which uses cosine annealing in the first half and a constant minimum rate in the second half to facilitate convergence and fine-tuning without disrupting learned representations.",
+  "key_points": [
+    "A hybrid learning rate schedule is implemented, combining cosine annealing for the first half of training and a constant minimum rate for the second half.",
+    "The schedule is mathematically defined with parameters including initial learning rate (η₀), minimum learning rate (η_min = 10^{-5}), current epoch (t), and half of maximum epochs (t_half).",
+    "The minimum learning rate is fixed at 10^{-5} to allow fine-tuning in the latter phase.",
+    "This approach aims to improve training stability by enabling initial convergence followed by undisturbed refinement."
+  ],
+  "technical_details": {
+    "algorithms": ["Custom learning rate schedule combining cosine annealing and constant phases"],
+    "formulas": ["η(t) = η_min + (η₀ - η_min) * (1 + cos(πt / t_half)) / 2 for t < t_half, otherwise η_min"],
+    "architectures": [],
+    "hyperparameters": {
+      "η_min": "10^{-5}",
+      "t_half": "half of the maximum number of epochs",
+      "η₀": "initial learning rate (value not specified in this section)"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 4 Experimental Setup", "General knowledge of learning rate schedules and cosine annealing"],
+  "reproducibility_notes": ["Equation for the learning rate schedule with parameters", "Minimum learning rate value (10^{-5})", "Definition of t_half based on maximum epochs", "Initial learning rate η₀ (requires reference to other sections for specific value)"]
+}

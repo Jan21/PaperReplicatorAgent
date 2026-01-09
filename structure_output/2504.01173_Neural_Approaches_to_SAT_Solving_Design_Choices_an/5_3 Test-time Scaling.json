@@ -1,0 +1,20 @@
+```json
+{
+  "section_title": "5.3 Test-time Scaling",
+  "section_purpose": "To introduce the concept of test-time scaling in the recurrent GNN architecture for SAT solving, emphasizing its ability to adjust computational effort dynamically during inference.",
+  "key_points": [
+    "The recurrent GNN architecture allows for adjustable computational effort at inference time.",
+    "Unlike standard GNNs with a fixed number of layers, the weight-shared recurrent design enables flexible scaling.",
+    "Scaling is achieved through additional iterations and resampling during inference."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["Recurrent GNN with weight-shared recurrent design"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 4.2 (Architecture Variants) for details on the recurrent GNN design", "Section 3.3 (Graph Neural Networks) for background on GNNs"],
+  "reproducibility_notes": ["Details on how to perform additional iterations and resampling during inference", "The specific recurrent GNN architecture and weight-sharing scheme"]
+}
+```

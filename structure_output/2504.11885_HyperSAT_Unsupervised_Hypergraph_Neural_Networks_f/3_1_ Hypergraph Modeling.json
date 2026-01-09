@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.1. Hypergraph Modeling",
+    "section_purpose": "To describe the process of transforming a Weighted MaxSAT problem instance into a hypergraph representation, which serves as the foundational input for the proposed HyperSAT neural network model.",
+    "key_points": [
+        "A Weighted MaxSAT instance is uniquely mapped to a hypergraph where literals become nodes and clauses become hyperedges.",
+        "Each variable is represented by two distinct nodes: one for its positive literal and one for its negative literal.",
+        "The weight of each clause in the problem becomes the weight of the corresponding hyperedge in the graph.",
+        "This hypergraph modeling captures higher-order dependencies between literals, overcoming limitations of pairwise factor graphs.",
+        "Modeling literals (not just variables) as distinct nodes is crucial for accurately representing the logical relationships central to MaxSAT."
+    ],
+    "technical_details": {
+        "algorithms": ["Hypergraph construction algorithm: Transform Weighted MaxSAT instance (X, C, w) to hypergraph (V, E, W)."],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.1 (Weighted MaxSAT preliminaries) for the definition of the input instance φ = (X, C, w).", "Figure 2 for visual illustration of the modeling process."],
+    "reproducibility_notes": ["The exact mapping rule: For variable set X of size n, create 2n nodes (V). For each clause C_j, create a hyperedge e_j connecting nodes for each literal in C_j. Set hyperedge weight W_jj = clause weight w_j.", "A visual reference of the mapping (Figure 2) is provided, showing a concrete example."]
+}
+```

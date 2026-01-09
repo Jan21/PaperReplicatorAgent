@@ -1,0 +1,24 @@
+USING DEEP LEARNING TO CONSTRUCT STOCHASTIC LOCAL SEARCH SAT SOLVERS WITH PERFORMANCE BOUNDS
+  ABSTRACT
+  1 Introduction
+    1.1 Contributions
+    1.2 Related Work
+      1.2.1 Deep learning based SAT solving
+      1.2.2 SLS algorithms with solution guarantees
+  2 Methods
+    2.1 SAT
+    2.2 Oracle-based SLS
+    2.3 Performance guarantees for the MT algorithm
+    2.4 Learning oracle factories with the LLL loss
+Algorithm 3 A single IN layer
+  2.5 Graph Neural Networks as oracle factories
+    2.5.1 Representing SAT instances as graphs
+    2.5.2 Defining the GNN's output
+  3 Experiments
+  4 Results
+  5 Conclusion and future work
+  Acknowledgments
+  References
+  A Appendix
+  A.1 Evaluating the loss in practice
+  A.2 Detailed plots for the experiments

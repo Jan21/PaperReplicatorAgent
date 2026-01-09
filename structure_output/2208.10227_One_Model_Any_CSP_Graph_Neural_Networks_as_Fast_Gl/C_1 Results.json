@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "C.1 Results",
+    "section_purpose": "To present and analyze the results of an ablation study comparing the full ANYCSP model against two ablated versions on graph coloring, MAXCUT, and MAX-k-SAT problems, demonstrating the importance of both the global search action space and the tailored reward scheme.",
+    "key_points": [
+        "ANYCSP_qual performs significantly worse on graph coloring than ANYCSP_loc and ANYCSP, only outperforming the baseline RUNCSP and a simple greedy approach.",
+        "For MAXCUT and MAX-k-SAT, both ablated versions (ANYCSP_loc and ANYCSP_qual) perform significantly worse than the full ANYCSP model, with no clear performance hierarchy between them.",
+        "Analysis on MAX-k-SAT shows ANYCSP_loc converges slowly and steadily, while ANYCSP_qual converges fast initially but tapers off early due to getting stuck in local maxima.",
+        "The study concludes that both a global search space (for parallel refinement and search speed) and a well-chosen exploration-encouraging reward scheme are crucial for strong performance.",
+        "The combination of global search and the sophisticated reward scheme in ANYCSP yields the best results across different CSPs, validating the method's core design choices."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "ANYCSP: Full model with global search action space and tailored reward scheme.",
+            "ANYCSP_loc: Ablated version using local search action space.",
+            "ANYCSP_qual: Ablated version using global search action space but a simple reward proportional to solution quality."
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "search_steps": "60K",
+            "timeout": "20 minutes"
+        },
+        "datasets": [
+            "Graph coloring test set of 100 instances (split into COL<10 and COL≥10).",
+            "MAXCUT test instances with graph sizes |V| = 800, 1K, 2K, and ≥3K.",
+            "MAX-k-SAT test set: 50 instances of MAX-5-SAT for convergence analysis, and results for 3CNF and 5CNF formulas."
+        ]
+    },
+    "dependencies": [
+        "Understanding of the ANYCSP method from Section 4, including its architecture and the formulation of global search as an RL problem.",
+        "Familiarity with the ablation study's setup, presumably defining the ablated versions (ANYCSPloc and ANYCSPqual), which is likely detailed in earlier parts of Appendix C.",
+        "Knowledge of the main experimental metrics and baselines (like RUNCSP) from Section 5 and Appendix B."
+    ],
+    "reproducibility_notes": [
+        "Performance metrics for the ablated models on specific problem instances: Table 11 for graph coloring, Table 12 for MAXCUT, Table 13 for MAX-k-SAT.",
+        "Observation of convergence behavior: ANYCSP_loc converges slowly; ANYCSP_qual converges fast initially but stagnates early due to reward scheme limitations.",
+        "The specific reward scheme details for ANYCSP_qual (simple, proportional to quality) vs. ANYCSP (designed to encourage exploration) are critical for reproducing the observed performance differences."
+    ]
+}
+```

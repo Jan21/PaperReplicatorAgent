@@ -1,0 +1,47 @@
+```json
+{
+    "section_title": "C.3 Satisfying Assignment Prediction",
+    "section_purpose": "This section presents a detailed evaluation of GNN models on the task of predicting satisfying assignments for SAT problems, comparing different training losses, dataset difficulty levels, datasets, and inference algorithms.",
+    "key_points": [
+        "Unsupervised training losses (UNS1 and UNS2) generally outperform supervised training (SUP) for GNN models on the satisfying assignment prediction task.",
+        "Training on more challenging medium-sized datasets yields better generalization performance than training on easy datasets, suggesting harder training data improves model robustness.",
+        "GNN models trained on datasets with specific combinatorial structures (k-Clique, k-Domset, k-Vercov) struggle to generalize to other problem domains, indicating potential overfitting to dataset-specific graph features.",
+        "Different inference/decoding algorithms for extracting assignments from learned embeddings show similar performance, suggesting the standard readout is sufficient and that models successfully learn assignment-relevant latent structures.",
+        "Performance varies significantly across different GNN architectures (NeuroSAT, GCN, GGNN, GIN) and graph representations (LCG*, VCG*), with no single model dominating all datasets."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Unsupervised training losses UNS1 and UNS2 (referenced from Equation 5 and Equation 6 in the paper)",
+            "Different inference/decoding algorithms for extracting satisfying assignments from learned embeddings"
+        ],
+        "formulas": [
+            "UNS1: Unsupervised loss defined in Equation 5",
+            "UNS2: Unsupervised loss defined in Equation 6"
+        ],
+        "architectures": [
+            "GNN models: NeuroSAT, GCN, GGNN, GIN",
+            "Graph representations: LCG* (Literal-Clause Graph), VCG* (Variable-Clause Graph)"
+        ],
+        "hyperparameters": {},
+        "datasets": [
+            "Easy datasets: SR, 3-SAT, CA, PS, k-Clique, k-Domset, k-Vercov",
+            "Medium datasets: Same categories as easy but more challenging",
+            "Only satisfiable instances evaluated"
+        ]
+    },
+    "dependencies": [
+        "Section 4.1 (Datasets) for descriptions of SR, 3-SAT, CA, PS, k-Clique, k-Domset, k-Vercov datasets",
+        "Section 4.2 (GNN Baselines) for descriptions of NeuroSAT, GCN, GGNN, GIN models",
+        "Equation 5 and Equation 6 (likely in Section 3 or 4) defining unsupervised losses UNS1 and UNS2",
+        "Understanding of LCG* and VCG* graph representations (likely in Section 3 or B)"
+    ],
+    "reproducibility_notes": [
+        "Definition of unsupervised training losses UNS1 and UNS2 (Equation 5 and 6)",
+        "Specific training settings for different difficulty levels (easy vs. medium datasets)",
+        "Details of inference/decoding algorithms for extracting assignments from embeddings",
+        "Architecture details for each GNN model variant",
+        "Dataset split information and evaluation metrics (accuracy reported as percentages in tables)",
+        "Note that only satisfiable instances are used in this evaluation"
+    ]
+}
+```

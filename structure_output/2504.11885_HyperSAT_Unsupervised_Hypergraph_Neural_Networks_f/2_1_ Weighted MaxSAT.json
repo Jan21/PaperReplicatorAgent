@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "2.1. Weighted MaxSAT",
+    "section_purpose": "This section formally defines the Weighted MaxSAT problem, introduces its mathematical notation, and presents the optimization objective.",
+    "key_points": [
+        "A Weighted MaxSAT instance is formally represented as a triple φ = (𝒳, 𝒞, w) consisting of variables, clauses, and weights.",
+        "Variables 𝒳 = {x₁, x₂, ..., xₙ} are Boolean variables (xᵢ ∈ {0,1}), and clauses 𝒞 = {C₁, C₂, ..., Cₘ} are disjunctions of literals.",
+        "Each clause Cⱼ has an associated weight wⱼ, forming a weight vector w = (w₁, w₂, ..., wₘ).",
+        "The objective is to find an assignment A = {a₁, a₂, ..., aₙ} (aᵢ ∈ {0,1}) that maximizes the total weight of satisfied clauses.",
+        "The optimization problem is formally expressed as maximizing the sum of weights of satisfied clauses subject to Boolean variable assignments."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "Weighted MaxSAT instance representation: φ = (𝒳, 𝒞, w)",
+            "Clause representation: Cⱼ = lⱼ₁ ∨ lⱼ₂ ∨ ... ∨ lⱼₖⱼ where lⱼᵢ are literals",
+            "Objective function: max_A ∑_{j=1}^{m} wⱼ · 1(Cⱼ(A))",
+            "Indicator function: 1(Cⱼ(A)) = 1 if clause Cⱼ is satisfied by assignment A, 0 otherwise",
+            "Constraint: A ∈ {0,1}ⁿ"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of Boolean logic and optimization problems"],
+    "reproducibility_notes": [
+        "Formal definition of Weighted MaxSAT problem structure",
+        "Mathematical notation for variables, clauses, and weights",
+        "Precise formulation of the optimization objective"
+    ]
+}
+```

@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "4.1. Experimental Settings",
+    "section_purpose": "To describe the experimental setup for evaluating HyperSAT, including baseline algorithms, datasets, model configuration, and hardware/software environment.",
+    "key_points": [
+        "HyperSAT is compared against two baseline algorithms: HypOp (an unsupervised hypergraph framework) and a supervised GNN-based approach by Liu et al.",
+        "The evaluation uses random 3-SAT benchmarks from the SATLIB dataset, with datasets ranging from 100-250 variables and 430-1065 clauses, containing both SAT and UNSAT instances.",
+        "Clause weights for the Weighted MaxSAT instances are uniformly sampled from integers 1 to 10.",
+        "Specific model architecture details are provided, including layer dimensions based on square roots of variable counts, dropout, optimizer settings, and early stopping criteria.",
+        "The hardware/software configuration specifies an NVIDIA A100 GPU with Python 3.9.30 and PyTorch 1.13.0."
+    ],
+    "technical_details": {
+        "algorithms": ["HypOp (unsupervised hypergraph framework)", "Liu et al. (supervised GNN-based approach using factor graphs)"],
+        "formulas": [],
+        "architectures": ["HyperGCN: two-layer network", "Cross-attention layer", "FFN: two linear transformations with ReLU activation"],
+        "hyperparameters": {
+            "input_dimension": "sqrt(number of variables)",
+            "hidden_layer_dimension": "0.5 * sqrt(number of variables)",
+            "cross_attention_dimension": "sqrt(number of variables)",
+            "dropout": 0.1,
+            "optimizer": "Adam",
+            "learning_rate": 0.07,
+            "loss_balancing_parameter_lambda": 0.002,
+            "ffn_hidden_dim": "0.5 * sqrt(number of variables)",
+            "early_stopping_tolerance": 0.0001,
+            "early_stopping_patience": 50,
+            "random_sampling_trials": 5
+        },
+        "datasets": ["SATLIB random 3-SAT benchmarks: UF100-430 (1000 SAT + 1000 UNSAT instances), UF200-860 (100 SAT + 100 UNSAT), UF250-1065 (100 SAT + 100 UNSAT)", "Clause weights: uniformly random integers from [1, 10]"]
+    },
+    "dependencies": ["Section 3 (HyperSAT architecture details)", "Understanding of Weighted MaxSAT problems (Section 2.1)", "Basic knowledge of hypergraph neural networks (Section 2.2)"],
+    "reproducibility_notes": ["Baseline algorithm implementations (HypOp and Liu et al.)", "SATLIB dataset access and preprocessing for weight assignment", "Model architecture specifications (layer dimensions, FFN structure)", "All hyperparameter values (learning rate, lambda, dropout, etc.)", "Early stopping and random sampling configuration", "Hardware/software environment (GPU, Python/PyTorch versions)"]
+}
+```

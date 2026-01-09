@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B. Dataset Preparation",
+    "section_purpose": "This section describes the methodology for creating the training dataset, focusing on how to obtain functional supervision without complete truth tables and how to efficiently generate training samples from circuit netlists.",
+    "key_points": [
+        "The complete truth table is impractical for supervision due to exponential growth with primary inputs, so an alternative supervision method using Hamming distance between truth tables is proposed.",
+        "Each logic gate is treated as a separate logic cone (circuit) with the gate as output and original primary inputs (PIs) as inputs, converting graph learning into node-level representation learning and improving data efficiency.",
+        "Four constraints are applied when sampling node pairs to ensure quality and limit quantity: same PIs, similar logic probability (within 5%), similar logic levels (within 5), and extreme truth table differences (within 20% or above 80%).",
+        "Incomplete truth tables are obtained via simulation with a maximum time limit rather than complete simulation.",
+        "The circuit netlist format used is And-Inverter Graph (AIG), composed only of AND and NOT gates, with other gates transformed into this representation."
+    ],
+    "technical_details": {
+        "algorithms": ["Sampling algorithm with four constraints for generating node pairs: same PIs, logic probability difference ≤5%, logic level difference ≤5, truth table difference either ≤20% or ≥80%."],
+        "formulas": ["distance(h_i, h_j) ∝ distance(T_i, T_j) - Supervision objective where embedding distance correlates with truth table Hamming distance."],
+        "architectures": [],
+        "hyperparameters": {"logic_probability_threshold": "5%", "logic_level_difference_threshold": "5", "truth_table_difference_thresholds": ["≤20%", "≥80%"]},
+        "datasets": ["Dataset derived from circuit netlists converted to And-Inverter Graph (AIG) format."]
+    },
+    "dependencies": ["Basic understanding of circuit representation learning (Section II.A)", "Familiarity with truth tables, logic gates, and Hamming distance.", "Concept of logic cones and primary inputs (PIs) from circuit terminology."],
+    "reproducibility_notes": ["The four specific constraints for sampling node pairs must be implemented.", "Logic probability calculation method is needed.", "Maximum simulation time limit for obtaining incomplete truth tables must be specified.", "Conversion of circuit netlists to And-Inverter Graph (AIG) format is required."]
+}
+```

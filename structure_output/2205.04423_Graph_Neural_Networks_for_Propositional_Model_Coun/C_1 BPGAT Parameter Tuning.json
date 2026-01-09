@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "C.1 BPGAT Parameter Tuning",
+    "section_purpose": "To describe the experiments conducted to tune two key hyperparameters of the BPGAT architecture: the damping parameter learning strategy and the number of message-passing iterations, justifying the final choices used in the main experiments.",
+    "key_points": [
+        "The optimal damping strategy is to use a learned MLP operator (Δ) only for factor-to-variable messages, while fixing the damping for variable-to-factor messages to 0.5.",
+        "Using a learned operator for both message types (BPGAT_ALL) or only for variable-to-factor messages (BPGAT_VF) yields worse performance than the chosen configuration.",
+        "The optimal number of message-passing iterations (T) is 5, as performance degrades with more iterations (10 or 15).",
+        "Results are presented using RMSE and MRE metrics across three test datasets, with the chosen configuration (BPGAT with T=5) showing the best performance."
+    ],
+    "technical_details": {
+        "algorithms": ["Hyperparameter tuning for BPGAT architecture"],
+        "formulas": ["Equation 4 (damping parameter)", "Equations 11 and 12 (message passing)", "Equation 9 (readout phase)"],
+        "architectures": ["BPGAT with learned MLP Δ for damping", "Variants: BPGAT, BPGAT_VF, BPGAT_ALL, BPGAT_NONE"],
+        "hyperparameters": {
+            "damping_parameter_fixed_value": "0.5",
+            "optimal_message_passing_iterations_T": "5",
+            "tested_iterations_T": "[5, 10, 15]"
+        },
+        "datasets": ["Test 1", "Test 2", "Test 3"]
+    },
+    "dependencies": ["Section 4.1 (experimental setting and training details)", "Equation 4 (damping parameter definition)", "Equations 11, 12 (message passing equations)", "Equation 9 (readout phase)"],
+    "reproducibility_notes": ["Optimal damping configuration: learned MLP Δ for factor-to-variable messages, fixed 0.5 for variable-to-factor messages.", "Optimal number of message-passing rounds: T = 5.", "Training protocol follows Section 4.1."]
+}
+```

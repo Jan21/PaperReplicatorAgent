@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 RELATED WORK",
+    "section_purpose": "To survey existing research on backbone identification and machine learning techniques for improving CDCL SAT solvers, positioning NeuroBack within this landscape by highlighting its distinct approach.",
+    "key_points": [
+        "Identifying a CNF formula's backbone is computationally hard (co-NP complete), and even approximating it is intractable, making direct computation infeasible.",
+        "Previous ML approaches (e.g., logistic regression for phase prediction) failed to improve solving time despite high accuracy on backbone variables, and recent works focus on partial backbone computation during solving.",
+        "ML techniques for CDCL, including GNNs, often aim to improve branching or phase selection heuristics but show limited effectiveness on large-scale problems with thousands of variables.",
+        "NeuroCore is the closest related work, enhancing branching heuristics via online inference on unsat core variables, but its frequent online inference is computationally expensive.",
+        "NeuroBack is distinct: it enhances phase selection (not branching) using offline GNN inference to predict backbone variables from sat formulas, aiming for effectiveness on large-scale problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of CDCL SAT solving and backbone variables (from BACKGROUND section)", "General familiarity with Graph Neural Networks (GNNs) and machine learning in SAT contexts"],
+    "reproducibility_notes": []
+}
+```

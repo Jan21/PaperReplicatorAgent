@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5 Benchmarking Evaluation on G4SATBench",
+    "section_purpose": "To introduce the benchmarking section and describe the methodology used for evaluating GNN models on G4SATBench, explaining the experimental setup and fairness controls.",
+    "key_points": [
+        "Presents benchmarking results of the G4SATBench benchmark.",
+        "Describes a grid search hyperparameter tuning process for fair comparison of GNN baselines.",
+        "Uses validation set performance to select the best checkpoint for each GNN model.",
+        "Uses 3 random seeds per setting to report average performance, mitigating randomness.",
+        "Specifies the computational resources used and notes substantial computational cost (~8000 GPU hours)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 4 (G4SATBench benchmark definition)", "Appendix C.1 (details for experimental setup and hyperparameters)"],
+    "reproducibility_notes": ["Need to perform grid search hyperparameter tuning for each GNN baseline.", "Must select best checkpoint based on validation set performance.", "Should run experiments with 3 different random seeds for averaging.", "Requires specific hardware: Single RTX8000 GPU and 16 AMD EPYC 7502 CPU cores."]
+}
+```

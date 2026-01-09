@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "10.2 PERFORMANCE ON SOLVED SAT AND UNSAT PROBLEMS",
+    "section_purpose": "This section presents a detailed performance comparison between NeuroBack-Kissat and baseline solvers specifically on solved SAT and UNSAT problems, analyzing differential improvement patterns and providing explanations for the observed trends.",
+    "key_points": [
+        "NeuroBack-Kissat shows better relative improvement rate on UNSAT problems (outperforming Default-Kissat in 62.4% of solved UNSAT problems) than on SAT problems (50.9% outperformance rate).",
+        "Despite lower outperformance rate, the magnitude of improvement is greater for SAT problems (average 53.2% enhancement) than for UNSAT problems (average 14.6% enhancement).",
+        "NeuroBack's phase predictions help with UNSAT problems by directing search toward unsatisfiable parts of the search space and helping identify assignments that reduce clause falsification.",
+        "NeuroBack shows more pronounced improvement on SAT problems because predicted phases can contribute directly to finding complete satisfying assignments, while in UNSAT problems only partial satisfying assignments exist.",
+        "The fundamental difference in problem nature (complete vs. partial satisfying assignments) explains the varying effectiveness of NeuroBack's phase predictions across SAT and UNSAT problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": [
+            "194 UNSAT problems solved from SATCOMP-2022 and SATCOMP-2023 testing sets",
+            "216 SAT problems solved from SATCOMP-2022 and SATCOMP-2023 testing sets"
+        ]
+    },
+    "dependencies": [
+        "Section 6 EXPERIMENTS for overall experimental setup",
+        "Section 4 NEUROBACK for understanding phase prediction mechanism",
+        "Knowledge of CDCL SAT solving and the role of variable phases"
+    ],
+    "reproducibility_notes": [
+        "Specific problem counts: 194 solved UNSAT problems, 216 solved SAT problems from the combined SATCOMP datasets",
+        "Performance metrics: Outperformance rates (62.4% vs 31.4% for UNSAT, 50.9% vs 40.3% for SAT) and average improvement percentages (53.2% for SAT, 14.6% for UNSAT)",
+        "Comparison baselines: Default-Kissat and Random-Kissat",
+        "Timeout threshold of 5,000 seconds for solver failures"
+    ]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Dominating Clique and Probabilistic-Method GNN",
+    "section_purpose": "This section defines the Dominating Clique (DC) problem and introduces the probabilistic-method Graph Neural Network (GNN) framework that will be used to learn branching heuristics for exact solvers.",
+    "key_points": [
+        "A Dominating Clique (DC) is a clique subset S of vertices such that S dominates all vertices not in S (each vertex outside S has a neighbor in S).",
+        "The paper's GNN is trained unsupervised to learn a Bernoulli probability distribution for each vertex, and these distributions are used to design branching heuristics rather than to sample solutions directly.",
+        "The loss function approximates the probability measure of dominating cliques in the graph using the correlation inequality from the probabilistic method, aiming to maximize this approximation.",
+        "The approach differs from prior work (Li et al.) in being designed for an exact backtracking solver (counting branches) rather than a heuristic tree search algorithm (solved problems fraction).",
+        "The learned probability distributions produce vertex information entropy which replaces the original heuristic in a DC solver, and experimentally prunes more search space."
+    ],
+    "technical_details": {
+        "algorithms": ["Probabilistic-method GNN model (similar to [8]) trained unsupervised", "Use of correlation inequality for probability approximation in loss function"],
+        "formulas": ["Graph G = (V, E)", "Dominating Clique definition: S ⊆ V, S is clique, ∀u∈V\\S, ∃v∈S s.t. {v,u}∈E", "Neighborhood notations: N(v) (open), N[v] = N(v) ∪ {v} (closed)", "[n] = {1,2,…,n}"],
+        "architectures": ["Standard GNN architecture (similar to [8])"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Introduction (section 1) for overall context", "Reference [8] for base GNN model", "Reference [9] for original DC solver branching heuristic", "Reference [10] for NP-completeness of DC", "Reference [5] for comparison to Li et al.'s heuristic search approach"],
+    "reproducibility_notes": ["Definition of Dominating Clique problem", "Use of Bernoulli distribution per vertex as probability space", "Concept of using probabilistic method correlation inequality for loss function approximation", "Goal to maximize the approximation (not bound it like first-moment method)", "Use of vertex information entropy from learned distributions for branching"]
+}
+```

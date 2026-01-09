@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "C.2 Baselines Setting",
+    "section_purpose": "This section details the configuration of baseline models used for comparison against the proposed STRCMP method in the paper's experiments, covering two main categories of combinatorial optimization approaches.",
+    "key_points": [
+        "Describes two categories of baseline methods: Neural Combinatorial Optimization (NCO) and Evolutionary Code Optimization.",
+        "Lists specific neural architectures used as NCO baselines: Graph Neural Networks (GNNs), Transformer-based models, and Recurrent Neural Networks (RNNs).",
+        "Specifies the use of popular evolutionary algorithms as baselines: Genetic Algorithm (GA) and Ant Colony Optimization (ACO).",
+        "Mentions that all baselines are implemented with the same problem-specific objective functions and constraints as used in STRCMP for fair comparison.",
+        "Implies these baselines represent the state-of-the-art in their respective approaches against which STRCMP's performance is evaluated."
+    ],
+    "technical_details": {
+        "algorithms": ["Genetic Algorithm (GA)", "Ant Colony Optimization (ACO)", "Graph Neural Networks", "Transformer-based models", "Recurrent Neural Networks"],
+        "formulas": [],
+        "architectures": ["GNN architectures", "Transformer architectures", "RNN architectures"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 5.1 Settings (for experimental setup context)", "Section 4 Proposed Solution (to understand what STRCMP is being compared against)", "Appendix C.1 Solver Adoption (for broader baseline context)"],
+    "reproducibility_notes": ["List of baseline algorithms used for comparison", "Statement that baselines use the same problem-specific objective functions and constraints as STRCMP"]
+}
+```

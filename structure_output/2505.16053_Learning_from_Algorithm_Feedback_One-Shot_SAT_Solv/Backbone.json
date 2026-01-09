@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "Backbone",
+    "section_purpose": "This section describes the methodology for training a supervised Graph Neural Network (GNN) to predict literal backbone membership and details how these predictions are used to set variable polarities and weights within the SAT solver.",
+    "key_points": [
+        "A supervised GNN is trained for the binary classification task of predicting literal backbone membership using cross-entropy loss.",
+        "The training is limited to 3SAT instances and uses only satisfiable problems, as backbone membership is not defined or useful for other problem types or unsatisfiable instances.",
+        "Variable polarity assignment is determined by comparing the predicted backbone probabilities of a literal and its negation.",
+        "Variable weights are assigned by applying a transformation to the mean backbone probability, with the goal of prioritizing variables whose correct early assignment benefits runtime.",
+        "A key hyperparameter (α) for the weight transformation is tuned separately for two base solvers (Glucose and March) on a validation set."
+    ],
+    "technical_details": {
+        "algorithms": ["Supervised GNN training for binary classification (literal backbone membership prediction)"],
+        "formulas": ["Variable polarity assignment: p(x) = 0 if p_backbone(¬x) > p_backbone(x), else p(x) = 1", "Mean backbone probability: p̅_backbone(x) = 0.5(p_backbone(¬x) + p_backbone(x))"],
+        "architectures": ["Graph Neural Network (GNN) (details in Appendices A.1, A.2)"],
+        "hyperparameters": {
+            "batch_size": 50,
+            "learning_rate_η": 0.0001,
+            "weight_decay": 0.1,
+            "epochs": 200,
+            "hidden_dim_d": 256,
+            "model_depth_L": 10,
+            "α_Glucose for 3SAT": 101,
+            "α_Glucose for 3COL": 103,
+            "α_Glucose for CRYPTO": "10-2",
+            "α_March for 3SAT": "10-2",
+            "α_March for 3COL": "10-2",
+            "α_March for CRYPTO": 101
+        },
+        "datasets": ["3SAT (satisfiable instances only)", "3COL (used for training but has empty backbone)", "CRYPTO (primarily UNSAT, not used for backbone training)"]
+    },
+    "dependencies": [
+        "Section 3.2 (for context on why training is restricted to 3SAT instances)",
+        "Equation (21) (for the unspecified weight transformation function)",
+        "Appendices A.1 & A.2 (for GNN architecture details)",
+        "Understanding of 'backbone' and 'UNSAT-core' concepts from section 'Supervised Comparison with March'"
+    ],
+    "reproducibility_notes": [
+        "The specific hyperparameters for supervised backbone model training (batch size, learning rate, etc.).",
+        "The formulas for determining variable polarity and mean backbone probability.",
+        "The need to tune the transformation parameter α for the target base solver (Glucose/March) on a validation set.",
+        "The specific training data restrictions: using only satisfiable 3SAT instances."
+    ]
+}
+```

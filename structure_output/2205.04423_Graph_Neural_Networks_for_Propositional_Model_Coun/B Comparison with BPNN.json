@@ -1,0 +1,34 @@
+{
+  "section_title": "B Comparison with BPNN",
+  "section_purpose": "To experimentally compare the performance of BPGAT (with GAT-style attention) and BPNN (without attention), demonstrating the improvement due to attention and evaluating scalability and generalization across different training regimes.",
+  "key_points": [
+    "BPGAT consistently outperforms BPNN in terms of RMSE and MRE across all benchmarks and training scenarios.",
+    "BPNN is implemented with 3-layer feedforward networks (ReLU activations) for MLPs from Equation 8, sharing other components like MLP3 and Δ operator with BPGAT.",
+    "Three training regimes are compared: fine-tuning on specific distributions, training from scratch with 500 epochs and 250 examples per distribution, and training on random Boolean formulae.",
+    "Fine-tuning both models yields better performance than training from scratch on distribution-specific datasets, with BPGAT showing superior generalization.",
+    "The experiments confirm that adding a GAT-style attention mechanism enhances model performance and scalability in propositional model counting tasks."
+  ],
+  "technical_details": {
+    "algorithms": ["BPNN implementation details: two MLPs from Equation 8 are 3-layer feedforward networks with ReLU activation between hidden layers; MLP3 from Equation 9 and learned operator Δ are same as BPGAT."],
+    "formulas": ["References to Equation 8 and Equation 9 from earlier sections, but no new formulas are introduced in this section."],
+    "architectures": ["BPNN architecture based on BPNN from Section 3.1, without GAT-style attention mechanism; shares components with BPGAT for factor-to-variable message transformation."],
+    "hyperparameters": {
+      "epochs": 500,
+      "labeled_examples": 250
+    },
+    "datasets": ["Boolean random formulae test sets (Test 1, Test 2, Test 3, Test 4)", "Specific distributions: Network, Domset, Color, Clique"]
+  },
+  "dependencies": [
+    "Section 3.1 for BPNN architecture details",
+    "Section 3.2 for BPGAT architecture with attention",
+    "Section 4.1 for training protocols and implementation specifics",
+    "Section 4.2 for test set descriptions and evaluation setup",
+    "Equation 8 and Equation 9 for MLP structures and operators"
+  ],
+  "reproducibility_notes": [
+    "BPNN implementation specifics: 3-layer feedforward MLPs with ReLU activation for Equation 8 components.",
+    "Training regimes details: fine-tuning protocol, training from scratch with 500 epochs and 250 labeled examples per distribution.",
+    "Dataset information: use of Boolean random formulae and specific distributions (Network, Domset, Color, Clique) for testing.",
+    "Evaluation metrics: RMSE (Root Mean Square Error) and MRE (Mean Relative Error) for performance comparison."
+  ]
+}

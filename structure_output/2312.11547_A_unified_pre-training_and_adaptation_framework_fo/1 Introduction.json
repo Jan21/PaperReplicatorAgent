@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the field of combinatorial optimization (CO) on graphs, outline the challenges of current graph neural network (GNN) methods for solving CO problems, and present the paper's proposed unified framework based on maximum satisfiability (Max-SAT) to address these challenges.",
+    "key_points": [
+        "Combinatorial optimization on graphs is highly challenging due to discrete properties and high computational costs, with traditional exact algorithms becoming infeasible at scale.",
+        "Current GNN methods for CO problems face three challenges: (1) directly modeling CO with graphs may ignore underlying mathematical logicality, (2) they are typically designed for single problems despite potential shared knowledge, and (3) limited real-world training data requires better generalization.",
+        "The core idea is to develop a unified, transferable GNN framework using Max-SAT as an intermediate representation to capture logical information common across different CO problems.",
+        "The proposed framework includes a pre-training stage on abundant Max-SAT instances and a fine-tuning stage with adversarial domain adaptation to transfer knowledge to specific CO problems.",
+        "The framework uses bipartite graph attention networks that separately aggregate clauses and variables to better capture dependencies in the Max-SAT representation."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Bipartite graph attention networks for separate aggregation of clauses and variables"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

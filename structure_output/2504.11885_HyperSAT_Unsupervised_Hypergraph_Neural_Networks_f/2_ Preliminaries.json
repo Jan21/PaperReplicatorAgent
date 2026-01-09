@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2. Preliminaries",
+    "section_purpose": "This section provides foundational background knowledge required to understand the paper's contributions, specifically introducing the Weighted MaxSAT problem and hypergraph neural networks.",
+    "key_points": [
+        "The section establishes core background on two main concepts: Weighted MaxSAT and Hypergraph Neural Networks.",
+        "It defines Weighted MaxSAT as an optimization problem involving a set of weighted clauses (disjunctions of literals), with the objective of finding an assignment that maximizes the total weight of satisfied clauses.",
+        "It outlines the representation of a clause as a hyperedge and a variable as a node, establishing the link between MaxSAT problems and hypergraph structures.",
+        "It introduces Hypergraph Neural Networks (HGNNs) as architectures for learning representations of hypergraph-structured data, describing their core operation of passing messages between nodes and hyperedges.",
+        "It frames the problem as a hypergraph combinatorial optimization problem."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Definition of Weighted MaxSAT: maximize Σ_{C_i ∈ φ} w_i * I(C_i is satisfied) over assignments v, where w_i is clause weight.", "Implicit basis for message-passing in HGNNs is described: representations are updated by aggregating information from connected nodes and hyperedges."],
+        "architectures": ["Hypergraph Neural Networks (HGNNs) as the foundational architecture."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": ["Formal problem definition of Weighted MaxSAT: variables, literals, clauses (as disjunctions), clause weights, and the objective function.", "Conceptual understanding of how a MaxSAT instance maps to a hypergraph: nodes=vars, hyperedges=clauses."]
+}
+```

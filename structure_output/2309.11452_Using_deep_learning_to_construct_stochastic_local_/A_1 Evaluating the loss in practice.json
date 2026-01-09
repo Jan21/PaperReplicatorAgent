@@ -1,0 +1,23 @@
+```json
+{
+    "section_title": "A.1 Evaluating the loss in practice",
+    "section_purpose": "This section describes the practical implementation of estimating the LLL and Gibbs loss functions introduced theoretically in Section 2.4, as the true underlying distribution \\(\\mathcal{P}\\) is not accessible.",
+    "key_points": [
+        "In practice, the total loss from equation (12) is estimated using a finite training set \\(\\mathcal{X}\\) of independent problem instances.",
+        "For the LLL loss, the dependency graph for each instance is constructed explicitly; the neighbourhood of a clause node is defined as the set of clause nodes whose variable sets intersect.",
+        "The LLL loss for a batch is estimated by calculating the z-norm of the loss vector, using the union of dependency graphs of batch elements.",
+        "For the Gibbs loss, an estimator is generated following a referenced method, involving Gibbs weights that depend on clause violations and a temperature parameter \\(\\beta\\)."
+    ],
+    "technical_details": {
+        "algorithms": ["Explicit construction of the dependency graph \\(\\mathcal{D}_{F_{\\theta}(\\phi)}(\\phi)\\) for LLL loss estimation", "Generation of the Gibbs loss estimator \\(\\hat{L}_{Gibbs}(\\theta)\\) using Gibbs weights"],
+        "formulas": ["Gibbs loss estimator: \\(\\hat{L}_{Gibbs}(\\theta) = -\\sum_{i\\in B}\\sum_{j}^{N_{i}}\\omega_{i j}\\log \\left(P_{F_{\\theta}(\\phi)}(x^{i,j})\\right)\\) (Eq. 20)", "Gibbs weights: \\(\\omega_{i j} = \\frac{\\exp\\left(-\\beta\\phi(x^{i,j})\\right)}{\\sum_{k = 1}^{N_{i}}\\exp\\left(-\\beta\\phi(x^{i,k})\\right)}\\) (Eq. 21)", "Neighbourhood definition for clause node \\(j\\): \\(\\Gamma (j)\\coloneqq \\{j^{\\prime}\\in [m]|j^{\\prime}\\neq j,V(c_{j^{\\prime}})\\cap V(c_{j})\\neq \\emptyset \\}\\)"],
+        "architectures": [],
+        "hyperparameters": {
+            "\\(\\beta\\)": "Temperature parameter in Gibbs weight calculation (mentioned, value not specified)"
+        },
+        "datasets": ["Training set \\(\\mathcal{X} = (X_{i},\\phi_{i})_{i = 1}^{N}\\), with \\(X_{i} = \\{x^{i,j}\\}_{j = 1}^{N_{i}}\\) being unique assignments for instance \\(\\phi_{i}\\)"]
+    },
+    "dependencies": ["Section 2.4 (main text) for the theoretical motivation of the total loss (equation 12)", "Understanding of output oracles with Bernoulli structure and dependency graphs"],
+    "reproducibility_notes": ["Procedure for constructing the dependency graph for LLL loss estimation, specifically the definition of clause neighbourhoods.", "Formula for the Gibbs loss estimator (Eq. 20) and the associated Gibbs weights (Eq. 21).", "Requirement of a training set \\(\\mathcal{X}\\) with instances and associated assignment sets.", "The hyperparameter \\(\\beta\\) used in Gibbs weighting."]
+}
+```

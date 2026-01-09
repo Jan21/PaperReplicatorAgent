@@ -1,0 +1,33 @@
+{
+  "section_title": "2.1 Guided Branching Heuristics",
+  "section_purpose": "This section describes how to modify existing SAT solvers to incorporate external variable weights and polarities into their branching heuristics, enabling guidance from learned parameters without replacing the original heuristic.",
+  "key_points": [
+    "SAT solvers are assumed to be DPLL-derived with a branching heuristic that selects variables by maximizing a scoring function (like VSIDS or look-ahead).",
+    "Variable weights are introduced to scale the existing scores, allowing external modulation of the heuristic: \\(\\hat{x} = \\mathrm{argmax}_{x} w(x) \\cdot \\mathrm{Score}(x)\\).",
+    "Polarity mappings specify the first assigned value (0 or 1) when a variable is chosen, which can significantly impact solver performance.",
+    "The modified solver takes a CNF formula and a variable parameterization \\(\\mathcal{W} = (w, p)\\) as input, where \\(w(x)\\) is a weight and \\(p(x)\\) is a polarity for each variable.",
+    "The goal is to learn effective weights and polarities from the input formula's structure using a deep neural network (GNN)."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Modified branching heuristic that scales the variable score by a learned weight and uses a learned polarity for sign selection.",
+      "Generic decision heuristic pattern (Algorithm 2) where a variable is selected by maximizing a score, then a sign is chosen by a secondary heuristic."
+    ],
+    "formulas": [
+      "Equation (1): \\(\\hat{x} = \\mathrm{argmax}_{x} w(x) \\cdot \\mathrm{Score}(x)\\), where \\(w(x)\\) is the weight for variable \\(x\\) and \\(\\mathrm{Score}(x)\\) is the solver's original scoring function."
+    ],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Assumes knowledge of DPLL-derived SAT solvers and branching heuristics (e.g., VSIDS, look-ahead) as covered in background sections.",
+    "References Algorithm 2 (Decision Heuristic) for the generic pattern.",
+    "Builds towards using a GNN for learning weights and polarities (detailed in later sections)."
+  ],
+  "reproducibility_notes": [
+    "The modification requires the base solver to follow the assumed pattern: DPLL-derived, with a variable scoring function and a secondary sign heuristic.",
+    "The guided solver must accept as input a CNF formula and a variable parameterization \\(\\mathcal{W} = (w, p)\\) mapping each variable to a weight and polarity.",
+    "Implementation of equation (1) to scale the variable score by the weight before selecting the variable with maximum score."
+  ]
+}

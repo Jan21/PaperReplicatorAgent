@@ -1,0 +1,38 @@
+```json
+{
+    "section_title": "D.2 MILP Domain",
+    "section_purpose": "To describe the Mixed Integer Linear Programming (MILP) datasets used for evaluation, categorizing them by difficulty (Easy, Medium, Hard) based on solver solving time, and providing detailed specifications for each problem type and dataset.",
+    "key_points": [
+        "The MILP evaluation uses three difficulty categories (Easy, Medium, Hard) defined by the time required for the SCIP 8.0.0 solver to find optimal solutions.",
+        "The Easy dataset contains three synthetic benchmark problems (Set Covering, Maximum Independent Set, Multiple Knapsack) with specific generation parameters and a 60-second time limit.",
+        "The Medium dataset combines the MIK (MILPs with knapsack constraints) and CORLAT (real-world grizzly bear corridor planning) problems with an 80/20 train/test split and a 120-second time limit.",
+        "The Hard dataset contains Load Balancing instances from the NeurIPS 2021 ML4CO competition, modeling server task allocation, with an 80/20 split and a 360-second time limit.",
+        "Table 4 provides statistical descriptions (mean number of constraints and variables) for all six specific MILP problem datasets used across the difficulty categories."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": [
+            "Easy Category (SCIP solves in <1 min): Set Covering (500 rows × 1000 columns), Maximum Independent Set (500-node graphs with affinity 4), Multiple Knapsack (60 items, 12 knapsacks). 1000 training, 100 test instances per dataset. Time limit: 60 seconds.",
+            "Medium Category (SCIP solves in ≥5 min): Combines MIK [46] (MILPs with knapsack constraints) and CORLAT [47] (real-world grizzly bear corridor planning). 80%/20% train/test split. Time limit: 120 seconds.",
+            "Hard Category (SCIP solves in >1 hour): Load Balancing from NeurIPS 2021 ML4CO competition [48] (server task allocation under resource constraints). 80%/20% train/test split. Time limit: 360 seconds.",
+            "Statistical description (Table 4): Set Covering (500 constraints, 1000 vars), Maximum Independent Set (1953 constraints, 500 vars), Knapsack (72 constraints, 720 vars), MIK (346 constraints, 413 vars), CORLAT (486 constraints, 466 vars), Load Balancing (64304 constraints, 61000 vars)."
+        ]
+    },
+    "dependencies": [
+        "Appendix D 'Dataset Details' provides context for this being the MILP-specific subsection.",
+        "Section 5 'Experimental Evaluation' and its subsections (5.1 Settings, 5.3 Results) reference these datasets for testing the proposed method.",
+        "References to prior work ([41]-[48], [53]-[55]) for dataset generation methodologies and problem definitions."
+    ],
+    "reproducibility_notes": [
+        "Precise dataset names and sources: Set Covering [41], Maximum Independent Set [42], Multiple Knapsack [43], MIK [46], CORLAT [47], Load Balancing [48].",
+        "Exact generation parameters for synthetic Easy datasets: dimensions, graph size (500 nodes, affinity 4), item/knapsack counts (60, 12).",
+        "Train/test split ratios: 1000/100 for Easy synthetic datasets, 80%/20% for Medium and Hard datasets.",
+        "Solver and version used for difficulty categorization: SCIP 8.0.0.",
+        "Time limits applied during evaluation: 60s (Easy), 120s (Medium), 360s (Hard).",
+        "Statistical characteristics (mean constraints and variables) for each problem type as listed in Table 4."
+    ]
+}
+```

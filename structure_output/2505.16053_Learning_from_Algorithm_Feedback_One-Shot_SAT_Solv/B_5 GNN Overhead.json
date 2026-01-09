@@ -1,0 +1,29 @@
+{
+  "section_title": "B.5 GNN Overhead",
+  "section_purpose": "This section reports and analyzes the computational overhead introduced by the GNN forward pass in the proposed method, comparing it to SAT solver runtimes and highlighting the advantage of the one-shot setup over prior RL-based approaches that require per-decision guidance.",
+  "key_points": [
+    "GNN overhead is minimal, ranging from 0.02 to 0.1 seconds across instance distributions, which is negligible compared to non-trivial SAT solver runtimes.",
+    "Classical SAT solvers perform over 10^4 branching decisions per second, making per-decision guidance computationally expensive.",
+    "Prior RL-based work (e.g., Kurin et al., 2020; Cameron et al., 2024) incurs massive runtime overhead by requiring a separate GNN forward pass for each branching decision.",
+    "The proposed one-shot setup avoids this problem by using a single GNN pass to generate multiplicative weights for all decisions, minimizing runtime overhead.",
+    "Empirical results in Table 5 show runtime comparisons between baseline SAT solvers (Glucose, March) and those enhanced with RLAF guidance, including GNN forward pass times."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["3SAT(300)", "3SAT(350)", "3SAT(400)", "3Col(400)", "3Col(500)", "3Col(600)", "Crypt(20)", "Crypt(15)", "Crypt(10)"]
+  },
+  "dependencies": [
+    "Sections on graph representation and architecture (e.g., 2.2, A.1, A.2) for GNN details.",
+    "Sections on guidance policy and optimization (e.g., 2.3, 2.4) for understanding RLAF setup.",
+    "Prior work references (Kurin et al., 2020; Cameron et al., 2024) for context on RL-based approaches.",
+    "Section B.1 Data for dataset specifics."
+  ],
+  "reproducibility_notes": [
+    "Mean wall-clock runtime of the GNN forward pass for each data distribution, as reported in Table 5.",
+    "Comparison metrics including decisions and total runtime for baseline and RLAF-guided solvers.",
+    "Implementation of one-shot guidance to avoid per-decision GNN calls, crucial for efficiency."
+  ]
+}

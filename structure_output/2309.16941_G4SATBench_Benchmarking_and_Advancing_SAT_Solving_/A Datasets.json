@@ -1,0 +1,64 @@
+```json
+{
+    "section_title": "A Datasets",
+    "section_purpose": "To provide detailed technical specifications and statistical characteristics of the synthetic SAT instance datasets generated for the G4SATBench benchmark, including their generators, parameters, and properties across difficulty levels.",
+    "key_points": [
+        "Describes seven synthetic SAT dataset generators (SR, 3-SAT, CA, PS, k-Clique, k-Domset, k-Vercov) used to create G4SATBench.",
+        "Each dataset is generated with specific procedural algorithms and parameters, often derived from prior literature, to ensure non-trivial instances with balanced satisfiability.",
+        "Datasets are categorized into three difficulty levels (Easy, Medium, Hard) based on ranges for key size parameters (e.g., number of variables n).",
+        "Provides comprehensive statistics for each dataset and difficulty level, including average numbers of variables and clauses, and graph metrics (clustering coefficient, modularity) for different graph representations (VIG, VCG, LCG).",
+        "The generation process aims to produce high-quality datasets that mimic various structural properties (e.g., community structure, power-law distributions) relevant to SAT solving and GNN evaluation."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "SR generator: Iteratively builds clauses by sampling k variables (k = 1 + Bernoulli(b) + Geometric(g)), negating each with 50% probability, until formula is unsatisfiable. Satisfiable instance is created by negating the first literal in the last clause of the unsatisfiable one.",
+            "3-SAT generator: Iteratively samples three variables and their polarities uniformly at random until m clauses are obtained, targeting the phase transition.",
+            "CA generator: Iteratively selects k literals. With probability P = Q + 1/c, literals are chosen from the same community; with probability 1-P, from distinct communities. Repeats m times.",
+            "PS generator: Assigns random angles to variables and clauses. Variable i is included in clause j with probability P = 1/(1 + (d_ij^β * β' / R)^T), where d_ij is the angular distance.",
+            "k-Clique generator: Produces an Erdős-Rényi graph with v vertices and edge probability p, then encodes the k-Clique problem into SAT.",
+            "k-Domset generator: Produces an Erdős-Rényi graph with v vertices and edge probability p, then encodes the k-Dominating Set problem into SAT.",
+            "k-Vercov generator: Produces the complement of an Erdős-Rényi graph with v vertices and edge probability p, then encodes the k-Vertex Cover problem into SAT."
+        ],
+        "formulas": [
+            "SR: k = 1 + Bernoulli(b) + Geometric(g) (clause size sampling).",
+            "3-SAT: m = 4.258n + 58.26n^{-2/3} (clause count formula at phase transition).",
+            "CA: Probability P = Q + 1/c for intra-community literal selection.",
+            "PS: Probability P = 1/(1 + (d_ij^β * β' / R)^T) for variable inclusion in a clause.",
+            "k-Clique: Edge probability p = (v)^{k-1} / (v choose k) (sets expected number of k-cliques to 1).",
+            "k-Domset: Edge probability p = 1 - (1 - (v)^{k-1}/(v choose k)) (sets expected number of dominating sets of size k to 1).",
+            "k-Vercov: Edge probability p = (v)^{k-1} / (v choose k) (related to k-Clique via complement graph)."
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "SR_general": "b=0.3, g=0.4",
+            "3-SAT_general": "m=4.258n + 58.26n^{-2/3}",
+            "CA_general": "m ~ Uniform(13n, 15n), k ~ Uniform(4,5), c ~ Uniform(3,10), Q ~ Uniform(0.7,0.9)",
+            "PS_general": "m ~ Uniform(6n, 8n), k ~ Uniform(4,5), β ~ Uniform(0,1), β'=1, c ~ Uniform(3,10), T ~ Uniform(0.75,1.5)",
+            "k-Clique_general": "p = (v)^{k-1} / (v choose k)",
+            "k-Domset_general": "p = 1 - (1 - (v)^{k-1}/(v choose k))",
+            "k-Vercov_general": "p = (v)^{k-1} / (v choose k)"
+        },
+        "datasets": [
+            "SR dataset: Pairs of satisfiable/unsatisfiable formulas differing by one literal polarity.",
+            "3-SAT dataset: Formulas at the satisfiability phase transition.",
+            "CA dataset: Formulas with community structure and modularity.",
+            "PS dataset: Formulas with power-law distributed variable occurrences and clustering.",
+            "k-Clique dataset: SAT encodings of the k-Clique problem on Erdős-Rényi graphs.",
+            "k-Domset dataset: SAT encodings of the k-Dominating Set problem on Erdős-Rényi graphs.",
+            "k-Vercov dataset: SAT encodings of the k-Vertex Cover problem on complement of Erdős-Rényi graphs."
+        ]
+    },
+    "dependencies": [
+        "Understanding of CNF formulas and SAT problem basics (likely covered in Preliminaries section 3).",
+        "Context on graph representations of SAT instances (VIG, VCG, LCG) for interpreting statistics.",
+        "Reference to main benchmark description in Section 4 (G4SATBench) for overall framework."
+    ],
+    "reproducibility_notes": [
+        "Precise procedural algorithms for each of the seven dataset generators.",
+        "All generator-specific parameters (e.g., b, g for SR; β, T for PS) and their distributions or fixed values.",
+        "Parameter ranges defining Easy, Medium, Hard difficulty levels for each dataset (e.g., n ~ Uniform(10,40) for Easy SR).",
+        "The statistical targets guiding parameter selection (e.g., expected number of k-cliques equals 1, balance of satisfiability).",
+        "The formulas for computing key parameters like m in 3-SAT and p in graph-based datasets."
+    ]
+}
+```

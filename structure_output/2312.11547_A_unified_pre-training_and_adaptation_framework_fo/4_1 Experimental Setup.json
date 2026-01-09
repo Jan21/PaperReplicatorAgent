@@ -1,0 +1,44 @@
+```json
+{
+    "section_title": "4.1 Experimental Setup",
+    "section_purpose": "To describe the datasets, evaluation metrics, baseline methods, and implementation settings used to evaluate the proposed framework for solving combinatorial optimization problems on graphs.",
+    "key_points": [
+        "Training uses 20,000 synthetically generated Max-SAT instances for pre-training and established benchmarks (GSET, frb) for fine-tuning and evaluating on Max-Cut, Maximum Independent Set (MIS), and Minimum Dominating Set (MDS) problems.",
+        "Evaluation metrics are problem-specific: a normalized p-value metric (with a provided formula) for Max-Cut, and the raw number of vertices in the solution for MIS/MDS.",
+        "Baselines are categorized as traditional (SDP), heuristic (EO, BLS), and learning-based (ECO-DQN, GMC-A/B, RUN-CSP, PI-GNN, MAXSAT) methods.",
+        "Key hyperparameters are provided: feature dimension 128, 5 GNN layers (first 2 fixed during fine-tuning), 2-layer MLP, 400/100 pre-train/fine-tune epochs, Adam optimizer with lr=1e-5 and weight decay=1e-10.",
+        "Preliminary results in tables show the proposed method achieving competitive or superior performance across different problem types and graph scales compared to baselines."
+    ],
+    "technical_details": {
+        "algorithms": ["MaxHS solver (used to generate labels for pre-training)", "Breakout Local Search (BLS, a baseline method)", "Local search (used in inference for MIS and MDS with 120 steps)"],
+        "formulas": ["p(z) = (z/n - γ/4) / sqrt(γ/4), where z is predicted cut size for a γ-regular graph with n nodes"],
+        "architectures": ["GNN with unspecified type (specified by number of layers L)", "Two-layer fully connected (FC) network for classification", "Two-layer fully connected network for the discriminator used in domain adaptation"],
+        "hyperparameters": {
+            "feature_dimension_d": "128",
+            "gnn_layers_L_pre_training": "5",
+            "gnn_layers_L_fine_tuning": "5",
+            "fixed_layers_fine_tuning": "first 2",
+            "mlp_layers": "2",
+            "pre_training_epochs": "400",
+            "fine_tuning_epochs": "100",
+            "optimizer": "Adam",
+            "learning_rate": "1e-5",
+            "weight_decay": "1e-10",
+            "local_search_steps_MIS_MDS": "120"
+        },
+        "datasets": [
+            "Pre-training: 20,000 generated Max-SAT instances using three clause generators (uniform, power-law, double power-law distributions).",
+            "Max-Cut: GSET benchmark (71 unweighted graphs).",
+            "MIS/MDS: frb benchmark (four instance scales: frb30-15, frb40-19, frb50-23, frb59-26, with 5 hard instances each)."
+        ]
+    },
+    "dependencies": ["Understanding of the CO problems being solved (Max-Cut, MIS, MDS) introduced in Section 3.1.", "Understanding of the proposed pre-training and fine-tuning methodology from Section 3.4.", "General familiarity with the baseline methods cited (e.g., what GNNs, SDP, RL are)."],
+    "reproducibility_notes": [
+        "Specification of the three clause generators and distributions for creating the 20k Max-SAT pre-training dataset.",
+        "Hyperparameter values for model architecture (feature dim, layer counts) and training (epochs, optimizer settings).",
+        "Hardware and software specifications (Python/PyTorch, CPU/GPU).",
+        "Evaluation metrics and formulas (p-value for Max-Cut).",
+        "Number of local search steps (120) for MIS and MDS problems during inference."
+    ]
+}
+```

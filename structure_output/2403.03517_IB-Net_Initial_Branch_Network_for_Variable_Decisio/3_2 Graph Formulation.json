@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2 Graph Formulation",
+    "section_purpose": "This section describes how a Boolean satisfiability (SAT) problem instance is converted from its standard CNF representation into a Weighted Literal Incidence Graph (WLIG) to capture structural information for input to the neural network model.",
+    "key_points": [
+        "SAT problem instances are provided to the model in Conjunctive Normal Form (CNF), a standard representation.",
+        "The SAT instance S is converted into a Weighted Literal Incidence Graph (WLIG) G to capture structural information.",
+        "In the WLIG, each literal (variable or its negation) becomes a node, and edges connect literals that appear together in the same clause.",
+        "Edge weights in the graph correspond to the number of co-occurrences (common incidences) of two literals within clauses.",
+        "The resulting adjacency matrix A of graph G serves as the primary input to the subsequent graph neural network model."
+    ],
+    "technical_details": {
+        "algorithms": ["Conversion of a SAT instance in CNF to a Weighted Literal Incidence Graph (WLIG)"],
+        "formulas": ["A SAT instance S is transformed into a graph G = (V, E, w), where V is the set of literals, E edges connect co-occurring literals, and w(e) counts the number of their common clause incidences."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Knowledge of Conjunctive Normal Form (CNF) for Boolean formulas", "Understanding of SAT problem structure (clauses and literals)"],
+    "reproducibility_notes": ["The specific rule for graph construction: nodes are literals, edges connect literals co-occurring in a clause.", "Edge weight calculation: weight = number of clauses where the two literals co-occur.", "The output is the adjacency matrix A of the constructed WLIG, which is the model input."]
+}
+```

@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "B.1 Data",
+    "section_purpose": "This section details the three SAT problem instance distributions (Random 3SAT, Graph Coloring, Cryptographic) used for training and testing, including their generation processes and dataset statistics.",
+    "key_points": [
+        "Defines three SAT instance distributions: Random 3SAT (3SAT(n)), Graph Coloring (3COL(n)), and Cryptographic (CRYPTO(n)), each with specific generation methods to produce hard problems.",
+        "Specifies training datasets: 20K instances each from 3SAT(200), 3COL(300), and CRYPTO(22), filtered for balanced SAT/UNSAT labels where possible (CRYPTO is all UNSAT).",
+        "Specifies test datasets: larger/more complex instances for each distribution (e.g., 3SAT with n∈{300,350,400}) to evaluate generalization.",
+        "Provides the formula for generating hard Random 3SAT instances based on the critical clause density: m = 4.258n + 58.26n^(-2/3).",
+        "References Table 2, which contains comprehensive dataset statistics including instance counts, SAT/UNSAT balance, and variable/clause counts."
+    ],
+    "technical_details": {
+        "algorithms": ["Uniformly random 3SAT clause generation: choose 3 distinct variables, negate each with 50% probability", "Generation of 3-colorability SAT instances from Erdős-Rényi graphs with expected vertex degree 4.67", "Generation of cryptographic SAT instances using Grain-of-Salt tool for HiTag2 cipher with parameters: -outputs 56 -base-shift 8 -karnaugh 8"],
+        "formulas": ["Critical clause count for Random 3SAT: m = 4.258n + 58.26n^(-2/3)"],
+        "architectures": [],
+        "hyperparameters": {
+            "3SAT training size": "n=200 variables",
+            "3SAT test sizes": "n∈{300,350,400}",
+            "3COL training size": "n=300 vertices",
+            "3COL test sizes": "n∈{400,500,600}",
+            "CRYPTO training": "n=22 help bits",
+            "CRYPTO test sizes": "n∈{20,15,10}",
+            "Training instances per distribution": "20,000",
+            "Test instances per size": "200 (3SAT, 3COL), 100 (CRYPTO)",
+            "Erdős-Rényi graph edge probability": "set for expected degree 4.67"
+        },
+        "datasets": ["Random 3SAT: Uniform random instances with hard clause density", "Graph Coloring: 3-colorability SAT encodings of Erdős-Rényi graphs", "Cryptographic: SAT instances for HiTag2 cipher decryption generated with Grain-of-Salt"]
+    },
+    "dependencies": ["Equation (6) referenced for defining training distribution Ω", "Table 2 referenced for full dataset statistics", "Background on SAT solving and problem hardness distributions"],
+    "reproducibility_notes": ["Formulas and parameters for generating each instance distribution: Random 3SAT clause formula, Graph Coloring encoding parameters, Cryptographic generation tool and parameters", "Dataset sizes and splits for training/validation/testing", "Balancing criteria for SAT/UNSAT instances in training sets", "Test set sizes and problem complexity progression"]
+}
+```

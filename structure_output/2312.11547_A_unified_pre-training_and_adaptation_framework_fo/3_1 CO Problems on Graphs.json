@@ -1,0 +1,27 @@
+```json
+{
+    "section_title": "3.1 CO Problems on Graphs",
+    "section_purpose": "This section formally defines the class of Combinatorial Optimization (CO) problems on graphs and introduces three specific problems (Max-Cut, Maximum Independent Set, Minimum Dominated Set) as concrete examples that the paper's framework will address.",
+    "key_points": [
+        "Defines CO problems on graphs as finding a subset of nodes under constraints to optimize an objective.",
+        "Presents the general mathematical formulation for such problems (Equation 3.1).",
+        "Introduces and formally defines the Max-Cut Problem, providing its objective function (Equation 3.2).",
+        "Introduces and formally defines the Maximum Independent Set (MIS) Problem, providing its objective and constraint (Equation 3.3a).",
+        "Introduces and formally defines the Minimum Dominated Set (MDS) Problem, providing its objective and constraint (Equation 3.4a)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "General CO Formulation: max f(S) subject to g_i(S) <= b_i, with b_i in Ω (Eq. 3.1)",
+            "Max-Cut Objective: f(S) = sum_{(i,j) in edges} (v_i + v_j - 2v_i v_j) where v_i in {0,1} (Eq. 3.2)",
+            "MIS Formulation: f(S) = sum_{(v_i in vertices)} v_i, subject to v_i + v_j <= 1 for all edges (i,j) where v_i, v_j in {0,1} (Eq. 3.3a)",
+            "MDS Formulation: f(S) = -sum_{(v_i in vertices)} v_i, subject to v_i + v_j >= 1 for all vertices v_i and each neighbor j where v_i, v_j in {0,1} (Eq. 3.4a)"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of graphs (nodes, edges) and combinatorial optimization problems."],
+    "reproducibility_notes": ["The formal definitions and problem formulations for Max-Cut, MIS, and MDS are provided, which are necessary to understand the problem types the framework aims to solve."]
+}
+```

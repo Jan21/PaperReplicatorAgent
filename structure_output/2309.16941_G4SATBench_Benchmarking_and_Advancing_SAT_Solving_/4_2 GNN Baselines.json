@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2 GNN Baselines",
+    "section_purpose": "This section introduces the graph encoding schemes used to represent SAT problems for GNNs and describes the message-passing frameworks employed by the GNN baselines in the benchmark.",
+    "key_points": [
+        "Established graph encodings like LIG, VIG, LCG, and VCG have limitations for GNNs (e.g., missing clause details or polarity information).",
+        "The study uses refined graph encodings called LCG* and VCG* which add edges to encode literal negation or variable polarities, respectively.",
+        "A general message-passing scheme (Equation 1) is defined for GNNs on LCG*, updating embeddings for literal and clause nodes using aggregation and update functions.",
+        "G4SATBench provides implementations of multiple GNN models (NeuroSAT, GCN, GGNN, GIN) on both LCG* and VCG* encodings.",
+        "Specialized graph encodings like And-Inverter-Graphs (AIG) are excluded from this benchmark as they are not for general-purpose SAT solving."
+    ],
+    "technical_details": {
+        "algorithms": ["Heterogeneous message-passing algorithms on LCG* or VCG* encodings", "General GNN update equations for literal and clause node embeddings", "Aggregation and update functions (e.g., summation, MLP) as used by specific models (NeuroSAT, GCN, GGNN, GIN)"],
+        "formulas": ["Equation 1: h_c^(k) = UPD( AGG_{l∈N(c)}({MLP(h_l^(k-1))}), h_c^(k-1) )", "Equation 1: h_l^(k) = UPD( AGG_{c∈N(l)}({MLP(h_c^(k-1))}), h_{-l}^(k-1), h_l^(k-1) )"],
+        "architectures": ["Graph neural network models built on LCG* or VCG* encodings of CNF formulas", "Neural components include MLP (multi-layer perception), update function (UPD), aggregation function (AGG)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Knowledge of CNF formula representation and graph encodings (LIG, VIG, LCG, VCG) from Preliminaries (Section 3)", "Understanding of the benchmark's scope and datasets (Section 4.1)"],
+    "reproducibility_notes": ["Graph construction details for LCG* (adding literal-negation edges) and VCG* (using two edge types for polarities)", "General message-passing equations (Equation 1) and the specific aggregation/update functions for each GNN model (NeuroSAT, GCN, GGNN, GIN)", "Initialization method: learnable vectors h_l^0 and h_c^0 for literal and clause node embeddings", "Implementation details and model specifics are referenced as being in Appendix B"]
+}
+```

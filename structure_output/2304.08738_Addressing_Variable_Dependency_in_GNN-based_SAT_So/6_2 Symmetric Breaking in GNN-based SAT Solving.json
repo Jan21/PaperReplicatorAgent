@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "6.2 Symmetric Breaking in GNN-based SAT Solving",
+    "section_purpose": "This section discusses an existing method called Preferential Labeling for breaking symmetry between variables in GNN-based SAT solving, highlights its limitations, and positions the authors' proposed method as a lower-cost alternative.",
+    "key_points": [
+        "Preferential Labeling breaks ties between symmetric variables by assigning distinct initial embeddings to variables.",
+        "The biased initialization introduces artifacts, requiring evaluation under multiple random permutations of initial embeddings during training and inference to smooth them out.",
+        "During training, it selects the permutation yielding the lowest loss for optimization; during inference, it averages outputs across permutations.",
+        "The authors position their method (from Section 4) as a lower-cost solution for tie-breaking compared to Preferential Labeling.",
+        "A detailed performance and cost comparison with Preferential Labeling is provided in the appendix."
+    ],
+    "technical_details": {
+        "algorithms": ["Preferential Labeling method (from Sun et al., 2022) for symmetry breaking via distinct initial embeddings and permutation evaluation"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 4 (Our Methods) which describes the authors' proposed architecture and approach", "Knowledge of GNN-based SAT solving from Sections 2.2 and 2.3", "Understanding of variable dependency and symmetry from Section 3"],
+    "reproducibility_notes": ["Description of the Preferential Labeling training procedure: evaluate multiple permutations, pick the one with lowest loss for optimization.", "Description of the Preferential Labeling inference procedure: average the output across all attempted permutations."]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 Branching Heuristic from New Probabilistic-Method GNN",
+    "section_purpose": "This section introduces a new approach for designing loss functions using the probabilistic method to overcome limitations in previous GNN designs, and demonstrates how to extract branching heuristics from the learned probability space for combinatorial optimization problems.",
+    "key_points": [
+        "Identifies restrictions in the loss function design of previous GNN models (from reference [8])",
+        "Proposes a new probabilistic-method approach for designing loss functions",
+        "The GNN outputs a probability space where each vertex has a Bernoulli distribution parameter representing its likelihood to be in a solution",
+        "Demonstrates utility on maximum-clique problem and extracts branching heuristics from the learned probability space",
+        "Applies the method to dominating-clique problems, showing experimental improvements in branching heuristics"
+    ],
+    "technical_details": {
+        "algorithms": ["Probabilistic-method GNN approach", "Method to extract branching heuristic from learned probability space"],
+        "formulas": ["Probability distribution: For graph G(V,E), subset S of V, P(S) = (∏_i p_i)(∏_j (1 - p_j)) where p_i, p_j are Bernoulli parameters for vertices in and out of S respectively"],
+        "architectures": ["Probabilistic-method GNN with 1-dimensional node features interpreted as Bernoulli distribution parameters"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Reference [8] for previous GNN model design", "Understanding of probabilistic method techniques", "Knowledge of maximum-clique and dominating-clique problems"],
+    "reproducibility_notes": ["The probability space construction with independent Bernoulli distributions for each vertex", "The formula for calculating probability of vertex subsets", "The interpretation of node features as Bernoulli parameters"]
+}
+```

@@ -1,0 +1,19 @@
+{
+  "section_title": "Abstract",
+  "section_purpose": "This abstract introduces the paper's core research question, which is investigating the limitations of Graph Neural Networks (GNNs) in certifying the unsatisfiability (UNSAT) of Boolean formulae, suggesting a potential failure in learning broader logical reasoning tasks.",
+  "key_points": [
+    "Bridging GNNs and logical reasoning is feasible and valuable.",
+    "While GNN-based solvers have seen success for Boolean SAT, their performance on more complex predicate logic formulae is unclear.",
+    "The paper conjectures, with evidence, that generally-defined GNNs have limitations in certifying UNSAT for Boolean formulae.",
+    "This implies GNNs may fail at learning logical reasoning tasks that include proving UNSAT as a sub-problem, which is common in predicate logic."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": []
+}

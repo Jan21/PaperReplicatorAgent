@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "CDCL WorkFlow",
+    "section_purpose": "This section explains the Conflict-Driven Clause Learning (CDCL) algorithm workflow used by modern SAT solvers, highlighting key stages that influence variable decision-making and provide context for the IB-Net approach.",
+    "key_points": [
+        "CDCL algorithm consists of four main stages: decision-making, unit propagation, conflict analysis, and non-chronological backtracking/backjumping.",
+        "Conflicts trigger clause learning (adding new clauses) to prevent repeated errors, and backtracking jumps to points before the conflict rather than just reverting the last decision.",
+        "Two critical stages are conflict analysis (clause learning) and variable decision, which collaboratively construct the decision queue for variable branching.",
+        "Swift identification of variables within the UNSAT-core accelerates solving UNSAT problems, while prematurely including variables outside the UNSAT-core slows down the solver.",
+        "The section argues for guiding the decision queue and decision score (internal variable used in variable decision and conflict analysis) to optimize solver performance."
+    ],
+    "technical_details": {
+        "algorithms": ["Conflict-Driven Clause Learning (CDCL) algorithm"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Fig. 2 (referred to for detailed workflow)", "General understanding of SAT problems and Boolean satisfiability from Introduction/Related Work"],
+    "reproducibility_notes": ["Understanding of CDCL workflow stages (decision-making, unit propagation, conflict analysis, backtracking)", "Concept of UNSAT-core and its importance in variable decision", "Role of decision queue and decision score in branching"]
+}
+```

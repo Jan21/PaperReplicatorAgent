@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "4.2 Finding Dominating Cliques",
+    "section_purpose": "This section presents the experimental results comparing the performance of an original dominating-clique solver with GNN-enhanced variants, using different loss functions and entropy calculation speeds, on various test datasets.",
+    "key_points": [
+        "Experiments compare three solvers: the original solver from a cited paper, and two GNN-enhanced solvers that use fast vs. accurate joint information entropy calculations, both trained with a specific new loss function.",
+        "Results are presented in Table 1 as approximation ratios (mean ± standard deviation) across real-world datasets (Twitter, COLLAB, IMDB) and synthetic G(n,p) instances of varying densities.",
+        "The GNN-enhanced solvers, particularly those using a slower, more accurate entropy calculation, show strong performance, often achieving near-perfect or high approximation ratios.",
+        "Figure 1 analysis suggests GNN-enhanced solvers perform better on instances where no dominating clique exists, as the learned heuristic can prune the entire search space more effectively.",
+        "On instances where dominating cliques do exist, the original heuristic might be equally effective because solvers can terminate early upon finding a solution."
+    ],
+    "technical_details": {
+        "algorithms": ["Original dominating-clique solver (from cited reference [9])", "GNN-enhanced solver with fast joint information entropy calculation", "GNN-enhanced solver with accurate (slow) joint information entropy calculation"],
+        "formulas": ["Loss function (4) - referenced but not defined here", "Loss function (5) - referenced as used for the GNN model output distribution"],
+        "architectures": [],
+        "hyperparameters": {
+            "G(n,p) parameters": "p ranges: 0.2 to 0.4 for 'Sparse', 0.6 to 0.8 for 'Dense'",
+            "Graph size for comparison": "Average node count for G(n,p) instances set to ~120 to match Twitter dataset average"
+        },
+        "datasets": ["Twitter (real-world, avg ~120 nodes/graph)", "COLLAB (real-world)", "IMDB (real-world)", "G(n,p) (synthetic, Erdős–Rényi graphs)"]
+    },
+    "dependencies": ["Section 3.4 (New Branching Heuristic for Dominating-Clique Solvers) for description of the GNN-enhanced solver framework", "Section 3.3 (Loss Function for (Minimum) Dominating-Clique Problem) for understanding loss function (5)", "Prior reference to loss function (4) from an earlier section (likely 3.2)", "Reference [8] for the baseline loss function used in comparison", "Reference [9] for the original solver algorithm"],
+    "reproducibility_notes": ["Definition of the 'approximation ratio' metric used in Table 1", "Detailed description of the 'fast' vs. 'accurate/slow' calculations for joint information entropy", "Specific training procedure and hyperparameters for the GNN models producing the output distributions", "Exact method for generating the synthetic G(n,p) test instances (beyond p range)", "Procedure for calculating the 'winning ratios' and 'ratios of geometric average number of branches' shown in Figure 1"]
+}
+```

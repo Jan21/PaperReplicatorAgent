@@ -1,0 +1,47 @@
+{
+  "section_title": "A.6 Expressiveness",
+  "section_purpose": "To explain how the ANYCSP model overcomes the expressiveness limitations of standard Graph Neural Networks by incorporating randomness, and to provide empirical evidence of its capability on problems where 1-WL limited functions fail.",
+  "key_points": [
+    "Standard message-passing GNNs are limited by the 1-dimensional Weisfeiler-Lehman isomorphism test, which can hinder tasks like graph coloring for certain structures.",
+    "ANYCSP overcomes 1-WL limitations by using randomness, as proven in prior work, through soft assignments and random sampling to break symmetries.",
+    "The model's policy GNN interacts with randomness by predicting soft assignments with high variance, enabling it to solve problems beyond 1-WL capabilities.",
+    "Empirically, ANYCSP achieves optimal cuts on 4-regular toroidal graphs (G48 and G49) in the MAXCUT experiment, which correspond to conflict-free 2-colorings.",
+    "Algorithms for the forward pass and training are provided, detailing how randomness is integrated and how rewards are computed."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Forward Pass of πθ (Algorithm 1): Describes steps from input CSP instance to output soft assignments, assignments, and rewards, including message passing and random sampling.",
+      "Training ANYCSP (Algorithm 2): Outlines the training loop with policy gradient updates using discounted rewards."
+    ],
+    "formulas": [
+      "Softmax: φ^{(t)}(v) = exp(o^{(t)}(v)) / Σ_{v'} exp(o^{(t)}(v')) for soft assignments within each domain.",
+      "Reward: r^{(t)} = max{Q_I(α^{(t)}) - q^{(t)}, 0}, where Q_I is the quality function.",
+      "Discounted return: G_t = Σ_{k=t}^{T} λ^{k-t} r^{(k)} for training.",
+      "Policy gradient: ∇_θ J_i = ∇_θ Σ_{t=1}^{T} (G_t Σ_{X} log(φ_θ^{(t)}(α^{(t)}(X)) + ε))"
+    ],
+    "architectures": [
+      "GNN architecture with components: E (embedding), M (message functions for values and constraints), U (update functions for values and variables), G (recurrent state update), O (output function).",
+      "Message passing between value nodes and constraint nodes, with aggregation operations (⊕)."
+    ],
+    "hyperparameters": {
+      "lr": "learning rate (mentioned as lr > 0)",
+      "λ": "discount factor in (0,1]",
+      "T_train": "number of training steps per instance",
+      "batch_size": "number of instances per batch",
+      "train_steps": "total number of training steps",
+      "ε": "small constant for numerical stability in log computation"
+    },
+    "datasets": []
+  },
+  "dependencies": [
+    "Understanding of Graph Neural Networks and the Weisfeiler-Lehman isomorphism test.",
+    "Prior sections on method architecture and training details (e.g., Section 4, Appendix A.1-A.5).",
+    "Knowledge of Constraint Satisfaction Problems and reinforcement learning concepts for policy gradients."
+  ],
+  "reproducibility_notes": [
+    "Implementation of the forward pass algorithm with message passing and random sampling.",
+    "Use of specified hyperparameters like learning rate, discount factor, and batch size.",
+    "Incorporation of randomness through soft assignment sampling to break symmetries.",
+    "Reward calculation based on the quality function Q_I and best prior quality."
+  ]
+}

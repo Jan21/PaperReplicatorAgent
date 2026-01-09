@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "Experiments for AsymSAT Configurations",
+    "section_purpose": "This section presents experimental results evaluating the effectiveness of the proposed AsymSAT model's RNN decoding layer and analyzes the impact of key hyperparameters, specifically comparing performance against baseline models and analyzing iteration count.",
+    "key_points": [
+        "The proposed AsymSAT model, with either an LSTM or GRU-based bidirectional RNN layer, achieves near-perfect accuracy (100%) on symmetric circuit problems, significantly outperforming NeuroSAT and DG-DAGRNN which fail on these problems.",
+        "The bidirectional RNN layer (the ℛ layer) is crucial for breaking symmetry; removing it prevents effective training on symmetric circuits.",
+        "On the V(n) problem set, AsymSAT maintains moderate solution rates (45-81%), while NeuroSAT fails completely and DG-DAGRNN performs comparably or better in some cases.",
+        "Increasing the number of message-passing iterations from 5 to 10 significantly improves accuracy for AsymSAT (especially with GRU), with diminishing returns beyond 10-15 iterations.",
+        "AsymSAT with LSTM shows slightly better potential accuracy and a later performance peak (around 15 iterations) compared to GRU, leading to its selection for subsequent SAT-solving experiments."
+    ],
+    "technical_details": {
+        "algorithms": ["AsymSAT (with LSTM or GRU RNN layer)", "NeuroSAT", "DG-DAGRNN"],
+        "formulas": [],
+        "architectures": ["AsymSAT configuration with a bidirectional RNN layer (ℛ layer) using either LSTM or GRU cells"],
+        "hyperparameters": {
+            "learning_rate": "1e-3",
+            "iteration_counts_tested": [5, 10, 15, 20]
+        },
+        "datasets": ["10 symmetric circuits (training set)", "SR(n) problems for n=3 to 10 (test set)", "V(n) problems for n=3 to 10 (test set)", "Mixed dataset with instances from SR(3) to SR(10)"]
+    },
+    "dependencies": ["Section 3 (Variable Dependency in SAT Solving) for discussion on tie-breaking in symmetric circuits", "Section 4.2 (The Proposed GNN Architecture) for details on the AsymSAT architecture and the ℛ layer"],
+    "reproducibility_notes": ["Use of LSTM or GRU in the bidirectional RNN (ℛ) layer is a key architectural choice.", "Learning rate of 1e-3 for AsymSAT models in these experiments.", "Number of message-passing iterations is a critical hyperparameter (optimal around 10-15).", "Performance metrics are solution rates on SR(n) and V(n) problem sets."]
+}
+```

@@ -1,0 +1,31 @@
+{
+  "section_title": "7.1 Limitations and Future Work",
+  "section_purpose": "To outline the limitations of G4SATBench and propose future research directions for improving GNN-based SAT solving.",
+  "key_points": [
+    "G4SATBench focuses on standalone neural SAT solvers and excludes neural-guided SAT solvers that integrate GNNs with search-based SAT solvers.",
+    "The instances in G4SATBench are smaller than real-world applications, limiting the scalability of GNN models alone.",
+    "GNNs show efficacy in unsat-core prediction, suggesting promising integration with modern SAT solvers to scale to real-world instances.",
+    "The benchmark does not consider domain-specific GNN models tailored to problems like Circuit SAT, which could improve performance in specialized instances.",
+    "Current GNN-based SAT solvers are static and have limited ability to capture the CDCL heuristic; dynamic GNN models are proposed as a future direction."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 3: Preliminaries for background on SAT solving and GNNs",
+    "Section 4: G4SATBench for benchmark details and graph representations (LCG* and VCG*)",
+    "Section 5: Benchmarking Evaluation for tasks like unsat-core prediction",
+    "Understanding of CDCL heuristic from related sections or prior knowledge",
+    "Knowledge of neural-guided SAT solvers and domain-specific GNN models"
+  ],
+  "reproducibility_notes": [
+    "Future work should address scaling instances to real-world sizes for practical application.",
+    "Explore techniques to integrate GNNs with search-based SAT solvers for neural-guided approaches.",
+    "Investigate domain-specific GNN models for problems like Circuit SAT to enhance performance.",
+    "Develop dynamic GNN models capable of learning the CDCL heuristic to improve SAT solving accuracy."
+  ]
+}

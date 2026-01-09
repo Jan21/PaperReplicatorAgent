@@ -1,0 +1,18 @@
+{
+  "section_title": "2.1 SAT Solver Selection",
+  "section_purpose": "This section reviews existing machine learning approaches for SAT solver selection (portfolio-based solving), providing context for the paper's proposed method. It summarizes key historical systems and their methodologies.",
+  "key_points": [
+    "SATzilla and its successors are prominent classification models that use hand-selected instance features and have won SAT competitions, evolving from ridge regression to cost-sensitive decision trees.",
+    "Other approaches using hand-picked features include k-nearest neighbors (KNN), clustering methods like CSHC, and combinations like ArgoS-mArT which uses KNN with a multi-armed bandit algorithm.",
+    "A deep learning approach by Loreggia et al. uses CNNs on grayscale images generated from textual SAT instances, but suffers from information loss due to rescaling, contrasting with the paper's proposed lossless approach."
+  ],
+  "technical_details": {
+    "algorithms": ["ridge regression", "cost-sensitive decision tree", "k-nearest neighbors (KNN)", "cost-sensitive hierarchical clustering (CSHC)", "multi-armed bandit algorithm", "convolutional neural networks (CNNs)"],
+    "formulas": [],
+    "architectures": ["CNN for processing 128x128 pixel grayscale images"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Basic understanding of SAT solving and the algorithm selection problem from Section 1 INTRODUCTION"],
+  "reproducibility_notes": []
+}

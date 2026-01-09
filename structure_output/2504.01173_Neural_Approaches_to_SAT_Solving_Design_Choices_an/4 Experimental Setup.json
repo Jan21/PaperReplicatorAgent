@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "4 Experimental Setup",
+    "section_purpose": "This section provides the foundational technical setup for the experiments conducted in the paper, describing the data representation, model architecture variants, training objectives, and benchmark datasets used to evaluate neural approaches for SAT solving.",
+    "key_points": [
+        "Introduces the graph-based representation of SAT formulas as bipartite graphs with clause nodes and variable nodes, along with the mechanism for propagating partial assignments.",
+        "Details three primary architecture variants: GNNs with different update functions (GAT, GCN, GIN, and a simple MPNN), Graph Transformers, and an MLP baseline.",
+        "Describes the key supervision tasks used to train the models: direct assignment prediction, clause state prediction, and margin loss minimization.",
+        "Specifies the benchmarks and procedures for generating and splitting training, validation, and test datasets, including the source SAT competitions and problem generation parameters."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph-based message passing", "Unit propagation simulation for graph representation"],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks (GAT, GCN, GIN, simple MPNN)", "Graph Transformer", "Multi-Layer Perceptron (MLP)"],
+        "hyperparameters": {},
+        "datasets": ["SAT competition benchmarks (2009–2022): SATLIB, Crafted, Random tracks", "Train/valid/test split: 70%/15%/15% of benchmark formulas", "Dataset generation: PySAT for random 3-SAT (clause-to-variable ratio: 1.0 to 4.5)"]
+    },
+    "dependencies": ["Section 3.3 (Graph Neural Networks) for architectural background", "General understanding of SAT from Section 3.1"],
+    "reproducibility_notes": ["Graph structure definition (bipartite with clause/variable nodes and edges for literals)", "List of specific GNN update functions tested (GAT, GCN, GIN, simple MPNN)", "List of model architecture families (GNNs, Graph Transformer, MLP)", "Three defined supervision tasks (assignment, clause state, margin)", "Source of benchmark data (SAT competitions and PySAT generation)", "Dataset split ratios (70/15/15)"]
+}
+```

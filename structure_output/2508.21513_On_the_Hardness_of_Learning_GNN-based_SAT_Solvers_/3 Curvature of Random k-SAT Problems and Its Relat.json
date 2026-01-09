@@ -1,0 +1,47 @@
+```json
+{
+    "section_title": "3 Curvature of Random k-SAT Problems and Its Relationship with GNNs",
+    "section_purpose": "To establish the mathematical relationship between graph Ricci curvature (RC) and random k-SAT problems, and to characterize how average curvature behaves in relation to problem difficulty parameters (α and k).",
+    "key_points": [
+        "Random k-SAT problems are represented as bipartite Literal-Clause Graphs (LCGs) with specific degree distributions for literals and clauses.",
+        "As problems become easier (α → 0), the average Ricci curvature (both Ollivier and Balanced Forman) approaches 0, indicating flatter graphs.",
+        "As problems become harder (α → ∞), the average lower bound of curvature approaches (2/k - 2), showing increasingly negative curvature.",
+        "Theorem 3.1 provides an upper bound for Balanced Forman Curvature (BFC) and shows that as α → ∞, average BFC converges to (2/k - 2).",
+        "The parameter k plays a crucial role in determining curvature: larger k leads to more negative curvature for hard problems, indicating more bottlenecks."
+    ],
+    "technical_details": {
+        "algorithms": ["Erdős–Rényi-like procedure for generating random k-SAT LCGs"],
+        "formulas": [
+            "Degree distribution for clauses: P(d_j = h) = δ(h - k)",
+            "Degree distribution for literals: P(d_i = h) = binomial(M, h) p^h (1-p)^{M-h} with p = k/(2N)",
+            "Poisson approximation for literal degrees: P(d_i = h) = λ^h e^{-λ}/h! with λ = αk/2",
+            "Zero-truncated Poisson distribution: P*(d_i = h) = λ^h/[h!(e^λ - 1)]",
+            "Ollivier Curvature lower bound: κ(i,j) = -2·max{0, 1 - 1/d_i - 1/d_j}",
+            "Alternative lower bound definition: R(i,j) = 0 if min{d_i,d_j}=1 else 2/d_i + 2/d_j - 2",
+            "Expected literal degree: E[d_i] = λe^λ/(e^λ - 1)",
+            "BFC upper bound: R̄(i,j) = 2/d_i + 2/d_j - 2 + (d_i + k - 2)/[max{k-1,M-1}·max{d_i,d_j}]"
+        ],
+        "architectures": ["Literal-Clause Graph (LCG) bipartite representation"],
+        "hyperparameters": {
+            "k": "number of literals per clause",
+            "N": "number of variables",
+            "M": "number of clauses",
+            "α": "M/N (clause-to-variable ratio)"
+        },
+        "datasets": ["Random k-SAT problems generated using the described model"]
+    },
+    "dependencies": [
+        "Section 2.1 for Random k Boolean Satisfiability Problem background",
+        "Section 2.3 for Ricci Curvature of Graphs definitions",
+        "Appendix A.2 for proofs of statements",
+        "Understanding of bipartite graph representations"
+    ],
+    "reproducibility_notes": [
+        "The precise mathematical model for generating random k-SAT LCGs",
+        "The formulas for degree distributions (Equations 3, 5, 6)",
+        "The curvature definitions and bounds (Equations 7, 8, 10)",
+        "The relationship between α, k, and curvature convergence results",
+        "The zero-truncated Poisson distribution for literal degrees when λ is large"
+    ]
+}
+```

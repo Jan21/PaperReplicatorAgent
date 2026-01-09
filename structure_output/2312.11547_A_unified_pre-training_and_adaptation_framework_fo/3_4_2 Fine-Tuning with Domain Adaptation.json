@@ -1,0 +1,39 @@
+{
+  "section_title": "3.4.2 Fine-Tuning with Domain Adaptation",
+  "section_purpose": "To describe the fine-tuning process that applies domain adaptation to transfer knowledge from pre-trained Max-SAT models to target combinatorial optimization problems, enabling learning of domain-invariant features.",
+  "key_points": [
+    "Fine-tuning uses domain adaptation to learn transferable features from Max-SAT (source domain) to CO problems (target domain).",
+    "The network architecture includes pre-trained feature extraction backbones (MLP and Bip-GNN), separate classification layers for each domain, and a discriminator for domain classification.",
+    "The overall loss function combines classification loss (ℒ_c) and discriminative loss (ℒ_d) with a weighting hyperparameter λ.",
+    "Data for source and target domains is constructed using transformations from section 3.2, with source data from varied Max-SAT distributions and target data from CO-converted Max-SAT.",
+    "The framework is designed for supervised settings but can be extended to unsupervised settings where target labels are unavailable."
+  ],
+  "technical_details": {
+    "algorithms": ["Fine-tuning with domain adaptation using a discriminator to classify domain labels for source and target samples"],
+    "formulas": [
+      "Overall domain adaptation loss: ℒ_ft = ℒ_c + λℒ_d, where ℒ_c is classification loss and ℒ_d is discriminative loss",
+      "Discriminative loss: ℒ_d = expectation over source domain data of log(1 - Dis(Bip-GNN(x_S))) plus expectation over target domain data of log(1 - Dis(Bip-GNN(x_T)))"
+    ],
+    "architectures": [
+      "Pre-trained feature extraction backbones based on MLP and Bip-GNN for both source and target domains",
+      "Separate classification networks for source and target domains",
+      "Discriminator network Dis(·) to classify domain labels for each sample"
+    ],
+    "hyperparameters": {
+      "λ": "positive hyperparameter controlling the weight of discriminative loss in the overall loss"
+    },
+    "datasets": ["Source domain data generated from Max-SAT with different distributions", "Target domain data generated from Max-SAT converted from a specific CO problem"]
+  },
+  "dependencies": [
+    "Pre-training from section 3.4.1",
+    "Transformation operations for constructing clauses and bipartite graphs from section 3.2",
+    "Bip-GNN and MLP architectures from section 3.3"
+  ],
+  "reproducibility_notes": [
+    "How to construct source and target domain data using the transformation operations from section 3.2",
+    "Architecture details of the pre-trained Bip-GNN and MLP, and the discriminator network Dis(·)",
+    "Specification of the classification loss ℒ_c (not detailed in this section)",
+    "Value or tuning method for hyperparameter λ",
+    "Implementation of the domain classifier and feature extractor for computing the discriminative loss ℒ_d"
+  ]
+}

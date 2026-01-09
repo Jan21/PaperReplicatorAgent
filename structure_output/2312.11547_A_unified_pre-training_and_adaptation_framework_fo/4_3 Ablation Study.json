@@ -1,0 +1,31 @@
+```json
+{
+  "section_title": "4.3 Ablation Study",
+  "section_purpose": "To validate the effectiveness of individual components in the proposed framework by systematically removing each module and evaluating performance changes on the Max-Cut problem.",
+  "key_points": [
+    "All modules contribute positively to overall performance, with the complete framework achieving the best results.",
+    "The problem transfer step (converting CO problems to Max-SAT and bipartite graphs) is the most critical component, showing the largest performance drop when removed.",
+    "Both pre-training and domain adaptation modules improve performance, demonstrating their complementary utility.",
+    "Attention mechanisms and multi-head mechanisms in the bipartite GNN also positively impact performance, indicating their importance for feature extraction."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 3.2 (Problem Transfer via Max-SAT Problem) for understanding the problem transfer step",
+    "Section 3.3 (Learning with Bipartite Graph Attention Networks) for understanding the Bi-G, Att, and Mult-Att variants",
+    "Section 3.4 (Pre-Training and Fine-Tuning with Domain Adaptation) for understanding the pre-training and domain adaptation modules",
+    "Section 4.1 (Experimental Setup) for context on the Max-Cut problem used in the study"
+  ],
+  "reproducibility_notes": [
+    "Definition of the five ablated variants: w/o pre-T, w/o DA, w/o Bi-G, w/o Att, w/o Mult-Att.",
+    "Performance metric used (p-values reported in Figure 3).",
+    "Benchmark problem used for ablation (Max-Cut).",
+    "Need to know how performance was measured (likely solution quality/gap)."
+  ]
+}
+```

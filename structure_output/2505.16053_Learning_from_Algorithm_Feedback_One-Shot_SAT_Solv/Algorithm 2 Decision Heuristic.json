@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "Algorithm 2 Decision Heuristic",
+    "section_purpose": "To present the pseudocode for the baseline decision heuristic that selects the next variable to branch on in a SAT solver and chooses its truth assignment.",
+    "key_points": [
+        "The algorithm takes a Boolean formula as input and outputs a literal to branch on.",
+        "It selects the variable with the highest score according to a scoring function SCORE(x).",
+        "It uses a separate function PICK-SIGN to determine whether to assign the selected variable as True or False.",
+        "This represents the core logic of a typical branching heuristic in DPLL-based SAT solvers."
+    ],
+    "technical_details": {
+        "algorithms": ["Decision heuristic: PICK-LITERAL(φ) that selects variable argmax_x SCORE(x) and uses PICK-SIGN to determine polarity."],
+        "formulas": ["Line 3: x̂ ← argmax_x SCORE(x)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Algorithm 1 DPLL Solver (for context of the solver framework)", "Section 2.1 Guided Branching Heuristics (for context on how this baseline is adapted)"],
+    "reproducibility_notes": ["The core logic of the decision process: variable selection via SCORE function, and sign assignment via PICK-SIGN function."]
+}
+```

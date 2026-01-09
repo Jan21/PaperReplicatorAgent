@@ -1,0 +1,19 @@
+{
+  "section_title": "Algorithm 1 DPLL Solver",
+  "section_purpose": "To present the fundamental DPLL (Davis-Putnam-Logemann-Loveland) recursive backtracking algorithm for solving SAT problems, serving as the base framework that the paper's guided heuristics will later augment.",
+  "key_points": [
+    "The algorithm takes a Boolean formula as input and recursively searches for a satisfying assignment.",
+    "It first simplifies the formula using unit propagation and pure literal elimination.",
+    "The core of the algorithm is a branching step where it picks a literal and explores both possible truth assignments.",
+    "It returns SAT if the formula simplifies to empty (satisfied) and UNSAT if a contradiction (empty clause) is found."
+  ],
+  "technical_details": {
+    "algorithms": ["DPLL recursive backtracking algorithm with unit propagation and pure literal elimination"],
+    "formulas": ["Formula representation: φ as input and recursively updated", "Branching step: SOLVE(φ ∧ {ℓ}) ∨ SOLVE(φ ∧ {¬ℓ})"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Assumes familiarity with Boolean SAT problems and basic SAT solving concepts (likely from Section 1.1 Background)"],
+  "reproducibility_notes": ["The core DPLL algorithm logic, including the recursive function SOLVE", "The order of operations: simplification (unit propagation, pure literal elimination) then branching", "The definition of the helper functions UNIT-PROPAGATION, PURE-LITERAL-ELIMINATION, and PICK-LITERAL (the latter is the focus of the paper's guidance)"]
+}

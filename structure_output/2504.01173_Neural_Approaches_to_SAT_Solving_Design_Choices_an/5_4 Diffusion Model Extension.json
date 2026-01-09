@@ -1,0 +1,24 @@
+{
+  "section_title": "5.4 Diffusion Model Extension",
+  "section_purpose": "To describe the integration of the GNN as a function approximator within a diffusion model for SAT solving, and present experimental results on the trade-offs between message-passing iterations and diffusion steps for test-time scaling.",
+  "key_points": [
+    "The GNN can serve as a function approximator in a diffusion model, enabling scalable test-time computation by predicting ground truth solutions from noisy samples.",
+    "The diffusion process involves iterative prediction and sampling over time steps, with the number of diffusion steps (T) being a tunable parameter post-training.",
+    "Two types of iterations exist: message-passing steps (GNN_Steps) and diffusion steps, with experiments showing message-passing steps are more critical for performance metrics like accuracy and average gap.",
+    "Experimental results demonstrate performance across benchmarks (e.g., SR40, SR100) and highlight the impact of training on larger instances for better generalization.",
+    "Tables and figures provide quantitative evaluations, including decision accuracy, SAT/UNSAT instance solving rates, and iteration efficiency."
+  ],
+  "technical_details": {
+    "algorithms": ["Diffusion model adapted from Sun et al., where a GNN function approximator f_theta(x_t, t) predicts the ground truth solution x_0 from noisy sample x_t at time t, followed by sampling to progress to time t-1."],
+    "formulas": ["Function approximator f_theta(x_t, t) conditioned on sample x_t and time t predicts the ground truth assignment x_0."],
+    "architectures": ["GNN with VCG+RNN architecture trained using closest assignment supervision."],
+    "hyperparameters": {
+      "max_message_passing_iterations": 100,
+      "early_stopping": true,
+      "diffusion_steps_T": "adaptable post-training"
+    },
+    "datasets": ["SR40, SR100, SR200, SR400, 3SAT100, 3SAT200 benchmarks for training and evaluation."]
+  },
+  "dependencies": ["Section 3.4.4 (Inference Schedule for diffusion models)", "Sections 4.1, 4.2, 4.3 (Data representation, architecture variants, supervision tasks and objectives)", "Prior knowledge of GNNs and diffusion models as background."],
+  "reproducibility_notes": ["Specific GNN architecture details (VCG+RNN with closest assignment supervision).", "Training datasets (e.g., SR40 or SR100).", "Inference parameters: maximum message-passing iterations, early stopping criteria, and number of diffusion steps.", "Diffusion model setup: training the function approximator to predict ground truth solutions and the sampling procedure over time steps."]
+}

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Related Work",
+    "section_purpose": "This section provides a literature review of the two main relevant research areas: (1) Circuit Representation Learning, which focuses on methods for learning representations of circuit graphs, and (2) Circuit Satisfiability, which covers SAT solving techniques, particularly those related to hardware circuits.",
+    "key_points": [
+        "Circuit representation learning methods can be categorized into graph neural networks (GNNs), spectral methods, and self-supervised pre-training methods.",
+        "Existing work on circuit satisfiability (SAT) primarily uses conflict-driven clause learning (CDCL) solvers, often enhanced with machine learning for specific tasks like branching decisions.",
+        "A gap exists in directly applying learned circuit properties to guide CDCL solvers, which this paper aims to address by using conditional probabilities of node/signal values.",
+        "Previous SAT solving research on circuits focuses heavily on preprocessing (e.g., SAT sweeping) but lacks effective inprocessing guidance during the main search.",
+        "The paper distinguishes its approach by using graph-based learning to predict signal probabilities and directly integrating these into CDCL decision heuristics."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Introduction (Section 1) for overall problem context and motivation"],
+    "reproducibility_notes": []
+}
+```

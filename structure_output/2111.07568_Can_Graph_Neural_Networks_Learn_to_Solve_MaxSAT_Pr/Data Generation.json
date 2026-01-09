@@ -1,0 +1,41 @@
+```json
+{
+  "section_title": "Data Generation",
+  "section_purpose": "This section describes the methodology for creating the labeled datasets used to train and evaluate the GNN models, including the generator source, instance parameters, dataset sizes, and the solver used for labeling.",
+  "key_points": [
+    "Datasets are constructed using a standard generator from MaxSAT competition benchmarks to ensure both ease of solving for labeling and ability to generate larger instances for generalization testing.",
+    "Multiple datasets with different distributions (varying clause length k, number of variables n, and number of clauses m) are generated to better observe GNN performance.",
+    "Dataset sizes vary: three primary datasets have 20K instances split 8:1:1 for training/validation/testing, while two additional larger/difficult datasets have only 2K instances for testing.",
+    "The MaxHS solver is used to find optimal solutions (labels) for all instances, and the average solving time per dataset is reported to indicate difficulty.",
+    "The parameters (k, n, m) and average solving times for each dataset are detailed in Table 1."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Use of generator proposed by Mitchell, Selman, and Levesque (1992) for generating random MaxSAT instances.",
+      "Use of MaxHS solver (Bacchus 2020) to compute optimal solutions/labels."
+    ],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": [
+      "R2 (60, 600): k=2, n=60, m=600, Avg Time=4.01s, 20K instances split 8:1:1",
+      "R2 (60, 800): k=2, n=60, m=800, Avg Time=18.21s, 20K instances split 8:1:1",
+      "R2 (80, 800): k=2, n=80, m=800, Avg Time=105.19s, 2K test instances only",
+      "R3 (30, 300): k=3, n=30, m=300, Avg Time=1.92s, 20K instances split 8:1:1",
+      "R3 (50, 500): k=3, n=50, m=500, Avg Time=216.26s, 2K test instances only"
+    ]
+  },
+  "dependencies": [
+    "Basic understanding of MaxSAT problem structure (from Preliminaries/SAT and MaxSAT sections)",
+    "Need for labeled data for data-driven GNN approaches (implied from Introduction/GNN Models sections)"
+  ],
+  "reproducibility_notes": [
+    "Generator source: Mitchell, Selman, and Levesque (1992) random CNF generator.",
+    "Exact parameters (k, n, m) for each dataset as in Table 1.",
+    "Dataset sizes: 20K instances for training/validation sets, 2K for certain test sets.",
+    "Train/validation/test split ratio: 8:1:1 for the 20K-instance datasets.",
+    "Labeling solver: MaxHS (Bacchus 2020) used to compute optimal solutions.",
+    "Reported average solving times for each dataset (to gauge difficulty and scalability)."
+  ]
+}
+```

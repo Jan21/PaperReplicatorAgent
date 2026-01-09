@@ -1,0 +1,20 @@
+{
+  "section_title": "B.4 Supervised UNSAT-Core and Backbone Prediction",
+  "section_purpose": "To describe the setup, training, and evaluation of supervised GNN models used as baselines for UNSAT-core and backbone prediction tasks, which are compared against the RLAF-based policies in the main experiments.",
+  "key_points": [
+    "The supervised GNN models for UNSAT-core and backbone prediction have the same architecture and size as the GNNs used in the RLAF-based policies.",
+    "The hyperparameters for training these supervised models are specified in a separate table (Table 4).",
+    "The section provides detailed descriptions of the training and evaluation processes for these models."
+  ],
+  "technical_details": {
+    "algorithms": ["Supervised learning for UNSAT-core prediction", "Supervised learning for backbone prediction"],
+    "formulas": [],
+    "architectures": ["GNN models (identical in architecture and size to the RLAF policy models)"],
+    "hyperparameters": {
+      "reference": "Table 4 (details not provided in the snippet)"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 3.2 (Comparison to Supervised Approaches)", "Appendix A.1 and A.2 (Graph Representation and Architecture, Message-Passing Neural Network)", "Appendix B.1 (Data)", "Appendix B.2 (Hyperparameters)"],
+  "reproducibility_notes": ["Architecture and size of the GNN models must match those used in RLAF policies.", "Hyperparameters from Table 4 are required for training.", "Detailed training and evaluation procedure described in the full section."]
+}

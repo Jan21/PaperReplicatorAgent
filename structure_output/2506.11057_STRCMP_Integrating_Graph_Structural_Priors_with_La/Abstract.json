@@ -1,0 +1,35 @@
+{
+  "section_title": "Abstract",
+  "section_purpose": "To provide a concise overview of the paper, including the problem statement, proposed solution, methodology, and main findings.",
+  "key_points": [
+    "Combinatorial optimization (CO) problems are NP-hard and present significant computational challenges.",
+    "Existing large language model (LLM) based approaches for CO often neglect structural priors, leading to suboptimality and inefficiency.",
+    "STRCMP is a novel structure-aware LLM-based framework that integrates graph structural priors to improve solution quality and solving efficiency.",
+    "The framework combines a graph neural network (GNN) for structural embeddings with an LLM for generating solver-specific codes, using evolutionary refinement for optimization.",
+    "Extensive evaluations on Mixed Integer Linear Programming and Boolean Satisfiability problems demonstrate STRCMP's superiority over baseline methods in both optimality and efficiency."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "structure-aware LLM-based algorithm discovery framework",
+      "graph neural network (GNN) for extracting structural embeddings",
+      "evolutionary refinement process for optimizing generated algorithms"
+    ],
+    "formulas": [],
+    "architectures": [
+      "composite architecture with GNN for embeddings and LLM for code generation"
+    ],
+    "hyperparameters": {},
+    "datasets": [
+      "Mixed Integer Linear Programming (MILP) and Boolean Satisfiability (SAT) problems using nine benchmark datasets"
+    ]
+  },
+  "dependencies": [
+    "general knowledge of combinatorial optimization problems",
+    "familiarity with large language models (LLMs) and graph neural networks (GNNs)"
+  ],
+  "reproducibility_notes": [
+    "framework design integrating GNN and LLM for structure-aware code generation",
+    "use of evolutionary refinement process for algorithm optimization",
+    "specification of datasets (MILP and SAT domains with nine benchmarks)"
+  ]
+}

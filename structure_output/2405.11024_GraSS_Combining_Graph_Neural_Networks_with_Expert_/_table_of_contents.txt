@@ -1,0 +1,27 @@
+GraSS: Combining Graph Neural Networks with Expert Knowledge for SAT Solver Selection
+  ABSTRACT
+  CCS CONCEPTS
+  KEYWORDS
+  ACM Reference Format:
+  1 INTRODUCTION
+  2 RELATED WORK
+    2.1 SAT Solver Selection
+    2.2 Algorithm Selection
+    2.3 Graph Neural Networks in SAT Solving
+  3 APPROACH
+    3.1 Problem
+    3.2 Representation and features
+    3.3 Model
+    3.4 Training
+    3.5 Inference
+  4 EXPERIMENTS
+    4.1 Base solvers
+    4.2 Datasets
+    4.3 Baselines
+    4.4 Metrics
+    4.5 Main Results
+    4.6 Ablation Study
+  5 LIMITATIONS
+  6 CONCLUSION
+  REFERENCES
+  A NODE FEATURES

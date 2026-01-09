@@ -1,0 +1,21 @@
+HyperSAT: Unsupervised Hypergraph Neural Networks for Weighted MaxSAT Problems
+  Abstract
+  1. Introduction
+  2. Preliminaries
+    2.1. Weighted MaxSAT
+    2.2. Hypergraph Neural Networks
+  3. HyperSAT
+    3.1. Hypergraph Modeling
+    3.2. Neural Network Architecture
+      3.2.1. HYPERGRAPH CONVOLUTIONAL NETWORKS
+      3.2.2. CROSS-ATTENTION MECHANISM
+      3.2.3. LOSS FUNCTION
+    3.3. Probabilistic Mapping
+  4. Experiment
+    4.1. Experimental Settings
+    4.2. Analytical Experiment
+    4.3. Result
+    4.4. Ablation Study
+  5. Conclusion
+  Impact Statement
+  References

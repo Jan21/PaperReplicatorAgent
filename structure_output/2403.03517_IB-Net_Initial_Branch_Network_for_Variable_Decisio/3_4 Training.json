@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "3.4 Training",
+    "section_purpose": "This section describes the loss function used to train the neural network for UNSAT-core prediction, specifically explaining why Focal loss was chosen over standard Cross-Entropy loss and providing the mathematical formulation.",
+    "key_points": [
+        "The UNSAT-core prediction task is formulated as a classification problem.",
+        "Focal loss is used instead of standard Cross-Entropy due to class imbalance issues in the dataset (large UNSAT-cores in LEC UNSAT problems).",
+        "Focal loss introduces parameters α and γ to address class imbalance by reducing the loss contribution from well-classified examples.",
+        "The loss function is computed per variable across all n variables in the target CNF formula."
+    ],
+    "technical_details": {
+        "algorithms": ["Focal loss training for imbalanced classification"],
+        "formulas": ["Focal loss formula: FL = Σ_i^n [y_i(-α(1-p_i)^γ log(p_i)) + (1-y_i)(-(1-α)p_i^γ log(1-p_i))], where p_i is prediction probability, y_i is ground truth, n is number of variables, α and γ are balancing parameters"],
+        "architectures": [],
+        "hyperparameters": {
+            "loss_function": "Focal loss",
+            "parameters": "α (class balancing parameter), γ (focusing parameter)"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 3.3 (Neural Network Model) for the model architecture that produces predictions p_i", "Section 4.1 (Datasets) for understanding the LEC UNSAT problem characteristics that create class imbalance"],
+    "reproducibility_notes": ["Use Focal loss instead of Cross-Entropy loss", "Need to set appropriate values for α and γ parameters (though specific values are not provided in this section)", "Loss is computed across all variables in the CNF (n variables)"]
+}
+```

@@ -1,0 +1,37 @@
+```json
+{
+    "section_title": "6.2 Comparison with the LS Heuristic",
+    "section_purpose": "To evaluate and compare the behaviors and performance of GNN-based SAT solvers against Local Search (LS) heuristics, specifically by examining them under random initialization conditions and analyzing their predicted assignment evolution.",
+    "key_points": [
+        "Using random initialization (emulating LS solvers) has limited impact on GNN performance, indicating GNNs don't learn fixed formula representations but exploit graph structure.",
+        "Analysis of predicted assignments shows GNNs initially flip many variables to reduce unsatisfiable clauses, then converge to minimal changes, resembling the greedy strategy of LS solvers like GSAT.",
+        "Unlike GSAT (which flips one variable with random tie-breaking), GNNs modify multiple variables simultaneously and can get stuck on unsatisfying assignments.",
+        "NeuroSAT*, even when trained only for satisfiability prediction, shows similar assignment-search behavior, implying GNNs implicitly learn to search for satisfying assignments during training.",
+        "The section connects to further experiments in Appendix D.2 comparing GNNs against state-of-the-art CDCL and LS solvers to evaluate their practical viability."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Local Search (LS) SAT solvers procedure: random initialization followed by iterative variable flipping guided by heuristics.",
+            "2-clustering decoding algorithm: used to extract predicted assignments from literal embeddings in NeuroSAT for satisfiability prediction.",
+            "Multiple-prediction decoding: used for evaluating satisfying assignment prediction with NeuroSAT and GGNN."
+        ],
+        "formulas": [],
+        "architectures": ["NeuroSAT", "GGNN"],
+        "hyperparameters": {},
+        "datasets": ["Easy Datasets (SR, 3-SAT)", "Medium Datasets (SR, 3-SAT)"]
+    },
+    "dependencies": [
+        "Section 4 (G4SATBench datasets and GNN baselines)",
+        "Section 5 (Tasks T1: Satisfiability Prediction, T2: Satisfying Assignment Prediction)",
+        "Understanding of LS heuristics and GSAT (Selman et al., 1992)",
+        "Appendix D.2 (for extended comparisons with state-of-the-art solvers)"
+    ],
+    "reproducibility_notes": [
+        "Use random initialization for node embeddings in both training and testing to emulate LS solving.",
+        "For T1 (satisfiability prediction), use the 2-clustering decoding algorithm on literal embeddings at each message passing iteration.",
+        "For T2 (satisfying assignment prediction), use multiple-prediction decoding.",
+        "Evaluate predictions across iterations (T) on key metrics: number of distinct assignments, number of flipped variables between iterations, and number of unsatisfiable clauses.",
+        "Compare results on Easy and Medium splits of SR and 3-SAT datasets as per Table 6."
+    ]
+}
+```

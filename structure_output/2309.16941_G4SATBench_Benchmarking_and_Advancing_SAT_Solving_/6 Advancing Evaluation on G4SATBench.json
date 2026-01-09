@@ -1,0 +1,34 @@
+```json
+{
+  "section_title": "6 Advancing Evaluation on G4SATBench",
+  "section_purpose": "To conduct comparative analyses between GNN-based SAT solvers and traditional SAT solving heuristics (CDCL and LS), focusing on understanding how GNNs tackle SAT problems through direct solving tasks.",
+  "key_points": [
+    "The analysis compares GNN solvers against two key SAT solving heuristics: Conflict-Driven Clause Learning (CDCL) and Local Search (LS).",
+    "Focus is narrowed to two specific tasks: satisfiability prediction (T1) and satisfying assignment prediction (T2) using the UNS₂ training loss.",
+    "Two specific GNN models are employed: NeuroSAT operating on LCG* graphs and GGNN operating on VCG* graphs.",
+    "Experiments are conducted on two SAT datasets: SR and 3-SAT.",
+    "Detailed experimental settings are deferred to Appendix D.1."
+  ],
+  "technical_details": {
+    "algorithms": ["Conflict-Driven Clause Learning (CDCL) heuristic", "Local Search (LS) heuristic", "GNN-based SAT solving (NeuroSAT, GGNN)"],
+    "formulas": ["Training loss function: UNS₂ (specific formulation not described in this section)"],
+    "architectures": ["NeuroSAT model architecture applied to LCG* (Literal-Clause Graph) representation", "GGNN (Gated Graph Neural Network) model architecture applied to VCG* (Variable-Clause Graph) representation"],
+    "hyperparameters": {},
+    "datasets": ["SR dataset", "3-SAT dataset"]
+  },
+  "dependencies": [
+    "Understanding of GNN models NeuroSAT and GGNN from Section 4.2/B",
+    "Knowledge of SAT problem representation graphs LCG* and VCG* from Section 3/4",
+    "Definition of tasks T1 (satisfiability prediction) and T2 (satisfying assignment prediction) from Section 4.3",
+    "Understanding of UNS₂ training loss function from previous sections",
+    "Familiarity with CDCL and LS heuristics from related work"
+  ],
+  "reproducibility_notes": [
+    "Need detailed experimental settings from Appendix D.1",
+    "Specific implementation of NeuroSAT on LCG* graphs",
+    "Specific implementation of GGNN on VCG* graphs",
+    "Exact formulation of UNS₂ training loss",
+    "Preprocessing steps for SR and 3-SAT datasets"
+  ]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 Preliminaries",
+    "section_purpose": "This section establishes the foundational concepts and terminology necessary for understanding the rest of the paper, specifically defining the SAT problem and the standard graph representations of CNF formulas used by GNNs.",
+    "key_points": [
+        "Defines the Boolean Satisfiability (SAT) problem in propositional logic, focusing on formulas in Conjunctive Normal Form (CNF).",
+        "Explains key SAT concepts: satisfiable vs. unsatisfiable formulas, satisfying assignments, and the unsat-core (a minimal unsatisfiable subset of clauses and its variables).",
+        "Introduces four traditional graph representations for CNF formulas used as input for Graph Neural Networks: Literal-Clause Graph (LCG), Variable-Clause Graph (VCG), Literal-Incidence Graph (LIG), and Variable-Incidence Graph (VIG).",
+        "Describes LCG and VCG as bipartite graphs connecting literal/variable nodes to clause nodes.",
+        "Describes LIG and VIG as graphs containing only literal or variable nodes, with edges based on co-occurrence within clauses."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of propositional logic and graph theory."],
+    "reproducibility_notes": ["The specific graph representations (LCG, VCG, LIG, VIG) must be constructed from CNF formulas as defined to replicate the GNN input structures."]
+}
+```

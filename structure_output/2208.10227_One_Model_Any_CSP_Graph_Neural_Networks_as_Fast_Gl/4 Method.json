@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "4 Method",
+    "section_purpose": "To introduce the core methodological representation of Constraint Satisfaction Problem (CSP) instances as a labeled tripartite graph, which serves as the input to the proposed Graph Neural Network model.",
+    "key_points": [
+        "The paper associates a CSP instance with a tripartite graph (variables, values, constraints) using variable edges and constraint edges.",
+        "The key innovation is the introduction of edges directly from constraints to values (not to variables), allowing constraint relations to be encoded via edge labeling.",
+        "For a given assignment α, a vertex labeling L_V and an edge labeling L_E are defined, encoding the current assignment and the effect of changing a single variable on each constraint.",
+        "The labeled graph G(F, α), called the constraint value graph, is the central data structure that will be processed by the GNN for global search."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["A formula defining edge label L_E(C, ν): L_E(C, ν) = 1 if (α(X_1), ..., α(X_{i-1}), d, α(X_{i+1}), ..., α(X_k)) ∈ R^C, and 0 otherwise."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of CSP instance structure from Section 3 Preliminaries (variables X, domains D, constraints C, relations R^C).", "Understanding of the set of values V from Section 3."],
+    "reproducibility_notes": ["Precise definition of the constraint value graph construction: vertices = X ∪ V ∪ C, edges = (X,ν) for ν in V_X and (C,ν) for C and ν in V_X where X is in scope(C).", "Definition of the vertex labeling function L_V(ν) = 1 if ν ∈ α (i.e., if value ν is chosen for its variable under assignment α).", "Definition of the edge labeling function L_E, which requires evaluating the constraint relation R^C for each (C, ν) pair given the current partial assignment α."]
+}
+```

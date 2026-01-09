@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Background",
+    "section_purpose": "This section provides foundational knowledge and context for the paper by explaining the Boolean Satisfiability Problem (SAT) and reviewing how Graph Neural Networks (GNNs) have been applied to solve SAT and Circuit-SAT problems.",
+    "key_points": [
+        "The Boolean Satisfiability Problem (SAT) is defined as determining if there exists an assignment of Boolean values to variables that makes a given Boolean formula true.",
+        "A SAT problem instance can be represented as a Conjunctive Normal Form (CNF) formula, which is a conjunction of clauses, where each clause is a disjunction of literals.",
+        "Graph Neural Networks (GNNs) can be applied to SAT solving by modeling the formula as a bipartite graph, where variable nodes and clause nodes are connected based on the literals in the clauses.",
+        "Message-passing on this bipartite graph allows variable nodes and clause nodes to update their embeddings based on their neighbors, enabling the GNN to learn correlations between variables and clauses.",
+        "Circuit-SAT problems extend this graph representation by converting circuits into And-Inverter Graphs (AIGs), which are then encoded as bipartite graphs using a similar GNN approach, but with additional node types for gates like AND."
+    ],
+    "technical_details": {
+        "algorithms": ["SAT solving using GNNs via bipartite graph message passing", "Circuit-SAT solving via conversion to And-Inverter Graph (AIG) and GNN processing"],
+        "formulas": ["CNF formula definition: conjunction of clauses (e.g., (x₁ ∨ ¬x₂) ∧ (x₂ ∨ x₃ ∨ ¬x₁))"],
+        "architectures": ["Bipartite GNN architecture with variable nodes and clause nodes", "And-Inverter Graph (AIG) representation for circuits"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of the SAT problem and GNN concepts from the Introduction"],
+    "reproducibility_notes": ["The core GNN-based SAT solving method involves constructing a bipartite graph from the CNF formula where variable and clause nodes exchange messages. For Circuit-SAT, the process requires converting circuits to AIGs before bipartite graph construction."]
+}
+```

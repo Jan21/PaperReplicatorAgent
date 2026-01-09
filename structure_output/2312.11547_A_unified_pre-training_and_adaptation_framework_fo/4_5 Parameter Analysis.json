@@ -1,0 +1,36 @@
+```json
+{
+  "section_title": "4.5 Parameter Analysis",
+  "section_purpose": "This section analyzes the sensitivity of the model's performance to key hyperparameters, identifying optimal configurations for the proposed framework.",
+  "key_points": [
+    "The model achieves stable performance when feature dimension d ≥ 16, with optimal performance at d=128.",
+    "The number of attention heads h has minimal impact on performance, with optimal performance at k=10 (note: likely a typo, should be h=10).",
+    "The optimal loss weight λ is 0.2.",
+    "Pre-training yields better results, especially when the number of layers L exceeds three."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "feature_dimension_d": "Optimal value: 128, stable when ≥16",
+      "attention_heads_h": "Optimal value: 10",
+      "loss_weight_lambda": "Optimal value: 0.2",
+      "number_of_layers_L": "Optimal: >3 layers"
+    },
+    "datasets": ["Max-CUT (used as testbed for parameter analysis)"]
+  },
+  "dependencies": [
+    "Section 3.3 Learning with Bipartite Graph Attention Networks (for architecture parameters like d, h, L)",
+    "Section 3.4 Pre-Training and Fine-Tuning (for λ and pre-training context)",
+    "Section 4.1 Experimental Setup (for baseline experimental context)"
+  ],
+  "reproducibility_notes": [
+    "Use feature dimension d=128 for optimal performance.",
+    "Set number of attention heads h=10.",
+    "Set loss weight λ=0.2.",
+    "Use more than three layers (L>3) to benefit from pre-training.",
+    "Refer to Figure 5 for detailed performance trends across parameter values."
+  ]
+}
+```

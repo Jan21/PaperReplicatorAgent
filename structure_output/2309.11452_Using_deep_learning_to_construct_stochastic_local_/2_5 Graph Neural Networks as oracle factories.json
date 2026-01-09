@@ -1,0 +1,20 @@
+{
+  "section_title": "2.5 Graph Neural Networks as oracle factories",
+  "section_purpose": "To describe how Graph Neural Networks, specifically Interaction Networks, are used as parametrized oracle factories in the proposed method, detailing their architecture, update functions, and integration into the overall framework.",
+  "key_points": [
+    "GNNs are suitable ML models for oracle factories as they can return both the factory and the parametrized functional required for evaluating the LLL loss.",
+    "The Interaction Network (IN) is used, which operates on graphs with node and edge features and updates them via a message passing algorithm.",
+    "Update functions for nodes (η^N) and edges (η^E) are defined as neural networks composed of layer normalization, ReLU, and fully connected layers.",
+    "A full IN consists of multiple consecutive IN layers followed by a final fully connected layer to ensure one-dimensional outputs across nodes and edges.",
+    "The edge aggregation function ρ^E is summation over edges for each node."
+  ],
+  "technical_details": {
+    "algorithms": ["Message passing algorithm for a single Interaction Network layer (Algorithm 3), which updates edge features based on source and receiver nodes, then aggregates updated edges to update node features."],
+    "formulas": ["Equation (14): η = LN ∘ RL ∘ FL_{d_u} ∘ RL ∘ FL_{d_{u-1}} ∘ ... ∘ FL_{d_1}, where LN is layer normalization, RL is ReLU, and FL_d are fully connected layers with dimensions d_t for each layer u.", "Equation (15): IN_θ(G) = FL_1 ∘ IN_{θ_l} ∘ IN_{θ_{l-1}} ∘ ... ∘ IN_{θ_1}(G), where θ are parameters for each IN layer and the final FL layer."],
+    "architectures": ["Interaction Network (IN) with node update function η^N, edge update function η^E (both as per Equation (14)), and edge aggregation function ρ^E (summation). The IN uses multiple layers followed by a final fully connected layer to output one-dimensional features."],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2.4 (Learning oracle factories with the LLL loss) for the loss function used in training", "Section 2.2 (Oracle-based SLS) for the concept of oracle factories", "Subsection 2.5.1 (Representing SAT instances as graphs) for graph representation details", "Subsection 2.5.2 (Defining the GNN's output) for how the GNN output maps to oracles"],
+  "reproducibility_notes": ["Specification of update functions: neural network architecture with layer dimensions (d_t) and number of layers u", "Number of IN layers l in the full network", "Graph representation of SAT instances (from 2.5.1) including node and edge feature dimensions", "Definition of GNN output to construct oracle factories (from 2.5.2)"]
+}

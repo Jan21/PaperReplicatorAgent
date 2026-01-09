@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "S.2 The NeuroSAT Architecture",
+    "section_purpose": "This section provides a detailed description of the original NeuroSAT architecture for SAT formula processing and then specifies the simplified modifications made to this architecture for use in the paper's experiments.",
+    "key_points": [
+        "The original NeuroSAT architecture uses iterative message-passing between literal and clause embeddings via LSTMs and MLPs over a bipartite graph representation of the SAT formula.",
+        "The core update rules involve a two-step process: first updating clause embeddings based on messages from their constituent literals, then updating literal embeddings based on aggregated clause messages and the state of their complementary literal (flipped polarity).",
+        "After T iterations, a voting MLP produces a 2n-dimensional vector (one logit per literal), which is aggregated to a single logit for the final SAT/UNSAT prediction.",
+        "The paper uses a significantly simplified version of NeuroSAT, removing message-processing MLPs, LayerNorm from LSTMs, reducing hidden dimensions, and replacing the voting MLP with a single linear layer.",
+        "The adjacency matrix M encodes the bipartite graph structure, connecting literals to the clauses they belong to, and the Flip operator handles interactions between complementary literals of the same variable."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Iterative message-passing algorithm between clauses and literals for T steps",
+            "Two-phase update: clauses update first (Eq. 1), then literals update (Eq. 2) using LSTM-based architectures"
+        ],
+        "formulas": [
+            "Update rule for clause embeddings: (C^(t+1), C_h^(t+1)) = C_u([C_h^(t), M^T L_msg(L^(t))])",
+            "Update rule for literal embeddings: (L^(t+1), L_h^(t+1)) = L_u([L_h^(t), Flip(L^(t)), M C_msg(C^(t+1))])",
+            "Voting rule: L*^T = L_vote(L^(T)) ∈ ℝ^(2n)"
+        ],
+        "architectures": [
+            "Original Architecture: Uses Component Update LSTMs (C_u, L_u) with LayerNorm, Message Processing MLPs (L_msg, C_msg), and a Voting MLP (L_vote).",
+            "Simplified Architecture: Removes L_msg and C_msg MLPs, replaces L_vote with a single linear layer, removes LayerNorm from LSTMs, and reduces hidden dimension from 128 to 16."
+        ],
+        "hyperparameters": {
+            "T": "Number of message-passing iterations (unspecified, carried from original NeuroSAT)",
+            "d (hidden dimension)": "128 in original, 16 in simplified version",
+            "LSTM type": "LayerNorm LSTMs in original, standard LSTMs in simplified"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Background on GNNs for Boolean Satisfiability (Section 2.4)",
+        "Understanding of bipartite graph representation of SAT formulas (implied from background)",
+        "Familiarity with NeuroSAT original paper [29] for context"
+    ],
+    "reproducibility_notes": [
+        "The simplified architecture specifications: removing two message MLPs (L_msg, C_msg), removing LayerNorm from LSTMs, reducing hidden dimension to 16, and using a single linear layer instead of a voting MLP.",
+        "The exact update equations (1-3) and the structure of the adjacency matrix M.",
+        "The role of the Flip operator to swap rows for complementary literals during the literal update step.",
+        "The method of aggregating the 2n-dimensional output vector to a single logit (averaging) and applying sigmoid cross-entropy loss."
+    ]
+}
+```

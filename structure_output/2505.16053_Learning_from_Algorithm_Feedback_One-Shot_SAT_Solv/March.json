@@ -1,0 +1,47 @@
+{
+  "section_title": "March",
+  "section_purpose": "To describe the March SAT solver, its look-ahead branching heuristic, and the modifications made to integrate it with variable weights and polarities for guided solving, along with a detailed training algorithm for policy optimization.",
+  "key_points": [
+    "March is a DPLL-based solver known for excelling on random SAT instances, utilizing a look-ahead branching heuristic that estimates the impact of variable selection on new binary clauses.",
+    "To reduce computational cost, March employs a pre-selection step with a cheaper scoring function SCORE-PRESELECT, selecting 10% of variables as candidates before applying the full look-ahead score.",
+    "In the modified solver, variable weights w are applied to both pre-selection scores (as w(x) * SCORE-PRESELECT(x)) and actual look-ahead scores, and polarities p determine the sign of branching literals.",
+    "The section includes a pseudocode algorithm for policy optimization using GRPO iterations, involving sampling, cost computation, advantage normalization, and PPO with KL penalty.",
+    "Training involves iterating over formulas, sampling weight assignments, computing rewards based on costs, and optimizing model parameters with clipped surrogate objectives and KL regularization."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "March's branching heuristic with look-ahead scoring (SCORE) and pre-selection (SCORE-PRESELECT).",
+      "Policy optimization algorithm with GRPO iterations, sampling from policy π_θ, cost computation, advantage estimation, and PPO loss minimization with KL penalty."
+    ],
+    "formulas": [
+      "SCORE(X) quantifies the number of new binary clauses if variable x is chosen for branching.",
+      "SCORE-PRESELECT(x) approximates the look-ahead score more cheaply.",
+      "Weighted pre-selection score: w(x) * SCORE-PRESELECT(x).",
+      "Advantage normalization: Â_{i,j} = (R(φ_i, W_{i,j}) - mean(R_i)) / std(R_i), where R is reward (negative cost).",
+      "Probability ratio: r_{i,j}(θ) = π_θ(W_{i,j} | φ_i) / π_{θ_{k-1}}(W_{i,j} | φ_i).",
+      "PPO loss: L_PPO(θ | φ_i) = (1/M) Σ_j min(r_{i,j}(θ)Â_{i,j}, clip(r_{i,j}(θ), 1-ε, 1+ε)Â_{i,j}).",
+      "Total loss: L(θ | φ_i) = L_PPO(θ | φ_i) - β * KL(π_θ(φ_i), π_{θ_{k-1}}(φ_i))."
+    ],
+    "architectures": [],
+    "hyperparameters": {
+      "pre_selection_ratio": "10%",
+      "GRPO_iterations": "K",
+      "samples_per_instance": "M",
+      "optimizer_steps_per_iteration": "S",
+      "clip_ratio": "ε ∈ (0,1)",
+      "KL_penalty_weight": "β ≥ 0",
+      "learning_rate": "η > 0"
+    },
+    "datasets": ["Training formulas F = {φ₁, ..., φ_N}"]
+  },
+  "dependencies": [
+    "Understanding of DPLL-based SAT solvers and look-ahead branching heuristics (e.g., from sections 1.1 Background or 2.1 Guided Branching Heuristics).",
+    "Familiarity with policy optimization and reinforcement learning concepts, particularly PPO and KL divergence (referenced in section 2.4 Policy Optimization).",
+    "Knowledge of graph neural networks or guidance policies as context for variable weights w and polarities p (from sections 2.2 and 2.3)."
+  ],
+  "reproducibility_notes": [
+    "Modifications to March: apply variable weights w to SCORE-PRESELECT and look-ahead scores, use polarities p for branching sign, and maintain a fixed 10% pre-selection ratio.",
+    "Training setup: specify hyperparameters K, M, S, ε, β, η, and initialize random weights θ₀ as per the algorithm.",
+    "Input data: require a set of training formulas F, and define a cost function for reward computation."
+  ]
+}

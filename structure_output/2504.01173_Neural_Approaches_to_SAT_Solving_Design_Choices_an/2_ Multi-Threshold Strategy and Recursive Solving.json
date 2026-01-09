@@ -1,0 +1,43 @@
+```json
+{
+    "section_title": "2. Multi-Threshold Strategy and Recursive Solving",
+    "section_purpose": "This section describes a multi-threshold strategy for partial assignment extraction during recursive solving, designed to balance between aggressive problem simplification and maintaining reliability, and it presents empirical results evaluating hyperparameters like diffusion and GNN steps.",
+    "key_points": [
+        "A multi-threshold list is used to balance between selecting many assignments for simplification (low threshold) and avoiding unreliable assignments that cause contradictions (higher thresholds).",
+        "The recursive solving process uses unit propagation to update clauses after partial assignment extraction, with actions based on the outcome (success, conflict, or incomplete).",
+        "Empirical results show that performance (average gap and accuracy) plateaus beyond certain hyperparameter values: diffusion steps larger than 8 and GNN steps larger than 50 no longer significantly improve performance on benchmark SR100.",
+        "Integrating unit propagation with the multi-threshold strategy improves model accuracy by about 10% across various problem settings.",
+        "For harder problems, the computational cost (reflected in recursive function calls) of the multi-threshold strategy is lower because unit propagation is more likely to encounter conflicts, reducing recursive branching.",
+        "The section includes specific performance tables showing the impact of varying GNN steps and diffusion steps on average gap and accuracy."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Multi-threshold strategy for partial assignment extraction",
+            "Recursive solving algorithm interleaving diffusion steps, partial assignment extraction, and unit propagation"
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "multithreshold_list": "[0.6, 0.75, 0.9]",
+            "GNN_steps": "25 (for specific test)",
+            "diffusion_steps": "10 (for specific test)",
+            "preset_maximum_depth": "implied but not specified numerically"
+        },
+        "datasets": [
+            "SR100 benchmark"
+        ]
+    },
+    "dependencies": [
+        "Knowledge of partial assignment extraction (from previous section A.3, '1. Partial Assignment Extraction and Local Unit Propagation')",
+        "Understanding of diffusion steps and GNN steps from model architecture (Sections 4.2 and 5.4)",
+        "Concept of unit propagation for clause updating and conflict detection (Section 3.1.1 or A.3)"
+    ],
+    "reproducibility_notes": [
+        "The multi-threshold list values used in experiments: [0.6, 0.75, 0.9].",
+        "Fixed GNN steps (25) and diffusion steps (10) for the unit propagation integration test.",
+        "Observation that performance plateaus after 8 diffusion steps and 50 GNN steps, which informs efficient hyperparameter selection.",
+        "Details on the recursive process logic, including conditions for raising threshold, moving to next recursive level, and handling success/conflict via unit propagation.",
+        "Benchmark dataset: SR100."
+    ]
+}
+```

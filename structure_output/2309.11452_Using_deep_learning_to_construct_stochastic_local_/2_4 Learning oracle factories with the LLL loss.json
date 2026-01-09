@@ -1,0 +1,50 @@
+```json
+{
+    "section_title": "2.4 Learning oracle factories with the LLL loss",
+    "section_purpose": "To introduce the concept of oracle factories and describe a novel loss function (LLL loss) for training parameterized oracle factories that produce oracles tailored to classes of SAT instances.",
+    "key_points": [
+        "Introduces the concept of oracle factories, which map a given SAT instance φ to an oracle for that instance, to handle distributions of instances rather than single instances.",
+        "Formulates the goal of learning oracle factories as maximizing the probability that an SLS solver S returns a solution when instances are sampled from a distribution P.",
+        "Proposes a novel Lovász Local Lemma (LLL)-inspired loss function (LLL loss) based on theoretical performance guarantees, which penalizes large ε values from the propositions in section 2.3.",
+        "Introduces a cross-entropy loss term (Gibbs loss) against a thermal distribution to prevent overfitting on solved instances.",
+        "Defines the total loss as a weighted sum of the LLL loss and Gibbs loss, with the overall objective to minimize the expected loss over the instance distribution."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Variational optimization of parametrized oracle factory F_θ to maximize solution probability for SLS solver S on instance distribution P."
+        ],
+        "formulas": [
+            "Goal: argmax_F Prob_{φ∼P, x∼S(φ,F(φ))}(x ∈ Π(φ)) (Eq. 8)",
+            "LLL loss: L_LLL,z(θ, φ) = ‖ (max(0, ε_{F_θ(φ), μ_θ[φ]}(j)))_{j∈[m]} ‖_z (Eq. 9), where ε is defined via propositions in section 2.3, ‖·‖_z is p-norm",
+            "Thermal distribution: γ_{β,φ}(x) = e^{-βφ(x)} / Z_β(φ), Z_β(φ) = Σ_{x∈I_n} e^{-β φ(x)} (Eq. 10)",
+            "Gibbs loss: L_Gibbs(θ, φ) = - E_{γ_{β,φ}} log(P_{F_θ(φ)}) (Eq. 11)",
+            "Total loss: L(θ, φ) = γ_1 L_Gibbs(θ, φ) + γ_2 L_LLL,z(θ, φ) (Eq. 12), with hyperparameters γ_1, γ_2 ≥ 0",
+            "Overall objective: argmin_{θ∈Θ} E_{φ∼P} L(θ, φ) (Eq. 13)"
+        ],
+        "architectures": [
+            "Parametrized oracle factory F_θ (architecture not yet specified; to be elaborated in section 2.5)",
+            "Additional parametrized functional μ_θ[φ] mapping instance φ to a function from [m] to reals"
+        ],
+        "hyperparameters": {
+            "β": "Inverse temperature > 0 for thermal distribution",
+            "γ_1, γ_2": "Hyperparameters ≥ 0 weighting the Gibbs and LLL loss terms",
+            "z": "Parameter for p-norm in LLL loss"
+        },
+        "datasets": [
+            "Instance distribution P over space of possible instances Φ"
+        ]
+    },
+    "dependencies": [
+        "Section 2.3 (Performance guarantees for the MT algorithm): The LLL loss uses ε values derived from propositions in that section.",
+        "Section 2.2 (Oracle-based SLS): Builds on the definition of oracles and oracle-based solvers.",
+        "Section 2.1 (SAT): Assumes understanding of SAT instances and solution sets."
+    ],
+    "reproducibility_notes": [
+        "Choice of norm parameter z (p-norm) for LLL loss",
+        "Values of hyperparameters γ_1, γ_2 weighting loss components",
+        "Inverse temperature β for Gibbs distribution",
+        "Method for evaluating the expectation over instance distribution P (hinted to be covered in technical appendix section 1)",
+        "Implementation details for the parametrized functionals F_θ and μ_θ[φ]"
+    ]
+}
+```

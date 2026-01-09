@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "5.2 Qualitative Results",
+    "section_purpose": "This section presents qualitative analyses to support the paper's claim that NeuroSAT's GNN operations relate to SDP optimization, and explores an alternative training objective based on the MAX-SAT SDP formulation.",
+    "key_points": [
+        "The evolution of NeuroSAT's literal embeddings during message-passing iterations appears to optimize the SDP objective function, as shown by tracking the objective value computed from the embeddings over time.",
+        "An experiment demonstrates that training NeuroSAT directly with a loss function derived from the MAX-SAT SDP objective (aiming to maximize satisfied clauses) yields a model that learns quickly without a curriculum, though its final accuracy (~73%) is lower than classification-trained NeuroSAT (~85%).",
+        "The SDP objective function is transformed into a differentiable form suitable for GNN training by lifting Boolean variables to unit vectors in a high-dimensional space and computing scalar products.",
+        "Variable assignments can be extracted from the learned vector embeddings by taking the sign of the inner product with a fixed 'true' vector y0.",
+        "A combination of the SDP-based objective (for maximizing satisfied clauses) and the classification loss (for penalizing incorrect predictions) is suggested as a promising future direction."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Procedure to compute matrix Y(t)=L^{(t)}L^{(t)T} after each GNN iteration t, where L^{(t)} contains centered/normalized positive literal embeddings.",
+            "Method to extract Boolean variable assignments by computing inner product of variable vectors with fixed 'true' vector y0 and assigning true if positive."
+        ],
+        "formulas": [
+            "SDP MAX-SAT objective function: v(C) = sum_{c in C} ( product_{l in c} (1 - sgn(l) * y_l · y_0) / 2 )",
+            "Where sgn(l) is 1 for positive literal, -1 for negative literal; y_l are unit vectors; y_0 is a fixed unit vector representing 'true'."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": [
+            "Several hundred random 2-CNF formulas used for analyzing embedding evolution."
+        ]
+    },
+    "dependencies": [
+        "Section 2.3 (SDP for Boolean Satisfiability) for background on SDP formulation",
+        "Section 4 (Sampling and Decimation) for details on the 'average true vector'",
+        "Supplementary Material S.2 (NeuroSAT Architecture) for GNN details"
+    ],
+    "reproducibility_notes": [
+        "Method for computing Y(t) from literal embeddings after each iteration: Y(t)=L^{(t)}L^{(t)T}",
+        "Procedure for centering and normalizing positive literal embeddings to create L^{(t)}",
+        "Setting of y0 vector: either to the 'average true vector' from Section 4 or sampled randomly as a fixed unit vector for SDP training",
+        "Differentiable SDP objective function formulation for training",
+        "Normalization of variable vectors after each GNN update during SDP training",
+        "Method for extracting Boolean assignments from embeddings: sign of inner product with y0"
+    ]
+}
+```

@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "3.1 New Probabilistic-Method GNN Model",
+    "section_purpose": "This section critiques the existing probabilistic-method GNN loss function from prior work and introduces a new, improved loss function design to overcome its identified drawbacks.",
+    "key_points": [
+        "The prior work's loss function is based on the first-moment method, defining a random variable as f(S) + indicator(S not a solution)*β, leading to a loss L = E(f(S)) + P(S not solution)*β.",
+        "Two key drawbacks of the prior approach are identified: 1) A trade-off where making the loss bound easier to satisfy (t close to 0) reduces the probability guarantee of finding a valid solution, and 2) The difficulty in choosing an appropriate β value and the need to use upper bounds for P(S not solution), which hinders convergence.",
+        "A new loss function is proposed: minimizing E(f(S)) / P(S is a solution), which aims to maximize the probability measure of solutions with low f values.",
+        "The practical implementation of the new loss function uses the logarithmic form: ln(E(f(S))) - ln(P(S is a solution)).",
+        "The logarithmic form is intended to balance the scale difference between the expectation term E(f(S)) and the probability term P(S is a solution), ensuring they are weighted proportionally."
+    ],
+    "technical_details": {
+        "algorithms": ["Probabilistic-method GNN framework for combinatorial optimization"],
+        "formulas": [
+            "First-moment method inequality: P(X < a) > 1 - E(X)/a",
+            "Previous work loss function: L = E(f(S)) + P(S not in solution set)*β, where β > max(f(S))",
+            "New proposed loss function: ln(E(f(S))) - ln(P(S is a solution))",
+            "Derivation: random variable X = f(S) + 1_{S∉S}β, leading to training condition L < (1-t)β guarantees existence of solution with probability t"
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "β": "Positive constant strictly greater than max(f(S)) over all solutions S",
+            "t": "Strictly positive probability parameter less than 1"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 2 (Dominating Clique and Probabilistic-Method GNN)", "Reference [8] by Karalias et al. for the original probabilistic-method GNN approach"],
+    "reproducibility_notes": [
+        "The mathematical form of the new loss function: ln(E(f(S))) - ln(P(S is a solution))",
+        "The rationale for using logarithmic scaling to balance the expectation and probability terms",
+        "The identified drawbacks of the previous approach that motivate the new design"
+    ]
+}
+```

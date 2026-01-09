@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Abstract",
+    "section_purpose": "To provide a concise summary of the paper's motivation, proposed method, key contributions, and experimental results.",
+    "key_points": [
+        "Standard CSAT solving converts circuits to CNF for generic CDCL solvers, discarding structural/functional information and leading to suboptimal performance.",
+        "CASCAD is a novel circuit-aware SAT solving framework that directly leverages circuit-level conditional probabilities computed via Graph Neural Networks.",
+        "CASCAD uses gate-level conditional probabilities to dynamically guide two critical CDCL heuristics: variable phase selection and clause management.",
+        "Extensive evaluations on real-world Logical Equivalence Checking benchmarks show CASCAD reduces solving times by up to 10× compared to state-of-the-art CNF-based approaches.",
+        "The probability-guided clause filtering strategy achieves an additional 23.5% runtime reduction."
+    ],
+    "technical_details": {
+        "algorithms": ["Circuit-aware SAT solving framework (CASCAD)", "CDCL (Conflict-Driven Clause Learning) heuristics guidance"],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks (GNNs) for computing conditional probabilities"],
+        "hyperparameters": {},
+        "datasets": ["Challenging real-world Logical Equivalence Checking (LEC) benchmarks"]
+    },
+    "dependencies": ["Basic understanding of Circuit Satisfiability (CSAT)", "Knowledge of Conjunctive Normal Form (CNF)", "Familiarity with Conflict-Driven Clause Learning (CDCL) solvers"],
+    "reproducibility_notes": ["Framework name: CASCAD", "Core technique: Using GNN-computed circuit-level conditional probabilities", "Targeted heuristics: Variable phase selection and clause management", "Evaluation benchmark type: Logical Equivalence Checking (LEC)"]
+}
+```

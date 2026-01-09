@@ -1,0 +1,35 @@
+{
+  "section_title": "A6 Applying Probability-Based Phase Selection for UNSAT Case",
+  "section_purpose": "This section describes a practical application of the proposed probability-based phase selection heuristic: using the solver's early behavior under this heuristic as a lightweight classifier to predict if an instance is likely UNSAT, and then adaptively switching to a UNSAT-tuned configuration.",
+  "key_points": [
+    "The phase selection method, which prioritizes assignments likely to satisfy the circuit, can also act as a lightweight classifier for unsatisfiability prediction.",
+    "If the solver fails to find a solution within a predefined time budget using this heuristic, the instance is considered likely UNSAT, triggering a dynamic switch to a UNSAT-tuned solver configuration.",
+    "The strategy is implemented on top of CaDiCaL with a 5-second time budget for the initial SAT-oriented phase, significantly reducing average solving time on UNSAT instances from 166.26 seconds to 80.36 seconds on the LECUNSAT dataset."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Timeout-based switching mechanism: Uses early-stage solver behavior under SAT-oriented phase heuristic as a signal to predict unsatisfiability and adaptively switch configurations."
+    ],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "time_budget": "5 seconds",
+      "TIMEOUT": "300 seconds"
+    },
+    "datasets": [
+      "LECUNSAT dataset",
+      "LECSAT dataset (mentioned in figure caption)"
+    ]
+  },
+  "dependencies": [
+    "Section 5.2 Node Probability for Phase Selection (describes the core phase selection heuristic being applied)",
+    "Section 5 Application to Circuit SAT (context for applying the method)",
+    "Overall methodology from Section 3 (for understanding the probability-based guidance)"
+  ],
+  "reproducibility_notes": [
+    "Implementation details: Strategy is built on top of the CaDiCaL solver.",
+    "Key parameter: The initial time budget for the SAT-oriented phase heuristic is set to 5 seconds before considering a switch.",
+    "Dataset used for evaluation: LECUNSAT dataset.",
+    "Performance metric: Solving time and number of solved instances within a 300-second timeout."
+  ]
+}

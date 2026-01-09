@@ -1,0 +1,21 @@
+Learning Branching Heuristics from Graph Neural Networks
+  Abstract
+  1 Introduction
+  2 Dominating Clique and Probabilistic-Method GNN
+  3 Branching Heuristic from New Probabilistic-Method GNN
+    3.1 New Probabilistic-Method GNN Model
+    3.2 New Loss Function for Maximum-Clique Problem
+    3.3 Loss Function for (Minimum) Dominating-Clique Problem
+    3.4 New Branching Heuristic for Dominating-Clique Solvers
+  4 Experimental Results
+    4.1 Finding Maximum Cliques
+    4.2 Finding Dominating Cliques
+    4.3 Finding Minimum Dominating Cliques
+  5 Concluding Remarks
+  6 Acknowledgement
+  References
+  A Neural Network Architecture of GNN Model for Dominating Cliques
+  B Preliminary Test for Dominating Cliques
+  C Training Data for (Minimum) Dominating Cliques
+  D Raw Experimental Results for Finding Dominating Cliques
+  E Raw Experimental Results for Finding Minimum Dominating Cliques

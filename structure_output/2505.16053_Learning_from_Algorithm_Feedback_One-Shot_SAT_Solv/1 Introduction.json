@@ -1,0 +1,24 @@
+{
+  "section_title": "1 Introduction",
+  "section_purpose": "This section introduces the challenge of improving SAT solver heuristics using machine learning, specifically reinforcement learning and graph neural networks, and outlines the paper's main contributions.",
+  "key_points": [
+    "Solving SAT problems is crucial in domains like verification and planning, but classical algorithms rely on rigid, hand-crafted heuristics.",
+    "Machine learning, particularly reinforcement learning (RL), offers a way to create adaptable, data-driven heuristics without expert supervision.",
+    "The paper proposes a novel method to integrate variable-wise weights into SAT solver branching heuristics using GNNs in a one-shot forward pass.",
+    "The task is framed as an RL problem called Reinforcement Learning from Algorithm Feedback (RLAF), where the reward is based on computational cost.",
+    "Empirical results show that RL-trained policies reduce solver runtimes, generalize to harder problems, and outperform supervised baselines."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "General knowledge of Boolean satisfiability (SAT) problems and complete search algorithms",
+    "Understanding of reinforcement learning and graph neural networks",
+    "Familiarity with heuristic-based SAT solvers and their limitations"
+  ],
+  "reproducibility_notes": []
+}

@@ -1,0 +1,40 @@
+```json
+{
+    "section_title": "4.1 Finding Maximum Cliques",
+    "section_purpose": "This section presents experimental results evaluating the performance of the proposed branching heuristic (specifically its loss function) for the maximum clique problem, comparing it against a baseline method.",
+    "key_points": [
+        "Compares two GNN models: one using the proposed new loss function (4) and one using the original loss function from cited work [8].",
+        "Evaluates performance using the approximation ratio (size of found clique vs. size of maximum clique).",
+        "Describes a greedy approximation algorithm with two decoding methods ('fast' and 'slow') that utilize learned probability distributions differently.",
+        "Uses established datasets (Twitter, COLLAB, IMDB) from prior work [8] for the experiments.",
+        "Relies on Gurobi to provide the ground-truth maximum clique size for calculating the approximation ratio."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Greedy approximation algorithm (from [8]) with two decoding variants: 'fast' (quick, less use of input probability distributions) and 'slow' (more thorough use of distributions)."
+        ],
+        "formulas": [
+            "Performance is measured by the 'approximation ratio': (size of found clique) / (size of maximum clique)."
+        ],
+        "architectures": [
+            "Two GNN models are tested. Both share the same neural network architecture as the model in [8]."
+        ],
+        "hyperparameters": {},
+        "datasets": [
+            "Twitter, COLLAB, IMDB (all sourced from [8])"
+        ]
+    },
+    "dependencies": [
+        "Section 3.2 (New Loss Function for Maximum-Clique Problem) for the definition of loss function (4).",
+        "Prior knowledge of the GNN architecture from [8].",
+        "Understanding of the maximum clique problem definition."
+    ],
+    "reproducibility_notes": [
+        "Need the specific 'greedy approximation algorithm' implementation details from [8].",
+        "Need the two decoding methods ('fast' and 'slow') for the greedy algorithm.",
+        "Need access to the Twitter, COLLAB, and IMDB datasets.",
+        "Need Gurobi or another exact solver to obtain the ground-truth maximum clique size for evaluation.",
+        "Need the precise neural network architecture from [8] to replicate the GNN models."
+    ]
+}
+```

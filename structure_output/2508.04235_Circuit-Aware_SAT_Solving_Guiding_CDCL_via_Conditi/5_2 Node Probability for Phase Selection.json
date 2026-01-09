@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "5.2 Node Probability for Phase Selection",
+    "section_purpose": "This section presents experimental results evaluating the effectiveness of using predicted conditional node probabilities for phase selection within a CDCL SAT solver on SAT instances from the LECSAT benchmark.",
+    "key_points": [
+        "The method using CASCAD-predicted probabilities consistently outperforms the mainstream phase selection heuristic in CaDiCaL, with most results showing faster solving times.",
+        "Compared to an alternative circuit representation model (DeepGate4), the probability-based method achieves consistently lower solving times, demonstrating more effective phase guidance.",
+        "Significant speedups are achieved, including up to 10× speedup at τ=0.005 and nearly 5× at τ=0.01.",
+        "The phase selection method also acts as a lightweight classifier for UNSAT instances, as it accelerates SAT solving enough that unsolved cases within a time budget are likely UNSAT.",
+        "This insight enables dynamic parameter adaptation for UNSAT-dominated scenarios, achieving 2× average speedup on the LECUNSAT dataset."
+    ],
+    "technical_details": {
+        "algorithms": ["Probability-based phase selection method using conditional probabilities (defined in Section 3.1)"],
+        "formulas": [],
+        "architectures": ["CASCAD model for predicting condition probability", "DeepGate4 model for predicting node-level similarity (used as baseline/comparison)"],
+        "hyperparameters": {
+            "threshold τ": "Varied values: 0.005, 0.01, 0.85, 0.9, 0.95"
+        },
+        "datasets": ["LECSAT benchmark (150 SAT instances)", "LECUNSAT dataset (130 small cases, 20 large cases)"]
+    },
+    "dependencies": ["Section 3.1 (Problem Definition) where the selection method is defined", "Appendix A6 for details on adapting solver parameters for UNSAT scenarios", "Understanding of CDCL SAT solving and phase selection heuristics"],
+    "reproducibility_notes": ["Threshold values (τ) used for probability-based selection", "Benchmark datasets used (LECSAT, LECUNSAT)", "Baseline solvers/comparisons (CaDiCaL, DeepGate4)", "Time budgets/limits (TIMEOUT = 400s for small cases, 1000s for large cases)", "Performance metric (solving time, Par2 score)"]
+}
+```

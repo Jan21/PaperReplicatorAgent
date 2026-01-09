@@ -1,0 +1,23 @@
+On the Hardness of Learning GNN-based SAT Solvers: The Role of Graph Ricci Curvature
+  Abstract
+  1 Introduction
+  2 Background
+    2.1 Random \(k\) Boolean Satisfiability Problem
+    2.2 Graph Neural Networks
+    2.3 Ricci Curvature of Graphs
+  3 Curvature of Random k-SAT Problems and Its Relationship with GNNs
+    3.1 Message-Passing Bottlenecks and Downstream Performance
+  4 Experiments
+    4.1 The Relationship Between Curvature and Satisfiability
+    4.2 A New Hardness Heuristic for GNN-Based Solvers
+  5 Conclusions
+  Acknowledgements
+  References
+  A Appendix
+  A.1 Ricci curvature of graphs
+  A.1.1 Ollivier Ricci curvature (OC)
+  A.1.2 Balanced Forman curvature (BFC)
+  A.2 Proofs
+  A.3 Details on Test-Time Rewiring
+  A.4 Some initial ideas for curvature-aware solvers
+  A.5 Additional plots

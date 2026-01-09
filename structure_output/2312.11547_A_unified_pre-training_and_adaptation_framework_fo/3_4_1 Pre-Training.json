@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "3.4.1 Pre-Training",
+    "section_purpose": "This section describes the pre-training stage of the framework, where the model learns general knowledge from Max-SAT problems to obtain better parameter initialization for solving different combinatorial optimization problems.",
+    "key_points": [
+        "The pre-training goal is to learn generalizable knowledge from Max-SAT problems to initialize parameters for solving various CO problems.",
+        "Clauses are generated from Max-SAT using three different distributions (uniform, single power-law, double power-law) to simulate various problem scenarios.",
+        "The pre-training model architecture consists of three components: an MLP for initial feature mapping, a bipartite GNN backbone, and a fully connected prediction network.",
+        "A supervised binary cross-entropy loss function is used to train the model, focusing only on variable node classification since clause labels are difficult to determine accurately."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Clause generation from Max-SAT using three distributions: uniform, single power-law, and double power-law",
+            "Binary cross-entropy loss for variable classification during pre-training",
+            "Pre-training pipeline: generate clauses → convert to bipartite graphs → train with BCE loss"
+        ],
+        "formulas": [
+            "Binary cross-entropy loss: L_c = ∑_{i=1}^n BCE(p_i, y_i) where y_i ∈ {0,1} is the ground truth label from MAXHS solver, and p_i ∈ {0,1} is the model prediction"
+        ],
+        "architectures": [
+            "Three-part pre-training model: 1) MLP for initial feature mapping of X_ini and C_ini to low-dimensional X⁽⁰⁾ and C⁽⁰⁾, 2) Bip-GNN(·) backbone from section 3.3 for high-level features X⁽ᴸ⁾ and C⁽ᴸ⁾ (L layers), 3) FC(·) prediction network for classification"
+        ],
+        "hyperparameters": {},
+        "datasets": [
+            "Synthetic clauses generated from Max-SAT with three distributions: uniform (variables/clauses appear with same frequency), single power-law (few high-frequency variables, most low-frequency), double power-law (extremely uneven, small clauses appear more frequently)"
+        ]
+    },
+    "dependencies": [
+        "Section 3.3 (Bipartite Graph Attention Networks) for the Bip-GNN backbone architecture",
+        "Section 3.2 (Problem Transfer via Max-SAT Problem) for understanding clause generation and bipartite graph conversion",
+        "MAXHS solver for generating ground truth labels for variables"
+    ],
+    "reproducibility_notes": [
+        "Clause generation methodology with three distributions (uniform, single power-law, double power-law)",
+        "Three-part model architecture: MLP → Bip-GNN → FC",
+        "Binary cross-entropy loss function focused only on variable node classification",
+        "Use of MAXHS solver to generate ground truth labels for training",
+        "Focus on variable nodes only during training (not clauses) to avoid inaccurate labeling issues"
+    ]
+}
+```

@@ -1,0 +1,59 @@
+{
+  "section_title": "B.2 Structure-Aware Code Generation",
+  "section_purpose": "This section describes the process of generating and post-training a language model to produce code for combinatorial optimization problems, integrating graph structural features to ensure the generated code respects problem constraints and solver requirements.",
+  "key_points": [
+    "Data curation involves creating prompts from natural language descriptions and code generation requirements, using an LLM to generate diverse code snippets, which are evaluated by embedding into solvers to obtain performance metrics.",
+    "Post training creates two datasets: an SFT dataset from the best-performing code snippets and a DPO dataset from pairwise comparisons, using DPO loss for training to improve code quality.",
+    "The composite model integrates graph structural features (extracted by a GNN) with the LLM by modifying the forward propagation to combine text embeddings and structural feature vectors.",
+    "Parameter-efficient fine-tuning is performed using LoRA with specific hyperparameters, training only query and value projections in the Transformer.",
+    "An adapted inference framework ensures structural features influence the entire generation process, using a hybrid sampling strategy."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Data curation process with prompt construction, LLM code generation, and solver-based evaluation",
+      "Post training with SFT and DPO",
+      "Structure-prior-aware forward propagation for feature fusion",
+      "LoRA for parameter-efficient fine-tuning",
+      "Adapted inference framework with hybrid sampling"
+    ],
+    "formulas": [
+      "DPO loss function with sigmoid, beta parameter, reference model, and policy model",
+      "Dimension adaptation of graph feature vector via zero-padding",
+      "Fusion of text and structural features by prepending graph feature vector to text embeddings",
+      "Merging attention mask to include graph feature vector"
+    ],
+    "architectures": [
+      "Composite model combining graph neural network (GNN) for structural features and Qwen2.5-Coder-7B-Instructor LLM",
+      "Modified forward propagation to prepend graph feature vector to text embeddings before decoder layers"
+    ],
+    "hyperparameters": {
+      "lora_rank": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "trainable_lora_layers": ["q_proj", "v_proj"],
+      "inference_top_k": 20,
+      "inference_top_p": 0.8,
+      "repetition_penalty": 1.0
+    },
+    "datasets": [
+      "8k post-training instances for MILP domain",
+      "4k post-training instances for SAT domain"
+    ]
+  },
+  "dependencies": [
+    "Section 4 (Methodology) for overall framework",
+    "Appendix B.1 (Combinatorial Structure Extraction) for graph feature extraction",
+    "Section 3 (Problem Statement) for understanding the combinatorial optimization problems",
+    "Knowledge of DPO (Direct Preference Optimization) and SFT (Supervised Fine-Tuning)",
+    "Familiarity with transformer architectures and LoRA"
+  ],
+  "reproducibility_notes": [
+    "Use of Qwen2.5-Coder-7B-Instructor model",
+    "Data curation process: prompt construction, high-temperature sampling for diversity, solver-based evaluation of code snippets",
+    "Dataset sizes: 8k for MILP, 4k for SAT",
+    "Formulas for feature fusion and attention mask modification (equations 17, 18, 19)",
+    "LoRA hyperparameters: rank, alpha, dropout, trainable layers",
+    "Training details: AdamW optimizer, cosine decay learning rate",
+    "Inference sampling parameters: top-k, top-p, repetition penalty"
+  ]
+}

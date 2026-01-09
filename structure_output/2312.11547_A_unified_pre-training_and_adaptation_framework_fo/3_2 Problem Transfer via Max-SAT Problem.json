@@ -1,0 +1,20 @@
+```json
+{
+    "section_title": "3.2 Problem Transfer via Max-SAT Problem",
+    "section_purpose": "To introduce the core methodological step of converting diverse combinatorial optimization (CO) problems on graphs into a unified Max-SAT problem representation, which serves as a common bridge for knowledge transfer.",
+    "key_points": [
+        "The section's goal is to bridge different CO problems by leveraging their common logical information through the Max-SAT problem framework.",
+        "The conversion process is a two-step pipeline: first, the original graph from a CO problem is converted into several clauses of a Max-SAT problem.",
+        "Second, these logical clauses are transformed into a bipartite graph structure, enabling the application of subsequent graph learning techniques."
+    ],
+    "technical_details": {
+        "algorithms": ["Problem transfer/conversion pipeline from original CO graph -> Max-SAT clauses -> bipartite graph"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of combinatorial optimization (CO) problems on graphs (Section 3.1)", "Basic familiarity with the Max-SAT (Maximum Satisfiability) problem"],
+    "reproducibility_notes": ["The two-step conversion logic (graph->clauses, clauses->bipartite graph) is the foundational process for transforming any CO problem into the model's unified input format."]
+}
+```

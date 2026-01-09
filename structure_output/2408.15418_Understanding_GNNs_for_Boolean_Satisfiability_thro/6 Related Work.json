@@ -1,0 +1,20 @@
+{
+  "section_title": "6 Related Work",
+  "section_purpose": "To review and categorize existing research on the application of Graph Neural Networks to Boolean Satisfiability, distinguishing between hybrid and end-to-end approaches.",
+  "key_points": [
+    "Applications of GNNs in Boolean Satisfiability are divided into hybrid approaches (guiding discrete search) and end-to-end approaches.",
+    "Hybrid approaches include using GNNs for simple heuristics in local search (e.g., with Reinforcement Learning or supervised learning) and integrating them into industrial SAT solvers like MiniSat to improve heuristics.",
+    "Specific hybrid examples: Yolcu and Poczos for RL-based local search, Zhang et al. for supervised learning, Kurin et al. and Wang et al. for enhancing MiniSat solvers.",
+    "End-to-end approaches include NeuroSAT by Selsam et al. (the paper's starting point) and similar models by Cameron et al., Shi et al., Freivalds and Kozlovics, and Ozolins et al., using various architectures.",
+    "Mention of related work by Kuck et al. using GNNs to improve Belief Propagation, extending beyond direct SAT applications."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2 for background and prior mention of related work"],
+  "reproducibility_notes": []
+}

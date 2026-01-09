@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "3.5 Inference",
+    "section_purpose": "This section describes the inference process of the GraSS model, explaining how predictions are made for solver selection at test time after the model has been trained.",
+    "key_points": [
+        "The inference process begins by converting a given SAT instance into the graph representation defined earlier.",
+        "Node features are computed for the converted graph instance.",
+        "The processed graph is fed into the pre-trained GNN model, which outputs a probability distribution over the set of candidate solvers.",
+        "The solver with the highest predicted probability is selected to solve the SAT instance, and its runtime is recorded as the outcome."
+    ],
+    "technical_details": {
+        "algorithms": ["Standard inference procedure using a trained GNN model to output probability distributions"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.2 (Representation and features) for details on graph conversion and node feature computation",
+        "Section 3.3 (Model) for understanding the GNN architecture that produces the probability distribution",
+        "Section 3.4 (Training) for understanding how the model was trained to make these predictions"
+    ],
+    "reproducibility_notes": [
+        "Need the exact method for converting a SAT instance to a graph, as specified in 3.2",
+        "Need the exact computation method for node features, as specified in 3.2 or Appendix A",
+        "Need the trained GNN model parameters from the training phase (3.4)",
+        "Need the list of candidate solvers over which the probability distribution is computed (implied from context)"
+    ]
+}
+```

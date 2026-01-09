@@ -1,0 +1,24 @@
+```json
+{
+  "section_title": "3.4.1 Categorical Diffusion Process",
+  "section_purpose": "To describe the categorical diffusion process used for generating variable assignments in SAT problems, specifically how noise is added to discrete binary assignments over time.",
+  "key_points": [
+    "Diffusion models are trained to denoise noisy versions of samples; for SAT problems, samples are binary variable assignments.",
+    "The forward diffusion process corrupts the initial assignment over T timesteps via a Markov chain with transition matrices defined by a noise schedule β_t.",
+    "The transition matrix Q_t for categorical diffusion is defined for Boolean variables, and as t approaches T, the distribution of assignments becomes uniform.",
+    "Cumulative transition matrices Q̄_t simplify inference, allowing efficient sampling of x_t given x_0 using a categorical distribution."
+  ],
+  "technical_details": {
+    "algorithms": ["Categorical diffusion process with a forward Markov chain for corrupting binary assignments"],
+    "formulas": ["Transition matrix Q_t = [[1-β_t, β_t], [β_t, 1-β_t]] (equation 2)", "Probability p(x_t|x_0) = Cat(x_t; p = x̃_0 Q̄_t) where x̃_0 is the one-hot encoding of x_0 (equation 3)"],
+    "architectures": [],
+    "hyperparameters": {
+      "β_t": "noise schedule (values not specified in this section)",
+      "T": "number of diffusion timesteps (not specified)"
+    },
+    "datasets": []
+  },
+  "dependencies": ["General knowledge of diffusion models (introduced in subsection 3.4)", "Section 5.4 for the specific approach leveraging this process", "Section 3.1 for SAT problem and variable assignment representation"],
+  "reproducibility_notes": ["Noise schedule β_t and number of timesteps T", "Method for computing cumulative transition matrices Q̄_t = product of Q_1 to Q_t", "Sampling procedure using categorical distribution with one-hot encoded initial assignments"]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2.2 IMPLEMENTATION",
+    "section_purpose": "This section describes the specific architectural components, design choices, and implementation details used to build the NeuroBack GNN model for phase prediction.",
+    "key_points": [
+        "The model uses a GINConv-based architecture with three separate layers, one for each edge weight type in the CNF graph representation, to aggregate information from differently weighted edges.",
+        "Transformer blocks combine Graph Self-Attention (GSA) using GATConv layers and Learnable Structure Attention (LSA) using a ViT-style patch encoder.",
+        "Key architectural hyperparameters are chosen to balance model capacity, accuracy, and memory constraints: the GNN subnet depth matches the graph diameter (L=4), and three blocks each are used for GSA and LSA (M=3, N=3).",
+        "The Feed-Forward Networks (FFNs) are simplified: transformer block FFNs have no hidden layers, while the final classification FFN has one hidden layer.",
+        "The implementation is built using PyTorch and PyTorch Geometric frameworks."
+    ],
+    "technical_details": {
+        "algorithms": ["GINConv for GNN layers (one layer per edge weight)", "GATConv for Graph Self-Attention (GSA) blocks", "ViT-style patch encoder for Learnable Structure Attention (LSA) blocks"],
+        "formulas": [],
+        "architectures": ["Three separate GINConv layers for three edge weight types, with aggregated outputs", "Transformer architecture combining GSA blocks (using GATConv) and LSA blocks (using ViT patch encoder)", "LayerNorm for normalization", "Final FFN for node classification with one hidden layer"],
+        "hyperparameters": {"GNN subnet depth (L)": "4 (maximum graph diameter)", "Number of GSA blocks (M)": "3", "Number of LSA blocks (N)": "3"},
+        "datasets": []
+    },
+    "dependencies": ["Section 4.1 (Graph Representation for CNF Formulas) for understanding the edge weight types and graph structure", "Section 4.2.1 (GNN Model Design) for the overall model architecture concept"],
+    "reproducibility_notes": ["Use GINConv layers (one per edge weight type) for the GNN component", "Use GATConv layers for GSA transformer blocks", "Use a ViT-style patch encoder for LSA transformer blocks", "Set GNN subnet depth L = graph diameter (specifically 4)", "Set number of GSA blocks M = 3 and LSA blocks N = 3", "Implement transformer block FFNs with no hidden layers", "Implement final classification FFN with one hidden layer", "Use LayerNorm for normalization", "Implement using PyTorch and PyTorch Geometric"]
+}
+```

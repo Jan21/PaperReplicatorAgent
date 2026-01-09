@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3 Methodology",
+    "section_purpose": "To present the core methodological framework of the paper, including problem definition, graph construction, training strategy, and conditional probability computation for circuit-aware SAT solving.",
+    "key_points": [
+        "Defines the problem of predicting conditional variable assignment probabilities from subcircuit states for guiding CDCL solvers.",
+        "Describes constructing a directed acyclic graph (DAG) to represent the combinational circuit and propagate values through the netlist.",
+        "Introduces a two-stage training strategy to handle unobserved input variable conditions in combinatorial circuits.",
+        "Proposes a method to compute conditional probabilities by analyzing assignments that satisfy subcircuits, using neighbor fanout nodes as constraints.",
+        "Explains how to compute node probabilities at different gates using different propagation equations (multiplication for AND, 1-prod for NAND, etc.)."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-stage training strategy for circuit representation learning", "Conditional probability computation via subcircuit satisfaction analysis"],
+        "formulas": ["Probability for AND gate: P = ∏ child probabilities", "Probability for NAND gate: P = 1 - ∏ child probabilities", "Probability for OR gate: P = 1 - ∏ (1 - child probabilities)", "Probability for NOR gate: P = ∏ (1 - child probabilities)", "Probability for XOR gate: alternative path probability plus path interaction terms"],
+        "architectures": ["Directed acyclic graph (DAG) representation of combinational circuits"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2 (Related Work) for context on circuit representation learning", "Section 1 (Introduction) for overall problem motivation"],
+    "reproducibility_notes": ["Formulas for computing node probabilities at different gate types (AND, NAND, OR, NOR, XOR)", "Graph construction method for representing circuits as DAGs", "Two-stage training strategy for handling unobserved input conditions"]
+}
+```

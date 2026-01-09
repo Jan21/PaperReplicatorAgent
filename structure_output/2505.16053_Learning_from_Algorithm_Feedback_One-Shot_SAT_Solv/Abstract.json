@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Abstract",
+    "section_purpose": "To provide a concise summary of the paper's contributions, introducing the Reinforcement Learning from Algorithm Feedback (RLAF) paradigm for guiding SAT solver branching heuristics with Graph Neural Networks and highlighting key results.",
+    "key_points": [
+        "Introduces Reinforcement Learning from Algorithm Feedback (RLAF) as a new paradigm for learning to guide SAT solver branching heuristics using Graph Neural Networks (GNNs).",
+        "Proposes a novel, generic mechanism for injecting inferred variable weights and polarities into existing SAT solver branching heuristics in a single forward pass of a GNN.",
+        "Formulates the one-shot guidance as a reinforcement learning problem, trained with off-the-shelf policy-gradient methods (e.g., GRPO) using only the solver's computational cost as the reward signal.",
+        "Demonstrates that RLAF-trained policies significantly reduce mean solve times for different base solvers across diverse SAT problems, achieving >2x speedup in some cases and generalizing to larger/harder problems.",
+        "Shows RLAF policies consistently outperform expert-supervised approaches that learn handcrafted weighting heuristics."
+    ],
+    "technical_details": {
+        "algorithms": ["Reinforcement Learning from Algorithm Feedback (RLAF)", "Policy-gradient methods (specifically GRPO)"],
+        "formulas": [],
+        "architectures": ["Graph Neural Network (GNN) for assigning variable weights and polarities"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Assumes familiarity with SAT solvers, branching heuristics, Graph Neural Networks, and reinforcement learning concepts."],
+    "reproducibility_notes": ["Key concept: Training uses only the solver's computational cost as the reward signal.", "The mechanism for injecting variable weights and polarities is described as 'novel and generic', but details are deferred to later sections."]
+}
+```

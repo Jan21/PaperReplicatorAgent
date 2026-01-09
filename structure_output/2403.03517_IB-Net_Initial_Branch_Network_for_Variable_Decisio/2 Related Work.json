@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Related Work",
+    "section_purpose": "This section reviews previous work on applying neural networks, particularly Graph Neural Networks (GNNs), to Electronic Design Automation (EDA) tasks and SAT problem solving, categorizing approaches and positioning the proposed IB-Net method within this landscape.",
+    "key_points": [
+        "Neural networks have been used in EDA for data processing, process optimization, and accelerating verification tasks like logic equivalence checking (LEC).",
+        "GNNs are applied to SAT problems in two main ways: end-to-end solving (directly predicting assignments) and heuristic solver guidance (predicting variable importance to guide solvers).",
+        "End-to-end GNN-based SAT solving faces challenges with reliability and performance, especially in industrial contexts, due to SAT problem complexity.",
+        "GNN-based heuristic guidance methods are more practical, as they accelerate solvers while maintaining reliability by letting the solver handle the core solving process.",
+        "The proposed IB-Net model fits into the heuristic guidance category, aiming to enhance SAT solver robustness and efficiency for industrial scenarios through GNN-solver interaction."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks (GNNs) for capturing relational information in SAT constraint graphs."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of SAT (Boolean Satisfiability) problems and solvers (from Introduction)", "High-level awareness of Electronic Design Automation (EDA) and logic equivalence checking (LEC) as application domains."],
+    "reproducibility_notes": ["References to prior work (e.g., Huang et al., Selsam et al., Amizadeh et al.) for context on NN/GNN applications in SAT/EDA, but no specific technical details from those papers are extracted here."]
+}
+```

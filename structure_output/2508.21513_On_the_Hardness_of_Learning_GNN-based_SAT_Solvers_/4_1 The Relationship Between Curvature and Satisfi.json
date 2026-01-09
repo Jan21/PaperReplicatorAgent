@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.1 The Relationship Between Curvature and Satisfiability",
+    "section_purpose": "This section presents experimental validation of the theoretical claims linking Ricci curvature to the performance of GNN-based SAT solvers, using numerical simulations on random SAT instances and test-time rewiring techniques.",
+    "key_points": [
+        "Experimental results show probability of finding a solution as a function of curvature parameters replicates the SAT/UNSAT phase transition around the critical threshold α_c ≈ 4.267 for 3-SAT.",
+        "For random 3-SAT, curvature becomes highly negative and concentrates near the dynamical threshold α_d ≈ 3.927, suggesting a relationship between negative curvature and computational hardness.",
+        "Test-time rewiring experiments demonstrate that making testing graphs less curved (via stochastic discrete Ricci flow) improves solver performance without retraining, with largest improvements on 4-SAT problems.",
+        "The relationship between curvature and performance is stronger for higher k values (e.g., 4-SAT), which have more negatively curved edges that strongly impact GNN-based solvers.",
+        "Smaller improvements are observed on the modular CA dataset that mimics real-world industrial problems, suggesting different curvature characteristics."
+    ],
+    "technical_details": {
+        "algorithms": ["Custom Julia implementation for generating random 3-SAT instances in CNF", "Test-time rewiring using stochastic discrete Ricci flow procedure (edges with highest negative curvature deleted, less curved edges added)"],
+        "formulas": ["Random 3-SAT instances generated with α ∈ [3,5] in steps of Δα = 0.1", "Number of message passing iterations scaled by 2N during evaluation"],
+        "architectures": ["NeuroSAT model trained to produce satisfying assignments", "Graph Convolutional Network (GCN)-solver"],
+        "hyperparameters": {"N (variables)": "256", "k (for k-SAT)": "3 and 4", "α range": "[3, 5]", "Δα": "0.1"},
+        "datasets": ["Random 3-SAT generated near critical threshold α_c", "Random 4-SAT", "SR dataset (mixed k values)", "CA dataset (mimics modularity and community structure of industrial problems)", "All benchmarks from Li et al. [28]"]
+    },
+    "dependencies": ["Section 3.1 (theoretical claims about message-passing bottlenecks and curvature)", "Background on Ricci curvature (Section 2.3)", "Background on random k-SAT (Section 2.1)", "Appendix A.3 (details on test-time rewiring procedure)"],
+    "reproducibility_notes": ["Need custom Julia implementation for generating random SAT instances", "Training protocol for NeuroSAT and GCN-solver", "Stochastic discrete Ricci flow rewiring procedure details (in Appendix A.3)", "Dataset generation parameters: α values, N=256 variables, step size Δα=0.1", "Evaluation protocol: scaling message passing iterations by 2N"]
+}
+```

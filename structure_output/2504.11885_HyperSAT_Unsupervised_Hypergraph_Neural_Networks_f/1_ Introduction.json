@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1. Introduction",
+    "section_purpose": "To introduce the Boolean SAT problem, its variants (MaxSAT and Weighted MaxSAT), provide background on existing neural approaches for SAT solving, identify the research gap in applying neural methods to Weighted MaxSAT, and outline the proposed HyperSAT approach and its contributions.",
+    "key_points": [
+        "SAT is a fundamental NP-complete problem with broad applications. Weighted MaxSAT, which aims to maximize the weighted sum of satisfied clauses, is a more general and flexible version used in many real-world problems.",
+        "Existing neural approaches for SAT problems fall into two categories: end-to-end neural solvers (e.g., NeuroSAT) and neural-guided solvers (e.g., NeuroCore, NLocalSAT). For MaxSAT, prior work (Liu et al., 2023) explored GNNs, but methods for Weighted MaxSAT remain underdeveloped.",
+        "The main challenge for Weighted MaxSAT is the uneven weight distribution, which increases search complexity and makes heuristic design difficult. The neural model must learn to prioritize high-weight clauses and handle sensitive objective functions where small assignment changes cause large weighted sum changes.",
+        "The paper proposes HyperSAT, an unsupervised neural solver for Weighted MaxSAT that uses hypergraph representation, a cross-attention mechanism, and a multi-objective loss design. It models Weighted MaxSAT as a hypergraph with positive/negative literal nodes and weighted clause hyperedges.",
+        "Contributions include: (1) First end-to-end HyperGCN-based solver for Weighted MaxSAT; (2) Novel hypergraph representation with cross-attention and shared representation constraint loss; (3) Extensive evaluation showing superior performance on multiple datasets."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Hypergraph convolutional network (HyperGCN) as the learning model", "Cross-attention mechanism designed to capture logical interplay between positive and negative literal node features of the same variable"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

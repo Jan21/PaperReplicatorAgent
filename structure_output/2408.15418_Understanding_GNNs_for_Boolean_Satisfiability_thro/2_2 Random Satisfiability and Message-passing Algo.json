@@ -1,0 +1,33 @@
+{
+  "section_title": "2.2 Random Satisfiability and Message-passing Algorithms",
+  "section_purpose": "This section introduces random SAT problems as a simplified study model and explains how message-passing algorithms like Belief Propagation (BP) and Survey Propagation (SP) are used to solve them, including their mechanisms and limitations.",
+  "key_points": [
+    "Random SAT problems are characterized by random clauses and a clause-to-variable ratio (α), and their solution space undergoes phase transitions, including clustering and an eventual unsatisfiability threshold.",
+    "Belief Propagation (BP) computes or approximates marginal probabilities of variables being true in satisfying assignments, which is exact only for loop-free factor graphs.",
+    "To find satisfying assignments, BP is combined with a decimation procedure: variables with extreme estimated marginals are fixed iteratively, and BP is rerun on the reduced formula.",
+    "BP fails as α approaches the satisfiability threshold due to long-range correlations breaking its assumptions, attributed to changes in solution space structure.",
+    "Survey Propagation (SP) overcomes BP's limitations by running on an augmented factor graph where variables can take values 0, 1, or * (undecided), using 3D vector messages, and is effective near the satisfiability threshold."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Belief Propagation (BP): An algorithm for computing/approximating marginal probabilities of variables in satisfying assignments; exact for loop-free factor graphs.",
+      "Survey Propagation (SP): A BP variant running on an augmented factor graph with three possible variable values (0, 1, *), using 3-dimensional vector messages."
+    ],
+    "formulas": [
+      "Clause-to-variable ratio parameter: α, used to characterize random formulas.",
+      "Marginal probability: Proportion of assignments where variable x_i = 1 among all satisfiable assignments."
+    ],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 2.1 (Boolean Satisfiability) for basic SAT concepts and definitions.",
+    "General knowledge of factor graphs and message-passing frameworks."
+  ],
+  "reproducibility_notes": [
+    "Definition of random SAT problems: clauses sampled randomly with fixed variable count k and clause-to-variable ratio α.",
+    "Description of the decimation procedure: fixing variables with extreme marginal estimates and repeating BP on reduced formulas.",
+    "Mechanism of Survey Propagation: use of augmented factor graph with three values (0, 1, *) and 3D vector messages."
+  ]
+}

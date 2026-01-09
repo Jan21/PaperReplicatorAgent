@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "A.2 Message-Passing Neural Network",
+    "section_purpose": "This section provides a detailed technical specification of the Graph Neural Network (GNN) architecture used for message passing and feature embedding in the context of SAT solving guidance.",
+    "key_points": [
+        "Initial vertex embeddings are derived from log-normalized vertex degrees using a trainable 2-layer MLP.",
+        "The GNN employs a two-phase message-passing scheme over L layers: clauses aggregate from literals, then literals aggregate from clauses, conceptually similar to NeuroSAT but with a fixed-depth feed-forward design.",
+        "All MLPs in the model have two layers with SiLU-activated hidden layers of dimension 2d, and the final output produces a 2-dimensional embedding per variable via a decoder MLP.",
+        "The final decoder's weights are initialized to zero to ensure stable training starts, setting initial variable weight and polarity parameters to zero."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-phase message-passing GNN: clauses aggregate from literals, then literals aggregate from updated clause embeddings."],
+        "formulas": ["Initial embedding: h^0(v) = Enc(log(deg(v) + 1))", "Clause aggregation: h^{t+1}(c) = U_Cls(h^t(c), mean_{l in c} h^t(l))", "Literal aggregation: h^{t+1}(l) = U_Lit(h^t(l), h^t(-l), mean_{c, l in c} h^{t+1}(c))", "Variable output: y(x) = Dec([h^L(x), h^L(neg x)])"],
+        "architectures": ["Graph Neural Network (GNN) with L message-passing layers", "All MLPs are 2-layer networks with hidden dimension 2d and SiLU activation", "Final decoder MLP has input dimension 2d, hidden dimension 2d, output dimension 2, with final layer weights initialized to zero"],
+        "hyperparameters": {
+            "d": "latent embedding dimension",
+            "L": "number of message-passing layers",
+            "hidden_dimension": "2d"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section A.1 Graph Representation and Architecture (for graph structure context)", "Section 2.2 Graph Representation and Architecture (main architecture overview)", "Understanding of SAT problem graph representation (literals, clauses)"],
+    "reproducibility_notes": ["Initial embedding formula using log-normalized degree", "Two-phase message-passing equations with mean aggregation", "MLP specifications: 2 layers, hidden dimension 2d, SiLU activation", "Final decoder MLP architecture and zero-initialization", "Number of message-passing layers L"]
+}
+```

@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "Algorithm 3 Guided Decision Heuristic",
+    "section_purpose": "To present the modified decision heuristic algorithm that incorporates learned variable weights and polarity guidance from a GNN policy into the SAT solver's branching decisions.",
+    "key_points": [
+        "The algorithm extends existing branching heuristics by scaling variable scores with learned weights.",
+        "It chooses the branching variable by maximizing the product of its learned weight and its heuristic score.",
+        "It selects the literal's sign (polarity) based on a provided polarity function.",
+        "The algorithm integrates GNN-provided guidance parameters into the standard DPLL solver framework."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Guided Decision Heuristic: Takes a formula φ and parameters 𝒲=(w, p). Function PICK-LITERAL-GUIDED selects variable x̂ = argmax_x w(x) * SCORE(x), then returns x̂ if p(x̂)=1 else ¬x̂."
+        ],
+        "formulas": [
+            "Variable selection: x̂ = argmax_x w(x) * SCORE(x) where w(x) is learned weight and SCORE(x) is heuristic score."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of standard DPLL SAT solver (Algorithm 1)",
+        "Understanding of standard branching heuristics (Algorithm 2)",
+        "Knowledge of GNN guidance policy that provides parameters 𝒲 (from Section 2.2/2.3)"
+    ],
+    "reproducibility_notes": [
+        "Exact algorithm pseudocode for guided heuristic",
+        "Definition of input parameters 𝒲 = (w, p) where w are variable weights and p is polarity function",
+        "How SCORE(x) is computed (from Algorithm 2/standard heuristic)",
+        "Integration point with GNN policy that generates w and p"
+    ]
+}
+```

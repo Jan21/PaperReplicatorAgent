@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "7 Discussion",
+    "section_purpose": "This section discusses the limitations of the presented neural SAT solving approaches and outlines future research directions, focusing on interpretability and practical applicability.",
+    "key_points": [
+        "The primary limitation is that GNN-based methods are not competitive with state-of-the-art SAT solvers on real-world problems with millions of variables.",
+        "Test-time scaling experiments show GNNs can generalize beyond their training distribution and do not merely learn superficial patterns.",
+        "The trained GNN functions as an implicit MaxSAT solver, incrementally maximizing satisfied clauses through continuous updates similar to gradient descent.",
+        "Future work aims to manually derive the GNN's update equations using a primal-dual approach, interpreting it as optimizing a continuous relaxation of MaxSAT.",
+        "Developing data-driven numerical solvers analogous to physics-informed neural networks is proposed as an exciting future direction for combinatorial optimization."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Gradient descent algorithm searching for optimal assignment over high-dimensional unit sphere",
+            "Primal-dual approach interleaving gradient updates of primal and dual variables",
+            "Continuous optimization similar to SDP relaxation for SAT problems"
+        ],
+        "formulas": [
+            "Equations 6, 7, and 11 interpreted as gradient descent on unit sphere",
+            "Final classification layer corresponds to rounding step to Boolean values"
+        ],
+        "architectures": [
+            "RNN update function noted for simple form suitable for derivation",
+            "GNNs with variable embeddings in high-dimensional vector space"
+        ],
+        "hyperparameters": {},
+        "datasets": [
+            "Tested exclusively on random problems (justified by Li et al. 2023 findings on generalization)"
+        ]
+    },
+    "dependencies": [
+        "Section 5.3 (Test-time scaling experiments)",
+        "Section 6 (Interpreting the Trained Model)",
+        "Appendix B (SDP for MAX-2-SAT)",
+        "Figure 3 and Figure 5 (visualizations of GNN behavior)",
+        "Equations 6, 7, and 11 (referenced gradient descent interpretation)"
+    ],
+    "reproducibility_notes": [
+        "Recognition that models are not competitive with state-of-art solvers on large real-world problems",
+        "Importance of test-time scaling for generalization assessment",
+        "Need to derive explicit equations from trained GNNs for interpretability",
+        "Future requirement to integrate neural solvers as guessing/bounding heuristics in complex systems"
+    ]
+}
+```

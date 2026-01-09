@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2.2 From Clauses to Bipartite Graph",
+    "section_purpose": "To describe how the Max-SAT clauses (derived from the original CO problem) are transformed into a bipartite graph representation for feature extraction, and to justify the advantages of this representation.",
+    "key_points": [
+        "The logical dependencies between variables and clauses in Max-SAT are represented as a bipartite graph.",
+        "The bipartite graph is formally defined with two node sets for variables and clauses, and edges representing their affiliations.",
+        "A concrete transfer process is illustrated using Max-Cut as an example, involving two main steps.",
+        "Using a bipartite graph, rather than the original problem graph, provides two key advantages: it encodes logical information and offers a generalizable representation for various CO problems.",
+        "This representation enables the construction of a knowledge transfer framework by utilizing a universal graph structure."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Bipartite graph notation: \\(\\tilde{\\mathcal{G}} = (\\tilde{\\mathcal{V}}_{x}, \\tilde{\\mathcal{V}}_{c}, \\tilde{\\mathcal{E}})\\) where \\(\\tilde{\\mathcal{V}}_{x}\\) is the variable node set, \\(\\tilde{\\mathcal{V}}_{c}\\) is the clause node set, and \\(\\tilde{\\mathcal{E}}\\) is the edge set."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.2 (Problem Transfer via Max-SAT Problem) for context on generating clauses from the original CO problem.", "Figure 1 (referenced) for a visual example of the transfer process."],
+    "reproducibility_notes": ["The formal definition of the bipartite graph structure \\((\\tilde{\\mathcal{V}}_{x}, \\tilde{\\mathcal{V}}_{c}, \\tilde{\\mathcal{E}})\\).", "The process rule: for each variable \\(x_i\\) in each clause \\(c_j\\), create an edge \\(\\tilde{e}_{i,j} \\in \\tilde{\\mathcal{E}}\\).", "An understanding that the input to this step is the set of clauses generated in Section 3.2.1."]
+}
+```

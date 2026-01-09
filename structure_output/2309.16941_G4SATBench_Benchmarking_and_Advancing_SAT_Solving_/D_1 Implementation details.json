@@ -1,0 +1,26 @@
+{
+  "section_title": "D.1 Implementation details",
+  "section_purpose": "This section provides implementation details for the experiments in the advancing evaluation, including dataset augmentation methods, contrastive pretraining setup, and specific configurations for training and testing.",
+  "key_points": [
+    "Datasets are augmented by using CaDiCaL to generate DART proofs and adding learned clauses, with a maximum of 1,000 clauses per instance.",
+    "Contrastive pretraining treats original formulas and their augmented versions as positive pairs, using SimCLR loss with specified hyperparameters.",
+    "The loss function for contrastive pretraining includes a temperature parameter and similarity function, with details on mini-batch handling.",
+    "Kaiming Initialization is used for literal/variable and clause embeddings in random initialization experiments.",
+    "For NeuroSAT*, 2-clustering decoding is employed to generate two assignment predictions, and the better one is selected based on clause satisfaction."
+  ],
+  "technical_details": {
+    "algorithms": ["CaDiCaL for generating DART proofs and learned clauses", "SimCLR contrastive loss for pretraining", "Kaiming Initialization for embeddings", "2-clustering decoding for assignment prediction"],
+    "formulas": ["Contrastive loss function: L_{i,j} = -log(exp(sim(m_i, m_j)/τ) / sum_{k≠i} exp(sim(m_i, m_k)/τ))", "Similarity function: sim(m_i, m_j) = m_i^T m_j / (||m_i|| ||m_j||)"],
+    "architectures": ["GNN model for graph embeddings", "MLP projection head for contrastive pretraining (removed after pretraining)"],
+    "hyperparameters": {
+      "temperature_parameter": 0.5,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.00000001,
+      "pretraining_epochs": 100,
+      "max_added_clauses": 1000
+    },
+    "datasets": ["Augmented datasets created by adding learned clauses from CaDiCaL proofs to original SAT instances"]
+  },
+  "dependencies": ["Section 4 (G4SATBench datasets and tasks)", "Section 5 (Benchmarking evaluation settings)", "Appendix B (GNN models)", "Section 6 (Advancing evaluation context)"],
+  "reproducibility_notes": ["Procedure for dataset augmentation using CaDiCaL and DART proofs", "Contrastive pretraining setup with positive/negative pairs and loss function", "Hyperparameters for pretraining (temperature, learning rate, weight decay, epochs)", "Initialization method for embeddings using Kaiming Initialization", "Decoding strategy for NeuroSAT* with 2-clustering and selection of better assignment"]
+}

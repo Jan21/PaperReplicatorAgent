@@ -1,0 +1,42 @@
+```json
+{
+    "section_title": "4 Experiments",
+    "section_purpose": "This section describes the experimental setup used to validate the theoretical claims about the relationship between graph curvature (BFC) and the performance of GNN-based SAT solvers, and introduces heuristics for predicting solver difficulty.",
+    "key_points": [
+        "The experiments explore the behavior of GNN-based SAT solvers and relate it to the Balanced Forman Curvature (BFC) of the input SAT problem graphs.",
+        "Experimental results show that average BFC decreases monotonically with the clause-to-variable ratio (α) in random 3-SAT problems, and this correlates with the solver's ability to find satisfying assignments.",
+        "The probability of finding a satisfying assignment depends on both the average and variance of the BFC distribution across the graph edges.",
+        "The research proposes two heuristics to predict how hard a given SAT problem will be for GNN-based solvers, focusing on the assignment scenario.",
+        "The GNN solvers were trained using learned node embeddings since the datasets lacked native node features, with specific implementation details provided."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "GNN-based SAT solvers following the design of Li et al. [28]",
+            "NeuroSAT model used as reference for validation experiments"
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "epochs": "100",
+            "optimizer": "AdamW",
+            "learning_rate": "0.0001",
+            "learning_rate_decay": "half after 50 epochs",
+            "gradient_clipping": "unit norm"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.1 (Random k Boolean Satisfiability Problem) for understanding α and SAT problem structure",
+        "Section 2.3 (Ricci Curvature of Graphs) for understanding BFC",
+        "Section 3 (Curvature of Random k-SAT Problems and Its Relationship with GNNs) for theoretical foundation",
+        "Background on GNNs (Section 2.2)"
+    ],
+    "reproducibility_notes": [
+        "GNN solvers implemented using PyTorch, PyTorch Geometric, and PyTorch Lightning frameworks",
+        "Training done for 100 epochs with AdamW optimizer, learning rate 0.0001 decaying by half after 50 epochs",
+        "Gradients clipped at unit norm",
+        "Use of learned embeddings when datasets lack node features",
+        "Training hardware: NVIDIA Titan RTX GPUs"
+    ]
+}
+```

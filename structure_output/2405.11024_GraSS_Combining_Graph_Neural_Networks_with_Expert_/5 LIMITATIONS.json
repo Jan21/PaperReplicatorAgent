@@ -1,0 +1,22 @@
+{
+  "section_title": "5 LIMITATIONS",
+  "section_purpose": "To outline the limitations of the GraSS approach, including its data requirements and inability to easily adapt to online learning scenarios.",
+  "key_points": [
+    "Deep learning methods like GNNs are data-hungry and require large training sets for optimal performance.",
+    "In scenarios with limited data, the performance may not be competitive against simpler models.",
+    "The method cannot be readily adapted to online learning due to the need for runtime labels on every solver per instance and the challenge of adapting GNNs to online learning."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 3 (APPROACH)", "Section 4 (EXPERIMENTS)", "Reference [42]"],
+  "reproducibility_notes": [
+    "Large training datasets are necessary for effective performance.",
+    "Access to runtime labels for all solvers on each instance is required, which may not be feasible in online settings.",
+    "Challenges in adapting GNNs to online learning should be considered for future work or alternative approaches."
+  ]
+}

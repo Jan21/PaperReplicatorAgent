@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "1. Partial Assignment Extraction and Local Unit Propagation",
+    "section_purpose": "This section describes a method for extracting a partial variable assignment from model belief predictions during diffusion and using it to simplify the SAT problem via unit propagation.",
+    "key_points": [
+        "Variables are selected for assignment based on a belief threshold derived from the diffusion model's predictions.",
+        "Unit propagation is applied to the partial assignment to simplify the clause set by removing satisfied clauses and resolving unit clauses.",
+        "The process identifies conflicts when all literals in a clause are assigned unsatisfying values.",
+        "Simplified clauses containing only unassigned literals are retained for subsequent solving steps."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Partial assignment extraction algorithm: selects variables with belief values exceeding a threshold.",
+            "Unit propagation algorithm: simplifies clauses based on current assignments, marks satisfied clauses, detects conflicts, and resolves unit clauses."
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of diffusion process generating belief values for variables (from Section 3.4)",
+        "Knowledge of SAT clause structure and unit propagation (from Section 3.1)",
+        "Context of using diffusion for SAT solving (from Section 5.4)"
+    ],
+    "reproducibility_notes": [
+        "Threshold value or method for selecting variables from belief predictions.",
+        "Detailed implementation of the unit propagation algorithm.",
+        "How the simplified clause set is passed to subsequent diffusion/solving steps."
+    ]
+}
+```

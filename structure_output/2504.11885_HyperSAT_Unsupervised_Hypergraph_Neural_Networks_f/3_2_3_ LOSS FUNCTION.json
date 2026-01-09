@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2.3. LOSS FUNCTION",
+    "section_purpose": "This section defines the unsupervised loss function used to train HyperSAT, which consists of a primary task loss based on the Weighted MaxSAT objective and a shared representation constraint loss that encourages distinct features for positive and negative literals.",
+    "key_points": [
+        "The loss function is unsupervised and multi-objective, combining a primary task loss and a shared representation constraint loss, eliminating the need for labeled training data.",
+        "The primary task loss is a differentiable relaxation of the Weighted MaxSAT objective, where clause satisfaction is represented as a continuous probability and weighted by clause importance.",
+        "The shared representation constraint loss encourages positive and negative literal nodes to develop distinct feature representations in the penultimate network layer.",
+        "The total loss is a weighted sum of the two components, with a balancing hyperparameter λ controlling their relative importance.",
+        "The authors argue that unsupervised learning is better suited for Weighted MaxSAT than supervised approaches due to multiple satisfying assignments and non-uniform clause weight distributions."
+    ],
+    "technical_details": {
+        "algorithms": ["Differentiable relaxation of Weighted MaxSAT objective for gradient-based optimization", "Multi-objective loss optimization with balancing hyperparameter"],
+        "formulas": ["Relaxation transformation: X ∈ {0,1}^n → Y(γ) ∈ [0,1]^n (Equation 6)", "Total loss: L_total = L_task + λ L_shared (Equation 7)", "Primary task loss: L_task(Y) = ∑_{j=1}^m w_j V_j(Y) (Equation 8)", "Clause satisfaction: V_j(Y) = 1 - ∏_{i∈C_j^+} (1 - y_i) ∏_{i∈C_j^-} y_i (Equation 9)", "Shared representation loss: L_shared = ||L_+^(T-1) + L_-^(T-1)||_F^2 (Equation 10)"],
+        "architectures": [],
+        "hyperparameters": {"λ": "balancing hyperparameter controlling trade-off between task loss and shared representation constraint (λ ≥ 0)"},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.1 (Weighted MaxSAT definitions and notation)", "Section 3.1 (Hypergraph modeling of MaxSAT instances)", "Section 3.2.1 and 3.2.2 (Network architecture for generating literal node representations L_+ and L_-)", "Notation: γ represents all learnable parameters of the network"],
+    "reproducibility_notes": ["Exact formulation of the differentiable clause satisfaction function V_j(Y)", "The balancing hyperparameter λ value (though not specified in this section)", "Definition of C_j^+ and C_j^- as index sets for positive and negative literals in clause j", "Use of Frobenius norm for the shared representation loss", "The layer index (T-1) for the penultimate layer representations"]
+}
+```

@@ -1,0 +1,35 @@
+```json
+{
+    "section_title": "C. Functionality-Aware Loss Function",
+    "section_purpose": "To define the primary training objective and loss function that ensures the learned node embeddings reflect the functional similarity (based on truth table Hamming distance) between nodes in the circuit.",
+    "key_points": [
+        "The core objective is to learn node embeddings where similarity between embeddings correlates with functional similarity of the nodes.",
+        "Functional similarity is measured by the normalized Hamming distance between the nodes' truth tables.",
+        "Embedding similarity is measured by cosine similarity, and embedding distance is derived from it.",
+        "The training loss aims to minimize the difference between the normalized truth table distance and the normalized embedding distance."
+    ],
+    "technical_details": {
+        "algorithms": ["ZeroNorm normalization function (applied to distances before loss calculation)", "L1Loss function for comparing normalized distances"],
+        "formulas": [
+            "D_{(i,j)}^{T} = HammingDistance(T_i, T_j) / length(T_i) - normalized truth table Hamming distance",
+            "S_{(i,j)} = CosineSimilarity(h_i, h_j) - embedding similarity",
+            "D_{(i,j)}^{H} = 1 - S_{(i,j)} - embedding distance",
+            "D_{(i,j)}^{T'} = ZeroNorm(D_{(i,j)}^{T}) - normalized truth table distance",
+            "D_{(i,j)}^{H'} = ZeroNorm(D_{(i,j)}^{H}) - normalized embedding distance",
+            "L_func = sum_{(i,j) in N} (L1Loss(D_{(i,j)}^{T'}, D_{(i,j)}^{H'})) - functionality-aware loss"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section III-B (Dataset Preparation) for the definition of sampled node pairs N",
+        "Equation (1) referenced (presumably defines the core proportional relationship objective)"
+    ],
+    "reproducibility_notes": [
+        "The exact formula for the ZeroNorm function must be known (not provided in this section).",
+        "The method for sampling node pairs N (from Section III-B) is required.",
+        "The loss calculation requires obtaining the truth table T_i for each node (method assumed from dataset preparation)."
+    ]
+}
+```

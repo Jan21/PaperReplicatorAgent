@@ -1,0 +1,7 @@
+Graph Neural Reasoning May Fail in Certifying Boolean Unsatisfiability
+  Abstract
+  1 Introduction
+  2 Embedding Logic Formulae by GNNs
+  3 Certifying UNSAT by GNNs may Fail
+  4 Further Discussion
+  References

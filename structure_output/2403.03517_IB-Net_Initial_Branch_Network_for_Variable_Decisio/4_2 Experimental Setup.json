@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "4.2 Experimental Setup",
+    "section_purpose": "This section describes the experimental methodology used to evaluate IB-Net, including dataset splitting, baseline models for comparison, and the justification for choosing the Kissat SAT solver as the collaboration partner.",
+    "key_points": [
+        "Datasets are split into 80% training and 20% testing subsets with no overlap.",
+        "Three baseline models are benchmarked against IB-Net: NeuroSAT, NeuroCore, and NLocalSAT.",
+        "Kissat is selected as the collaborating SAT solver due to its superior performance over other CDCL solvers (CaDiCaL, MiniSAT, Glucose) as shown in runtime comparisons.",
+        "All baseline implementations are adapted from official code/publications but modified to target UNSAT-core prediction.",
+        "Interaction with Kissat is maintained without recompiling, allowing for transferability to future solvers."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "train_test_split": "80%/20%"
+        },
+        "datasets": ["LEC dataset", "SAT Comp dataset"]
+    },
+    "dependencies": ["Section 4.1 Datasets (for dataset descriptions)", "Section 3 IB-Net approach (for understanding the proposed model being evaluated)", "Related work/background knowledge of baseline models (NeuroSAT, NeuroCore, NLocalSAT) and SAT solvers (CDCL, Kissat)"],
+    "reproducibility_notes": ["Train/test split ratio (80/20).", "List of baseline models and references to their official implementations.", "Choice of Kissat as the collaborating solver and justification based on performance data.", "Adaptation of baselines: using official code but changing the target output to UNSAT-core prediction."]
+}
+```

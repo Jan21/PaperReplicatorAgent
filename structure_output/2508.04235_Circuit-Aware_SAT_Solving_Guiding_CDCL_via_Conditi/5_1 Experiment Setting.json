@@ -1,0 +1,33 @@
+```json
+{
+    "section_title": "5.1 Experiment Setting",
+    "section_purpose": "To describe the experimental setup for evaluating the proposed conditional probability-based SAT solving methods (phase selection and clause filtering) on Logic Equivalence Checking (LEC) tasks, including hardware configuration, dataset construction, and problem categorization.",
+    "key_points": [
+        "Experiments evaluate methods from Section 3.1 on Logic Equivalence Checking (LEC) tasks using an Intel(R) Platinum 8474C processor.",
+        "Separate evaluations are conducted for satisfiable (SAT) and unsatisfiable (UNSAT) instances because CDCL solvers behave differently for each case.",
+        "For phase selection evaluation, 150 hard satisfiable instances (LECSAT set) were constructed using logic synthesis and miter construction from the ForgeEDA dataset via ABC tool.",
+        "For clause filtering evaluation, unsatisfiable instances (LECUNSAT set) were constructed using miter circuits from logically equivalent datapath circuits.",
+        "The LECSAT instances have an average solving time of 17.39 seconds using CaDiCaL baseline, indicating sufficient challenge."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": [
+            "LECSAT: 150 hard satisfiable instances constructed from ForgeEDA dataset using logic synthesis and miter construction via ABC tool",
+            "LECUNSAT: Unsatisfiable instances constructed from pairs of datapath circuits using miter construction",
+            "ForgeEDA dataset (referenced from Shi et al. 2025a)",
+            "ABC tool used for miter construction (Brayton and Mishchenko 2010)"
+        ]
+    },
+    "dependencies": ["Section 3.1 (Methodology/Problem Definition)", "Understanding of CDCL SAT solver behavior differences for SAT vs UNSAT cases", "Knowledge of Logic Equivalence Checking (LEC) and miter construction"],
+    "reproducibility_notes": [
+        "Hardware specification: Intel(R) Platinum 8474C processor",
+        "Dataset construction details: LECSAT instances created via logic synthesis and miter construction from ForgeEDA using ABC tool",
+        "Baseline solver: CaDiCaL with reported average solving time of 17.39 seconds for LECSAT",
+        "Time cutoff for UNSAT instances: 20 seconds (instances that cannot be solved within this time by CaDiCaL)",
+        "Reference to Chanseok 2015 for CDCL behavior differences between SAT/UNSAT cases"
+    ]
+}
+```

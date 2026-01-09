@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "C.2.2 Evolutionary Code Optimization",
+    "section_purpose": "This section describes two baseline methods (AutoSAT and LLM4Solver) that use evolutionary algorithms and large language models for combinatorial optimization, explaining their approaches and how they were adapted for fair comparison in this paper's experiments.",
+    "key_points": [
+        "AutoSAT is a framework that uses LLMs to automatically optimize heuristic functions within Conflict-Driven Clause Learning (CDCL) SAT solvers.",
+        "AutoSAT operates on a modular search space of nine key heuristic functions (e.g., branching, restart, clause management) from an existing solver.",
+        "LLM4Solver integrates LLMs with evolutionary search to automate the design of diving heuristics for combinatorial optimization solvers.",
+        "LLM4Solver defines its algorithm space using 13 interpretable variable features and uses LLMs for code-level operations in evolutionary search.",
+        "Both baselines were configured with their default parameters from their original papers, with LLM4Solver adapted to focus on cut selection for MILP solvers instead of diving heuristics."
+    ],
+    "technical_details": {
+        "algorithms": ["Greedy Hill Climber (GHC) search strategy", "(1 + 1) Evolutionary Algorithm (EA) search strategy", "Derivative-free evolutionary framework (single- or multi-objective)"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "AutoSAT configuration": "default used in source paper [29]",
+            "LLM4Solver configuration": "default used in source papers [15, 16]"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section C (Baseline Details) for overall context", "Section 5 (Experimental Evaluation) for comparison framework", "Related work on SAT and MILP solvers for domain understanding"],
+    "reproducibility_notes": ["Use of default configurations from cited papers [29], [15], [16] for fair comparison", "LLM4Solver adaptation: optimization focus changed from diving heuristics to cut selection for MILP solver"]
+}
+```

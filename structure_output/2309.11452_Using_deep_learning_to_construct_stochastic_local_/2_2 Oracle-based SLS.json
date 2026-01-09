@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "2.2 Oracle-based SLS",
+    "section_purpose": "This section introduces the concept of Stochastic Local Search (SLS) algorithms and formalizes the idea of oracle-based SLS, which enhances traditional SLS by using adaptive sampling distributions rather than uniform randomness.",
+    "key_points": [
+        "Stochastic Local Search (SLS) algorithms work by iteratively generating candidate assignments and updating variables in violated clauses until a solution is found or a stopping criterion is met.",
+        "The Moser-Tardos (MT) algorithm and WalkSAT are two fundamental SLS algorithms that use uniform random sampling during initialization and updates.",
+        "An oracle is introduced as a random variable over assignments that can provide instance-specific sampling distributions, enabling better performance than uniform sampling.",
+        "Oracle-based versions of MT and WalkSAT algorithms are presented, which generalize their non-oracle counterparts by replacing uniform random choices with oracle-guided ones.",
+        "The oracle-based WalkSAT's variable selection probability is inspired by ProbSAT and is proportional to the oracle's likelihood of sampling a state with the flipped value assignment."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Oracle-based Moser-Tardos algorithm: Initializes with a sample from oracle O, then repeatedly samples a new assignment x' from O, picks a random violated clause c, and updates x on the variables in c with the values from x'.",
+            "Oracle-based WalkSAT algorithm: Initializes with a sample from oracle O, then repeatedly picks a random violated clause c, selects a variable v from c with probability P_O(¬x_v) / (sum over v' in c of P_O(¬x_v')), and flips x_v."
+        ],
+        "formulas": [
+            "P_O(x_V) = sum_{x in {0,1}^n: x|_V = x_V} P_O(x) (Eq. 3): defines the marginal probability of a partial assignment x_V over a set of variables V under the oracle distribution P_O."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Basic understanding of SAT problems and CNF representation (implied from context, possibly from Section 2.1 SAT).",
+        "Knowledge of traditional SLS algorithms like Moser-Tardos and WalkSAT for comparison."
+    ],
+    "reproducibility_notes": [
+        "The exact definitions of the oracle-based MT and WalkSAT algorithms (Algorithm 1 and Algorithm 2).",
+        "The definition of the marginal probability P_O(x_V) for partial assignments (Eq. 3).",
+        "The connection to ProbSAT [23] for the motivation behind the variable selection probability in oracle-based WalkSAT."
+    ]
+}
+```

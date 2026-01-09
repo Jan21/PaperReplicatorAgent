@@ -1,0 +1,28 @@
+```json
+{
+    "section_title": "6 EXPERIMENTS",
+    "section_purpose": "This section presents the experimental setup and results evaluating the NeuroBack model's classification accuracy and its effectiveness when integrated into the Kissat SAT solver.",
+    "key_points": [
+        "The NeuroBack model achieves 75.1% accuracy in classifying backbone variables after pre-training, with post fine-tuning it achieves over 90% on precision, recall, and F1 score.",
+        "Experiments evaluate solving performance on 800 CNF formulas from SATCOMP-2022 and SATCOMP-2023, comparing NeuroBack-Kissat against Default-Kissat and Random-Kissat baselines.",
+        "NeuroBack-Kissat consistently outperforms both baselines, showing improvements of 3.0-7.4% in the number of problems solved across the two competition datasets.",
+        "Model inference for NeuroBack is performed on CPU with a memory limit of 10GB, taking an average of 1.7 seconds per problem, with some problems failing inference.",
+        "Results are visualized via cactus plots, showing NeuroBack-Kissat solves more problems faster, reducing solving time per problem by tens to hundreds of seconds compared to baselines."
+    ],
+    "technical_details": {
+        "algorithms": ["NeuroBack-Kissat (SAT solver with GNN-predicted phase initialization)", "Default-Kissat (baseline with all true initial phases)", "Random-Kissat (baseline with random initial phases)"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "solving_time_limit": "5000 seconds",
+            "parallel_processes": "64",
+            "model_memory_limit": "10GB",
+            "inference_device": "CPU",
+            "validation_split": "90%/10%"
+        },
+        "datasets": ["DataBack-PT (pre-training dataset)", "DataBack-FT (fine-tuning dataset)", "SATCOMP-2022 main track (400 problems)", "SATCOMP-2023 main track (400 problems)"]
+    },
+    "dependencies": ["Section 4 (NeuroBack model description)", "Section 5 (DataBack dataset description)", "Understanding of CDCL SAT solving and phase initialization"],
+    "reproducibility_notes": ["Hardware specifications: NVIDIA RTX 3080 GPU (10GB), AMD Ryzen Threadripper 3970X (64 cores), 256GB RAM", "Time limit of 5000 seconds per SAT problem", "Use of 64 parallel processes", "CPU-only inference with 10GB memory limit", "Training/validation split of 90%/10% for fine-tuning", "Exclusion of problems where model inference fails"]
+}
+```

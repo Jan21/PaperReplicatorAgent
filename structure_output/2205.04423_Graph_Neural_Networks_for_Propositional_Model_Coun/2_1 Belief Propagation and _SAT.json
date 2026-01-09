@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "2.1 Belief Propagation and #SAT",
+    "section_purpose": "This section introduces Belief Propagation (BP) as an approximate inference algorithm for computing marginal probabilities on factor graphs, and explains how it can be adapted to solve the #SAT (model counting) problem by representing propositional formulas as factor graphs.",
+    "key_points": [
+        "Belief Propagation is an iterative message-passing algorithm that approximates marginal distributions (beliefs) on factor graphs by exchanging messages between variable and factor nodes.",
+        "The algorithm computes a variational approximation of the partition function Z via the Bethe free energy (F), where F ≈ -ln Z.",
+        "Propositional formulas in CNF can be directly translated into factor graphs where clauses are factor nodes and variables are variable nodes, with factors taking value 1 for satisfying assignments and 0 otherwise.",
+        "The partition function of this constructed factor graph directly counts the number of satisfying assignments (#SAT), enabling BP to serve as an approximate #SAT solver.",
+        "Practical implementation details include performing updates in log-space to avoid underflow and using damping (partial updates) with parameter α to improve convergence."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Belief Propagation (BP): An approximate inference algorithm that passes messages iteratively between variable and factor nodes on a factor graph to compute marginal beliefs.",
+            "BP for #SAT: Adapts BP to work on factor graphs derived from CNF formulas, where messages are passed between variables and clauses until convergence to approximate the model count."
+        ],
+        "formulas": [
+            "Equation (1): Defines a discrete probability distribution P over variables V as a product of factors f_j normalized by partition function Z.",
+            "Equation (2): Defines the iterative BP message update rules: m_i→j^(k+1) from variable to factor, and m_j→i^(k+1) from factor to variable.",
+            "Equation (3): Defines Bethe average energy U, Bethe entropy H, and Bethe free energy F = U - H, with F ≈ -ln Z.",
+            "Equation (4): Defines damped message updates with damping parameter α ∈ [0,1] to improve convergence."
+        ],
+        "architectures": [
+            "Factor graph representation of CNF formulas: Bipartite graph with clause factor nodes and variable nodes, edges connecting variables to clauses they appear in."
+        ],
+        "hyperparameters": {
+            "T": "Maximum number of BP iterations",
+            "α": "Damping parameter for partial updates, α ∈ [0,1]"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Basic understanding of factor graphs (implicitly from Section 2 or Appendix A.1)",
+        "Knowledge of propositional logic and Conjunctive Normal Form (CNF)",
+        "Familiarity with the #SAT problem (model counting)"
+    ],
+    "reproducibility_notes": [
+        "BP message initialization: m_i→j^(0)(x_i) = 1 for variable-to-factor messages, m_j→i^(0)(x_i) = f_j(x_i) for factor-to-variable messages.",
+        "Use of log-space updates to prevent underflow errors.",
+        "Damping parameter α value range and its role in weighted message updates.",
+        "Maximum iteration count T for stopping BP.",
+        "Method for translating CNF formulas to factor graphs: factor nodes represent clauses, edges connect variables to clauses containing them, factor values are 1 for satisfying assignments and 0 otherwise."
+    ]
+}
+```

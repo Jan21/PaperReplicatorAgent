@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.3 Graph Neural Networks",
+    "section_purpose": "This section provides the foundational background on Graph Neural Networks (GNNs), explaining their core mechanism of message passing for operating on graph-structured data, which is essential for understanding how SAT formulas are processed in subsequent sections.",
+    "key_points": [
+        "GNNs enable deep learning on irregular, graph-structured data where classical architectures fail.",
+        "The core operation is message passing, where nodes iteratively aggregate information from neighbors and update their features.",
+        "A formal update equation defines this process using UPDATE and AGGREGATE functions (often permutation-invariant neural networks like sum or max).",
+        "Multiple layers of message passing allow GNNs to capture both local structure and longer-range dependencies in a graph.",
+        "This architecture makes GNNs suitable for processing SAT formulas, which can be represented as bipartite graphs."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph Neural Network message-passing algorithm"],
+        "formulas": ["h_v^{l+1} = UPDATE(h_v^l, AGGREGATE({h_u^l : u ∈ N(v)}))"],
+        "architectures": ["General GNN architecture based on iterative message passing with UPDATE and AGGREGATE functions"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of graphs and deep learning (implied by paper context)", "SAT formula representation as graphs (implied by reference to bipartite graphs, detailed elsewhere)"],
+    "reproducibility_notes": ["The formal message-passing equation is provided.", "The core components of a GNN (UPDATE and AGGREGATE functions) are defined, though their specific implementations for SAT solving are described in later sections."]
+}
+```

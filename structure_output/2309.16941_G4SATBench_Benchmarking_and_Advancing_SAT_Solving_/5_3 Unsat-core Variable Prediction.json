@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5.3 Unsat-core Variable Prediction",
+    "section_purpose": "To present the benchmarking evaluation results for the task of predicting unsat-core variables using GNN models, demonstrating their performance and discussing the practical utility of such predictions.",
+    "key_points": [
+        "All evaluated GNN models (NeuroSAT, GCN, GGNN, GIN) show superior performance on both easy and medium SAT problem datasets for unsat-core variable prediction.",
+        "NeuroSAT consistently achieves the best classification accuracy across most of the evaluated datasets.",
+        "The primary goal of predicting unsat-core variables is not to solve SAT problems directly, but to provide guidance to enhance the backtracking search process in SAT solvers.",
+        "Even imperfect predictions (e.g., with 90% accuracy) have been shown in prior work to be effective for improving the heuristics in modern CDCL-based SAT solvers.",
+        "Generalization experiments for this task are detailed in an appendix (C.4)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["GNN models: NeuroSAT, GCN, GGNN, GIN"],
+        "hyperparameters": {},
+        "datasets": ["Easy Datasets: SR, 3-SAT, CA, PS, k-Clique, k-Domest", "Medium Datasets: SR, 3-SAT, CA, PS, k-Clique, k-Domest, k-Verov", "Graph representations: LCG*, VCG*"]
+    },
+    "dependencies": ["Section 4 (G4SATBench benchmark setup, datasets, tasks, and GNN baselines)", "Section 5 (overall benchmarking evaluation context)", "Prior knowledge of CDCL-based SAT solvers and unsat-core concepts"],
+    "reproducibility_notes": ["Performance metrics are classification accuracy on unsatisfiable instances only.", "Results are separated by dataset difficulty (Easy, Medium) and problem type.", "Results are provided for two graph representations (LCG*, VCG*).", "The evaluation is on the 'same distribution' (presumably training and testing from the same dataset distribution)."]
+}
+```

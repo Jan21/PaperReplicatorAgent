@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "D.1 SAT Domain",
+    "section_purpose": "To provide detailed descriptions and statistical summaries of the SAT (Boolean satisfiability) problem domains and their datasets used in the experimental evaluation of the paper.",
+    "key_points": [
+        "Four distinct SAT problem domains (CNP, PRP, CoinsGrid, and Zamkeller) are defined, each with a unique objective and constraint structure.",
+        "For three of the four datasets (PRP, CoinsGrid, and Zamkeller), instance generation follows the methodology from a prior work referenced as [29].",
+        "A statistical table presents key dataset characteristics: size (number of instances), mean and standard deviation for the number of constraints, and mean and standard deviation for the number of variables.",
+        "The datasets vary significantly in scale, with the average number of constraints ranging from ~261k (CNP) to over 2.1 million (PRP), and variables from ~8.8k (CNP) to ~317k (PRP).",
+        "The section serves as a reference for understanding the specific combinatorial optimization benchmarks used in the SAT-related experiments."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Chromatic-Number-of-the-Plane (CNP): Problem of coloring graph vertices with distinct colors for adjacent nodes.", "Profitable-Robust-Production (PRP): Problem of finding robust production plans under uncertainty. Generation follows [29].", "CoinsGrid: Problem based on a coin puzzle involving grid arrangement with row, column, and distance constraints. Generation follows [29].", "Zamkeller: Problem of finding a permutation of integers (1 to n) to maximize differential alternations in subsequences divisible by integers 1 to k. Generation follows [29].", "Table with statistics: CNP (Size=150, Mean Constraints=261,260, Std Constraints=352,379, Mean Variables=8,798, Std Variables=8,893); CoinsGrid (Size=78, Mean Constraints=1,116,972, Std Constraints=1,068,009, Mean Variables=154,828, Std Variables=148,571); PRP (Size=80, Mean Constraints=2,120,983, Std Constraints=1,346,344, Mean Variables=317,635, Std Variables=201,185); Zamkeller (Size=80, Mean Constraints=310,804, Std Constraints=335,102, Mean Variables=24,592, Std Variables=22,190)."]
+    },
+    "dependencies": ["Prior work [29] for the generation procedures of PRP, CoinsGrid, and Zamkeller datasets.", "Appendix D title 'Dataset Details' for overall context."],
+    "reproducibility_notes": ["Precise names and definitions of the four SAT problem domains.", "Reference [29] for generating instances of PRP, CoinsGrid, and Zamkeller.", "Dataset statistics (size, mean/std of constraints and variables) which characterize the testbed's scale and variability."]
+}
+```

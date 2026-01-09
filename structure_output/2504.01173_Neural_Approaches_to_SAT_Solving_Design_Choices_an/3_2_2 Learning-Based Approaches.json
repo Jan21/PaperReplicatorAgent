@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2.2 Learning-Based Approaches",
+    "section_purpose": "This section surveys existing machine learning approaches to SAT solving, categorizing them into methods that guide traditional solvers versus end-to-end neural solvers, and positions the paper's focus on recurrent GNN-based end-to-end methods which are framed as bi-level optimization.",
+    "key_points": [
+        "Machine learning is heavily used in SAT solving, with approaches falling into two main categories: those that guide traditional solvers and those that solve SAT problems directly (end-to-end).",
+        "Neural networks can replace traditional solver heuristics (e.g., variable selection, restart policies) when guiding a solver.",
+        "Graph Neural Networks (GNNs) can be trained to solve SAT problems end-to-end by operating on a bipartite graph representation of Boolean formulas (variables and clauses as nodes).",
+        "This work focuses on recurrent GNN variants, which allow computational scaling during inference and adaptive iteration counts per instance.",
+        "The end-to-end ML approaches (specifically the GNNs in this work) can be interpreted as bi-level optimization methods: the outer loop trains network weights, and the inner loop (during inference) optimizes variable assignments to maximize satisfied clauses."
+    ],
+    "technical_details": {
+        "algorithms": ["End-to-end GNN-based SAT solving", "Recurrent GNN variants for adaptive inference"],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks (GNNs) operating on bipartite graphs (variable and clause nodes)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.2 (SAT Solving Approaches) for context on other methods like continuous relaxations", "Section 3.3 (Graph Neural Networks) for GNN background", "Section 6 (Interpreting the Trained Model) for the bi-level optimization interpretation"],
+    "reproducibility_notes": ["Importance of using a bipartite graph representation for the Boolean formula (variables and clauses as nodes)", "Use of recurrent GNN architecture to allow flexible inference iteration counts"]
+}
+```

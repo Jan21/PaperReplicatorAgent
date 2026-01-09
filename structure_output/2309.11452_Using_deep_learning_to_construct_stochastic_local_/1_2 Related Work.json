@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "1.2 Related Work",
+    "section_purpose": "This section reviews previous research relevant to the paper's contributions, specifically focusing on deep learning for SAT solving and stochastic local search (SLS) algorithms with performance guarantees.",
+    "key_points": [
+        "Reviews existing work on deep learning-based SAT solving, which typically focuses on predicting solver runtime or heuristic efficiency.",
+        "Highlights that most existing SLS algorithms with performance guarantees rely on random or human-designed heuristics.",
+        "Identifies a gap where learning-based methods are not integrated with SLS algorithms that have formal performance bounds.",
+        "Introduces the novel contribution of the paper: using deep learning to construct SLS algorithms that maintain formal performance guarantees."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["1 Introduction"],
+    "reproducibility_notes": []
+}
+```

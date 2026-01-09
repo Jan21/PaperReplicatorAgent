@@ -1,0 +1,55 @@
+```json
+{
+    "section_title": "3.3 Model",
+    "section_purpose": "This section describes the specific Graph Neural Network (GNN) architecture used to predict the optimal SAT solver for a given instance. It explains how the literal-clause graph representation is modeled as a heterogeneous graph and the details of the graph convolution operations.",
+    "key_points": [
+        "The model uses a Graph Neural Network (GNN) adapted to operate on a heterogeneous graph with three edge types: clause-to-literal, literal-to-clause, and between positive/negative literal nodes.",
+        "The graph convolution process is edge-type-dependent, involving message functions, aggregation functions, and update functions specific to each edge type.",
+        "Node embeddings are initialized with specific dimensional feature vectors for clause nodes (17-dim), positive literal nodes (3-dim), and negative literal nodes (3-dim) from Table 7.",
+        "Two rounds of convolutions are applied using an adaptation of the Kipf and Welling GCN framework with ReLU nonlinearities and mean aggregation functions.",
+        "The architecture includes learnable weight matrices (W_poslit, W_neglit) and bias terms (b) for the convolution operations, with degree normalization applied."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Heterogeneous Graph Neural Network for SAT instance representation",
+            "Edge-type-dependent graph convolution with message passing, aggregation, and update steps",
+            "Two rounds of graph convolutions based on Kipf and Welling GCN framework"
+        ],
+        "formulas": [
+            "Message computation: m_i,j,k = φ_k(x_i, x_j) where φ_k is learnable message function for edge type k",
+            "Message aggregation: m̄_i,k = ρ_k({m_i,j,k | (j,i)∈ε_k}) where ρ_k is aggregation function for edge type k",
+            "Node update: x_i ← δ({ψ_k(x_i, m̄_i,k) | k=1...K}) where ψ_k is learnable update function and δ is edge-type aggregation",
+            "Concrete convolution formula for clause nodes: x_clause,i ← relu(b + Σ_j∈N_poslit(i) (W_poslit * x_poslit,j)/√(deg(i)deg(j)) + Σ_j∈N_poslit(i) (W_neglit * x_neglit,j)/√(deg(i)deg(j)))"
+        ],
+        "architectures": [
+            "Heterogeneous GNN with three node types (clause, positive literal, negative literal)",
+            "Three edge types: clause→literal, literal→clause, positive↔negative literal",
+            "Graph convolution layers inspired by Kipf and Welling GCN with degree normalization"
+        ],
+        "hyperparameters": {
+            "convolution_layers": 2,
+            "clause_node_feature_dim": 17,
+            "positive_literal_node_feature_dim": 3,
+            "negative_literal_node_feature_dim": 3,
+            "nonlinearity": "relu",
+            "aggregation_functions": "mean"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.2 Representation and features (for understanding node feature initialization dimensions)",
+        "Table 7 (referenced for specific feature dimensions but not included in this section)",
+        "Figure 1 (referenced architecture diagram not included in this section)",
+        "Knowledge of SAT instance representation as literal-clause graph",
+        "Kipf and Welling GCN framework [27]"
+    ],
+    "reproducibility_notes": [
+        "The specific node feature vector dimensions: 17 for clause nodes, 3 for positive literal nodes, 3 for negative literal nodes",
+        "The use of two rounds of graph convolutions",
+        "The exact convolution formula with learnable weight matrices W_poslit, W_neglit and bias b",
+        "The use of ReLU nonlinearities and mean aggregation functions",
+        "The heterogeneous graph structure with three edge types",
+        "The degree normalization factor √(deg(i)deg(j)) in convolution operations"
+    ]
+}
+```

@@ -1,0 +1,52 @@
+{
+  "section_title": "B.2 Vertex Coloring",
+  "section_purpose": "This section describes the experimental setup for the Vertex Coloring (k-COL) problem, including problem definition, data generation methods, baseline configurations, and evaluation criteria.",
+  "key_points": [
+    "Definition of the k-COL CSP instance with variables for vertices, domain of colors, and inequality constraints on edges.",
+    "Use of the decision problem variant where the number of colors k is given, and ANYCSP aims to find conflict-free colorings, with comparisons to baselines that may have different objectives.",
+    "Data generation using a uniform mix of Erdős-Rényi, Barabási-Albert, and random geometric graphs with n=50 vertices, and a method to set k based on greedy coloring results.",
+    "Description of baselines including RUNCSP, Picat, CoSoCo, HybridEA, greedy algorithm, and DSATUR, with specific configurations and training details.",
+    "Reference to detailed results in tables for instances with fewer than 10 colors and 10 or more colors (Table 8 and 9)."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Greedy coloring heuristic (from NetworkX)",
+      "HybridEA with nPoint recombination and 64x factor for tabu search steps",
+      "DSATUR algorithm",
+      "RUNCSP training for 100K steps per model"
+    ],
+    "formulas": [
+      "Equation (22): k = max(3, min(10, k' - 1)), where k' is the number of colors from greedy heuristic"
+    ],
+    "architectures": [],
+    "hyperparameters": {
+      "Erdős-Rényi_p_range": "[0.1, 0.3]",
+      "Barabási-Albert_m_range": "[2, 10]",
+      "Random_geometric_r_range": "[0.15, 0.3]",
+      "vertices_n_training": "50",
+      "vertices_n_validation": "200",
+      "color_k_range": "[3, 10]",
+      "RUNCSP_training_steps": "100K",
+      "RUNCSP_k_values": "{4, 5, 6, 7, 8, 9}",
+      "HybridEA_recombination": "nPoint",
+      "HybridEA_tabu_factor": "64"
+    },
+    "datasets": [
+      "Mixed graph distribution: Erdős-Rényi, Barabási-Albert, Random geometric with n=50 for training and n=200 for validation"
+    ]
+  },
+  "dependencies": [
+    "Understanding of CSP basics from Section 3 Preliminaries",
+    "Knowledge of ANYCSP model from Section 4 Method",
+    "Reference to RUNCSP from Tönshoff et al. (2021)",
+    "Baseline methods: DSATUR, greedy algorithm, HybridEA, Picat, CoSoCo"
+  ],
+  "reproducibility_notes": [
+    "Graph generation parameters for training and validation data",
+    "Method for determining k based on greedy coloring",
+    "Training configuration for RUNCSP models (100K steps per k in {4,...,9})",
+    "Parameters for HybridEA (nPoint recombination, 64x factor for tabu steps)",
+    "Reduction of coloring instances to XCSP3 format for Picat and CoSoCo solvers",
+    "Evaluation timeout of 20 minutes"
+  ]
+}

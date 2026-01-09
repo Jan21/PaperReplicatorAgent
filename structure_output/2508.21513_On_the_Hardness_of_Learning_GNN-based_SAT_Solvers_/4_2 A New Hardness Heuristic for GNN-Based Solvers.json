@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2 A New Hardness Heuristic for GNN-Based Solvers",
+    "section_purpose": "To introduce and validate two novel curvature-based heuristics that predict the difficulty a GNN-based SAT solver will have in generalizing to a particular dataset, moving beyond simple clause density measures.",
+    "key_points": [
+        "Two new heuristics, ω(G) and ω*(G), are defined based on the average and variance of graph Ricci curvature to quantify dataset hardness for GNN-based solvers.",
+        "The heuristics aim to capture aspects of message-passing bottlenecks (oversquashing) that raw clause density (α) misses, relating dataset structure to GNN generalization.",
+        "A correlation analysis shows these curvature-based heuristics are far better predictors of NeuroSAT's generalization error (1 - testing accuracy) than average clause density.",
+        "The performance gains from the previously discussed test-time rewiring procedure (Section 3.1) are formally motivated by these results.",
+        "Analysis of the CA dataset reveals that while it has high clause density, its lower average curvature (due to community structure with fewer bottlenecks) makes it easier for GNNs, explaining prior performance observations."
+    ],
+    "technical_details": {
+        "algorithms": ["Definition of two hardness heuristics based on graph Ricci curvature statistics."],
+        "formulas": ["ω(G) = -𝔼_{(i~j)}[Ric(i,j)] * 𝔼[α]", "ω*(G) = ω(G) / 𝕍_{(i~j)}[Ric(i,j)] (Equation 11)", "Heuristics averaged over datasets to get ω̄ and ω̄*."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["The four benchmarks from Section 4.1 (implied: includes CA dataset and random 4-SAT problems)."]
+    },
+    "dependencies": ["Section 3.1 (Message-Passing Bottlenecks and theory of oversquashing)", "Section 4.1 (Relationship Between Curvature and Satisfiability & the four benchmarks)", "Background on Graph Ricci Curvature (Sections 2.3 & A.1)", "NeuroSAT model (referenced but defined elsewhere)."],
+    "reproducibility_notes": ["Definition of the two heuristics ω(G) and ω*(G) (Equation 11).", "Procedure to compute expectations and variance of Ricci curvature over graph edges.", "Correlation results between heuristics (ω̄, ω̄*) and generalization error vs. clause density (ᾱ): ρ_ᾱ=0.32, ρ_ω̄=0.86, ρ_ω̄*=0.98.", "Identification that the specific benchmarks are those from Section 4.1."]
+}
+```

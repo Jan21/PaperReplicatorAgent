@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "2 Related Work",
+    "section_purpose": "To situate the paper's research within the existing landscape of neural approaches to SAT solving, highlighting direct influences, alternative directions, and relevant connections to continuous relaxations.",
+    "key_points": [
+        "The work builds directly on NeuroSAT, an end-to-end neural SAT solver using a recurrent message-passing architecture, and explores simplified variants and training improvements like curriculum learning.",
+        "Other neural SAT approaches include G4SATBench (benchmarking various GNN architectures) and hybrid methods like NeuroCore/NeuroComb that integrate neural networks with traditional CDCL solvers.",
+        "The connection between neural networks and continuous relaxations is highlighted, with FourierSAT transforming SAT into continuous optimization and other works linking GNNs to semidefinite programming (SDP) relaxations.",
+        "The paper distinguishes its focus on the recurrent message-passing paradigm from NeuroSAT, investigating specific training objectives and graph representations, as opposed to broader architecture exploration or hybrid solving."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Recurrent message-passing architecture (from NeuroSAT)", "RNNs and LSTMs (simplified variants)", "GCN, GGNN, GIN (referenced from G4SATBench)", "Restricted Boltzmann Machine-based architecture (Warde-Farley et al.)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Introduction (to understand the problem context and high-level goal)", "Section 3 (Relevant Background, for understanding SAT, GNNs, and diffusion concepts)"],
+    "reproducibility_notes": ["Key references for foundational works: NeuroSAT, G4SATBench, NeuroCore, NeuroComb, FourierSAT, and studies linking GNNs to SDP relaxations."]
+}
+```

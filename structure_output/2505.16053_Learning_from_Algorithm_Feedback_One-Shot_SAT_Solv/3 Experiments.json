@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "3 Experiments",
+    "section_purpose": "This section presents the experimental setup and main results to evaluate the RLAF-guided SAT solvers against base solvers, aiming to answer specific research questions about performance, generalization, and comparison to supervised approaches.",
+    "key_points": [
+        "The experiments aim to answer whether RLAF-trained GNN policies can shorten solver runtimes and generalize to harder formulas, and how they compare to supervised learning approaches.",
+        "Experiments use two distinct base SAT solvers: the CDCL solver Glucose (good on structured problems) and the DPLL solver March (good on random instances).",
+        "Three SAT problem classes with different structures are used: Random 3SAT, Graph Coloring (3COL), and Cryptographic instances (CRYPTO), each with training and progressively harder test sets.",
+        "Main results (shown in a table) demonstrate that RLAF guidance significantly reduces the number of decisions and runtime for both solvers across all datasets, especially on larger/harder instances.",
+        "Hyperparameters include a 10-layer GNN with embedding dimension 256, trained for 2000 GRPO iterations with specific batch sizes, using substantial computational resources."
+    ],
+    "technical_details": {
+        "algorithms": ["RLAF (Reinforcement Learning from Algorithm Feedback) guided SAT solvers (Glucose + RLAF, March + RLAF)"],
+        "formulas": ["3SAT(n): uniform random 3SAT with n variables, clause-to-variable ratio 4.26", "3COL(n): SAT problems for 3-colorability of random Erdős-Rényi graphs with n vertices, expected degree 4.67", "CRYPTO(n): SAT instances from HiTag2 cipher decryption attacks with n help bits"],
+        "architectures": ["GNN with 10 layers, embedding dimension d = 256"],
+        "hyperparameters": {
+            "GNN_layers": "10",
+            "embedding_dimension": "256",
+            "GRPO_iterations_K": "2000",
+            "training_formulas_per_iteration_N": "100",
+            "parameterizations_per_formula_M": "40",
+            "SGD_steps_per_iteration": "50"
+        },
+        "datasets": ["Random 3SAT: train on 3SAT(200) 20K instances, test on n ∈ {300, 350, 400} (200 instances each size)", "Graph Coloring (3COL): train on 3COL(300) 20K instances, test on n ∈ {400, 500, 600} (200 instances each size)", "Cryptographic (CRYPTO): train on CRYPTO(22) 20K instances, test on n ∈ {20, 15, 10} (100 instances each)"]
+    },
+    "dependencies": ["Section 2 (RLAF-guided SAT Solvers) for understanding the guidance policy and training method", "Appendix A.3 for details on RLAF integration into solvers", "Appendix B.1 for full data generation and statistics", "Knowledge of SAT solvers Glucose and March"],
+    "reproducibility_notes": ["Specific dataset distributions and sizes for training and testing", "GNN architecture details (10 layers, d=256)", "GRPO training hyperparameters (K=2000, N=100, M=40, SGD steps=50)", "Computational setup (H100 GPU, 48-core CPU, 128GB RAM)", "Integration details of RLAF into base solvers (referenced from Appendix A.3)"]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "This section introduces the Boolean Satisfiability Problem (SAT), highlights challenges in traditional heuristic design, presents the motivation for using Graph Neural Networks (GNNs) for SAT solving, identifies key issues in current GNN-based SAT research, and introduces the proposed G4SATBench benchmark as a solution.",
+    "key_points": [
+        "SAT is a fundamental problem solved by modern solvers using CDCL or LS heuristics, but designing effective heuristics is difficult with limited recent improvement.",
+        "GNNs show promise for analyzing structured data and have been applied to SAT solving, but diverse objectives, datasets, and implementation issues make fair evaluation and comparison challenging.",
+        "Existing GNN-based SAT approaches vary widely in learning objectives (e.g., satisfiability prediction, unsat-core variable classification, satisfying assignment construction) and use different datasets, hindering unified assessment.",
+        "The paper proposes G4SATBench, a comprehensive benchmark to systematically evaluate GNNs for SAT solving, featuring diverse datasets, re-implemented baselines with unified interfaces, thorough analyses, and experiments comparing GNN heuristics to traditional CDCL/LS heuristics.",
+        "Preliminary findings indicate GNNs tend to learn heuristics similar to greedy local search for finding satisfying assignments but fail to effectively learn CDCL heuristics in latent space."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

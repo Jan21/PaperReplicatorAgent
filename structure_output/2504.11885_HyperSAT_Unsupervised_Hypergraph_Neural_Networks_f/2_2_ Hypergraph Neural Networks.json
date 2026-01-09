@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "2.2. Hypergraph Neural Networks",
+    "section_purpose": "To formally define the hypergraph structure and introduce the fundamental concepts and operations of Hypergraph Neural Networks (HGNN), establishing the theoretical basis for the HyperSAT method presented later.",
+    "key_points": [
+        "A hypergraph is defined as a set of nodes, a set of hyperedges (which are non-empty subsets of nodes), and a diagonal weight matrix for hyperedges, represented by an incidence matrix.",
+        "Hypergraph Neural Networks (HGNN) perform representation learning by capturing higher-order dependencies between nodes via hypergraph structure and spectral convolution.",
+        "HGNN uses hyperedge convolution operations, approximated with Chebyshev polynomials to reduce computational complexity and avoid explicit eigenvector computation.",
+        "The core operation of an HGNN layer is defined by a specific propagation formula that updates node features using the incidence matrix, degree matrices, weights, and learnable filters."
+    ],
+    "technical_details": {
+        "algorithms": ["Hypergraph Neural Networks (HGNN) for representation learning", "Hyperedge convolution operation for feature extraction", "Approximation using Chebyshev polynomials to reduce complexity"],
+        "formulas": ["Hypergraph definition: \\(\\mathcal{G} = (\\mathcal{V},\\mathcal{E},\\mathbf{W})\\)", "Incidence matrix \\(\\boldsymbol{H}\\) with \\(\\boldsymbol{H}_{i,j} = 1\\) if \\(v_{i}\\in e_{j}\\)", "Vertex degree: \\(d(v_{i}) = \\sum_{j = 1}^{|\\mathcal{E}|}\\boldsymbol{H}_{i,j}\\boldsymbol{W}_{j,j}\\)", "Edge degree: \\(\\delta (e_{j}) = \\sum_{i = 1}^{|\\mathcal{V}|}\\boldsymbol{H}_{i,j}\\)", "HGNN layer update: \\(\\boldsymbol{X}^{(l + 1)} = \\sigma \\left(\\boldsymbol{D}_{v}^{-1 / 2}\\boldsymbol {H}\\boldsymbol {W}\\boldsymbol{D}_{e}^{-1}\\boldsymbol {H}^{\\top}\\boldsymbol{D}_{v}^{-1 / 2}\\boldsymbol {X}^{(l)}\\boldsymbol {\\Theta}^{(l)}\\right)\\)"],
+        "architectures": ["Hypergraph Neural Network (HGNN) layer structure"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of basic graph theory concepts (nodes, edges, adjacency/incidence matrices)", "Familiarity with spectral graph convolution concepts (optional, as it is introduced here)"],
+    "reproducibility_notes": ["Definition of hypergraph components (nodes, hyperedges, weight matrix, incidence matrix).", "Formulas for calculating vertex and hyperedge degrees from the incidence matrix and weights.", "The core HGNN layer propagation formula for updating node features."]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "This section introduces the challenge of solving combinatorial optimization (CO) problems, discusses existing approaches including machine learning and LLM-based methods, identifies their limitations regarding structural prior exploitation, and presents the novel STRCMP framework that integrates graph structural priors with LLMs.",
+    "key_points": [
+        "Combinatorial optimization problems are NP-hard and critical in many real-world applications, but current solutions require specialized expertise and struggle with computational complexity.",
+        "Existing ML approaches for CO (end-to-end neural solvers, ML-augmented configuration, hybrid methods) face limitations in generalization and interpretability that hinder real-world adoption.",
+        "Recent LLM-based approaches show promise due to improved interpretability, but primarily rely on textual/visual prompting and fail to exploit the inherent topological structures of CO problems.",
+        "Human experts have historically leveraged structural priors to design efficient algorithms, suggesting that integrating structural information could improve LLM-based CO solving.",
+        "STRCMP is proposed as a novel framework that explicitly integrates structural priors via GNN-extracted embeddings to guide LLM-based code generation, theoretically motivated by information theory and practical benefits."
+    ],
+    "technical_details": {
+        "algorithms": ["Evolutionary algorithm-based refinement process is mentioned as part of the framework"],
+        "formulas": [],
+        "architectures": ["Composite architecture combining a Graph Neural Network (GNN) and a Large Language Model (LLM)", "GNN extracts structural embeddings from input CO instances"],
+        "hyperparameters": {},
+        "datasets": ["Two representative CO domains mentioned: Mixed Integer Linear Programming and Boolean Satisfiability, spanning nine benchmark datasets"]
+    },
+    "dependencies": ["General knowledge of combinatorial optimization problems", "Familiarity with machine learning paradigms for CO", "Basic understanding of LLM capabilities and limitations"],
+    "reproducibility_notes": ["Concept of extracting structural embeddings using GNN from CO instances", "Integration method where GNN embeddings serve as inductive biases for LLM code generation", "Evolutionary algorithm-based refinement process for iterative improvement"]
+}
+```

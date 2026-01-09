@@ -1,0 +1,20 @@
+{
+  "section_title": "4.4 Effects of Different Knowledge Transfer Strategies",
+  "section_purpose": "To verify the knowledge transfer ability of the model by examining how different source domains (Max-SAT, Max-Cut, MDS) affect performance on the target domain MIS, and to demonstrate the impact of domain relevance on transferability.",
+  "key_points": [
+    "The model's transfer ability is tested with MIS as the target domain and Max-SAT, Max-Cut, and MDS as source domains, using pre-training and domain adaptation.",
+    "Max-SAT → MIS consistently yields the best performance, indicating Max-SAT has the strongest and most general transferability across CO problems.",
+    "MDS → MIS performs better than Max-Cut → MIS, suggesting MDS is more relevant to MIS than Max-Cut.",
+    "Different source domains significantly affect target domain performance, with irrelevant tasks potentially causing negative transfers.",
+    "Experiments were conducted on two node scales (450 and 760 variables), with results visualized in heat maps showing performance variations."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["Source domains: Max-SAT, Max-Cut, MDS; Target domain: MIS; Node scales: 450 variables, 760 variables"]
+  },
+  "dependencies": ["Section 3.4 Pre-Training and Fine-Tuning with Domain Adaptation", "Section 4.1 Experimental Setup", "Research question Q3 from introduction or methodology"],
+  "reproducibility_notes": ["Specify source domains (Max-SAT, Max-Cut, MDS) and target domain (MIS)", "Use node scales of 450 and 760 variables for experiments", "Apply the pre-training and domain adaptation framework described in Section 3", "Evaluate performance using metrics and methods from the experimental setup"]
+}

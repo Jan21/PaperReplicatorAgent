@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5.2 Experimental setup and result",
+    "section_purpose": "To describe the experimental configurations, including model hyperparameters, hardware setup, and baseline model implementations, used to evaluate the proposed method.",
+    "key_points": [
+        "The output dimension of the model's \\(\\mathcal{R}\\) layer is set to 10.",
+        "The Adam optimizer is used for training.",
+        "Baseline models NeuroSAT and DG-DAGRNN are implemented following their original publications.",
+        "The DG-DAGRNN model had to be re-implemented as its source code was not public.",
+        "All models were trained and tested on a server with two NVIDIA GeForce RTX 3090 GPUs."
+    ],
+    "technical_details": {
+        "algorithms": ["Adam optimizer used for training"],
+        "formulas": [],
+        "architectures": ["Mentions an \\(\\mathcal{R}\\) layer with output dimension 10"],
+        "hyperparameters": {"R_layer_output_dim": "10", "optimizer": "Adam"},
+        "datasets": []
+    },
+    "dependencies": ["Section 4 (Our Methods) for the proposed GNN architecture containing the \\(\\mathcal{R}\\) layer", "References [Selsam et al., 2018] and [Amizadeh et al., 2018] for baseline model configurations"],
+    "reproducibility_notes": ["Output dimension (10) of the \\(\\mathcal{R}\\) layer", "Use of the Adam optimizer", "Hardware specifications (server with 2x NVIDIA RTX 3090 GPUs)", "Note that DG-DAGRNN was re-implemented based on its paper"]
+}
+```

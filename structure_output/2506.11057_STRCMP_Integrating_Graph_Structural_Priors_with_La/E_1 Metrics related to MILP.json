@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "E.1 Metrics related to MILP",
+    "section_purpose": "To define and explain the specific evaluation metrics used to assess performance on Mixed-Integer Linear Programming (MILP) problems in the paper's experiments.",
+    "key_points": [
+        "The evaluation uses metrics established in prior MILP literature (HEM) for fair comparison.",
+        "For instances solved to optimality, the primary metric is solving time (runtime).",
+        "For instances not solved within the time limit, the primal-dual gap is used, defined as the absolute difference between the global primal bound (best feasible solution) and global dual bound (strongest lower bound).",
+        "The primal-dual (PD) integral quantifies the cumulative optimality gap over the entire solving horizon, calculated as the area between primal and dual bound trajectories.",
+        "The PD integral was the primary evaluation criterion in the NeurIPS 2021 ML4CO competition, establishing it as a key benchmark."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Primal-Dual Integral: ∫ from t=0 to T of (w^T x_t* - z_t*) dt, where w is the objective coefficient vector, x_t* is the incumbent feasible solution at time t, and z_t* is the tightest dual bound at time t."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 5 (Experimental Evaluation) for the context of how these metrics are applied", "Prior work referenced as HEM [15, 16, 14]", "SCIP 8.0.0 solver [52] for implementation specifics like initial gap value"],
+    "reproducibility_notes": ["Definition of solving time metric for instances solved optimally", "Definition and calculation method for the primal-dual gap", "Mathematical formula for calculating the primal-dual integral", "Note that the initial primal-dual gap in SCIP 8.0.0 is initialized to 100"]
+}
+```

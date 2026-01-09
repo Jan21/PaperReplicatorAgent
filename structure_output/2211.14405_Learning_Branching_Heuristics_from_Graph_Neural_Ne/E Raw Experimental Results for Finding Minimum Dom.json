@@ -1,0 +1,19 @@
+{
+  "section_title": "E Raw Experimental Results for Finding Minimum Dominating Cliques",
+  "section_purpose": "This section presents raw experimental results for the minimum dominating clique problem, comparing the performance of different GNN-enhanced solvers (using various loss functions) against the original solver on synthetic graph instances.",
+  "key_points": [
+    "Three GNN models were trained for finding minimum dominating cliques, differing in their loss functions (Equation (5) and two variants of Equation (6) with different expected size calculations).",
+    "Six GNN-enhanced solvers were created by combining the three models with fast and accurate versions of joint information entropy.",
+    "Experiments were run on training, validation, and test data generated from G(n,p) random graphs with edge probability p ∈ (0.4, 0.41) and 50 instances per graph size n.",
+    "Results are shown in Tables 5, 6, and 7, comparing the original solver (O) and the GNN-based solvers (labeled (5), (6), and (7) corresponding to their loss functions)."
+  ],
+  "technical_details": {
+    "algorithms": ["GNN models with loss functions from Equations (5) and (6)", "Two methods for computing expected set size E(|S|): sum of probabilities and Equation (7)"],
+    "formulas": ["Equation (5) loss function", "Equation (6) loss function", "Equation (7) for calculating expected set size"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["Synthetic graphs generated from G(n,p) with p ∈ (0.4, 0.41), 50 instances per n"]
+  },
+  "dependencies": ["Section 3.1 (GNN model)", "Section 3.2 (loss function for maximum clique)", "Section 3.3 (loss function for dominating clique)", "Section 3.4 (branching heuristic)", "Understanding of minimum dominating clique problem"],
+  "reproducibility_notes": ["Exact loss functions (Equations 5, 6, 7)", "GNN architecture details (likely from Appendix A)", "Dataset generation parameters: G(n,p) with specific p range and instance count", "Details on fast and accurate joint information entropy variants"]
+}

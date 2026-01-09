@@ -1,0 +1,29 @@
+{
+  "section_title": "A Proofs",
+  "section_purpose": "To provide formal mathematical proofs for theorems that establish theoretical guarantees regarding the impact of integrating structural priors on the performance upper bound of generative models in combinatorial optimization.",
+  "key_points": [
+    "Theorem 1 proves that adding any additional modal prior does not lower the upper bound of model performance, supporting the integration of multiple priors.",
+    "Theorem 2 proves that neglecting a performance-enhancing prior decreases the performance upper bound, emphasizing the importance of specific priors.",
+    "The proofs expand performance bounds using probability distributions and conditional probabilities, relying on definitions from the paper.",
+    "These theorems provide a theoretical foundation for the proposed methodology of leveraging graph structural priors."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [
+      "Definition of performance upper bound sup(P) as a sum over priors and samples: ∑_{C∈C} ∑_{c∈C} p(c) max_w p(w|c) Φ(w).",
+      "Expansion and inequality for Theorem 1 showing sup(P_{C_K} ∪ {c_i}) ≥ sup(P_{C_K}) using conditional probabilities p(c_i|c) and joint distributions.",
+      "Inequality for Theorem 2 showing sup(P_{C \\ {c_pe}}) < sup(P_C) with derivations involving performance-enhancing prior distributions p(c_pe|c)."
+    ],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Definition 1 and Definition 2 from the theoretical analysis section (likely Section 4.2).",
+    "Basic knowledge of probability theory, conditional distributions, and generative models."
+  ],
+  "reproducibility_notes": [
+    "Clear definitions of all symbols, including priors C, performance measure Φ(w), and distributions p(c) and p(w|c).",
+    "Assumptions about the true distributions p(C_i|w) and the generative model's framework to verify the inequalities."
+  ]
+}

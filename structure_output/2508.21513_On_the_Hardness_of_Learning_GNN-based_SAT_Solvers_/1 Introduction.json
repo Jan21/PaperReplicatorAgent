@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the Boolean Satisfiability Problem (SAT), explain the rise and limitations of GNN-based SAT solvers, propose the hypothesis that oversquashing (linked to graph Ricci Curvature) limits these solvers on hard problems, and provide an overview of the paper's theoretical and experimental contributions to address this hypothesis.",
+    "key_points": [
+        "SAT is a foundational NP-Complete problem with broad applications, and GNNs have emerged as a new class of solver by learning over graph representations of SAT formulas.",
+        "GNNs, however, are fragile; their performance deteriorates on problems known to be algorithmically harder, potentially due to oversquashing—a bottleneck limiting long-range dependency modeling.",
+        "Recent theory links oversquashing to negative Ricci Curvature (RC) in graphs, prompting the question of whether RC can predict hardness for GNN-based SAT solvers.",
+        "The paper studies RC on random k-SAT problems, showing edges become more negatively curved as problems get harder and provides a theoretical connection between curvature and oversquashing.",
+        "Experimental validation on benchmark datasets shows a phase-transition link between curvature and solving probability, and that test-time rewiring to increase curvature makes problems easier for GNN solvers, suggesting curvature is a better hardness heuristic than clause density."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Random 3- and 4-SAT problems", "Datasets from the recent benchmark of Li et al. [28]"]
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "A.2 Training",
+  "section_purpose": "This section formalizes the application of the REINFORCE reinforcement learning algorithm to train the ANYCSP model, explaining how policy gradients are computed and optimized despite the extremely large action space.",
+  "key_points": [
+    "The large action space (all possible assignments) is handled efficiently by modeling probability distributions as soft assignments, where each variable's value is sampled independently.",
+    "The training objective is to maximize the discounted cumulative reward over the search trajectory, using a discount factor λ to encourage quick reward acquisition.",
+    "The REINFORCE algorithm is applied directly without a baseline or critic network, which surprisingly works effectively despite the large action space.",
+    "Policy gradients are estimated using the sampled hard assignments and their probabilities under the soft assignments, with a small ε added for numerical stability.",
+    "Training involves sampling batches of instances, running ANYCSP for T steps per instance to generate sequences, computing gradients, and updating parameters via Adam optimizer."
+  ],
+  "technical_details": {
+    "algorithms": ["REINFORCE algorithm applied to the CSP Markov Decision Process", "Training procedure with batch sampling and gradient ascent via Adam optimizer"],
+    "formulas": ["P(α|φ) = ∏_{X∈X} φ(α(X)) - probability of sampling hard assignment α from soft assignment φ", "G_t = Σ_{k=t}^T λ^{k-t} r^{(k)} - discounted future reward after step t", "∇_θJ(θ) = ∇_θ Σ_{t=1}^T G_t Σ_{X∈X} log(φ_θ^{(t)}(α^{(t)}(X)) + ε) - policy gradient estimation"],
+    "architectures": [],
+    "hyperparameters": {"discount_factor_λ": "0.75", "numerical_stability_ε": "10^{-5}", "T_steps": "T (number of search steps per instance)"},
+    "datasets": []
+  },
+  "dependencies": ["Section 4.2 (Global Search as an RL Problem) for the RL framework", "Section A.1 (Architecture) for understanding the policy GNN π_θ", "Equation 14 from this appendix for the probability computation"],
+  "reproducibility_notes": ["Discount factor λ = 0.75", "Numerical stability constant ε = 10^{-5}", "Use of Adam optimizer for gradient ascent", "Batch sampling procedure from training distribution Ω", "Training involves T-step trajectories per instance"]
+}
+```

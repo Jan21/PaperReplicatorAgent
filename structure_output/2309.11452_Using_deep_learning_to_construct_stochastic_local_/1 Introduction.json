@@ -1,0 +1,20 @@
+{
+  "section_title": "1 Introduction",
+  "section_purpose": "This section introduces the motivation for integrating deep learning into SAT solving, specifically proposing the use of Graph Neural Networks (GNNs) as oracle factories to generate instance-specific distributions for stochastic local search (SLS) solvers, based on theoretical guarantees for efficient solving.",
+  "key_points": [
+    "Deep learning has been successfully applied to constraint optimization problems, including Boolean Satisfiability (SAT), as a prototypical NP-complete problem.",
+    "Machine learning models can learn structural patterns from data distributions, enabling solvers to perform efficiently on typical instances, even if performance drops on atypical ones.",
+    "The paper's approach uses a GNN as an oracle factory to produce instance-specific sampling oracles for SLS solvers, differing from methods that only use ML for initial solutions.",
+    "The work is motivated by theoretical computer science results that provide sufficient conditions for SLS solvers with appropriate oracles to find solutions efficiently.",
+    "Figure 1 illustrates the general idea: from basic SLS to oracle-based SLS, and finally using a learned oracle factory to map instances to oracles."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["Graph Neural Networks (GNNs) as oracle factories"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Basic knowledge of SAT and stochastic local search (SLS) algorithms", "Section 2 for detailed methods", "Figure 1 for visual illustration", "Related work in deep learning based SAT solving (references [3-11])"],
+  "reproducibility_notes": ["Concept of training an oracle factory (e.g., GNN) to generate instance-specific distributions for SLS", "Theoretical foundation from references [12,13,14,15] on sufficient conditions for oracle-based SLS efficiency"]
+}

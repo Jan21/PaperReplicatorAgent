@@ -1,0 +1,38 @@
+```json
+{
+    "section_title": "A.2 Graph Neural Networks",
+    "section_purpose": "This section provides background on Graph Neural Networks (GNNs) and specifically the Message Passing Neural Network (MPNN) framework, positioning the paper's model as a specific instance of an MPNN applied to heterogeneous factor graphs.",
+    "key_points": [
+        "GNNs learn state embeddings for vertices in graph-structured data, encoding information from neighboring nodes.",
+        "The Message Passing Neural Network (MPNN) framework abstracts common GNN approaches via neural message passing over a fixed number of iterations.",
+        "Each MPNN iteration updates a node's hidden representation by aggregating messages from its neighbors using a message function M_t and an update function U_t.",
+        "After T message passing iterations, a permutation-invariant readout function R computes final node embeddings.",
+        "The paper's model is a MPNN operating on a heterogeneous factor graph, using distinct update functions for factor nodes and variable nodes, with message passing split into two phases."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Message Passing Neural Network (MPNN): A general GNN framework where vector messages are exchanged between 1-hop neighbors for T iterations.",
+            "Two-step update per iteration: 1) Compute aggregated message m_v^(t+1) from neighbors using message function M_t. 2) Update hidden state h_v^(t+1) using update function U_t.",
+            "Readout phase: After T iterations, compute final node embeddings y_v using readout function R on the set of final hidden states."
+        ],
+        "formulas": [
+            "Message aggregation: m_v^(t+1) = ∑_{w ∈ N(v)} M_t(h_v^(t), h_w^(t)) (Equation 17, top)",
+            "State update: h_v^(t+1) = U_t(h_v^(t), m_v^(t+1)) (Equation 17, bottom)",
+            "Readout: y_v = R({h_v^(T) | v ∈ G}) (Equation 18)"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3 (Method), which details the specific message passing and readout functions (Equations 9, 11, 12) referenced here.",
+        "Appendix A.1 (Factor Graphs and Belief Propagation), which defines the structure of the factor graph input.",
+        "General understanding of graph-structured data and deep learning models."
+    ],
+    "reproducibility_notes": [
+        "The core MPNN update equations (message function M_t, update function U_t, and readout function R) must be defined as differentiable functions, typically neural networks.",
+        "The number of message passing iterations T is a key hyperparameter.",
+        "For heterogeneous graphs (like factor graphs), separate update functions must be implemented for different node types (factors and variables)."
+    ]
+}
+```

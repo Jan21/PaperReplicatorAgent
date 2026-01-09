@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B.3 Interpretation and Rounding",
+    "section_purpose": "This section interprets the geometric meaning of the Semidefinite Programming (SDP) solution for MAX-2-SAT and describes a method to 'round' the continuous vector solution back into a discrete Boolean variable assignment.",
+    "key_points": [
+        "The SDP solution can be visualized as positioning unit vectors, where vectors for variables to be set TRUE move closer to a reference vector y0, and vectors for FALSE variables move away from it.",
+        "For satisfiable formulas, the objective function drives vectors to form two well-separated clusters; for unsatisfiable or hard-to-satisfy formulas, vectors become scattered.",
+        "A simple rounding scheme assigns Boolean values based on the sign of the inner product ⟨y0, yi⟩. A random hyperplane rounding yields a provable 0.8785 approximation guarantee for the MAX-2-SAT optimum.",
+        "Satisfiability can be checked by verifying if the SDP objective reaches the total number of clauses in the formula, allowing the SDP formulation to act as an incomplete SAT solver.",
+        "For MAX-SAT with larger clauses (beyond 2-SAT), empirical observation indicates the SDP convergence threshold must be decreased significantly to obtain good approximations."
+    ],
+    "technical_details": {
+        "algorithms": ["Rounding via inner product sign (sign(⟨y0, yi⟩))", "Random hyperplane rounding (0.8785-approximation algorithm)"],
+        "formulas": ["Inner product ⟨y0, yj⟩ indicates assignment (positive for TRUE, negative for FALSE)", "Objective function value equal to number of clauses indicates satisfiability"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Previous sections in Appendix B (B.1 Derivation of the SDP Relaxation, B.2 Relaxation to Semidefinite Programming)", "Understanding of the SDP matrix Y and its factorization into vectors yi", "Knowledge of MAX-2-SAT problem definition from Section 3.1.2"],
+    "reproducibility_notes": ["Rounding procedure: compute sign(⟨y0, yi⟩) for each variable i", "Verification method: check if SDP objective equals total clause count", "Empirical note: for MAX-k-SAT (k>2), convergence threshold must be decreased from the MAX-2-SAT setting"]
+}
+```

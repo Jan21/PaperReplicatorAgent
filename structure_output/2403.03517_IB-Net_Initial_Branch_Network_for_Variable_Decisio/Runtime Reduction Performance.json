@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Runtime Reduction Performance",
+    "section_purpose": "This section presents a comparative analysis of end-to-end runtime performance, demonstrating IB-Net's efficiency gains over the baseline solver Kissat and other neural SAT solving approaches.",
+    "key_points": [
+        "IB-Net achieves the shortest average runtime and shows improvement over Kissat on both LEC Circuit and SAT Competition datasets.",
+        "IB-Net improves average runtime by 19 seconds (5%) on LEC Circuit and 15 seconds (8.3%) on SAT Competition compared to Kissat.",
+        "Other methods (NeuroCore, NeuroSAT, NLocalSAT) exhibit much longer average runtimes compared to Kissat and face additional halted instances, while IB-Net reduces halted instances.",
+        "On three main circuit subsets of the LEC dataset, IB-Net consistently outperforms all other methods, validating its universal effectiveness for UNSAT problems.",
+        "There is consistency between UNSAT-core prediction quality and runtime efficiency improvement, suggesting that eliminating non-core variables from decision queues improves performance."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["LEC Circuit dataset", "SAT Competition dataset", "Three main circuits in LEC dataset: Circuit1, Circuit2, Circuit3"]
+    },
+    "dependencies": ["Table 3 (UNSAT-core prediction results)", "Table 4 (Model performance comparison)", "Table 5 (Circuit-specific performance)", "Knowledge of compared methods: Kissat, NeuroCore, NeuroSAT, NLocalSAT"],
+    "reproducibility_notes": ["Baseline solver: Kissat", "Runtime metrics: Average Runtime (A.RT), Improvement in seconds (Imp.), Improvement percentage (Imp.%), Halted instances count and percentage", "Comparison methods: NeuroCore, NeuroSAT, NLocalSAT, IB-Net"]
+}
+```

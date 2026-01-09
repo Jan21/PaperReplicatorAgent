@@ -1,0 +1,40 @@
+```json
+{
+    "section_title": "C Training Data for (Minimum) Dominating Cliques",
+    "section_purpose": "To describe the methodology for generating the training, validation, and test datasets used to learn branching heuristics for the dominating clique and minimum dominating clique problems.",
+    "key_points": [
+        "Training data is generated from Erdős–Rényi random graphs (G(n,p)) using a phase-transition threshold at p ≈ 0.381 to produce hard-to-solve instances.",
+        "For the dominating clique problem, the dataset consists of 2650 instances with n from 75 to 800, including 1250 hard instances (p ≈ 0.371) and 1400 easy instances (p outside (0,0.35) ∪ (0.4,1)).",
+        "Training uses 750 hard instances and all 1400 easy instances (2150 total), with the remaining 500 hard instances reserved for validation and testing.",
+        "For the minimum dominating clique problem, a new set of 1250 instances with p between 0.4 and 0.41 replaces the hard instances to create graphs with few minimum-size dominating cliques.",
+        "Easy instances are reused for minimum dominating clique training, while the new 1250 instances are split into 750 for training and 500 for validation/testing."
+    ],
+    "technical_details": {
+        "algorithms": ["Data generation from G(n,p) random graph model"],
+        "formulas": ["Phase transition threshold: p = (3 - √5)/2 ≈ 0.381", "Hard instance probability: p ≈ 0.371"],
+        "architectures": [],
+        "hyperparameters": {
+            "n_range": "75 to 800",
+            "hard_instances_p": "≈0.371",
+            "easy_instances_p_range": "(0,0.35) ∪ (0.4,1)",
+            "min_dominating_clique_p_range": "0.4 to 0.41",
+            "total_instances_dominating_clique": "2650",
+            "training_instances_dominating_clique": "2150 (750 hard + 1400 easy)",
+            "validation_test_instances_dominating_clique": "500 hard",
+            "new_instances_min_dominating_clique": "1250",
+            "training_instances_min_dominating_clique": "750 new + 1400 easy"
+        },
+        "datasets": [
+            "G(n,p) random graphs for dominating clique problem",
+            "G(n,p) random graphs for minimum dominating clique problem"
+        ]
+    },
+    "dependencies": ["Section 2 (Dominating Clique definition)", "Section 3.3 (Loss Function for Minimum Dominating-Clique Problem)", "Reference [9] for phase transition threshold"],
+    "reproducibility_notes": [
+        "Use G(n,p) random graph model with specified probability ranges: p≈0.371 for hard instances, p outside (0,0.35)∪(0.4,1) for easy instances, and p∈[0.4,0.41] for minimum dominating clique instances.",
+        "Graph size n should range from 75 to 800 vertices.",
+        "Dataset splits: 2150 for training, 500 for validation/testing for dominating clique; 2150 (750 new + 1400 easy) for training, 500 for validation/testing for minimum dominating clique.",
+        "Note the rationale for choosing p∈[0.4,0.41] to ensure few minimum-size dominating cliques exist."
+    ]
+}
+```

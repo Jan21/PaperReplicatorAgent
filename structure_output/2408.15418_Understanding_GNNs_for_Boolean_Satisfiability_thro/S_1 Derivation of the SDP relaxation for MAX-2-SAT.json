@@ -1,0 +1,27 @@
+```json
+{
+    "section_title": "S.1 Derivation of the SDP relaxation for MAX-2-SAT",
+    "section_purpose": "This appendix section provides a detailed derivation of the semidefinite programming (SDP) relaxation for the MAX-2-SAT problem, showing how Boolean variables are transformed into continuous vector variables, which forms the theoretical foundation for comparing SDP optimization with GNN behavior.",
+    "key_points": [
+        "The derivation introduces an auxiliary variable y₀ to resolve sign ambiguity when mapping Boolean variables xᵢ to relaxed variables yᵢ ∈ {-1,1}, with truth assignment determined by comparing yᵢ to y₀: xᵢ is True iff yᵢ = y₀.",
+        "Clause satisfaction values v(c) are expressed as quadratic functions of the y variables, leading to an integer quadratic program objective function ∑ v(c).",
+        "The integer program is reformulated using symmetric coefficient matrix W and variable matrix Y where Yᵢⱼ = yᵢ·yⱼ, with objective function Tr(WY).",
+        "Relaxation occurs in two steps: first allowing yᵢ to be real values in [-1,1], then further relaxing to unit vectors in high-dimensional space (SDP relaxation).",
+        "The final SDP relaxation with vector variables and rounding via random hyperplanes is shown to closely resemble the behavior of Graph Neural Networks."
+    ],
+    "technical_details": {
+        "algorithms": ["SDP relaxation derivation for MAX-2-SAT", "Rounding via random hyperplane separation"],
+        "formulas": [
+            "v(xᵢ) = (1 + y₀·yᵢ)/2",
+            "v(¬xᵢ) = (1 - y₀·yᵢ)/2", 
+            "v(xᵢ ∨ ¬xⱼ) = ¼(1 + y₀·yᵢ) + ¼(1 - y₀·yⱼ) + ¼(1 + yᵢ·yⱼ)",
+            "Objective: Maximize ∑ v(c) or equivalently Tr(WY) where Yᵢⱼ = yᵢ·yⱼ"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Background on Boolean Satisfiability (Section 2.1)", "Semidefinite Programming for Boolean Satisfiability (Section 2.3)", "Figure 5 referenced in the text (visualization of the lifting process)"],
+    "reproducibility_notes": ["The precise mapping from Boolean variables to SDP variables with auxiliary y₀", "The derived quadratic expressions for clause satisfaction v(c)", "The reformulation from integer quadratic program to trace form Tr(WY)", "The final relaxation to unit vectors in high-dimensional space"]
+}
+```

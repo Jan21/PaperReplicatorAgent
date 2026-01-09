@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "E.2 Metrics related to SAT",
+    "section_purpose": "This section defines the specific evaluation metrics used to assess the performance and efficiency of SAT solvers in the experimental evaluation, ensuring fairness and consistency with prior work in the SAT community.",
+    "key_points": [
+        "Three primary metrics are defined for evaluating SAT solving performance: Solving Time, Number of Timeout, and PAR-2 score.",
+        "The metrics are explicitly adopted from the standard AutoSAT benchmark to ensure fair comparison.",
+        "Solving Time is measured only for instances solved within the timeout limit; for unsolved instances, alternative metrics like Number of Timeout and PAR-2 are used.",
+        "The timeout limit τ is set to 5000 seconds for consistency with the referenced prior work.",
+        "PAR-2 (Penalized Average Runtime with a factor of 2) is the key aggregated metric that penalizes unsolved instances with double the timeout time, providing a comprehensive efficiency assessment."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["PAR-2 metric defined as: PAR-2 = (1/n) * Σᵢ tᵢ, where tᵢ is the runtime if ≤ τ; otherwise tᵢ = 2τ for timeout or failure."],
+        "architectures": [],
+        "hyperparameters": {"timeout limit τ": "5000 seconds"},
+        "datasets": []
+    },
+    "dependencies": ["Section 5.3 Results (for context on the experimental results using these metrics)", "Reference to AutoSAT [29] for metric justification"],
+    "reproducibility_notes": ["The specific definition and calculation of the PAR-2 score.", "The timeout limit τ = 5000 seconds for both the Number of Timeout and PAR-2 calculations."]
+}
+```

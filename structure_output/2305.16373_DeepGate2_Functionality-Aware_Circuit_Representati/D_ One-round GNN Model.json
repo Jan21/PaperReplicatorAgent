@@ -1,0 +1,29 @@
+{
+  "section_title": "D. One-round GNN Model",
+  "section_purpose": "To propose a GNN model that captures both functional and structural information of logic gates in a circuit through one-round forward propagation.",
+  "key_points": [
+    "Separates functional embeddings (hf) and structural embeddings (hs) with different initializations: uniform functional embeddings for primary inputs (PIs) and unique orthogonal structural embeddings via a PI encoding strategy.",
+    "Designs four aggregators (for AND and NOT gates, each for structural and functional updates) using self-attention mechanism to prioritize controlling inputs.",
+    "Structural embeddings are updated only with predecessors' structural embeddings, while functional embeddings are updated with both functional and structural embeddings of predecessors.",
+    "Forward propagation proceeds level-by-level from PIs to primary outputs, with structural and functional embeddings updated per level.",
+    "The self-attention mechanism in aggregators uses weight matrices w_q, w_k, w_v and scaling by embedding dimension d."
+  ],
+  "technical_details": {
+    "algorithms": ["One-round GNN propagation", "Self-attention mechanism for aggregators", "PI encoding (PIE) strategy"],
+    "formulas": [
+      "Self-attention: α_j = softmax((w_q^T h_i) ⋅ (w_k^T h_j)^T / √d), m_j = w_v^T h_j, aggregated embedding h_i = Σ (α_j * m_j) over predecessors.",
+      "Structural embedding updates: for AND gate a: hs_a = aggr_{AND}^s(hs_j | j∈P(a)); for NOT gate b: hs_b = aggr_{NOT}^s(hs_j | j∈P(b)).",
+      "Functional embedding updates: for AND gate a: hf_a = aggr_{AND}^f([hs_j, hf_j] | j∈P(a)); for NOT gate b: hf_b = aggr_{NOT}^f([hs_j, hf_j] | j∈P(b))."
+    ],
+    "architectures": ["GNN with separate functional and structural embeddings, specific aggregators for AND and NOT gates, level-by-level propagation from PIs to POs."],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section III.A (Problem Formulation)", "Section III.B (Dataset Preparation)", "Figure 3 (propagation process)", "Prior work on attention mechanism [20] and controlling inputs [7]"],
+  "reproducibility_notes": [
+    "Initialization: uniform functional embeddings for PIs, orthogonal structural embeddings for PIs (PIE strategy).",
+    "Aggregator design: self-attention with weight matrices w_q, w_k, w_v.",
+    "Forward propagation rules: structural embeddings updated only with structural embeddings of predecessors; functional embeddings updated with both structural and functional embeddings of predecessors.",
+    "Embedding dimension d (from Eq. (5)) and number of levels N (determined by circuit)."
+  ]
+}

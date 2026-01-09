@@ -1,0 +1,41 @@
+{
+  "section_title": "4.1 Methodology",
+  "section_purpose": "To describe the methodology of the proposed STRCMP framework, which integrates graph structural priors from combinatorial optimization problems with language models through three key steps: combinatorial structure extraction, structure-aware code generation, and evolutionary code refinement.",
+  "key_points": [
+    "Combinatorial optimization problems are converted into bipartite graphs, and a Graph Neural Network (GNN) is trained via a classification task to extract structural embeddings capturing priors like symmetry, sparsity, and degeneracy.",
+    "A composite generative model is built by concatenating the trained GNN with a Large Language Model (LLM) to generate solver-specific code snippets conditioned on natural language descriptions and structural embeddings, using a probability model for token prediction.",
+    "To address architectural incompatibilities, a two-phase training protocol is implemented: data curation (collecting problem formulations, specifications, code, and metrics) and post-training (Supervised Fine-Tuning and Direct Preference Optimization on the LLM).",
+    "An evolutionary code refinement framework leverages the composite model within Evolutionary Algorithms (EAs) to iteratively improve algorithm implementations using selection, crossover, and mutation, achieving faster convergence and higher-quality outputs."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Combinatorial Structure Extraction using bipartite graph construction and GNN training via classification",
+      "Structure-Aware Code Generation using a composite model (GNN + LLM) with token prediction probability model",
+      "Evolutionary Code Refinement using standard EA operators (selection, crossover, mutation)",
+      "Training protocols: classification for GNN, SFT and DPO for LLM post-training"
+    ],
+    "formulas": [
+      "Equation (3): P(w1,...,wT) = ∏_{t=1}^{T} P_θL(wt | w<t; h_q, NL), where w_i are code tokens, h_q is structure embedding, NL is natural language description, and θ_L is LLM parameters"
+    ],
+    "architectures": [
+      "Composite model consisting of a GNN (θ_G) for generating structural embeddings and an LLM (θ_L) for code generation, concatenated together"
+    ],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Figure 2 for visual context of the methodology steps",
+    "Appendix B.1 for details on combinatorial structure extraction and GNN training",
+    "Appendix B.2 for prompt templates, data curation, and post-training specifics",
+    "Section 3 (Problem Statement) for understanding combinatorial optimization problems",
+    "Prior knowledge of GNNs, LLMs, and evolutionary algorithms"
+  ],
+  "reproducibility_notes": [
+    "Construction of bipartite graph from CO problem instances with nodes for constraints and variables, and edges for connections",
+    "Training procedure for GNN using classification task with problem classes from domains like traveling salesman or vehicle routing",
+    "Concatenation method for composite model (GNN + LLM) and how structural embeddings are fed to LLM",
+    "Data curation process: collecting mathematical formulations, natural language specs, executable code, and performance metrics",
+    "Post-training steps: SFT and DPO setup for LLM parameters while keeping GNN embeddings frozen",
+    "Evolutionary algorithm framework details: how composite model is integrated, operators used, and iteration process"
+  ]
+}

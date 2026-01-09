@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "C.2.1 Neural Combinatorial Optimization",
+    "section_purpose": "This section describes several baseline neural combinatorial optimization methods used for comparison in the paper, specifically detailing their approaches, architectures, and how they were configured for the experiments.",
+    "key_points": [
+        "L2B (Learn to Branch) uses a Graph Convolutional Neural Network (GCNN) on a bipartite graph representation of MILPs to learn variable selection (branching) policies via imitation learning of strong branching decisions.",
+        "HEM (Hierarchical sequence Model) is a two-level reinforcement learning model for cut selection in MILP solvers, comprising a higher-level policy for cut ratio and a lower-level pointer network for ordered cut subsets.",
+        "NeuroSAT is a message-passing neural network (MPNN) trained to predict the satisfiability of SAT instances by representing them as bipartite graphs and performing iterative message passing between literal and clause nodes.",
+        "All baseline configurations (hyperparameters, architectures) are set to their original paper's default values for a fair comparison.",
+        "For NeuroSAT, solving time is not a meaningful metric; evaluation is based on prediction accuracy, and its training data consists of SAT instances solvable within a given time limit τ."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph Convolutional Neural Network (GCNN) for branching policy learning", "Hierarchical Policy Gradient Optimization for cut selection", "Message-Passing Neural Network (MPNN) for SAT prediction", "Behavioral cloning with cross-entropy loss (L2B)", "Sequence-to-sequence learning via pointer network (HEM)"],
+        "formulas": ["Training via cross-entropy loss (L2B, NeuroSAT)", "Higher-level policy uses tanh-Gaussian distribution (HEM)", "Reward function based on solver performance metrics like primal-dual gap integral (HEM)"],
+        "architectures": ["Bipartite graph representation of MILPs (variable/constraint nodes) for L2B", "Two-level hierarchical architecture for HEM (higher-level ratio policy + lower-level pointer network)", "Bipartite graph representation of SAT instances (literal/clause nodes) for NeuroSAT with permutation-invariant message passing"],
+        "hyperparameters": {
+            "All baselines": "Default values from their original papers ([14], [15,16], [40])"
+        },
+        "datasets": ["NeuroSAT trained on random SAT problems with n ≤ 40 variables", "Ground-truth dataset for NeuroSAT: SAT instances solvable within time limit τ"]
+    },
+    "dependencies": ["Section C (Baseline Details) for context on why these baselines are chosen", "Section 2 (Related Work) for broader context on neural combinatorial optimization", "Section 5.1 (Settings) for experimental setup details like time limit τ"],
+    "reproducibility_notes": ["Use default hyperparameters and configurations from the cited original papers ([14], [15,16], [40])", "For NeuroSAT, ensure training data consists of SAT instances solvable within the experimental time limit τ", "For fair comparison, do not modify the baseline architectures or training procedures from their original implementations"]
+}
+```

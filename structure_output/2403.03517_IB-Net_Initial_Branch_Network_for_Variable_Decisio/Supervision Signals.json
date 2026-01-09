@@ -1,0 +1,18 @@
+{
+  "section_title": "Supervision Signals",
+  "section_purpose": "To present results from an ablation study comparing the performance of UNSAT-core prediction versus SAT/UNSAT prediction as supervision signals, validating the choice of UNSAT-core prediction for the model.",
+  "key_points": [
+    "UNSAT-core prediction as an objective outperforms SAT/UNSAT prediction on the industrial LEC dataset.",
+    "The improved performance validates the use of UNSAT-core prediction as the supervision signal in the model.",
+    "Results are based on Fig. 4(b) from the experimental results."
+  ],
+  "technical_details": {
+    "algorithms": ["UNSAT-core prediction as training objective", "SAT/UNSAT prediction as training objective"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["industrial LEC dataset"]
+  },
+  "dependencies": ["Section 3: IB-Net approach (neural network model and training)", "Section 4: Experimental Settings (datasets and setup)", "Fig. 4(b) from experimental results"],
+  "reproducibility_notes": ["Choice of supervision signal: UNSAT-core prediction", "Dataset used: industrial LEC", "Performance comparison with SAT/UNSAT prediction objective"]
+}

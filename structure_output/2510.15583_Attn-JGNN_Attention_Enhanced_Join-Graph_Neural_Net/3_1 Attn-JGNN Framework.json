@@ -1,0 +1,39 @@
+```json
+{
+    "section_title": "3.1 Attn-JGNN Framework",
+    "section_purpose": "To describe the overall architecture and workflow of the Attn-JGNN framework, which combines factor graph encoding, tree decomposition, and attention-enhanced graph neural networks for solving satisfiability problems.",
+    "key_points": [
+        "The framework begins by encoding a CNF formula as a factor graph, where edges connect variables and the clauses they appear in.",
+        "An external tree decomposition tool is used to decompose the factor graph into a join-graph consisting of clusters containing variables and clauses.",
+        "The core architecture features two GAT layers (GAT1 for local variable-clause message passing, GAT2 for cross-cluster message passing), an MLP layer, and a pooling layer.",
+        "GAT1 and GAT2 are cyclically invoked in a manner that mirrors the iterative nature of the IJGP algorithm (local then global propagation).",
+        "The MLP layer estimates beliefs b_i(C_i) and b_i(x_i) to output the final number of models, with intra-cluster results influencing inter-cluster propagation weights."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "External tree decomposition algorithm (tool not specified) to decompose factor graph into join-graph clusters",
+            "Two GAT layers (GAT1 and GAT2) used cyclically for iterative message passing",
+            "Splicing-pooling operation for message aggregation in GAT2"
+        ],
+        "formulas": [],
+        "architectures": [
+            "Input layer initializes two feature types: h_v (node features) and self-identifying node feature h_φ",
+            "Core architecture: GAT1 (local variable-clause message passing), GAT2 (cross-cluster message passing), MLP layer, pooling layer"
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.2 (Iterative Join-Graph Propagation) for join-graph definition and IJGP algorithm context",
+        "Section 2.3 (Graph Attention Networks) for understanding GAT layers",
+        "Figure 2 referenced for visualization of tree decomposition trade-offs"
+    ],
+    "reproducibility_notes": [
+        "Need external tree decomposition tool (specific tool not named) to create join-graph from factor graph",
+        "Initialization method for node features h_v and h_φ not specified",
+        "Convergence criteria for the cyclic invocation of GAT1 and GAT2 not defined",
+        "Specific architecture details of GAT layers (number of heads, hidden dimensions) not provided",
+        "Structure and activation functions of the MLP layer not described"
+    ]
+}
+```

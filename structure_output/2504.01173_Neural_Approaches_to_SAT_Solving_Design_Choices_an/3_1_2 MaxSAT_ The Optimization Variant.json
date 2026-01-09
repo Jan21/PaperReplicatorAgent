@@ -1,0 +1,28 @@
+```json
+{
+  "section_title": "3.1.2 MaxSAT: The Optimization Variant",
+  "section_purpose": "This section introduces the Maximum Satisfiability (MaxSAT) problem, the optimization variant of SAT, and defines its unweighted formulation which the paper focuses on.",
+  "key_points": [
+    "MaxSAT is the optimization version of SAT, aiming to maximize the number of satisfied clauses, especially useful when a formula is unsatisfiable.",
+    "MaxSAT has variants: unweighted (all clauses equal), weighted (clauses have positive weights), and partial (hard clauses must be satisfied, soft clauses have weights).",
+    "The paper focuses exclusively on the unweighted MaxSAT formulation.",
+    "Formally, unweighted MaxSAT seeks an assignment that maximizes the sum of indicator functions for satisfied clauses in a CNF formula."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [
+      "Unweighted MaxSAT objective: for a CNF formula with m clauses, find an assignment σ* that maximizes the sum over i=1 to m of the indicator function 1(σ satisfies clause c_i)."
+    ],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "3.1.1 Boolean Satisfiability as a Constraint Satisfaction Problem (for basic SAT definition)",
+    "General knowledge of CNF formulas and assignment semantics"
+  ],
+  "reproducibility_notes": [
+    "The formal definition of the unweighted MaxSAT problem that the paper's methods aim to solve."
+  ]
+}
+```

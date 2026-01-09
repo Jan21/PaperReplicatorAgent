@@ -1,0 +1,31 @@
+Understanding GNNs for Boolean Satisfiability through Approximation Algorithms
+  Abstract
+  CCS Concepts
+  Keywords
+  ACM Reference Format:
+  1 Introduction
+  2 Background
+    2.1 Boolean Satisfiability
+    2.2 Random Satisfiability and Message-passing Algorithms
+    2.3 Semidefinite Programming for Boolean Satisfiability
+    2.4 Graph Neural Networks for Boolean Satisfiability
+  3 Curriculum for Training GNNs
+  4 Sampling and Decimation
+  5 Experiments
+    5.1 Data and hyperparameters
+    5.2 Qualitative Results
+    5.3 Quantitative Results
+  6 Related Work
+  7 Conclusion
+  8 Limitations
+  Acknowledgments
+  References
+  S Supplementary Material
+  S.1 Derivation of the SDP relaxation for MAX-2-SAT
+  S.2 The NeuroSAT Architecture
+  S.3 Datasets
+  S.4 Visualizations of literal embeddings
+  S.5 Analysis of the Evolution of Literal Embeddings
+  S.6 Training with the SDP objective function
+  S.7 Results for Different Numbers of Decimation Steps
+  S.8 Results for Belief Propagation

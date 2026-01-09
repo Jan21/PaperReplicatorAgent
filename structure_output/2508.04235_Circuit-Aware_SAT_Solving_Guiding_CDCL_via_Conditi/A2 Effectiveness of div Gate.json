@@ -1,0 +1,40 @@
+```json
+{
+  "section_title": "A2 Effectiveness of div Gate",
+  "section_purpose": "This appendix analyzes the mathematical and practical issues with using explicit division to compute conditional probabilities in circuit graphs, and explains how the proposed method avoids these issues by incorporating the division operation internally during dataset preparation.",
+  "key_points": [
+    "The explicit division formula P(A|C) = P(A∧C)/P(C) causes significant error amplification when P(C) is small, which is common as it represents a logic probability always less than 1.",
+    "Case studies show that even moderate absolute errors in P(C) lead to large relative errors in P(A|C) when P(C) is extremely small (e.g., 0.01).",
+    "Even with moderate P(C) values (e.g., >0.3), the division operation remains numerically unstable, producing practically unacceptable error levels (>0.1 absolute error).",
+    "The proposed method avoids explicit division by incorporating the DIV gate during dataset preparation, where probability labels are pre-computed and learned as a standard gate type.",
+    "The model internalizes the division operation using distinct positional markers for input nodes, eliminating error amplification from explicit quotient computation."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Analysis of conditional probability computation via division: P(A|C) = P(A∧C)/P(C)"
+    ],
+    "formulas": [
+      "Conditional probability equation: P(A|C) = P(A∧C)/P(C) (Equation A3)"
+    ],
+    "architectures": [
+      "DIV gate with distinct positional markers for two input nodes"
+    ],
+    "hyperparameters": {},
+    "datasets": [
+      "Case study using ac97_ctrl.aig circuit",
+      "Two representative cases: P(C)=0.01 (extremely small) and P(C)>0.3 (moderate)"
+    ]
+  },
+  "dependencies": [
+    "Understanding of conditional probabilities in circuit graphs from main methodology",
+    "Knowledge of how probabilities are computed for circuit nodes",
+    "Basic understanding of numerical error amplification"
+  ],
+  "reproducibility_notes": [
+    "Need to understand how DIV gate is implemented with positional markers",
+    "Importance of pre-computing probability labels during dataset preparation rather than explicit division at inference time",
+    "Specific case study circuit: ac97_ctrl.aig",
+    "Numerical stability thresholds: P(C)=0.01 for small, P(C)>0.3 for moderate"
+  ]
+}
+```

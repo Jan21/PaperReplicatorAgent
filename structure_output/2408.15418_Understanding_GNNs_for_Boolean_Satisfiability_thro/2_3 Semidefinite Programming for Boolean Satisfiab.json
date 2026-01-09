@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.3 Semidefinite Programming for Boolean Satisfiability",
+    "section_purpose": "To explain how Semidefinite Programming (SDP) is used as a mathematical optimization technique for solving MAX-2-SAT problems, providing the foundational theory behind the SDP relaxation that will later be connected to Graph Neural Network behavior.",
+    "key_points": [
+        "SDP relaxation transforms MAX-2-SAT into a continuous optimization problem by lifting Boolean variables to unit vectors in high-dimensional space.",
+        "The optimization objective is formulated as maximizing Tr(WY) subject to Y being a positive semidefinite matrix with unit diagonal entries (Y_ii = 1).",
+        "The vectors corresponding to true variables cluster near the 'true vector' y₀, while false variable vectors move away, forming two clusters in satisfiable instances.",
+        "A simple rounding scheme assigns truth values based on the sign of the inner product ⟨y₀, y_i⟩, achieving a 0.8785-approximation guarantee for MAX-2-SAT.",
+        "The SDP solver serves as an incomplete SAT solver whose behavior provides intuition for understanding and improving GNN training for SAT problems."
+    ],
+    "technical_details": {
+        "algorithms": ["Semidefinite programming relaxation for MAX-2-SAT", "Rounding scheme based on inner product signs"],
+        "formulas": ["Transformation: x_i is true iff y_i = y_0 where y_i ∈ {-1,1}", "Objective: Maximize Tr(WY)", "Constraints: Y_ii = 1 for all i, Y ≥ 0 (positive semidefinite)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.1 Boolean Satisfiability for basic SAT concepts", "Supplementary material S.1 for detailed derivation", "Section 4 for empirical demonstration connecting SDP to GNN behavior"],
+    "reproducibility_notes": ["Need to construct coefficient matrix W from the clause structure", "Understand the vector lifting process from Boolean variables to (n+1)-dimensional unit vectors", "Implementation details for the rounding scheme (sign of inner product with y₀)"]
+}
+```

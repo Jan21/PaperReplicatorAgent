@@ -1,0 +1,31 @@
+```json
+{
+    "section_title": "2.5 Training Setup",
+    "section_purpose": "This section describes the practical implementation details and constraints of using the GRPO reinforcement learning algorithm to train the policy GNN by interacting directly with a SAT solver, and justifies the choice of training data.",
+    "key_points": [
+        "The policy GNN is trained using GRPO (Group Relative Policy Optimization), an online RL algorithm that learns directly from observed solver costs.",
+        "Training involves the SAT solver in the loop, requiring M*N solver calls per GRPO iteration, with default parameters M=40 and N=100 resulting in 4000 calls per iteration.",
+        "The computational cost of these solver calls imposes a constraint: training must be performed on a distribution of SAT problems that can be solved very quickly (fractions of a second).",
+        "The authors frame this as a small-scale demonstration using single CPU/GPU machines, with the potential to scale up by using distributed computing.",
+        "A crucial result highlighted is that despite being trained on easy problems, the learned policies generalize effectively to significantly harder and larger problems."
+    ],
+    "technical_details": {
+        "algorithms": ["GRPO (Group Relative Policy Optimization) - an online RL algorithm"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "N": "100",
+            "M": "40"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 2.4 Policy Optimization (for context on GRPO and RL framework)", "Understanding of the base SAT solvers and the GNN architecture from previous sections"],
+    "reproducibility_notes": [
+        "Use GRPO as the RL algorithm for training the policy GNN.",
+        "Configure GRPO with N=100 and M=40 (resulting in 4000 SAT solver calls per iteration).",
+        "Train on a distribution Ω of SAT problems where instances are solvable by the base solvers in a fraction of a second.",
+        "Hardware setup: one multi-core CPU and one GPU.",
+        "The SAT solver must be integrated into the training loop."
+    ]
+}
+```

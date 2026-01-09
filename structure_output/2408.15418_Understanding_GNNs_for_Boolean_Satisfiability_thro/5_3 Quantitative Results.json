@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "5.3 Quantitative Results",
+    "section_purpose": "To present quantitative evidence demonstrating the effectiveness of the proposed training curriculum and the sampling/decimation enhancements in improving GNN performance on SAT problems.",
+    "key_points": [
+        "The proposed curriculum training accelerates convergence, reaching target validation accuracy (85%) in ~30 minutes compared to hours for baselines (NeuroSAT and model without curriculum).",
+        "Sampling (multiple initializations of literal embeddings) and decimation (fixing variables and simplifying formulas) together significantly increase the number of solved SAT problems across various problem types.",
+        "For structured problems (Latin Squares, Logical Circuits, Sudoku), using 32 samples without decimation achieves high performance, but adding a second decimation pass with fewer samples yields further improvements.",
+        "Decimation involves two passes: if the first pass fails, variables with embedding distances below a threshold are fixed, the formula is simplified, and the GNN processes it again.",
+        "The method is evaluated on random 40-variable problems (SR(40)) and four structured problem types, showing substantial gains over single-sample, non-decimation baselines."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-pass decimation procedure: fix variables with low embedding distance threshold, simplify formula, reprocess with GNN"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "validation_accuracy_target": "85%",
+            "decimation_passes": "2",
+            "MP_iterations_SR40": "100",
+            "MP_iterations_structured": "1000",
+            "samples_first_pass": "16",
+            "samples_second_pass": "1 per decimated formula",
+            "total_samples_comparison": "32"
+        },
+        "datasets": ["SR(40): 5000 random SAT problems, avg 40 variables", "Latin Squares 9x9: 200 problems, avg 196.9 variables", "Latin Squares 8x8: 200 problems, avg 133.5 variables", "Logical Circuits: 344 problems, avg 131.1 variables", "Sudoku 9x9: 200 problems, avg 245.6 variables"]
+    },
+    "dependencies": ["Section 4 (Sampling and Decimation) for understanding the enhancements", "Section 5.1 for data and hyperparameter context", "Supplementary Material S3.2 for details on structured problems", "Section 2.4 for background on GNNs for SAT"],
+    "reproducibility_notes": ["Training hardware: 1 GPU (NVIDIA A100)", "Validation accuracy stopping criterion: 85%", "Number of message-passing iterations per problem type (100 for SR(40), 1000 for structured)", "Decimation threshold: distance to average vectors (specific value not given)", "Number of samples per run (16 for first pass, 1 for second pass, 32 for comparison)"]
+}
+```

@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "Abstract",
+    "section_purpose": "To provide a concise overview of the paper's motivation, key problem identification, proposed solution, and main experimental findings.",
+    "key_points": [
+        "The Boolean satisfiability problem (SAT) is fundamental, and Graph Neural Networks (GNNs) have been used for approximate solving.",
+        "Typical GNN-based solvers make concurrent predictions, which is guaranteed to fail for symmetric SAT problems due to neglecting variable dependencies.",
+        "The paper proposes AsymSAT, a novel GNN architecture integrating Recurrent Neural Networks (RNNs) to generate dependent predictions for variable assignments.",
+        "Experimental results show that dependent variable prediction extends GNN-based solving capability and improves the number of solved SAT instances on large test sets."
+    ],
+    "technical_details": {
+        "algorithms": ["GNN-based end-to-end SAT solving", "AsymSAT architecture integrating GNNs with RNNs"],
+        "formulas": [],
+        "architectures": ["AsymSAT (GNN integrated with Recurrent Neural Networks)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of Boolean satisfiability problem (SAT)", "Basic concept of Graph Neural Networks (GNNs) and Recurrent Neural Networks (RNNs)"],
+    "reproducibility_notes": ["High-level architecture description (GNN+RNN for dependent predictions)"]
+}
+```

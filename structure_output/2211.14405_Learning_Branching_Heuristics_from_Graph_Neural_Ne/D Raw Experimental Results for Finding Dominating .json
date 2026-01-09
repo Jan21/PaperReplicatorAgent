@@ -1,0 +1,24 @@
+```json
+{
+    "section_title": "D Raw Experimental Results for Finding Dominating Cliques",
+    "section_purpose": "To present detailed, tabular experimental results comparing the performance of three solvers (original, GNN-enhanced Fast, GNN-enhanced Accurate) on the task of finding dominating cliques across training, validation, and test datasets.",
+    "key_points": [
+        "Three solvers are compared: the original solver (O), and two GNN-enhanced solvers using fast (F) and accurate (A) joint information entropy calculations.",
+        "Performance is measured by counting the number of branches in the search tree, with results reported for training, validation, and test datasets of random graphs G(n,p).",
+        "For each graph size (n), the results show how many times each solver 'wins' (produces a smaller search tree) against the others and report average branch counts.",
+        "Results are reported for all instances, with numbers in brackets representing results only for instances where a dominating clique exists.",
+        "Across most graph sizes and datasets, the GNN-enhanced solvers (F and A) generally outperform the original solver (O), and solver A often outperforms solver F."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "p": "~0.371 (graph edge probability)"
+        },
+        "datasets": ["Training Data (DC): 50 instances per n for n in [75, 150, 225, 250, 300, 350, 375, 425, 475, 525, 575, 625, 675, 700, 750]", "Validation Data (DC): 50 instances per n for n in [100, 275, 400, 550, 725]", "Test Data (DC): 50 instances per n for n in [200, 325, 450, 600, 800]"]
+    },
+    "dependencies": ["Section 3.4 (New Branching Heuristic for Dominating-Clique Solvers) for description of GNN-enhanced solvers F and A", "Section 4.2 (Finding Dominating Cliques) for the high-level experimental setup", "Appendix C (Training Data for (Minimum) Dominating Cliques) for details on data generation"],
+    "reproducibility_notes": ["The exact edge probability (p) used for each graph size (n) in each dataset", "The metric used for comparison: number of branches in the search tree", "The criteria for a 'win' (solver with fewer branches)", "The distinction between results on all instances vs. instances where a dominating clique exists"]
+}
+```

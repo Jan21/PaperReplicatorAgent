@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.3 Learning with Bipartite Graph Attention Networks",
+    "section_purpose": "To introduce the bespoke bipartite Graph Neural Network (GNN) backbone architecture designed to extract features from bipartite graphs representing Max-SAT problems, using attention mechanisms to handle two distinct node types: variables and clauses.",
+    "key_points": [
+        "Traditional GNN message-passing schemes are insufficient for bipartite graphs because they assume a single node type, whereas bipartite graphs have two distinct types (variables and clauses).",
+        "The proposed bipartite GNN uses a two-step, layer-wise message-passing process: clause-wise aggregation (from variables to clauses) followed by variable-wise aggregation (from clauses to variables).",
+        "An attention mechanism is integrated into both aggregation steps to learn the importance of neighboring nodes when updating features.",
+        "Initial node attributes for variables (X) and clauses (C) are set to all-one matrices after experiments showed no significant impact from other initialization strategies (uniform/normal distributions).",
+        "The final output is updated feature representations for variables X^(L) and clauses C^(L), capturing their correlations and enabling building the overall framework on this Bip-GNN backbone."
+    ],
+    "technical_details": {
+        "algorithms": ["Bipartite GNN with attentive message-passing scheme", "Clause-wise aggregation using attention", "Variable-wise aggregation using attention", "Feature update via Multi-Layer Perceptron (MLP)"],
+        "formulas": ["Generic GNN message-passing formula: a_v^(l) = AGG(x_u | u ∈ N(v)); x_v^(l+1) = COM(a_v^(l), x_v^(l)) (Eq. 3.8)", "Clause-wise aggregation with attention: attention score α_{x_j→c_i}^(l) uses softmax over dot product of transformed features w_Q^(l)c_i^(l) and w_K^(l)x_j^(l). Updated clause feature c_i^(l+1) = MLP(c_i^(l), Σ_j α_{x_j→c_i}^(l)(w_V^(l)x_j^(l))) (Eq. 3.11)", "Variable-wise aggregation with attention: symmetrical process with scores α_{c_j→x_i}^(l) and updated variable feature x_i^(l+1) = MLP(x_i^(l), Σ_j α_{c_j→x_i}^(l)(w_V^(l)c_j^(l))) (Eq. 3.12)"],
+        "architectures": ["Bipartite Graph Attention Network (Bip-GNN) backbone", "Single-type node GNNs (as baseline/context)", "Multi-Layer Perceptron (MLP) for feature combination"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.2 (Problem Transfer via Max-SAT Problem), for understanding the bipartite graph structure (variables, clauses, edges) that serves as input to this network.", "Background on standard Graph Neural Networks (GNNs) and their message-passing framework.", "Knowledge of attention mechanisms in neural networks."],
+    "reproducibility_notes": ["The specific two-step (clause-wise, then variable-wise) message-passing scheme for bipartite graphs.", "The formulas for calculating attention scores and updating node features (Eq. 3.11 and 3.12).", "The initialization strategy for the variable and clause attribute matrices: using all-one matrices (X_ini, C_ini).", "The use of an MLP for combining original and aggregated features in the update step.", "The definition of neighbor sets N(v_c(i)) and N(v_x(i)) based on the bipartite graph edges."]
+}
+```

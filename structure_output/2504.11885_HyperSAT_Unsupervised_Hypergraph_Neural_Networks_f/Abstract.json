@@ -1,0 +1,19 @@
+{
+  "section_title": "Abstract",
+  "section_purpose": "To provide a high-level summary of the paper, introducing the problem of solving Weighted MaxSAT with neural networks and presenting HyperSAT as a novel solution using unsupervised hypergraph neural networks.",
+  "key_points": [
+    "Graph neural networks (GNNs) have been promising for SAT and MaxSAT but are underdeveloped for Weighted MaxSAT due to challenges from non-linear dependencies and sensitive objective functions caused by non-uniform clause weights.",
+    "HyperSAT is a novel neural approach that uses an unsupervised hypergraph neural network model to solve Weighted MaxSAT problems.",
+    "The method involves a hypergraph representation for Weighted MaxSAT instances and a design featuring a cross-attention mechanism and a shared representation constraint loss function to capture logical interactions between positive and negative literal nodes.",
+    "Extensive experiments on various datasets demonstrate that HyperSAT achieves better performance than state-of-the-art competitors."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": []
+}

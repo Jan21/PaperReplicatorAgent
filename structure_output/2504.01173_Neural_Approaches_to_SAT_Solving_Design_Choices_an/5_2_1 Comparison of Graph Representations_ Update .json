@@ -1,0 +1,20 @@
+{
+  "section_title": "5.2.1 Comparison of Graph Representations, Update Functions and Training Methods",
+  "section_purpose": "This section presents a comparative evaluation of different architectural configurations for neural SAT solving, specifically analyzing the impact of graph representations, update functions, and training methods on performance metrics, and identifies the most effective approach for further experiments.",
+  "key_points": [
+    "Variable-Clause Graph (VCG) representation outperforms Literal-Clause Graph (LCG) for assignment-based training with RNN updates, offering better SAT accuracy and computational efficiency.",
+    "RNN-based message passing is preferred for assignment-based training due to better performance and interpretability, while LSTM is more stable for SAT/UNSAT classification tasks.",
+    "Different supervision approaches have distinct strengths: assignment-based supervision excels at finding satisfying assignments, unsupervised learning minimizes unsatisfied clauses, and SAT/UNSAT classification enables implicit assignment retrieval through embedding clustering.",
+    "The novel 'closest assignment' training method, which minimizes Hamming distance to model predictions, improves performance, especially for formulas with more variables like SR100.",
+    "Training data composition affects results: SAT-only training improves assignment accuracy, while SAT+UNSAT training better minimizes the average gap of unsatisfied clauses."
+  ],
+  "technical_details": {
+    "algorithms": ["closest assignment method that computes assignments minimizing Hamming distance to model's current predictions"],
+    "formulas": [],
+    "architectures": ["Literal-Clause Graph (LCG)", "Variable-Clause Graph (VCG)", "RNN update function", "LSTM update function"],
+    "hyperparameters": {},
+    "datasets": ["SR40 dataset", "SR100", "SR10-100", "SR3-40", "3SAT+UNSAT benchmarks"]
+  },
+  "dependencies": ["Appendix A.1.2 for Exponential Moving Average (EMA) usage", "Appendix A.1.1 for curriculum learning application", "Section 4 for experimental setup details", "Background on SAT solving and GNNs from Sections 3.1-3.3"],
+  "reproducibility_notes": ["Graph representations: LCG and VCG definitions", "Update functions: RNN and LSTM implementations", "Supervision approaches: assignment-based, unsupervised, SAT/UNSAT classification objectives", "Training method: 'closest assignment' algorithm details", "Use of EMA for validation and curriculum learning for specific objectives", "Benchmark datasets and their characteristics (e.g., SR40)"]
+}

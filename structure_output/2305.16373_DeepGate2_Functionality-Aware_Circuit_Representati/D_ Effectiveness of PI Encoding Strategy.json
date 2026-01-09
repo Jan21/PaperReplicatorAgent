@@ -1,0 +1,21 @@
+```json
+{
+  "section_title": "D. Effectiveness of PI Encoding Strategy",
+  "section_purpose": "To evaluate the impact of the Proposed Input Encoding (PIE) strategy by comparing model performance with and without it on specific tasks.",
+  "key_points": [
+    "Disabling the PIE strategy causes a significant drop (20.07% reduction) in the F1-Score for identifying logic equivalence gates, from 0.9434 to 0.7541.",
+    "The model without PIE fails to accurately model circuit structural information, particularly reconvergence structures.",
+    "The model with PIE achieves 93.22% accuracy on reconvergence structure identification, whereas the model without PIE only achieves 74.56% accuracy.",
+    "Accurate node functionality modeling depends on both the functionality of fan-in gates and the correct identification of reconvergence structures between them."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section II (Related Work) and Figure 1 for the failure case demonstration", "Understanding of the One-round GNN Model (Section III.D) and the PIE strategy implied from prior sections"],
+  "reproducibility_notes": ["Need the exact PIE strategy implementation details (to create the w/o PIE baseline)", "The specific task setup for logic equivalence gate identification and reconvergence structure identification"]
+}
+```

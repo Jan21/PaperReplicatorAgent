@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the research problem of understanding neural network reasoning capabilities through the lens of SAT solving, position the work within the broader debate about neural network generalization, and outline the paper's specific contributions and structure.",
+    "key_points": [
+        "There is a long-standing debate about whether neural networks can truly reason and generalize to novel constraint combinations or merely detect superficial patterns.",
+        "Large Language Models (LLMs) trained for reasoning challenge the 'superficial patterns only' claim, but their exact reasoning mechanisms remain unclear.",
+        "The paper focuses on Boolean satisfiability (SAT) as a prototypical reasoning task where novel constraint combinations are essential and pattern-matching would fail.",
+        "Understanding how Graph Neural Networks (GNNs) solve SAT problems has both practical value (as heuristics in classical solvers) and theoretical value (to elucidate reasoning in Transformers).",
+        "The paper provides experimental evaluation of GNN design choices for SAT solving with intuitive explanations of their inner workings."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

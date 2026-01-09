@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.2 Iterative Join-Graph Propagation",
+    "section_purpose": "To introduce the Iterative Join-Graph Propagation (IJGP) algorithm as a foundational approximate inference method for computing marginal probabilities in probabilistic graphical models, providing the mathematical and algorithmic basis for the subsequent neural network framework.",
+    "key_points": [
+        "IJGP is an approximate inference algorithm for computing marginal probabilities in models like MRFs and Bayesian Networks using iterative message passing over a join-graph.",
+        "A join-graph decomposes a factor graph into clusters and must satisfy two properties: Coverage (each factor in at least one cluster) and Connectivity (shared variables maintain connected paths).",
+        "The algorithm's core involves iterative computation of messages between clusters, initialized as uniform distributions, until convergence or a max iteration limit.",
+        "Marginal probability for a variable is computed as proportional to the product of all messages in clusters containing that variable.",
+        "The join-graph construction for this work uses the external tool flow-cutter, with tree-width controlled manually."
+    ],
+    "technical_details": {
+        "algorithms": ["Iterative Join-Graph Propagation (IJGP): Initializes messages to uniform distributions, computes messages for each cluster to neighbors, updates iteratively until convergence/max-iterations, then computes marginals."],
+        "formulas": ["Joint probability distribution: P(X) = (1/Z) ∏_{i=1}^{m} φ_i(C_i), where φ_i(C_i) is a factor on variable subset C_i ⊆ X, Z is partition function.", "Message from cluster C_i to C_j: m_{i→j}(S_ij) = ∑_{C_i\\S_ij} φ_i(C_i) ∏_{k ∈ ne(i)\\j} m_{k→i}(S_ki), where S_ij = C_i ∩ C_j, ne(i) is neighbors of C_i.", "Marginal probability approximation: P(X) ∝ ∏_{X ∈ C_i} m_{i→j}(S_ij)."],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of probabilistic graphical models (Markov Random Fields, Bayesian Networks) and factor graphs from Section 2.1 or general background.", "External tool flow-cutter for tree decomposition."],
+    "reproducibility_notes": ["The mathematical formulation of message passing (Equation 2) and marginal computation (Equation 3).", "The use of the flow-cutter tool for join-graph construction.", "The need to manually control the tree-width parameter during decomposition.", "Algorithm steps: uniform initialization, iterative message computation/update until convergence or max iterations."]
+}
+```

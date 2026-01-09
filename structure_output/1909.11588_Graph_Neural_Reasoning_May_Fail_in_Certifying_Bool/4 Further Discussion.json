@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4 Further Discussion",
+    "section_purpose": "To discuss limitations of the analysis, compare GNN approaches to other methods like Belief Propagation, and summarize the core limitation of GNNs in unsatisfiability reasoning.",
+    "key_points": [
+        "The analysis does not consider shrinkage conditions or dynamic GNNs (like those cited as [9]), as proving impossibility for all dynamic updating methods is difficult.",
+        "The paper does not claim GNNs are provably unable to achieve UNSAT certification; this remains an open issue.",
+        "Belief Propagation (BP) can find witnesses of unsatisfiability for 2QBF using a bias estimation strategy, but it has high overhead similar to RL approaches.",
+        "BP's ability to find witnesses contrasts with the limitation of one-shot GNN-based embeddings, which cannot achieve this.",
+        "The revealed GNN limitation is likely rooted in the simplicity of the message-passing scheme, which is good for embedding features but not for complex reasoning on graph structures."
+    ],
+    "technical_details": {
+        "algorithms": ["Belief Propagation (BP) - a Bayesian message-passing method used as an approximation algorithm for SAT and 2QBF problems"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of SAT and 2QBF problems from earlier sections", "Basic knowledge of GNN message-passing schemes", "References to dynamic GNNs [9], BP origins [10], 3-SAT application [8], 2QBF application [19], and RL approach [5]"],
+    "reproducibility_notes": ["Note that the analysis excludes dynamic GNNs and shrinkage conditions", "Recognition that BP can produce unsatisfiability witnesses but with high overhead", "The core reproducibility limitation is the identified constraint of one-shot GNN embeddings for this reasoning task"]
+}
+```

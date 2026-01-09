@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.2 Graph Neural Networks",
+    "section_purpose": "This section provides background on Graph Neural Networks (GNNs), explaining their fundamental mechanisms and recent advances relevant to the paper's focus on combinatorial optimization, including their application in graph domain adaptation.",
+    "key_points": [
+        "GNNs follow a message-passing mechanism and are a core deep-learning framework for graphs, with major variants including GCNs (spectral), GraphSAGE (inductive learning), and GATs (with self-attention).",
+        "Recent trends involve adapting GNNs via prompt tuning (e.g., GPPT) to generalize pre-trained models without fine-tuning and addressing theoretical issues like over-smoothing and over-squashing (e.g., via BORF rewiring).",
+        "The expressive power of GNNs is a subject of theoretical study, explaining their success across many tasks.",
+        "GNNs are applied to graph domain adaptation to handle domain shifts, often using adversarial training to learn domain-invariant features (e.g., TFLG, GCAN).",
+        "Domain adaptation strategies extend to aligning structural and spectral information (e.g., StruRW) and leveraging multi-level invariant information."
+    ],
+    "technical_details": {
+        "algorithms": ["Message-passing mechanism", "Graph convolutions (GCNs)", "Aggregation and sampling (GraphSAGE)", "Self-attention mechanisms (GATs)", "Prompt tuning for GNNs (GPPT)", "Rewiring algorithm based on Ollivier-Ricci curvature (BORF)", "Adversarial training for domain alignment (TFLG, GCAN)", "Structural re-weighting method (StruRW)"],
+        "formulas": [],
+        "architectures": ["Graph Convolution Networks (GCNs)", "GraphSAGE", "Graph Attention Networks (GATs)", "Graph convolutional adversarial network (GCAN)"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic familiarity with graph representation learning (referenced via related work citations)", "Context from earlier parts of Section 2 (Related Work)"],
+    "reproducibility_notes": ["This is a background section; no direct reproducibility details for the core methodology are provided."]
+}
+```

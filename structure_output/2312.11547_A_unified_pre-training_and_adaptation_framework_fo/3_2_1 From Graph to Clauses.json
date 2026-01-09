@@ -1,0 +1,23 @@
+```json
+{
+    "section_title": "3.2.1 From Graph to Clauses",
+    "section_purpose": "This section explains how to transform graph-based combinatorial optimization (CO) problems into a Max-SAT problem by generating clauses that represent objective functions (soft rules) and constraints (hard rules).",
+    "key_points": [
+        "CO problems on graphs are represented using Max-SAT with clauses and variables: m clauses C={c1,...,cm} and n variables X={x1,...,xn} corresponding to graph nodes.",
+        "Two types of clauses are defined: hard clauses (from constraints, must be strictly satisfied) and soft clauses (from objectives, satisfaction is optimized).",
+        "Provides concrete transformation rules for Maximum Independent Set (MIS), Minimum Dominating Set (MDS), and Max-Cut problems.",
+        "For MIS: hard clause ¬xi ∨ ¬xj for each edge (neighbors cannot both be in set), soft clause xi for each node (maximize set size).",
+        "For MDS: hard clause xi ∨ xj for each edge (node or neighbor must be in set), soft clause ¬xi for each node (minimize set size).",
+        "For Max-Cut: two soft clauses xi ∨ xj and ¬xi ∨ ¬xj for each edge (maximize cut edges, no hard clauses)."
+    ],
+    "technical_details": {
+        "algorithms": ["Transformation from graph CO problems to Max-SAT clauses"],
+        "formulas": ["MIS hard clause: ¬xi ∨ ¬xj for edge e_ij; MIS soft clause: xi for node v_i", "MDS hard clause: xi ∨ xj for edge e_ij; MDS soft clause: ¬xi for node v_i", "Max-Cut soft clauses: xi ∨ xj and ¬xi ∨ ¬xj for edge e_ij"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.1 (CO Problems on Graphs) for problem definitions", "Understanding of Max-SAT problem formulation"],
+    "reproducibility_notes": ["Mapping from graph nodes to variables (xi corresponds to vi)", "Rules for generating hard and soft clauses for MIS, MDS, and Max-Cut", "Distinction between hard (constraint) and soft (objective) clauses"]
+}
+```

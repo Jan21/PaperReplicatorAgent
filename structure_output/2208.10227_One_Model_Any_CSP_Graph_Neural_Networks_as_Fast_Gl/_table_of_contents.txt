@@ -1,0 +1,28 @@
+One Model, Any CSP: Graph Neural Networks as Fast Global Search Heuristics for Constraint Satisfaction
+  Abstract
+  1 Introduction
+  2 Related Work
+  3 Preliminaries
+  4 Method
+    4.1 Architecture
+    4.2 Global Search as an RL Problem
+    4.3 Implementation and Hyperparameters
+  5 Experiments
+  6 Conclusion
+  References
+  A Method Details
+  A.1 Architecture
+  A.2 Training
+  A.3 Hyperparameters and Model Selection
+  A.4 Design Constraints and Bottlenecks
+  A.5 Relabeling Constraint Value Graphs
+  A.6 Expressiveness
+  B Experiment Details
+  B.1 MODEL RB
+  B.2 Vertex Coloring
+  B.3 MAXCUT
+  B.4 3-SAT
+  B.5 MAX-k-SAT
+  B.6 Cross-Comparison of Trained Models
+  C Ablation
+  C.1 Results

@@ -1,0 +1,33 @@
+{
+  "section_title": "4.1 Datasets",
+  "section_purpose": "To describe the datasets used for training and evaluating the IB-Net framework, including their sources, preparation methods, and how supervision signals are generated.",
+  "key_points": [
+    "Two datasets are utilized: industrial LEC circuit SAT instances from chip design and the SAT Competition 2022 anniversary track.",
+    "Datasets are filtered to include only instances solvable by Kissat within 1,000 seconds to manage complexity and reflect real-life constraints.",
+    "Dataset statistics are provided in Table 1, showing the number of CNFs, average variables, and average clauses for each dataset and sub-category.",
+    "Supervision for training is obtained by using Kissat to find variable assignments for SAT instances and Drat-trim to extract UNSAT-cores for UNSAT instances.",
+    "The LEC dataset is predominantly UNSAT (over 99%), while the SAT Competition dataset includes SAT, UNSAT, and halted instances."
+  ],
+  "technical_details": {
+    "algorithms": ["Kissat (SAT solver)", "Drat-trim (UNSAT-core extractor)"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "filtering_time_threshold": "1000 seconds"
+    },
+    "datasets": [
+      "LEC circuit dataset: industrial instances from chip design, with circuits 1, 2, 3 having 22,050, 14,840, 25,591 CNFs respectively, average variables 1,002, 952, 1,563, and overall 62,481 CNFs, avg vars 1,220.",
+      "SAT Competition 2022 anniversary track: includes SAT (1,115 CNFs, avg vars 3,065), UNSAT (985 CNFs, avg vars 3,784), Halted (1,171 CNFs, avg vars 3,623), overall 3,271 CNFs, avg vars 3,481."
+    ]
+  },
+  "dependencies": [
+    "Understanding of SAT problems and UNSAT cores, likely covered in Introduction or Related Work sections.",
+    "Knowledge of SAT solvers like Kissat and proof systems for UNSAT cores."
+  ],
+  "reproducibility_notes": [
+    "Use Kissat solver to filter instances solvable within 1,000 seconds.",
+    "For UNSAT instances, use Drat-trim to extract UNSAT-cores as supervision.",
+    "Dataset sources: LEC circuit instances from chip design and SAT Competition 2022 anniversary track.",
+    "Filter datasets as described to match the paper's setup."
+  ]
+}

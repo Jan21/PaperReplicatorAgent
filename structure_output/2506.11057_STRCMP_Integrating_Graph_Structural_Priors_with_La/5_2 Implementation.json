@@ -1,0 +1,43 @@
+{
+  "section_title": "5.2 Implementation",
+  "section_purpose": "To describe the implementation details of the proposed composite model, including its architecture, training process, integration into an optimization framework, and hardware specifications.",
+  "key_points": [
+    "The composite model consists of two components: a GNN implemented with three sequential convolutional layers and global mean pooling, and a structure-prior-aware LLM adapted from Qwen2.5-Coder-7B-Instructor.",
+    "Training involves domain-specific GNN training on SAT (3 epochs) and MILP (4 epochs) benchmark datasets, followed by LLM post-training for 3 epochs per domain, with checkpoint selection based on validation prediction loss.",
+    "The adapted model is integrated into an Evolutionary Algorithm (EA)-based framework to discover solver-specific algorithm configurations optimized for training instances.",
+    "Experiments are conducted on hardware with dual AMD EPYC 9534 64-core processors and two NVIDIA H800 80GB GPUs, with comprehensive details provided in appendices."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "GNN using graph convolution operators from torch_geometric with three sequential convolutional layers and global mean pooling",
+      "LLM adaptation based on Qwen2.5-Coder-7B-Instructor model with modifications to architecture, forward propagation, and inference",
+      "EA-based framework for optimizing solver-specific algorithm configurations"
+    ],
+    "formulas": [
+      "Normalization formula for evaluation indicators: \(1 - \\frac{value - min}{2\\times (max - min)}\), where value is the method's measured indicator, min and max are the minimum and maximum values observed"
+    ],
+    "architectures": [
+      "GNN with three sequential convolutional layers terminated by global mean pooling",
+      "LLM component adapted from Qwen2.5-Coder-7B-Instructor model"
+    ],
+    "hyperparameters": {
+      "GNN_training_epochs_SAT": "3",
+      "GNN_training_epochs_MILP": "4",
+      "LLM_post_training_epochs_per_domain": "3",
+      "checkpoint_selection": "based on validation prediction loss"
+    },
+    "datasets": [
+      "Benchmark datasets for SAT and MILP problems (referenced but not specified in this section)"
+    ]
+  },
+  "dependencies": [
+    "Section 4 (Proposed Solution) for methodology context",
+    "Appendix B.1 and B.2 for comprehensive implementation details, hyperparameters, adaptations, and software dependencies"
+  ],
+  "reproducibility_notes": [
+    "Specific GNN architecture details and LLM modifications are in Appendix B",
+    "Hyperparameter configurations and software dependencies are provided in Appendix B.1 and B.2",
+    "Training specifics and data curation details are in Appendix B.1 and B.2",
+    "Hardware specifications: dual AMD EPYC 9534 64-core processors @ 2.45GHz and two NVIDIA H800 80GB GPUs"
+  ]
+}

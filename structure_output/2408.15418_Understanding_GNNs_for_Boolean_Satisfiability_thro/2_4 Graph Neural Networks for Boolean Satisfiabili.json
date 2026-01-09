@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.4 Graph Neural Networks for Boolean Satisfiability",
+    "section_purpose": "This section introduces the application of Graph Neural Networks (GNNs) to Boolean Satisfiability problems, focusing on their role in combinatorial optimization and specifically describing the end-to-end NeuroSAT architecture.",
+    "key_points": [
+        "GNNs are a flexible tool for learning representations of graph-structured data, useful for encoding complex relations and sparsity structures in combinatorial optimization problems like SAT.",
+        "GNNs in combinatorial optimization typically enhance manual solvers by replacing decision heuristics or operate in end-to-end modes trained to produce final answers, with end-to-end approaches being particularly interesting for potential efficiency gains.",
+        "There is a trade-off between performance on restricted input subsets and generalization to the whole domain; extreme cases may lead to GNNs learning only superficial features.",
+        "This work focuses on end-to-end approaches and demonstrates improvements using the NeuroSAT architecture, which exhibits nontrivial behavior resembling continuous space search.",
+        "NeuroSAT operates on an undirected bipartite graph of literals and clauses, uses alternating message-passing steps with independent LSTMs for updating embeddings, and employs MLPs for message generation and final prediction."
+    ],
+    "technical_details": {
+        "algorithms": ["NeuroSAT architecture for end-to-end SAT solving", "Alternating message-passing process between clauses and literals"],
+        "formulas": [],
+        "architectures": ["NeuroSAT GNN architecture with: undirected bipartite graph (literals-clauses), alternating literal/clause update steps using independent LSTMs, 3-layer MLP for message generation in both directions, final MLP for literal vote prediction"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.1 (Boolean Satisfiability background)", "Section 2.2 (Random SAT and message-passing algorithms)", "General knowledge of GNNs and combinatorial optimization"],
+    "reproducibility_notes": ["Use of NeuroSAT architecture with described simplifications", "Graph construction: undirected bipartite graph connecting literals to containing clauses", "Message-passing alternation between clause and literal updates", "Use of independent LSTMs for embedding updates", "3-layer MLP for message generation", "Final MLP for literal vote prediction and averaging"]
+}
+```

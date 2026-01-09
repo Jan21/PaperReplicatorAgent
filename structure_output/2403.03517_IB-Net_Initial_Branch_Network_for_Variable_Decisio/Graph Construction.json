@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Graph Construction",
+    "section_purpose": "To justify the choice of the Weighted Literal Incidence Graph (WLIG) construction over the common Literal-Clause Graph (LCG) for representing SAT problems, based on its superior performance for UNSAT-core prediction.",
+    "key_points": [
+        "The traditional Literal-Clause Graph (LCG) represents both literals and clauses as nodes, with edges for clause-literal affiliations.",
+        "The Weighted Literal Incidence Graph (WLIG) discards clause information deemed useless for UNSAT-core prediction and focuses on connections between literals.",
+        "Experiments (Fig 4a) show WLIG consistently outperforms LCG in accuracy and F1 scores for UNSAT problems.",
+        "WLIG provides a particular performance increase on variables that are NOT part of the UNSAT-core.",
+        "This evidence supports the adoption of WLIG for graph construction in the proposed IB-Net model."
+    ],
+    "technical_details": {
+        "algorithms": ["Weighted Literal Incidence Graph (WLIG) construction"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of SAT problem representation, UNSAT-core prediction task, and neural models for SAT (implied by Section 3)"],
+    "reproducibility_notes": ["Choice of graph construction method (WLIG over LCG)", "Reference to experimental results in Fig. 4(a) for justification"]
+}
+```

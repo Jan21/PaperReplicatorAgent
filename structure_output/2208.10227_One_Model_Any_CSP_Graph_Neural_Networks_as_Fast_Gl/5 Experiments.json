@@ -1,0 +1,37 @@
+```json
+{
+  "section_title": "5 Experiments",
+  "section_purpose": "This section evaluates the performance of the ANYCSP model on a wide range of constraint satisfaction problems, comparing it against classical solvers, heuristics, and previous neural approaches across multiple benchmark datasets.",
+  "key_points": [
+    "ANYCSP is evaluated on six CSP types: MODEL RB, Graph Coloring, MAXCUT, 3-SAT, MAX-k-SAT, demonstrating broad applicability.",
+    "ANYCSP outperforms or matches state-of-the-art baselines across all problems, often by substantial margins, despite being trained on smaller instances.",
+    "The model shows strong generalization to instances significantly larger (100x) and more complex than those seen during training.",
+    "ANYCSP's global search approach (changing multiple variables per step) is crucial; a local search variant performs worse, highlighting the importance of parallel refinement.",
+    "ANYCSP achieves superior results while performing orders of magnitude fewer search steps than classical heuristics, though each step is computationally more expensive."
+  ],
+  "technical_details": {
+    "algorithms": ["ANYCSP (global search via RL/GNN)", "Comparison algorithms: Picat, ACE, CoSoCo, HybridEA, DSATUR, GREEDY, RUNCSP, ECO-DQN, ECORD, SDP, RLSAT, PDP, WALKSAT, PROB SAT, CCLS, SATLike"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "MODEL_RB_training_T_train": "40",
+      "MAXCUT_training_graph_vertices": "100",
+      "MAXCUT_training_edge_probability": "p ∈ [0.05, 0.3]",
+      "3SAT_training_variables": "100",
+      "3SAT_training_clause_variable_ratio": "[4, 5]",
+      "MAX_k_SAT_training_variables": "100",
+      "MAX_k_SAT_training_k_values": "{3,4}",
+      "MAX_k_SAT_training_clause_ratios": "for k=3: [5,8]; for k=4: [10,16]"
+    },
+    "datasets": [
+      "MODEL RB: Test dataset RB50 (50 satisfiable instances, 50 variables, 23 domain values, ~500 constraints) from XCSP project.",
+      "Graph Coloring: Training: Ω_COL random graphs (50 vertices, Erdős-Rényi, Barabási-Albert, random geometric). Test: 100 structured benchmark graphs split into COL<10 (chromatic number <10) and COL≥10 (chromatic number ≥10, up to 1K vertices, 19K edges).",
+      "MAXCUT: Training: Ω_MCUT random Erdős-Rényi graphs (100 vertices). Test: Gset benchmark graphs (800 to 10K vertices).",
+      "3-SAT: Training: Ω_3SAT uniform random 3-SAT (100 variables). Test: SATLIB benchmark sets SLN with N∈{50,100,150,200,250} variables, 100 instances each.",
+      "MAX-k-SAT: Training: Ω_MSAT uniform random instances (100 variables, k∈{3,4}). Test: 50 random instances per k∈{3,4,5} with 10K variables and 75K/150K/300K clauses respectively."
+    ]
+  },
+  "dependencies": ["Section 4 (Method) for understanding ANYCSP architecture and training", "Section 3 (Preliminaries) for CSP definitions", "Appendix A for detailed method details", "Appendix B for more experiment details"],
+  "reproducibility_notes": ["Precise training instance distributions (Ω_RB, Ω_COL, Ω_MCUT, Ω_3SAT, Ω_MSAT) including graph types, sizes, and parameter ranges.", "Test dataset specifications and sources (RB50, structured coloring graphs, Gset, SATLIB SLN, custom MAX-k-SAT).", "Hyperparameters for training (e.g., T_train=40).", "Evaluation setup: timeouts (20 minutes for MODEL RB, Coloring, MAX-k-SAT; 180s for MAXCUT), number of parallel runs (20 for MAXCUT), search steps limit (10K for 3-SAT).", "Baseline implementations and configurations (e.g., classical solvers tuned on validation data).", "Hardware specifications (NVIDIA Quadro RTX A6000 GPU, Intel Xeon Platinum 8160 CPU)."]
+}
+```

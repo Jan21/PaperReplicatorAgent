@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "4 Experimental Settings",
+    "section_purpose": "This section describes the experimental framework used to evaluate the IB-Net approach, including the datasets, setup, and evaluation metrics.",
+    "key_points": [
+        "The authors use SAT competition benchmark problems (2018-2022) and hardware/software verification problems as datasets.",
+        "A pre-processing step uses CaDiCaL to identify initial variables and add them to the formula for network analysis.",
+        "Experimental setup involves 5-fold cross-validation with a 80/20 train-test split and hyperparameter tuning via grid search.",
+        "The primary evaluation metric is the reduction in solver runtime, but they also measure variable selection accuracy.",
+        "Training utilizes a machine with an NVIDIA V100 GPU, with 1000 epochs and early stopping based on validation loss."
+    ],
+    "technical_details": {
+        "algorithms": ["Pre-processing using CaDiCaL solver to identify initial variables"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "batch_size": 8,
+            "learning_rate": 0.001,
+            "hidden_dim": 128,
+            "GNN_layers": 3,
+            "epochs": 1000,
+            "early_stopping_patience": 50
+        },
+        "datasets": ["SAT competition benchmark problems (2018-2022)", "Hardware/software verification problems (SAT-Comp'22, HWMCC'22)"]
+    },
+    "dependencies": ["Section 3 (IB-Net approach) for understanding the model being evaluated"],
+    "reproducibility_notes": ["Dataset sources (SAT competition benchmarks 2018-2022, verification problems)", "Pre-processing steps with CaDiCaL solver", "5-fold cross-validation with 80/20 split", "Training hardware specs (NVIDIA V100 GPU)", "Hyperparameter values: batch size 8, learning rate 0.001, hidden dim 128, GNN layers 3", "Early stopping patience of 50 epochs"]
+}
+```

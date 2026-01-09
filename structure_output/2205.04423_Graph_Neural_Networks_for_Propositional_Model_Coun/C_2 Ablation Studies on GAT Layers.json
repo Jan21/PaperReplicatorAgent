@@ -1,0 +1,46 @@
+{
+  "section_title": "C.2 Ablation Studies on GAT Layers",
+  "section_purpose": "To evaluate the importance of using GAT attention mechanisms in both factor-to-variable and variable-to-factor message transformations through ablation studies comparing hybrid models with BP and BPNN.",
+  "key_points": [
+    "Ablation studies assess the benefit of GAT attention in both message directions for the BPGAT model.",
+    "Hybrid models were tested: one combining BP with BPGAT (GAT in one direction only) and another combining BPNN with BPGAT.",
+    "Results show that BPGAT with full GAT attention outperforms hybrid variants in terms of RMSE and MRE across test datasets.",
+    "The studies demonstrate that transforming both message types with GAT attention is crucial for optimal model performance."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "GAT-style attention mechanism for message transformation",
+      "Belief Propagation (BP) for message updates",
+      "BPNN's MLP-based message updates"
+    ],
+    "formulas": [
+      "Equation 12: GAT transformation for factor-to-variable messages",
+      "Equation 11: GAT transformation for variable-to-factor messages",
+      "Equation 2: BP update for messages",
+      "Equation 8: BPNN's MLP update for messages"
+    ],
+    "architectures": [
+      "BPGAT: full GAT attention in both factor-to-variable and variable-to-factor directions",
+      "FVGAT-VFNONE: GAT for factor-to-variable messages, BP for variable-to-factor messages",
+      "FVNONE-VFGAT: BP for factor-to-variable messages, GAT for variable-to-factor messages",
+      "FVGAT-VFMLP: GAT for factor-to-variable messages, BPNN MLP for variable-to-factor messages",
+      "FVMLP-VFGAT: BPNN MLP for factor-to-variable messages, GAT for variable-to-factor messages"
+    ],
+    "hyperparameters": {},
+    "datasets": [
+      "Test 1, Test 2, Test 3 (specific details not provided in this section, likely defined in Experimental Setting)"
+    ]
+  },
+  "dependencies": [
+    "Section 2.2 on Graph Attention Networks (GAT)",
+    "Section 3 on Method, specifically 3.1 (BPNN) and 3.2 (Neural Belief Propagation with Attention/BPGAT)",
+    "Equations 2, 8, 11, 12 from earlier sections for message update rules",
+    "Appendix C.1 for BPGAT parameter tuning context"
+  ],
+  "reproducibility_notes": [
+    "Definition of hybrid model variants (e.g., FVGAT-VFNONE) and their message transformation rules",
+    "Equations for message transformations (Eq. 2, 8, 11, 12) as referenced in the paper",
+    "Dataset specifications for Test 1, Test 2, Test 3, including structure and preprocessing",
+    "Evaluation metrics: Root Mean Square Error (RMSE) and Mean Relative Error (MRE)"
+  ]
+}

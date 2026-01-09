@@ -1,0 +1,20 @@
+{
+  "section_title": "DeepGate2: Functionality-Aware Circuit Representation Learning",
+  "section_purpose": "This is the title and abstract section of the paper, which provides a high-level summary of the work, its motivation, core contributions, and key results.",
+  "key_points": [
+    "Circuit representation learning is a promising field for EDA and logic reasoning tasks, but existing solutions like DeepGate have limitations due to weak supervision or flawed design.",
+    "DeepGate2 is introduced as a novel functionality-aware learning framework that improves upon DeepGate in both effectiveness and efficiency.",
+    "The approach uses pairwise truth table differences between sampled logic gates as training supervision with a designed loss function that explicitly considers circuit functionality.",
+    "An efficient one-round Graph Neural Network (GNN) model is designed, resulting in an order of magnitude faster learning speed than DeepGate.",
+    "Experimental results show significant improvements in downstream tasks: logic synthesis and Boolean satisfiability solving."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["One-round Graph Neural Network (GNN)"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": ["Code is available at https://github.com/cure-lab/DeepGate2."]
+}

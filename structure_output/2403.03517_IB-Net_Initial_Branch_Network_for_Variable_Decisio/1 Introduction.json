@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the Boolean Satisfiability (SAT) problem, its importance in applications like Electronic Design Automation (EDA) and Logic Equivalence Checking (LEC), highlight the limitations of existing neural network approaches for SAT, and present the proposed IB-Net framework as a solution.",
+    "key_points": [
+        "The Boolean Satisfiability (SAT) problem is NP-complete and fundamental to practical applications like software verification and hardware design, with two main solver categories: Stochastic Local Search (SLS) and Conflict Driven Clause Learning (CDCL).",
+        "In Electronic Design Automation (EDA), specifically Logic Equivalence Checking (LEC), SAT solvers are used extensively, and most problems are unsatisfiable (UNSAT), making solver performance critical for efficiency.",
+        "Existing neural network approaches (NeuroSAT, NLocalSAT, Neurocore) have limitations: they either target satisfiability prediction, use invalid supervision signals for LEC, or require periodic computation unsuitable for high-frequency verification.",
+        "The paper proposes IB-Net (Initial Branch Network), a framework targeting UNSAT problems that interacts with CDCL solvers via one-time offline branch initialization to boost solving efficiency.",
+        "IB-Net introduces a Weighted Literal-Incidence Graph for formula encoding, uses GNNs to predict UNSAT-core variables, and addresses imbalanced data distribution in LEC with novel node embeddings and loss functions."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

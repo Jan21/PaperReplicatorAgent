@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "3.1 Boolean Satisfiability and Maximum Satisfiability",
+    "section_purpose": "To formally define the Boolean Satisfiability (SAT) and Maximum Satisfiability (MaxSAT) problems, establishing the core computational problems that the paper's neural methods aim to address.",
+    "key_points": [
+        "Defines SAT as a decision problem to determine if a Boolean formula is satisfiable under some variable assignment.",
+        "Formalizes SAT problems using Conjunctive Normal Form (CNF) with literals, clauses, and Boolean variables.",
+        "Defines MaxSAT as an optimization variant of SAT aiming to satisfy the maximum possible number of clauses.",
+        "Distinguishes between the decision problem (SAT) and the optimization problem (MaxSAT)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "SAT defined as finding assignment σ: V→{0,1} such that Φ(σ)=True for CNF formula Φ.",
+            "CNF formula defined as conjunction of m clauses: Φ = C₁ ∧ C₂ ∧ ... ∧ Cₘ.",
+            "Each clause is disjunction of literals: Cᵢ = (l_{i,1} ∨ l_{i,2} ∨ ... ∨ l_{i,kᵢ}).",
+            "MaxSAT defined as finding assignment σ that maximizes Σᵢ Cᵢ(σ) where Cᵢ is satisfied indicator (1 if Cᵢ(σ)=True, else 0)."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": [
+        "Clear formal definitions of SAT and MaxSAT problem formulations.",
+        "Standard CNF representation of Boolean formulas."
+    ]
+}
+```

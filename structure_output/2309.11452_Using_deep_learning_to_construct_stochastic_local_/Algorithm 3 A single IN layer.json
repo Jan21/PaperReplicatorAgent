@@ -1,0 +1,31 @@
+{
+  "section_title": "Algorithm 3 A single IN layer",
+  "section_purpose": "This section provides the pseudocode for a single Interaction Network layer, which is a key component of the Graph Neural Network architecture used to implement oracle factories for stochastic local search in SAT solving.",
+  "key_points": [
+    "Describes the forward pass computation for one layer of an Interaction Network (IN) in a Graph Neural Network (GNN).",
+    "Updates edge features by applying a learnable function η^E to each edge, incorporating features of the connected nodes.",
+    "Aggregates updated edge features for each node using a function ρ^E to prepare for node updates.",
+    "Updates node features by applying a learnable function η^N to the aggregated edge features and the current node feature."
+  ],
+  "technical_details": {
+    "algorithms": ["Interaction Network layer update procedure as detailed in Algorithm 3"],
+    "formulas": [
+      "Edge feature update: e_k' = η^E(e_k, n_{r_k}, n_{s_k}) for each edge k, where r_k and s_k are indices of connected nodes",
+      "Edge aggregation for node i: aggregated edge features = ρ^E(E_i'), where E_i' is the set of updated edges where node i is the receiver",
+      "Node feature update: n_i' = η^N(aggregated edge features, n_i) for each node i"
+    ],
+    "architectures": ["Interaction Network (IN) layer architecture for graph neural networks"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 2.5 Graph Neural Networks as oracle factories for overall context",
+    "Section 2.5.1 Representing SAT instances as graphs to understand graph structure input",
+    "General knowledge of Graph Neural Networks and message-passing mechanisms"
+  ],
+  "reproducibility_notes": [
+    "Specific implementations of the learnable functions η^E, η^N, and ρ^E (e.g., neural network architectures).",
+    "Dimensions of node and edge feature vectors.",
+    "Initialization methods for node and edge features."
+  ]
+}

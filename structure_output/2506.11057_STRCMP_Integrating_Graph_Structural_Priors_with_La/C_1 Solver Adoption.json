@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "C.1 Solver Adoption",
+    "section_purpose": "This section specifies the specific solver software used as backends for the experimental MILP and SAT domains to ensure reproducibility and fair comparisons with baselines.",
+    "key_points": [
+        "SCIP 8.0.0 is used as the MILP solver backend with all parameters at default values.",
+        "The MILP solver retains advanced features like presolve and heuristics to align with real-world applications.",
+        "EasySAT is used as the SAT solver backend for direct comparability with the AutoSAT baseline.",
+        "The SAT solver configuration maintains parity with AutoSAT in compiler versions, interfaces, and time budgets."
+    ],
+    "technical_details": {
+        "algorithms": ["Conflict-Driven Clause Learning (CDCL)", "Literal Block Distance (LBD) heuristics", "VSIDS variable selection"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 5 Experimental Evaluation (establishes the experimental context)", "Appendix C Baseline Details (parent section)"],
+    "reproducibility_notes": ["Use SCIP 8.0.0 for MILP experiments with default parameters.", "Use EasySAT for SAT experiments with configurations matching AutoSAT.", "Retain advanced solver features like presolve and heuristics for MILP.", "Ensure compiler versions, interfaces, and time budgets match AutoSAT setup for SAT."]
+}
+```

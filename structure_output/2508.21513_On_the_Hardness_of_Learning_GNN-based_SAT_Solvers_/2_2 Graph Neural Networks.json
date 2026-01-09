@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "2.2 Graph Neural Networks",
+    "section_purpose": "This section provides background on Graph Neural Networks (GNNs), explaining their core message-passing framework and specifically how they are adapted to handle Boolean Satisfiability (SAT) problems by modeling CNF formulas as bipartite graphs.",
+    "key_points": [
+        "GNNs are neural networks designed for graph data, learning representations by locally aggregating information and incorporating inductive biases like permutation invariance.",
+        "The core of many GNNs is the message-passing framework, where node features are updated by aggregating transformed features from neighboring nodes.",
+        "A Conjunctive Normal Form (CNF) Boolean formula can be represented as a bipartite graph, making it suitable for processing by GNN-based solvers.",
+        "For SAT problems, the general message-passing scheme is specialized into two separate update equations: one for clause nodes and one for literal nodes, using different neural network functions for each partition."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "General Message-Passing Framework for GNNs: Updates node features by applying differentiable functions θ and φ to the node's previous features and an aggregation (⊕) of messages from its neighbors.",
+            "Specialized Bipartite Message-Passing for SAT: Applies the general framework separately to the clause and literal nodes of a bipartite graph representation of a CNF formula, using distinct neural networks (θ_c, φ_c for clauses and θ_l, φ_l for literals)."
+        ],
+        "formulas": [
+            "General GNN update equation (1): x_i^(k) = θ^(k)( x_i^(k-1), ⊕_(j∈N(i)) [ φ^(k)( x_i^(k-1), x_j^(k-1), e_ji ) ] ). Describes feature update for node i at layer k, where ⊕ is a permutation-invariant aggregation function.",
+            "Specialized SAT GNN update equations (2): Two equations defining updates for clause nodes (h_j^(k)) and literal nodes (h_i^(k)). They use specialized functions θ_c, φ_l for clauses and θ_l, φ_c for literals, aggregating messages from nodes in the opposite partition."
+        ],
+        "architectures": [
+            "Graph Neural Network (GNN) architecture based on the message-passing framework.",
+            "Bipartite GNN architecture with two distinct computational streams for clause and literal node partitions."
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of graphs (nodes, adjacency matrix, features).", "Concept of Conjunctive Normal Form (CNF) Boolean formulas (implied, for understanding the SAT application)."],
+    "reproducibility_notes": ["The general message-passing formula (Equation 1) specifying the functions θ, φ, and the aggregation operator ⊕.", "The specialized bipartite update rules for SAT (Equation 2), which detail the separate neural networks (θ_c, φ_c, θ_l, φ_l) for clauses and literals.", "The representation of a CNF formula as a bipartite graph (clause and literal nodes), though the specifics of this construction are deferred to Section 3."]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2 Comparison to Supervised Approaches",
+    "section_purpose": "To compare the effectiveness of the proposed RLAF (Reinforcement Learning from Algorithm Feedback) method for SAT solver guidance against prior supervised learning approaches that predict predefined variable properties like UNSAT core or backbone membership.",
+    "key_points": [
+        "Supervised approaches predict variable properties (UNSAT core/backbone membership) and transform predictions into variable weights for solver guidance, whereas RLAF uses reinforcement learning.",
+        "The notions of UNSAT cores and backbones have limitations as training targets: backbones are only non-empty on satisfiable instances and are empty for graph coloring due to symmetry, while UNSAT cores on their training data were effectively constant (contained all variables).",
+        "For a fair comparison, the same GNN architecture is used for both RLAF and supervised models, with separate models per instance distribution and tuned transformation from predictions to weights.",
+        "RLAF significantly outperforms both UNSAT core and backbone prediction-based guidance in terms of relative wall-clock runtime for the Glucose solver across most tested distributions.",
+        "The backbone-based heuristic only outperforms RLAF on satisfiable 3SAT instances with 300 variables, not on larger problems, and performs substantially worse on unsatisfiable 3SAT problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Same GNN architecture used for both RLAF and supervised comparison models"],
+        "hyperparameters": {},
+        "datasets": ["3SAT instances (satisfiable and unsatisfiable)", "Graph coloring instances", "Cryptographic SAT instances"]
+    },
+    "dependencies": ["Section 2 (RLAF-guided SAT Solvers, for understanding RLAF method)", "Appendix B.4 (for full comparison setup details)", "Understanding of UNSAT cores and backbones from prior work"],
+    "reproducibility_notes": ["Use the same GNN architecture for both RLAF and supervised models", "Train separate models for each instance distribution (3SAT, graph coloring, cryptographic)", "Tune the transformation from backbone/core predictions to variable weights separately per distribution on validation sets", "Evaluation metric: relative wall-clock runtime compared to base solver (Glucose)"]
+}
+```

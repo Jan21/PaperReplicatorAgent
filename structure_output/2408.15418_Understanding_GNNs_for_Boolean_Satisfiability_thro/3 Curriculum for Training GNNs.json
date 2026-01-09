@@ -1,0 +1,46 @@
+```json
+{
+    "section_title": "3 Curriculum for Training GNNs",
+    "section_purpose": "This section explains how the iterative nature of the NeuroSAT architecture enables the use of a curriculum training strategy, which adapts both the problem size and the number of message-passing iterations to accelerate model convergence.",
+    "key_points": [
+        "The NeuroSAT architecture uses iterative message-passing (MP) with the same function per step, allowing the number of MP iterations to adapt to problem difficulty during inference.",
+        "The trained model's MP process resembles optimization of an implicit energy function; convergence is marked by literal vectors forming two well-separated clusters.",
+        "A curriculum training procedure is introduced: the model is trained by progressively increasing both the size (number of variables) of SAT problems in the training set and the number of MP operations used.",
+        "This curriculum strategy results in almost an order-of-magnitude faster convergence to the same accuracy (85%) as reported in the original NeuroSAT paper.",
+        "Training with an SDP-like loss function instead of a classification loss yields lower accuracy but reduces dependency on the curriculum due to richer supervision."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Iterative message-passing algorithm with adaptive number of steps based on problem difficulty",
+            "Curriculum training algorithm: incrementally enlarges training set with bigger problems and increases the number of MP operations",
+            "Stopping criterion based on when literal vectors stop changing significantly"
+        ],
+        "formulas": [],
+        "architectures": [
+            "NeuroSAT architecture with shared MP function across iterations"
+        ],
+        "hyperparameters": {
+            "number_of_MP_iterations_during_training": "fixed during training",
+            "number_of_MP_iterations_during_inference": "adaptive",
+            "original_paper_training_MP_iterations": "26",
+            "original_paper_training_problem_size": "up to 40 variables",
+            "original_paper_inference_generalization": "up to 200 variables",
+            "target_accuracy_for_curriculum_transition": "certain accuracy (unspecified)"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.3: Semidefinite Programming for Boolean Satisfiability (for connection between MP process and SDP optimization)",
+        "Section 2.4: Graph Neural Networks for Boolean Satisfiability (for NeuroSAT architecture background)",
+        "Original NeuroSAT paper (for baseline results and architecture details)",
+        "Figure 4: Visualization of SDP objective evolution on NeuroSAT embeddings"
+    ],
+    "reproducibility_notes": [
+        "Curriculum training procedure details: start with smaller problems, train until target accuracy, then increment both problem size and MP iterations.",
+        "The specific target accuracy threshold for transitioning between curriculum stages.",
+        "The exact schedule for increasing problem size and MP iterations.",
+        "Simplifications made to the original NeuroSAT model to achieve faster convergence.",
+        "Implementation details for the stopping criterion based on vector change magnitude."
+    ]
+}
+```

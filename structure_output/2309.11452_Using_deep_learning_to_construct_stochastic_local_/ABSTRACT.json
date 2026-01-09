@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "ABSTRACT",
+    "section_purpose": "To provide a concise overview of the paper's motivation, methodology, and key findings regarding the use of Graph Neural Networks to train oracles for stochastic local search SAT solvers with performance guarantees.",
+    "key_points": [
+        "SLS SAT solvers can be guaranteed to solve instances efficiently if they have access to suitable instance-specific oracles that exploit local structure.",
+        "The paper trains such oracles using Graph Neural Networks to learn common structure from datasets of SAT instances.",
+        "GNN-based oracles significantly boost performance: they allow solvers to solve 17% more difficult instances (measured by clause-to-variable ratio).",
+        "With GNN oracles, solvers require 35% fewer steps on average, with median step reductions up to a factor of 8.",
+        "The work bridges theoretical computer science (formal performance guarantees) with practical deep learning for constraint satisfaction."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks used as oracle factories"],
+        "hyperparameters": {},
+        "datasets": ["Random SAT instances of varying difficulty (implied by evaluation setup)"]
+    },
+    "dependencies": ["Basic understanding of SAT problem, Stochastic Local Search (SLS) algorithms, and Graph Neural Networks"],
+    "reproducibility_notes": ["High-level approach: Train GNNs as oracles for SLS solvers, evaluate on random SAT instances with varying clause-to-variable ratios."]
+}
+```

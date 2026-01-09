@@ -1,0 +1,36 @@
+STRCMP: Integrating Graph Structural Priors with Language Models for Combinatorial Optimization
+  Abstract
+  1 Introduction
+  2 Related Work
+  3 Problem Statement
+  4 Proposed Solution
+    4.1 Methodology
+    4.2 Theoretical Analysis
+  5 Experimental Evaluation
+  Research Questions
+    5.1 Settings
+    5.2 Implementation
+    5.3 Results
+  Optimization Performance (Answer to RQ1).
+  Efficiency Improvement (Answer to RQ2).
+  6 Conclusion
+  References
+  Contents
+  A Proofs
+  B Implementation Details
+  B.1 Combinatorial Structure Extraction
+  B.2 Structure-Aware Code Generation
+  C Baseline Details
+  C.1 Solver Adoption
+  C.2 Baselines Setting
+  C.2.1 Neural Combinatorial Optimization
+  C.2.2 Evolutionary Code Optimization
+  D Dataset Details
+  D.1 SAT Domain
+  D.2 MILP Domain
+  E Metric Details
+  E.1 Metrics related to MILP
+  E.2 Metrics related to SAT
+  F Discussion
+  G Additional Experimental Results
+  G.1 Optimization Performance Result

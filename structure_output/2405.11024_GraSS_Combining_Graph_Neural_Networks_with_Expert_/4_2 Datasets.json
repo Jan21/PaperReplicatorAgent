@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2 Datasets",
+    "section_purpose": "This section describes the two datasets used for training and evaluating the SAT solver selection model, providing their sources, generation methods, and filtering criteria.",
+    "key_points": [
+        "Two distinct datasets are used: a proprietary industrial dataset (LEC) and a public competition dataset (SAT Competition).",
+        "The Logic Equivalence Checking (LEC) dataset contains 78,727 SAT instances derived from verifying functional equivalence during circuit optimization steps in electronic design.",
+        "The SAT Competition (SC) dataset is a filtered subset of the 2022 SAT Competition Anniversary Track Benchmark, containing 2,088 instances.",
+        "For the SC dataset, instances were filtered to exclude those unsolvable by any portfolio solver within 1,500 seconds and those with more than 20,000 variables.",
+        "Dataset statistics for both are summarized in referenced tables (Table 1a and 1b)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Logic Equivalence Checking (LEC): Proprietary dataset from 30 industrial circuits. 78,727 SAT instances.", "SAT Competition (SC): Filtered subset of 2022 SAT Competition Anniversary Track Benchmark. 2,088 SAT instances. Filter criteria: solved by at least one portfolio solver within 1,500 seconds, and ≤ 20,000 variables."]
+    },
+    "dependencies": ["Section 4.1 (Base solvers/portfolio), as filtering for the SC dataset references the portfolio."],
+    "reproducibility_notes": ["Source and size of the LEC dataset (proprietary, from 30 circuits, 78,727 instances).", "Source and filtering process for the SC dataset (2022 SAT Competition Anniversary Track, filtered by solvability within 1,500s and variable count ≤ 20k).", "Reference to Table 1 for detailed statistics (not provided in this section)."]
+}
+```

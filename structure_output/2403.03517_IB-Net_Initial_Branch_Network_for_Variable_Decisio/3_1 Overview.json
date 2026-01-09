@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.1 Overview",
+    "section_purpose": "To provide a high-level introduction to the IB-Net framework, describing its integration with a CDCL solver and its purpose of assisting with UNSAT problems.",
+    "key_points": [
+        "The IB-Net framework is designed to assist Conflict-Driven Clause Learning (CDCL) solvers specifically on UNSAT problems.",
+        "It combines a neural network with a method to interact with SAT solvers.",
+        "The pipeline converts a Boolean formula into a Weighted Literal-Incidence Graph (WLIG), processes it with a GNN, and outputs probabilities for variables belonging to an UNSAT-core.",
+        "The neural outputs are used to initialize the solver's internal decision queue and scores to guide the solving process.",
+        "The framework includes specific improvements tailored for handling UNSAT problems, which are detailed in subsequent subsections."
+    ],
+    "technical_details": {
+        "algorithms": ["High-level framework for neural-guided SAT solving (IB-Net)"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of CDCL solvers and Boolean satisfiability (SAT/UNSAT) problems from the Introduction (Section 1)"],
+    "reproducibility_notes": ["Concept of converting a Boolean formula to a Weighted Literal-Incidence Graph (WLIG)", "High-level pipeline: WLIG -> GNN -> prediction of variable UNSAT-core likelihood -> initialization of solver's decision queue/score."]
+}
+```

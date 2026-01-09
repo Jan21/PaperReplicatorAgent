@@ -1,0 +1,33 @@
+{
+  "section_title": "5.1 Data preparation",
+  "section_purpose": "To describe the datasets prepared for experimental evaluation, including small-scale symmetric circuits, medium-size CNF formulas, and large random circuits, detailing their construction and characteristics.",
+  "key_points": [
+    "Three datasets are prepared: small-scale symmetric AIGs, medium-size CNF formulas (SR(n) problems), and large random AIGs (V(n) problems).",
+    "The small-scale dataset is manually constructed with 10 circuits having symmetric inputs but asymmetric solutions, designed to test existing methods like NeuroSAT and DG-DAGRNN.",
+    "Medium-size datasets (SR(n)) are generated similarly to prior work and converted to circuit form using Shannon's Decomposition.",
+    "Large-scale datasets (V(n)) are generated using the AIGEN tool, extracting combinational circuits from sequential ones, and are complex with over 1K logic gates for V(10) problems."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": [
+      "Small-scale symmetric AIG: 10 manually constructed circuits, no more than 3 inputs, symmetric input nodes with distinct assignments.",
+      "Medium-size CNF formulas: SR(n) problems generated as per [Selsam et al., 2018], n is number of variables, converted using Shannon's Decomposition.",
+      "Large random AIGs: V(n) problems generated with AIGEN tool [Jacobs and Sakr, 2021], n is number of inputs, average >1K logic gates for V(10), CNF formulas have >1K variables via Tseitin transformation."
+    ]
+  },
+  "dependencies": [
+    "Prior work by Selsam et al. (2018) for SR(n) problem generation.",
+    "Shannon's Decomposition method from Amizadeh et al. (2018).",
+    "AIGEN tool by Jacobs and Sakr (2021) for generating random circuits.",
+    "Background on SAT problems and GNN-based solving from section 2."
+  ],
+  "reproducibility_notes": [
+    "Manual construction details for small-scale symmetric circuits with asymmetric solutions.",
+    "Generation procedure for SR(n) problems following prior work specifications.",
+    "Use of AIGEN tool to create sequential circuits and extraction of combinational logic.",
+    "Application of Shannon's Decomposition for CNF to circuit conversion and Tseitin transformation for circuit to CNF conversion."
+  ]
+}

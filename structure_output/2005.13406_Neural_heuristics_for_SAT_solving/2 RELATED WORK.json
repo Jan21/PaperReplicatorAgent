@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 RELATED WORK",
+    "section_purpose": "This section reviews and positions the paper's neural SAT-solving approach relative to prior research on applying machine learning, particularly neural networks, to SAT problems.",
+    "key_points": [
+        "NeuroSAT [SLB+18] is a key inspiration; it uses a message-passing network to directly generate variable assignments, whereas this paper uses a similar network to guide a backtracking-based algorithm.",
+        "FormulaNet [TWTD17] uses a more general graph representation for higher-order logic but hasn't been applied to neural guidance.",
+        "PossibleWorldNet [ESA+18], based on TreeNN, explores multiple possible worlds, an approach considered as an alternative to structured backtracking algorithms like DPLL/CDCL.",
+        "EqNet [ACKS16] solves Boolean expression equivalence but is limited to very small formulas (~10 variables), while this work tackles formulas with hundreds of variables and thousands of symbols.",
+        "Other approaches include Learned Restart Policy [LOM+18], which uses ML to decide when to restart the search, and reinforcement learning [VLV+20] for training clause deletion heuristics in DPLL solvers."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["NeuroSAT message-passing network architecture", "FormulaNet graph representation for higher-order logic", "PossibleWorldNet architecture (based on TreeNN)", "TreeNN for proof synthesis", "EqNet for Boolean expression equivalence"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["General background on SAT solving and backtracking-based algorithms (e.g., DPLL, CDCL) is assumed."],
+    "reproducibility_notes": ["This section does not contain specific information needed for reproduction; it is a literature review."]
+}
+```

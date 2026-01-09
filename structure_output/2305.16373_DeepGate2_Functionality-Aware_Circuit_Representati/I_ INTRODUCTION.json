@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "I. INTRODUCTION",
+    "section_purpose": "To introduce the problem domain of circuit representation learning in EDA, identify limitations of the existing DeepGate framework (lack of true functional supervision and inefficient PI encoding), and present the novel contributions of DeepGate2 which address these issues.",
+    "key_points": [
+        "Circuit representation learning is a promising two-step (pre-training then fine-tuning) paradigm for EDA tasks.",
+        "DeepGate embeds circuit logic and structure using signal probability supervision but has significant limitations: its supervision (logic-1 probability) does not capture the complete truth table, and its homogeneous PI embeddings fail to identify individual PIs.",
+        "DeepGate2 introduces a 'functionality-aware' loss function based on the pairwise truth table difference (Hamming distance) between gates, providing genuine functional supervision.",
+        "DeepGate2 employs a single-round GNN architecture with separate functional and structural embeddings for PIs, using orthogonal vectors for structural PI embeddings to encode unique identities, improving efficiency.",
+        "Experiments indicate DeepGate2 achieves significant accuracy improvements and an order-of-magnitude speedup over DeepGate, with demonstrated efficacy in downstream tasks like logic synthesis and SAT solving."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-step circuit representation learning paradigm (pre-training then fine-tuning)", "Attention-based GNN (referenced from DeepGate)", "Proposed single-round GNN architecture with separate functional/structural embedding streams"],
+        "formulas": [],
+        "architectures": ["DeepGate: Attention-based GNN mimicking logic computation", "DeepGate2: Single-round GNN segregating node embeddings into functional embeddings and structural embeddings"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic knowledge of Electronic Design Automation (EDA)", "Concept of Graph Neural Networks (GNNs)", "Basic logic gate functionality and truth tables"],
+    "reproducibility_notes": ["The core concept of the 'pairwise truth table difference' (Hamming distance between incomplete truth tables of gates) as supervision", "The idea of separating node embeddings into functional and structural components", "The use of orthogonal vectors for initial structural embeddings of Primary Inputs (PIs)"]
+}
+```

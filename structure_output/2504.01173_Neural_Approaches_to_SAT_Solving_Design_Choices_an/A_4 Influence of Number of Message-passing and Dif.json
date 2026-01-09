@@ -1,0 +1,21 @@
+{
+  "section_title": "A.4 Influence of Number of Message-passing and Diffusion Steps",
+  "section_purpose": "To report experimental findings on how varying the number of message-passing steps and diffusion steps impacts model performance, noting that increasing these steps beyond a certain threshold does not yield further improvements.",
+  "key_points": [
+    "Evaluations are reported with fixed diffusion steps and varying message-passing steps (Table 10) and vice versa (Table 9).",
+    "Increasing the number of iterative steps (either message-passing or diffusion) does not always lead to performance benefits.",
+    "When one type of step is fixed, increasing the other beyond a certain threshold does not improve performance."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "message_passing_steps": "varied (specific values not given, referenced in tables)",
+      "diffusion_steps": "varied (specific values not given, referenced in tables)"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 3.3 (Graph Neural Networks)", "Section 3.4 (Diffusion-based Assignment Generation)", "Section 4.2 (Architecture Variants)", "Section 5.4 (Diffusion Model Extension)"],
+  "reproducibility_notes": ["Specific values for message-passing and diffusion steps from Tables 9 and 10 are required.", "Observation of thresholds beyond which increasing steps does not help should be considered when tuning."]
+}

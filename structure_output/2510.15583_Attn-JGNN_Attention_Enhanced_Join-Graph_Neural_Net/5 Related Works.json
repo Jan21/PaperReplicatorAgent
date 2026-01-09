@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5 Related Works",
+    "section_purpose": "To survey existing approaches to #SAT model counting, categorizing them into traditional methods (exact and approximate) and modern data-driven neural network approaches, and to position the paper's proposed Attn-JGNN method within this research landscape.",
+    "key_points": [
+        "Traditional #SAT methods are divided into Exact Counting (prioritizing correctness) and Approximate Counting (trading accuracy for scalability).",
+        "Exact counting includes Search-based methods (extending DPLL algorithm, e.g., c2d, SharpSAT) and Dynamic Programming-based methods (decomposing formulas recursively, e.g., ADDMC, DPMC), but both face scalability challenges.",
+        "Approximate counting, especially hash-based methods like ApproxMC, uses randomization and hash functions to partition the solution space for estimation, offering polynomial-time complexity with provable guarantees.",
+        "Neural network approaches leverage GNNs and message-passing to learn from formula structures, starting with NeuroSAT for satisfiability classification and evolving to #SAT with methods like BPNN (combining Belief Propagation) and BPGAT (adding attention).",
+        "Existing neural methods (BPNN, BPGAT) show promise in speed and adaptability but have limitations: BPNN relies on BP's inaccuracies on cyclic graphs, and BPGAT suffers from high computational overhead due to global attention."
+    ],
+    "technical_details": {
+        "algorithms": ["Davis-Putnam-Logemann-Loveland (DPLL) algorithm", "Dynamic Programming (DP)-based exact counting", "Hash-based approximate counting with random XOR constraints", "Belief Propagation (BP)", "Graph Neural Networks (GNNs) for message-passing"],
+        "formulas": ["Hash-based estimation: Partition solution space with hash functions, count satisfying assignments in a random cell, and scale by total number of cells."],
+        "architectures": ["NeuroSAT: GNN on variable-clause bipartite graph", "BPNN: Combines Belief Propagation with neural network", "BPGAT: Extends BPNN with attention mechanism"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of #SAT problem complexity (#P-complete) from Section 2.1", "Familiarity with iterative join-graph propagation (Section 2.2) and Graph Attention Networks (Section 2.3) to contrast with related neural methods."],
+    "reproducibility_notes": ["Names and citations of key baseline tools and methods for comparison (e.g., ApproxMC, NeuroSAT, BPNN, BPGAT).", "Core algorithmic ideas of each category (search-based, DP-based, hash-based, neural message-passing) to understand the design space.", "Identified limitations of existing neural approaches (BP limitations, attention overhead) that motivate the paper's new method."]
+}
+```

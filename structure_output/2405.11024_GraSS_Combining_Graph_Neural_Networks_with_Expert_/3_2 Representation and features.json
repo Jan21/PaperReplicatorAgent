@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.2 Representation and features",
+    "section_purpose": "This section describes how SAT instances are represented as input to the machine learning model, specifically as literal-clause graphs (LCGs) with node features, and introduces positional encodings to handle sensitivity to clause ordering.",
+    "key_points": [
+        "SAT instances are input to the model as literal-clause graphs (LCGs), which are undirected graphs with clause nodes, positive variable nodes, and negative variable nodes connected by edges representing literal appearances in clauses.",
+        "Node features are attached to both clause and variable nodes, with most features being hand-designed and inspired by SATzilla, representing expert knowledge critical for SAT solving (e.g., presence of Horn clauses).",
+        "Clause node features are enriched with positional encodings to address the practical sensitivity of solver runtimes to clause ordering, despite SAT formulas being theoretically permutation-invariant.",
+        "An empirical study showed that shuffling clauses can cause large variations in runtime for the Kissat 3.0 solver on the LEC dataset, while shuffling variables has limited impact, aligning with prior observations about modern solver architectures.",
+        "The positional encoding follows the classical sinusoidal encoding from Transformer models, generating a 10-dimensional embedding for each clause based on its position in the CNF formula."
+    ],
+    "technical_details": {
+        "algorithms": ["Conversion of SAT instances to literal-clause graphs (LCGs)", "Generation of sinusoidal positional encodings for clauses"],
+        "formulas": ["Positional encoding formulas: PE(k,2i) = sin(k / 10000^(2i/10)) and PE(k,2i+1) = cos(k / 10000^(2i/10)) for i=0,...,4, where k is the clause index", "CNF formula representation: c₁ ∧ ... ∧ cₘ where each clause cᵢ = l₁ ∨ l₂ ∨ ..."],
+        "architectures": ["Literal-clause graph (LCG) structure: undirected graph with three node types (clause nodes, positive variable nodes, negative variable nodes), edges between clause and variable nodes when literal appears in clause, and edges between complementary variable nodes"],
+        "hyperparameters": {"positional_encoding_dimension": 10},
+        "datasets": ["LEC dataset (mentioned in context of clause shuffling experiment)"]
+    },
+    "dependencies": ["Knowledge of SAT problems and conjunctive normal form (CNF)", "Understanding of graph neural networks (implied by previous section 3.1)", "Familiarity with SATzilla features (referenced)", "Transformer positional encodings (referenced Vaswani et al.)"],
+    "reproducibility_notes": ["Need to implement conversion of CNF SAT instances to literal-clause graphs (LCGs)", "Must extract hand-designed features inspired by SATzilla (details in Appendix A)", "Must generate 10-dimensional sinusoidal positional encodings for each clause based on its index", "Need to concatenate positional encodings with other clause node features"]
+}
+```

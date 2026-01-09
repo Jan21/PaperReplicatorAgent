@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "5.4.2 Interleaving Diffusion Steps with Unit Propagation",
+    "section_purpose": "This section introduces and evaluates a method for integrating unit propagation into the diffusion-based SAT solving process, describing a backtracking algorithm that uses probability thresholds from the model to obtain partial assignments.",
+    "key_points": [
+        "The diffusion model's probability outputs allow for creating partial assignments by setting a threshold on variable assignment confidence.",
+        "A tree-search-like algorithm is proposed that starts with a low threshold, attempts to find a satisfiable assignment via unit propagation, and backtracks to increase the threshold if it fails.",
+        "Interleaving diffusion steps with unit propagation provides a ~10% accuracy improvement over the base diffusion model.",
+        "The algorithm is presented as a proof-of-concept for potential improvements and is not optimized for speed.",
+        "A table (Table 7) provides quantitative results comparing accuracy with and without unit propagation, along with computational cost metrics (recursive calls)."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Tree-search-like algorithm that interleaves diffusion steps with unit propagation. It starts with a low threshold for partial assignment extraction, performs unit propagation, and backtracks to increase the threshold if no satisfiable assignment is found."
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "threshold": "Used to determine partial assignments from model probability outputs (lower threshold fixes more variables but increases risk of unsatisfiability)"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of the base diffusion model described in Section 5.4",
+        "Knowledge of unit propagation (presumably from background sections like 3.1)",
+        "Algorithm details in Appendix A.3"
+    ],
+    "reproducibility_notes": [
+        "Algorithm details for interleaving diffusion and unit propagation (referenced as being in A.3)",
+        "Strategy for threshold selection and backtracking",
+        "Integration method between the model's probability outputs and the unit propagation subroutine"
+    ]
+}
+```

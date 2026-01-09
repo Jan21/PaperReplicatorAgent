@@ -1,0 +1,26 @@
+{
+  "section_title": "4.3 Finding Minimum Dominating Cliques",
+  "section_purpose": "To present methods for finding minimum dominating cliques using enhanced solvers with GNN models, including backjumping and loss function variations, and to show experimental results comparing solver performance.",
+  "key_points": [
+    "Addition of features to dominating-clique solvers for finding minimum solutions, such as recording and updating the minimum clique and applying backjumping to prune search space.",
+    "Preparation of three GNN models with different loss functions (equations 5, 6 with E(|S|) = sum p_i, and 6 with E(|S|) as equation 7) for experiments.",
+    "Comparison of six solvers (combinations of GNN models and joint information entropy calculations) based on winning ratios and geometric average of branches.",
+    "Observations that loss functions with the E(|S|) term perform better than equation 5, and accurate calculations of entropy or E(|S|) improve solver performance."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Backjumping to prune search space: backjump three levels when finding first dominating clique or one with lower cardinality, and two levels when current recursive depth equals minimum clique cardinality.",
+      "Evaluation order of random variables in C ∩ S is decreasing order based on numbers of unsatisfied clauses involved."
+    ],
+    "formulas": [
+      "Loss function (5) (referenced but not detailed here).",
+      "Loss function (6) with E(|S|) = ∑_{i=1}^{n} p_i.",
+      "Loss function (6) with E(|S|) as equation (7) (referenced)."
+    ],
+    "architectures": ["GNN models (specifics not detailed in this section, referenced from earlier sections)."],
+    "hyperparameters": {},
+    "datasets": ["Test data for finding minimum dominating cliques (unspecified in this section)."]
+  },
+  "dependencies": ["Section 3 for loss functions (5), (6), (7)", "Section 3.1 or Appendix A for GNN model architecture", "Sections 2 and 3 for concepts of dominating clique and probabilistic-method GNN"],
+  "reproducibility_notes": ["Implementation details of backjumping and variable evaluation order", "Specifications of the three GNN models and their loss functions", "Details on test data used in experiments", "Methods for calculating joint information entropy (fast vs. accurate)"]
+}

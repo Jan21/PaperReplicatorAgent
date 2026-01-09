@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.1.2 Exponential Moving Average (EMA)",
+    "section_purpose": "To describe the use of Exponential Moving Average (EMA) as a training technique to stabilize the learning process and improve the neural network model's generalization performance.",
+    "key_points": [
+        "Exponential Moving Average (EMA) is employed for model parameter updates during training.",
+        "EMA maintains a shadow copy of model parameters updated after each batch to smooth parameter trajectories.",
+        "The EMA parameters are used during validation and testing instead of the current parameters.",
+        "This technique significantly stabilizes training and improves generalization, especially early in training.",
+        "Experiments show EMA provides a smooth validation accuracy curve, while non-EMA models exhibit high variance and large accuracy jumps."
+    ],
+    "technical_details": {
+        "algorithms": ["Exponential Moving Average (EMA) parameter update strategy"],
+        "formulas": ["θ_EMA ← β * θ_EMA + (1 - β) * θ_current (Equation 13)"],
+        "architectures": [],
+        "hyperparameters": {"EMA decay rate (β)": "0.999"},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of neural network training processes and parameter optimization methods"],
+    "reproducibility_notes": ["Use EMA decay rate β = 0.999", "Use EMA shadow parameters for validation and testing instead of current parameters", "Update EMA parameters after each training batch"]
+}
+```

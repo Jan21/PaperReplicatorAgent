@@ -1,0 +1,19 @@
+{
+  "section_title": "A.5 Additional plots",
+  "section_purpose": "To provide additional visualizations that illustrate the relationship between graph Ricci curvature and problem hardness, and to show visualizations of easy and hard SAT problems, supporting the theoretical concepts discussed in the main paper.",
+  "key_points": [
+    "Visualization of hard random 3-SAT problems reveals many long-range interactions and strongly negative average Balanced Forman Curvature (BFC), aligning with theoretical predictions.",
+    "Average BFC decreases monotonically with clause density α for both 3-SAT and 4-SAT, and this drop correlates with the solvability performance of the NeuroSAT model.",
+    "For 4-SAT, curvature is more negative and concentrated, leading to oversquashing and a faster performance drop-off in GNN-based solvers, occurring before the SAT-UNSAT critical threshold.",
+    "The plots highlight an additional hardness phase for GNN-based solvers related to representation learning limitations, beyond traditional SAT-UNSAT thresholds."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": ["Balanced Forman Curvature (BFC)"],
+    "architectures": ["NeuroSAT model [46]"],
+    "hyperparameters": {},
+    "datasets": ["Random 3-SAT problems with N=256 variables", "Random 4-SAT problems with N=256 variables"]
+  },
+  "dependencies": ["Main manuscript concepts on curvature and hardness (Sections 3 and 4)", "Background on SAT problems and GNNs (Section 2)", "Figures 4, 5, 6, and 7 from the main paper for context"],
+  "reproducibility_notes": ["Generate random k-SAT problems with specified N=256 and varying α", "Use the NeuroSAT model to assess solvability and compute average BFC", "Apply visualization techniques such as bipartite and circular layouts for problem representation"]
+}

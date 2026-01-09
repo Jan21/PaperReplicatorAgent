@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.3 Evaluation metrics",
+    "section_purpose": "To define and explain the evaluation metrics used in the experiments to assess the performance of IB-Net, specifically focusing on UNSAT-core prediction efficacy and end-to-end time efficiency when interacting with the Kissat solver.",
+    "key_points": [
+        "Two main aspects are evaluated: the efficacy of UNSAT-core prediction for unsatisfiable problems, and the end-to-end time efficiency of models when used with the Kissat solver compared to Kissat alone.",
+        "A.RT (Average Runtime) is used to measure the average runtime across all CNF instances.",
+        "Imp. (Efficiency Improvement) quantifies the reduction in runtime (in seconds) compared to the original Kissat solver.",
+        "Halted counts the number of CNF instances that timed out within the 1000-second limit.",
+        "All reported runtimes for neural-network-based solutions include the time for graph construction and inference."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.5 (Interaction with Solver) for context on how the model interacts with Kissat", "Section 4.1 (Datasets) as these metrics are applied to the test datasets"],
+    "reproducibility_notes": ["The specific definition and calculation of each metric (A.RT, Imp., Halted)", "The understanding that neural network runtime includes graph construction and inference time", "The timeout limit of 1000 seconds for the 'Halted' metric"]
+}
+```

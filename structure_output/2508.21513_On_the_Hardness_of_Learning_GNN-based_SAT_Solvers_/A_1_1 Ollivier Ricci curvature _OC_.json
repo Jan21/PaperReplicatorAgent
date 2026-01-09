@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.1.1 Ollivier Ricci curvature (OC)",
+    "section_purpose": "This appendix section provides a formal definition and background on Ollivier Ricci Curvature (OC), explaining its geometric intuition, the underlying mathematical framework from metric measure spaces, and its discretization to weighted graphs.",
+    "key_points": [
+        "Edges with negative Ollivier curvature act as structural bottlenecks, separating dense regions and impeding information propagation.",
+        "Edges with positive curvature facilitate smooth information propagation and indicate community structure.",
+        "OC is formally defined on a metric measure space via the Wasserstein distance between probability measures assigned to points.",
+        "The definition is extended to graphs by defining node-specific probability measures based on edge weights (like random walk probabilities) and computing the Wasserstein distance on the graph's shortest-path metric.",
+        "The computation on an edge involves solving an optimal transport problem to find a minimal-cost transfer plan for redistributing mass between the neighborhoods of the two nodes."
+    ],
+    "technical_details": {
+        "algorithms": ["Describes the Wasserstein distance (optimal transport) calculation as an optimization over transfer plans (matrices)."],
+        "formulas": ["Wasserstein distance formula: W₁(μ₁, μ₂) = inf_{ν ∈ M(μ₁,μ₂)} ∫ d(x,y) dν(x,y) (Eq. 12)", "Ollivier curvature definition: κ(x,y) ≔ 1 - W₁(mₓ, m_y) / d(x,y) (Eq. 13)", "Graph-specific Wasserstein distance: W₁ᴳ(m_i, m_j) = inf_{ν ∈ A} Σ_{z₁∈N(i)} Σ_{z₂∈N(j)} ν(z₁,z₂) d(z₁,z₂) (Eq. 14)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["General knowledge of metric spaces and probability measures.", "Understanding of graphs, neighborhoods, and shortest-path distances.", "Context from the main paper sections (e.g., 2.3) linking curvature to GNN performance."],
+    "reproducibility_notes": ["The formal definition of OC for weighted graphs, including the construction of node probability measures m_i(j) = w_{i,j}/d_i.", "The precise optimization formulation (Eq. 14) for calculating the Wasserstein distance between two node neighborhoods on a graph."]
+}
+```

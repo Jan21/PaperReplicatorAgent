@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Related Work",
+    "section_purpose": "To situate the paper's approach within existing research by reviewing prior work on data-driven and machine learning methods for combinatorial optimization problems, particularly highlighting GNN-based approaches.",
+    "key_points": [
+        "Traditional combinatorial problem solving relies on symbolic search algorithms, but there are growing data-driven approaches.",
+        "One research direction integrates machine learning into traditional search frameworks (e.g., for MIP, SMT, QBF).",
+        "This paper focuses on end-to-end models that do not require search algorithm assistance, tracing from early Hopfield networks to modern neural variants.",
+        "GNNs are particularly suited for combinatorial problems because many problems are graph-defined, and variable-constraint relations form bipartite graphs.",
+        "There is a growing body of GNN-based work for problems like SAT, TSP, pseudo-Boolean optimization, and graph coloring, supported by recent literature reviews."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Introduction (for context on MaxSAT and GNNs)", "Preliminaries (for definitions of SAT/MaxSAT and GNN basics)"],
+    "reproducibility_notes": []
+}
+```

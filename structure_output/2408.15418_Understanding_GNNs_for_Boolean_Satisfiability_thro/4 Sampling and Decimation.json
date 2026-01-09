@@ -1,0 +1,21 @@
+```json
+{
+  "section_title": "4 Sampling and Decimation",
+  "section_purpose": "This section explores the connection between literal embeddings produced by GNNs and potential solution recovery methods, specifically investigating how clustering of embeddings can be used for sampling multiple solutions and developing a decimation algorithm.",
+  "key_points": [
+    "The observation that literal embeddings form two well-separated clusters for satisfiable formulas is robust, confirmed by achieving the same classification accuracy (85%) using Silhouette score on K-means clusters.",
+    "Multiple random initializations of embeddings produce diverse solutions for many satisfiable problems, enabling improved classification accuracy via majority voting.",
+    "Average vectors representing 'true' and 'false' values can be computed from aggregated literal embeddings, with literals' distances to these vectors serving as indicators of their truth assignments.",
+    "These distances can be interpreted as marginal probabilities, motivating a decimation algorithm that fixes variables based on embedding distances, simplifies the formula, and re-runs the message-passing process."
+  ],
+  "technical_details": {
+    "algorithms": ["K-means clustering with 2 clusters", "Silhouette score for cluster quality assessment", "Majority voting over multiple random initializations", "Decimation algorithm based on embedding distances to average true/false vectors"],
+    "formulas": ["Euclidean distance (l₂ distance) between literal embeddings and average true/false vectors"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2.4 (Graph Neural Networks for Boolean Satisfiability) for understanding GNN architecture and embedding generation", "Section S.2 (The NeuroSAT Architecture) for details on the specific GNN model", "Figure 1 and Supplementary Figure 6 for visualizations of embedding evolution"],
+  "reproducibility_notes": ["Procedure for computing Silhouette score threshold on training set", "Method for sampling multiple random initializations of embeddings", "Procedure for computing average true/false vectors from aggregated literal embeddings", "Decimation algorithm steps: fix variables based on distance to average vectors, simplify formula, re-run message-passing"]
+}
+```

@@ -1,0 +1,19 @@
+{
+  "section_title": "2 Methods",
+  "section_purpose": "This section introduces the core methods of the paper, including the background on SAT and Stochastic Local Search, and the theoretical framework for constructing oracle-based SLS solvers with performance guarantees.",
+  "key_points": [
+    "The paper uses Stochastic Local Search (SLS) algorithms to solve SAT problems, where the search process is guided by a learned oracle.",
+    "It introduces a theoretical framework that provides performance bounds for the Metropolis algorithm when using a learned oracle, based on the Lovász Local Lemma.",
+    "A novel loss function, the LLL loss, is defined to train neural networks (oracle factories) to produce effective heuristics that maximize the probability of satisfying the Lovász Local Lemma condition.",
+    "Graph Neural Networks (GNNs) are proposed as the architecture for the oracle factory, which allows the method to be applied to arbitrary SAT problem structures."
+  ],
+  "technical_details": {
+    "algorithms": ["Stochastic Local Search (SLS)", "Metropolis (MT) algorithm", "Algorithm 3 (A single IN layer) - mentioned as being detailed later"],
+    "formulas": ["Lovász Local Lemma (LLL) condition for providing performance guarantees"],
+    "architectures": ["Graph Neural Networks (GNNs) as oracle factories"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Basic understanding of SAT (Boolean Satisfiability Problem) from section 2.1", "Knowledge of SLS algorithms and the concept of an oracle from section 2.2"],
+  "reproducibility_notes": ["The definition of the oracle-based SLS framework", "The theoretical performance guarantees linked to the Lovász Local Lemma", "The concept and purpose of the LLL loss function for training"]
+}

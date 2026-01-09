@@ -1,0 +1,47 @@
+```json
+{
+    "section_title": "S.3 Datasets",
+    "section_purpose": "To describe the datasets used for evaluating GNN-based SAT solvers, including random SAT instances and structured problems designed to represent facets of human reasoning.",
+    "key_points": [
+        "Random SAT instances are generated using a specific generative model that produces sat/unsat pairs by sequentially adding clauses and toggling a single literal's negation.",
+        "Structured problems are created to evaluate reasoning difficulty on human-like tasks, with all instances uniformly reduced by unit propagation.",
+        "Four structured problem types are described: Latin squares (puzzle completion), Sudoku (an extension of Latin squares), logical circuits (modeling digital systems), and bit-vector inequalities.",
+        "For structured satisfiable instances (Latin squares, Sudoku), generation ensures a unique solution and minimality (removing any hint creates multiple solutions).",
+        "Unit propagation is applied as a polynomial-time preprocessing step to reduce instance size by eliminating unit clauses."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Generative model for random SAT instances from reference [29]: sequentially samples clauses until unsatisfiable, creates sat/unsat pairs by negating one literal in the last clause.",
+            "Unit propagation algorithm: identifies unit clauses, removes clauses containing the literal, removes complementary literal from other clauses, iterates.",
+            "Latin square/Sudoku instance generation: start with valid solved puzzle, remove hints randomly while uniqueness is maintained (verified by SAT solver).",
+            "Bit-vector problem generation: uses CBMC model checker to convert inequalities to CNF."
+        ],
+        "formulas": [
+            "Bit-vector inequality form: c1*r1 + c2*r2 ≠ c3 mod 2^n"
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "random_clause_sampling_k_distribution": "small integer k",
+            "literal_negation_probability": "0.5"
+        },
+        "datasets": [
+            "Random SAT instances: generated in sat/unsat pairs via sequential clause addition.",
+            "Latin square problems: n×n grid, numbers 1..n, each row/column unique, generated with unique solution and minimal hints.",
+            "Sudoku problems: extension of Latin squares with 3×3 box constraints, generated similarly.",
+            "Logical circuits/bit-vector problems: represent digital systems or fixed bit-width inequalities converted to CNF via CBMC."
+        ]
+    },
+    "dependencies": [
+        "Basic understanding of CNF formulas and SAT terminology",
+        "Reference to prior work [29] for random problem generation details",
+        "Knowledge of unit propagation and SAT preprocessing",
+        "Reference to CBMC model checker [7] for bit-vector conversion"
+    ],
+    "reproducibility_notes": [
+        "Detailed random instance generation procedure: sample k, select k variables, negate each with prob 0.5, add clauses until unsatisfiable, create pair by toggling last clause literal.",
+        "Unit propagation preprocessing step applied uniformly to all structured instances.",
+        "Latin square/Sudoku generation: ensure unique solution and minimal hints (removing any hint creates multiple solutions).",
+        "Bit-vector problem format: inequality modulo 2^n converted via CBMC."
+    ]
+}
+```

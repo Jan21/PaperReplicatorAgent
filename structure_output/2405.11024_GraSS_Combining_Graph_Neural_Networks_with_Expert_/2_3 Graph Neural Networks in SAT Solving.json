@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.3 Graph Neural Networks in SAT Solving",
+    "section_purpose": "To survey and summarize existing research that applies Graph Neural Networks (GNNs) to various SAT solving tasks, establishing the prior art and relevant graphical representations used in the field.",
+    "key_points": [
+        "Multiple graphical representations of SAT instances exist for GNNs, including lossless (LCG, VCG) and lossy (LIG, VIG) formats, which balance graph size with information content.",
+        "GNNs have been used to learn heuristics within SAT solvers: one approach uses VCGs and an MDP framework to select variable signs to flip in local search; another uses VCGs with a DQN architecture to learn branching heuristics in CDCL solvers.",
+        "End-to-end satisfiability prediction models like NeuroSAT use LCGs and message-passing to produce a satisfiability probability, achieving reported accuracy on specific synthetic distributions.",
+        "GNNs are also employed for SAT instance generation, using representations like LCGs or weighted co-occurrence graphs to drive iterative generation processes.",
+        "This body of work provides a foundation for applying GNNs to SAT-related tasks but does not specifically address the problem of solver selection, which is the focus of the current paper."
+    ],
+    "technical_details": {
+        "algorithms": ["Markov Decision Process (MDP) for variable sign selection", "Deep Q-Network (DQN) for branching heuristic learning", "Message-passing GNN for end-to-end satisfiability prediction", "Iterative graph splitting and merging for instance generation"],
+        "formulas": [],
+        "architectures": ["Graph Neural Network (GNN) models", "Deep Q-Network (DQN) with GNN layers"],
+        "hyperparameters": {},
+        "datasets": ["Randomly generated instances from SR(40) distribution (mentioned for NeuroSAT)"]
+    },
+    "dependencies": ["Basic understanding of SAT problem and solvers (implied)", "Knowledge of Graph Neural Networks (GNNs) (implied)", "Familiarity with common SAT instance graph representations (LCG, VCG, LIG, VIG)"],
+    "reproducibility_notes": ["References to specific graph representations (LCG, VCG, LIG, VIG) used in prior works", "Mention of specific model architectures (e.g., NeuroSAT) and their tasks", "Citation of performance metrics (e.g., 70% solved, 85% accuracy for NeuroSAT) on specific datasets"]
+}
+```

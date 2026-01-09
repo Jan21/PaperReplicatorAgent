@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "A.1.1 Curriculum Learning",
+    "section_purpose": "To describe the curriculum learning strategy implemented to improve training efficiency and generalization by starting with simpler formulas and gradually increasing complexity.",
+    "key_points": [
+        "Curriculum learning trains with simpler (smaller) formulas first to establish basic logical reasoning before progressing.",
+        "The strategy uses increasing formula size as the curriculum metric, starting from 5 variables and progressing to 40 variables.",
+        "A validation accuracy threshold must be met (or a maximum epoch limit reached) before moving to the next formula size.",
+        "When introducing a new formula size, the training set includes formulas from the four previous sizes to prevent catastrophic forgetting.",
+        "This curriculum approach significantly accelerates training, reducing training time from over 5 hours to approximately 30 minutes to reach 85% validation accuracy."
+    ],
+    "technical_details": {
+        "algorithms": ["Curriculum learning algorithm with incremental formula size progression"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "min_formula_size": "5 variables",
+            "max_formula_size": "40 variables",
+            "size_increment_step": "2 variables",
+            "max_epochs_per_size": "100",
+            "initial_accuracy_threshold": "65%",
+            "final_accuracy_threshold": "85%"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 4.4 Benchmarks and Data Generation (for understanding formula generation and variable ranges)", "Section 4.1 Data Representation and Graph Structure (for understanding how formulas are represented for training)"],
+    "reproducibility_notes": ["The exact curriculum progression parameters: start size (5 vars), increment (2 vars), max size (40 vars).", "The validation accuracy thresholds for curriculum advancement (65%-85%).", "The number of previous sizes to retain in the training mix (4).", "The maximum number of epochs allowed per size before advancement (100).", "The reported speed-up comparison data (30 min vs 5+ hours)."]
+}
+```

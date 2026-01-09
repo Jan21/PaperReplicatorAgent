@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "5 Conclusion and future work",
+  "section_purpose": "To summarize the main contributions of the paper, assess the current state of the research, and outline directions for future work.",
+  "key_points": [
+    "The main contribution is a deep learning approach to construct SLS-based SAT solvers with algorithms and loss functions theoretically guaranteed to produce stronger solvers in expectation.",
+    "The approach aims to create solvers that are both highly performant for specific applications and provably robust in terms of average performance.",
+    "Empirical investigation on a random 3-SAT dataset shows promising results, but the practical potential remains largely uncharted.",
+    "Future work needs more thorough experiments on larger, application-oriented datasets, research on suitable deep learning architectures, and application to more mature SLS solvers.",
+    "The resulting solvers are currently far from competitive with state-of-the-art solvers."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["random 3-SAT dataset"]
+  },
+  "dependencies": ["Introduction and contributions (Section 1.1)", "Methods detailing the algorithms and loss functions (Section 2)", "Experiments and results (Sections 3 & 4)"],
+  "reproducibility_notes": []
+}
+```

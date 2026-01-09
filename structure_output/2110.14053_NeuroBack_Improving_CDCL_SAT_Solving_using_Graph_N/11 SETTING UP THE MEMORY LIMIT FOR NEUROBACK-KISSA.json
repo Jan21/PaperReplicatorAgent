@@ -1,0 +1,33 @@
+```json
+{
+    "section_title": "11 SETTING UP THE MEMORY LIMIT FOR NEUROBACK-KISSAT",
+    "section_purpose": "To provide practical guidance on configuring memory limits for running NeuroBack-Kissat solver instances, particularly in parallel execution environments, to prevent memory contention issues.",
+    "key_points": [
+        "The experimental setup uses a machine with 256GB memory running 64 parallel solver instances.",
+        "A conservative SAT formula size threshold of 135 MB is set to ensure each instance stays under 10GB memory limit.",
+        "This threshold is based on practical experience and prevents memory contention.",
+        "Users should adjust thresholds based on their machine's memory capacity.",
+        "Alternative approach: set memory threshold per solver instance and allow model inference until threshold is reached (overhead typically < few seconds)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of NeuroBack-Kissat system architecture",
+        "Knowledge of SAT solving and parallel execution context",
+        "Awareness of GNN model inference overhead mentioned in section"
+    ],
+    "reproducibility_notes": [
+        "Memory configuration: 256GB total machine memory",
+        "Parallel execution: 64 solver instances",
+        "SAT formula size threshold: 135 MB",
+        "Per-instance memory limit: 10GB",
+        "Memory contention risk if threshold increased",
+        "Model inference overhead: typically a few seconds"
+    ]
+}
+```

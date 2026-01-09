@@ -1,0 +1,44 @@
+```json
+{
+    "section_title": "4.3 Supervision Tasks and Objectives",
+    "section_purpose": "This section describes and compares different training objectives and prediction tasks used to supervise Graph Neural Networks for SAT solving, including both established methods and a novel approach introduced by the authors.",
+    "key_points": [
+        "The section surveys multiple supervision objectives for training SAT-solving models, including satisfiability classification, unsupervised training via clause validity, and assignment prediction.",
+        "It introduces a novel 'Closest Assignment Training' method where a MaxSAT solver finds a valid assignment minimizing Hamming distance to the model's prediction, adapting the supervision signal to the model's current state.",
+        "The authors reimplement objectives from prior work (NeuroSAT, etc.) and also experiment with SAT-only instance filtering, finding it can improve model accuracy.",
+        "Different loss functions (Binary Cross-Entropy, Mean Squared Error, Cross-Entropy) are used depending on the prediction task (satisfiability classification vs. assignment prediction).",
+        "The novel Closest Assignment Training method is particularly beneficial when the solution space is large, as it avoids penalizing the model for predicting a valid solution different from a precomputed ground truth."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Satisfiability classification via graph-level embedding aggregation and binary cross-entropy loss.",
+            "Unsupervised training using clause validity loss derived from predicted variable probabilities.",
+            "Assignment prediction training using either Mean Squared Error (MSE) or Cross-Entropy (CE) loss between predicted and ground truth assignments.",
+            "Closest Assignment Training: Uses RC2 MaxSAT solver to find valid assignment minimizing Hamming distance to model's current predictions for each formula in a batch."
+        ],
+        "formulas": [
+            "Satisfiability loss: L_sat = -(y log ŷ + (1 - y) log (1 - ŷ)) where y ∈ {0,1} is ground truth, ŷ is prediction.",
+            "Clause validity: V_c(ẑ) = 1 - ∏_{i∈c⁺} (1 - ẑ_i) ∏_{i∈c⁻} ẑ_i, where c⁺ and c⁻ are variables in clause c in positive/negative form.",
+            "Unsupervised loss: L_φ(ẑ) = -∑_{c∈φ} log(V_c(ẑ)).",
+            "Assignment prediction MSE loss: L_assign^MSE = || â - x ||₂², where x is ground truth, â are logits.",
+            "Assignment prediction CE loss: L_assign^CE = -∑_i [x_i log ẑ_i + (1 - x_i) log(1 - ẑ_i)], where ẑ_i are softmax-applied predictions."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of Graph Neural Networks (Section 3.3)",
+        "Basic concepts of Boolean Satisfiability and MaxSAT (Section 3.1)",
+        "Data representation and graph structure (Section 4.1)",
+        "Model architecture variants (Section 4.2)"
+    ],
+    "reproducibility_notes": [
+        "Exact formulation of loss functions for each supervision task (satisfiability classification, unsupervised, assignment prediction, closest assignment).",
+        "Details on using RC2 MaxSAT solver for Closest Assignment Training to minimize Hamming distance.",
+        "Choice between MSE and CE loss for assignment prediction, and handling of logits vs. softmax outputs.",
+        "Strategy for SAT-only instance filtering after initial training with both SAT and UNSAT instances.",
+        "Potential need for pre-computing solutions or using approximate MaxSAT solver to address slower loss computation in Closest Assignment Training."
+    ]
+}
+```

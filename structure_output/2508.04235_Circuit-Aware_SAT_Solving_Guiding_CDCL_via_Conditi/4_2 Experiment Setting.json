@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "4.2 Experiment Setting",
+    "section_purpose": "To specify the detailed configuration, hyperparameters, and computational setup used to train the Graph Neural Network (GNN) model for predicting conditional probabilities in the experiments.",
+    "key_points": [
+        "The one-round GNN model uses 128-dimensional embeddings for both structural (h^s) and functional (h^f) features.",
+        "The task head (φ) is a 3-layer MLP with 32 neurons per layer and uses the SiLU activation function.",
+        "Training is conducted for 60 epochs with a batch size of 512 on an NVIDIA RTX 4090 GPU.",
+        "Optimization uses the Adam optimizer with a fixed learning rate of 10⁻⁴."
+    ],
+    "technical_details": {
+        "algorithms": ["One-round GNN model training"],
+        "formulas": [],
+        "architectures": [
+            "Graph Neural Network (GNN) with separate structural and functional embeddings (dimension 128)",
+            "Task head φ: 3 hidden layers, 32 neurons per layer, SiLU activation function"
+        ],
+        "hyperparameters": {
+            "structural_embedding_dim": "128",
+            "functional_embedding_dim": "128",
+            "task_head_hidden_layers": "3",
+            "task_head_neurons_per_layer": "32",
+            "activation_function": "SiLU",
+            "training_epochs": "60",
+            "batch_size": "512",
+            "optimizer": "Adam",
+            "learning_rate": "10⁻⁴"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.3 (Two-Stage Training Strategy) - understanding the overall GNN training approach",
+        "Section 3.4 (Multiple Condition Probability) - context for the model's prediction task",
+        "Section 4.1 (Dataset Generation) - source of the training data"
+    ],
+    "reproducibility_notes": [
+        "Embedding dimensions (128 for both h^s and h^f)",
+        "Task head architecture (3 layers, 32 neurons, SiLU activation)",
+        "Training duration (60 epochs)",
+        "Batch size (512)",
+        "Hardware (NVIDIA RTX 4090 GPU)",
+        "Optimizer and learning rate (Adam, 10⁻⁴)"
+    ]
+}
+```

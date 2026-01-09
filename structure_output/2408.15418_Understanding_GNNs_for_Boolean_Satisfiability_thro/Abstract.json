@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "Abstract",
+    "section_purpose": "To provide a concise overview of the paper's objectives: interpret Graph Neural Networks (GNNs) for Boolean Satisfiability by connecting them to classical approximation algorithms, and to highlight key methodological enhancements introduced.",
+    "key_points": [
+        "The paper aims to interpret GNNs for Boolean Satisfiability by uncovering connections to two approximation algorithms: Belief Propagation and Semidefinite Programming Relaxations.",
+        "A curriculum training procedure is introduced, incrementally increasing problem complexity and GNN message-passing iterations, reducing training time by more than an order of magnitude.",
+        "Decimation and sampling of initial embeddings are applied, significantly increasing the percentage of solved problems.",
+        "The goal is to demystify GNN internal workings and provide insights into their decision-making processes."
+    ],
+    "technical_details": {
+        "algorithms": ["Belief Propagation", "Semidefinite Programming Relaxations"],
+        "formulas": [],
+        "architectures": ["Graph Neural Networks (GNNs) with message-passing iterations"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": ["Curriculum training procedure details: incremental increase in problem complexity and number of GNN message-passing iterations", "Use of decimation and sampling of initial embeddings"]
+}
+```

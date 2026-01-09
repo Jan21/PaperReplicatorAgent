@@ -1,0 +1,21 @@
+```json
+{
+  "section_title": "4.1 Base solvers",
+  "section_purpose": "This section identifies and describes the portfolio of SAT solvers used as candidate algorithms for the selection task, providing context for their performance and design.",
+  "key_points": [
+    "The portfolio consists of seven top-performing solvers from recent SAT Competitions.",
+    "Two solvers (Kissat-3.0 and bulky) are based on the Kissat architecture, the 2020 SAT Competition winner.",
+    "Five other solvers (HyWalk, MOSS, mabgb, ESA, and UCB) are based on the UCB architecture with different bandit-based scoring mechanisms for branching.",
+    "The method is designed to be generic and work with any choice of candidate solvers."
+  ],
+  "technical_details": {
+    "algorithms": ["Kissat-based solvers (efficient data structures)", "UCB-based solvers (bandit-based scoring for branching)"],
+    "formulas": [],
+    "architectures": ["Kissat architecture", "UCB architecture"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 3 (APPROACH) for understanding the overall selection framework", "Subsection 4.2 (Datasets) for context on the evaluation instances"],
+  "reproducibility_notes": ["List of seven specific solver names: Kissat-3.0, bulky, HyWalk, MOSS, mabgb, ESA, UCB", "Note that solvers are from recent SAT Competitions, citing references [3, 14] for exact versions and details"]
+}
+```

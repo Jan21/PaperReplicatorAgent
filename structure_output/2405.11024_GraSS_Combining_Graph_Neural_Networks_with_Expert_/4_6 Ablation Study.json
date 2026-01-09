@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "4.6 Ablation Study",
+    "section_purpose": "This section evaluates the impact of key methodological choices (graph neural network architecture and node features) on the performance of the proposed GraSS model for SAT solver selection, comparing against alternative approaches.",
+    "key_points": [
+        "The proposed GNN architecture (GraSS) outperforms a homogeneous graph variant and a NeuroSAT-inspired variant in all metrics on the LEC benchmark.",
+        "A NeuroSAT variant (modified for solver selection) with 4 layers was implemented for tractability, as instances in this work are larger than those in the original NeuroSAT paper.",
+        "The choice of node features (custom hand-designed features plus positional embeddings) outperforms alternative feature sets: random embeddings, node-type one-hot vectors, Laplacian positional encodings, and custom features without positional embeddings.",
+        "The ablation study shows that both the heterogeneous graph architecture and the specific node features contribute to the model's performance.",
+        "Results are reported as averages and standard deviations over 5 train-test folds for metrics: Average Runtime (lower is better), Solved % (higher is better), and Accuracy (ACC, higher is better)."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Homogeneous graph variant: Uses same convolution weights for every edge, treating the graph as homogeneous.",
+            "NeuroSAT variant: Inspired by Selsam et al. [38], uses literal-clause graph with learned initial node embeddings, LSTM-GNN hybrid architecture, but modified final layer (average literal embeddings → linear layer → softmax) and reduced to 4 layers for tractability."
+        ],
+        "formulas": [],
+        "architectures": [
+            "Homogeneous GNN architecture variant",
+            "NeuroSAT-style architecture variant (modified, 4 layers)",
+            "GraSS architecture (the proposed approach)"
+        ],
+        "hyperparameters": {
+            "NeuroSAT variant layers": "4 (reduced from original 26 for tractability)"
+        },
+        "datasets": ["LEC benchmark (used for evaluation)"]
+    },
+    "dependencies": [
+        "Section 3.3 Model (for understanding the proposed GraSS architecture)",
+        "Section 3.2 Representation and features (for understanding the custom node features and positional embeddings)",
+        "Section 4.2 Datasets (for context on the LEC benchmark)",
+        "Section 4.4 Metrics (for definitions of Avg Runtime, Solved %, ACC)"
+    ],
+    "reproducibility_notes": [
+        "Details on implementing the homogeneous graph variant (same convolution weights for all edges).",
+        "Modifications made to the NeuroSAT architecture: reduced depth to 4 layers, replaced final vote/average-sigmoid layer with average embeddings → linear → softmax.",
+        "Specification of alternative node features tested: random normal values, node-type one-hot (clause/positive literal/negative literal), Laplacian Positional Encodings, custom hand-designed features without positional embeddings.",
+        "Evaluation protocol: 5 train-test folds, reporting averages and standard deviations."
+    ]
+}
+```

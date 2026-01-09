@@ -1,0 +1,37 @@
+```json
+{
+    "section_title": "2.2 Graph Representation and Architecture",
+    "section_purpose": "This section describes the core approach for mapping SAT instances to neural network inputs (via a graph representation) and outputs (variable weights and polarities) using a trainable GNN model.",
+    "key_points": [
+        "The goal is to use a neural network to map a SAT instance (φ) to advantageous variable weights and polarities for solver guidance.",
+        "The approach transforms the SAT instance into a graph representation, specifically the \"Literal-Clause Graph\" from prior work (Selsam et al., 2019).",
+        "This graph is processed by a trainable Graph Neural Network (GNN), denoted N_θ, which performs message passing to extract structural embeddings.",
+        "The GNN's output is a mapping from each variable in the formula to two real numbers, representing the learned weights and polarities.",
+        "The choice of graph representation is noted to be modular, implying other representations could be substituted."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "The SAT instance is mapped to a graph representation: G(φ) = (V(φ), E(φ)).",
+            "A trainable GNN model N_θ processes the graph, with θ representing all trainable parameters.",
+            "The output is a mapping y: Var(φ) → R^2, assigning two real numbers to each variable."
+        ],
+        "architectures": [
+            "The neural architecture is a Graph Neural Network (GNN) that performs message passing.",
+            "The specific GNN architecture details are deferred to Appendix A."
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Knowledge of SAT instances and variables (φ, Var(φ)).",
+        "Basic understanding of Graph Neural Networks (GNNs) and message passing.",
+        "Familiarity with the \"Literal-Clause Graph\" concept from Selsam et al. (2019)."
+    ],
+    "reproducibility_notes": [
+        "The specific graph construction method: the \"Literal-Clause Graph\" from Selsam et al. (2019).",
+        "The general architecture of the GNN (a message-passing model) and the fact that its details are in Appendix A.",
+        "The input-output specification: SAT instance (φ) → graph G(φ) → GNN N_θ → mapping y: variables → R^2."
+    ]
+}
+```

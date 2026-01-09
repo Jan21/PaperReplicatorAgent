@@ -1,0 +1,54 @@
+```json
+{
+    "section_title": "3.3 Two-Stage Training Strategy",
+    "section_purpose": "To describe the two-stage training methodology used to train the neural network, which first learns fine-grained circuit behaviors from patterns and then generalizes to statistical properties from diverse workloads.",
+    "key_points": [
+        "Training employs a two-stage strategy: pattern-based pre-training followed by workload-aware fine-tuning.",
+        "Pattern-based pre-training addresses the limitation of coarse-grained input probabilities by using 100 random patterns per minibatch to compute fine-grained probability features for primary inputs (PIs).",
+        "Initial PI embeddings are encoded from 100-bit simulation traces via an autoencoder, then embeddings for other nodes are propagated level-by-level.",
+        "Workload-aware fine-tuning enhances generalization by using 200 simulations (each with 100 random patterns) with PI workloads from set {0.1,0.2,…,0.9} to capture diverse input distributions.",
+        "The fine-tuning stage uses a loss function with three components weighting all internal nodes, div nodes, and polarized nodes (P<0.1) to prioritize structurally and semantically critical nodes."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Pattern-based pre-training with minibatches of 100 random patterns",
+            "Workload-aware fine-tuning with 200 simulations (each using 100 random patterns) and PI workloads from {0.1,0.2,…,0.9}",
+            "Level-by-level propagation of node embeddings through circuit",
+            "Three-component loss function for fine-tuning stage"
+        ],
+        "formulas": [
+            "Stage-1 loss: L_stage1 = w1*(1/(n-m))*∑_{i=m+1}^{n} L1(P_i-ˆP_i) + w2*(1/m)*∑_{j=1}^{m} L1(P_j-ˆP_j), where L1(a,b)=|a-b|",
+            "Stage-2 loss: L_stage2 = w1*(1/|S_all|)*∑_{i∈S_all} L1(P_i-ˆP_i) + w2*(1/|S_div|)*∑_{j∈S_div} L1(P_j-ˆP_j) + w3*(1/|S_polar|)*∑_{k∈S_polar} L1(P_k-ˆP_k)"
+        ],
+        "architectures": [
+            "Autoencoder for encoding 100-bit simulation traces into initial PI embeddings",
+            "MLP for processing 200-dimensional vectors to produce PI embeddings in stage-2"
+        ],
+        "hyperparameters": {
+            "stage1_pre-training_patterns_per_minibatch": "100",
+            "stage2_fine-tuning_simulations": "200",
+            "stage2_patterns_per_simulation": "100",
+            "stage2_PI_workload_values": "[0.1,0.2,…,0.9]",
+            "weights_reference": "Higher weights w2 and w3 for div and polarized nodes"
+        },
+        "datasets": [
+            "Pattern-based training data (100 random patterns per minibatch)",
+            "Workload-based training data (200 simulations with diverse PI workloads)"
+        ]
+    },
+    "dependencies": [
+        "Section 3.2 Graph Construction (for circuit node representation)",
+        "Appendix A4 Workload-Based Dataset (for details on workload generation)",
+        "Table 1 (for example of simulation patterns and probability)",
+        "Understanding of primary inputs (PIs), div nodes, and polarized nodes"
+    ],
+    "reproducibility_notes": [
+        "Use 100 random patterns per minibatch for stage-1 pre-training",
+        "Encode 100-bit simulation traces for PIs using an autoencoder",
+        "For stage-2, perform 200 simulations with 100 patterns each and PI workloads from {0.1,0.2,…,0.9}",
+        "Generate 200-dimensional vectors from averaged simulation traces and process through MLP for PI embeddings",
+        "Weight loss components appropriately (w2 and w3 higher for div and polarized nodes)",
+        "Ground-truth probabilities for internal nodes computed from 20,000 total input patterns (200×100)"
+    ]
+}
+```

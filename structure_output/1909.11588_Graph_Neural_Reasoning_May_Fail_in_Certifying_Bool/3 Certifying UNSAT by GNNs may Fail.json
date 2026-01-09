@@ -1,0 +1,44 @@
+```json
+{
+    "section_title": "3 Certifying UNSAT by GNNs may Fail",
+    "section_purpose": "This section argues that GNN-based approaches cannot reliably certify Boolean unsatisfiability (UNSAT) because they cannot simulate recursive algorithms that iteratively reconfigure the formula's graph, and at best can only simulate incomplete local search solvers like WalkSAT.",
+    "key_points": [
+        "GNN-based SAT solvers perform poorly at predicting unsatisfiability with high confidence, especially for formulas without a small unsatisfiable core.",
+        "GNNs cannot simulate recursive decision procedures (like DPLL or CDCL) that prove unsatisfiability because those procedures iteratively reconfigure the graph representing the CNF formula, whereas GNNs operate on a fixed input graph.",
+        "GNNs are fundamentally similar to incomplete local search SAT solvers (like WalkSAT) that stochastically search for satisfying assignments but cannot provide proofs of unsatisfiability.",
+        "The authors construct optimal aggregation and combine functions to show that GNNs could, in principle, simulate the local search behavior of WalkSAT.",
+        "The failure to prove UNSAT becomes critical for problems like 2QBF, where proving unsatisfiability is essential, explaining poor GNN performance on such tasks."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "DPLL (Davis-Putnam-Logemann-Loveland) - traverses all possible assignments to construct proof of unsatisfiability.",
+            "CDCL (Conflict-Driven Clause Learning) - generates extra constraints from assignment trials leading to conflicts.",
+            "WalkSAT - a local search, incomplete SAT solver that randomly assigns variables and flips variables in unsatisfied clauses.",
+            "GNN message-passing update rule for literal embeddings (Eq. 3) that depends on embeddings of the literal, its negation, and all containing clauses from previous iteration."
+        ],
+        "formulas": [
+            "Eq. 3: Iterative update rule for literal embedding h_v^(k) = Update_L(h_v^(k-1), h_¬v^(k-1), {h_Ψ(v)^(k-1): Ψ(v)∈Φ})",
+            "Eq. 4: Optimal aggregation function for literal messages m_v^(k) - outputs random vector ε^(k) if product of clause embedding norms is 0 (unsatisfied clause exists), else 0.",
+            "Eq. 5: Optimal combine function for literal embeddings - flips literal embedding to its negation's if its message norm is maximum and positive, otherwise keeps same.",
+            "Eq. 6: Optimal aggregation function for clause embeddings m_Ψ(v)^(k) - uses optimal Deep Sets (MLP1*, MLP2*) to predict clause satisfaction, outputs initial clause embedding if satisfied (≥0.5), else 0.",
+            "Eq. 7: Optimal combine function for clause embeddings - updates clause embedding based on consistency between current message and previous embedding, and their norms."
+        ],
+        "architectures": [
+            "GNN with message-passing defined by aggregate and combine functions (Eq. 2 from paper).",
+            "Deep Sets network (MLP1* and MLP2*) used as permutation-invariant clause predictor."
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2 (Embedding Logic Formulae by GNNs) for Eq. 2 and basic GNN formulation.",
+        "Understanding of CNF formulas, literals, clauses, and bipartite graph representation.",
+        "Knowledge of SAT solving algorithms (DPLL, CDCL, WalkSAT)."
+    ],
+    "reproducibility_notes": [
+        "The proof that GNNs cannot simulate recursive graph-reconfiguring algorithms relies on the fixed-graph assumption of GNNs versus the dynamic graph changes in DPLL/CDCL.",
+        "The constructed optimal functions (Eq. 4-7) and their interpretation as simulating WalkSAT steps.",
+        "The claim that GNNs approximate incomplete solvers, not complete ones capable of UNSAT certification."
+    ]
+}
+```

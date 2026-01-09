@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "A4 Workload-Based Dataset",
+    "section_purpose": "To introduce an alternative, more realistic dataset generation method that assigns primary inputs (PIs) with probability values sampled from a set to simulate realistic workload biases, addressing the limitation of purely random patterns.",
+    "key_points": [
+        "Workload-based simulations assign each primary input (PI) a probability value ρ sampled from the set {0.1, 0.2, ..., 0.9} to capture realistic activity biases.",
+        "Two contrasting workload scenarios are presented: one where all PIs have a fixed workload (ρ = 0.5) leading to stable internal node probabilities, and another where each PI's ρ is independently sampled, creating a broader range of internal node probabilities.",
+        "A toy circuit (c = a ∧ b) is used to illustrate the necessity and effect of these workload assignments on node probabilities.",
+        "The workload-based approach exposes the model to a richer set of circuit behaviors and better reflects diverse operational conditions compared to random patterns."
+    ],
+    "technical_details": {
+        "algorithms": ["Workload-based dataset generation with independent probability assignment to PIs"],
+        "formulas": ["Probability assignment: ρ ∈ {0.1, 0.2, ..., 0.9}", "Conditional probability: P(A_i|C) = P(A_i∧C) / P(C)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Workload-based dataset with two scenarios: 1) fixed workload (ρ=0.5), 2) independent workload sampling from {0.1,...,0.9}"]
+    },
+    "dependencies": ["Prior section on pattern-based dataset (A3) for contrast", "General understanding of circuit probability estimation"],
+    "reproducibility_notes": ["Method for assigning probability values to primary inputs (sampling from {0.1,0.2,...,0.9})", "The two specific workload scenarios (fixed vs. independent sampling)", "Reference to the toy circuit c = a ∧ b for illustration"]
+}
+```

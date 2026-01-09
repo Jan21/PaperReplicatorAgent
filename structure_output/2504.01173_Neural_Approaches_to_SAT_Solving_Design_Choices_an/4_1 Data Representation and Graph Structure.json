@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.1 Data Representation and Graph Structure",
+    "section_purpose": "To define and compare two bipartite graph representations (Literal-Clause Graph and Variable-Clause Graph) for encoding Boolean CNF formulas, highlighting their structural differences and computational trade-offs.",
+    "key_points": [
+        "Boolean CNF formulas are naturally represented as bipartite graphs connecting variable/literal nodes to clause nodes.",
+        "The Literal-Clause Graph (LCG) represents each literal (positive and negative polarity) as a separate node, resulting in 2n literal nodes connected to clauses containing them.",
+        "The Variable-Clause Graph (VCG) represents each variable as a single node and encodes literal polarity via edge features (p_ij ∈ {-1,1}).",
+        "The LCG explicitly separates polarities but uses more nodes; the VCG is more compact but requires handling polarity via edge features.",
+        "The VCG is more computationally efficient than the LCG, reducing memory and processing time due to fewer nodes and avoiding an expensive message-passing operation."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph construction algorithms for LCG and VCG from CNF formulas"],
+        "formulas": ["Formal definition of LCG: G_LC = (L ∪ C, E) with L = {l_1,..., l_n, ¯l_1,..., ¯l_n}, C = {c_1,..., c_m}, edge (l_i, c_j) ∈ E if literal l_i in clause c_j", "Formal definition of VCG: G_VC = (V ∪ C, E, P) with V = {x_1,..., x_n}, C = {c_1,..., c_m}, edge (x_i, c_j) ∈ E if variable x_i appears in clause c_j, edge feature map P: E → {-1,1} where p_ij = 1 for positive literal, -1 for negative literal"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of Boolean formulas in CNF form (Section 3.1)", "General knowledge of graph neural networks (Section 3.3)", "Section 4.2 for details on message passing operations and the 'expensive operation' avoided by VCG"],
+    "reproducibility_notes": ["Precise definition of both graph representations (nodes, edges, edge features)", "The rule for mapping a CNF formula to each graph type", "The note that VCG is more efficient and will be compared with different message passing and training regimes"]
+}
+```

@@ -1,0 +1,24 @@
+Can Graph Neural Networks Learn to Solve MaxSAT Problem?
+  Abstract
+  Introduction
+  Preliminaries
+  SAT and MaxSAT
+  Graph Neural Networks
+  GNN Models for MaxSAT
+  Theoretical Analysis
+  Algorithmic Alignment
+  Distributed Local Algorithm
+  Analyzing GNNs for MaxSAT
+  Experimental Evaluation
+  Building the Models
+  Data Generation
+  Implementation Details
+  Accuracy of Models
+  Influence of GNN Layers
+  Generalizing to Other Distributions
+  Related Work
+  Conclusion and Future Work
+  References
+  Appendix
+  Proof of Theorem 1
+  Frameworks of Models

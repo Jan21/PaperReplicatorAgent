@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "6.1 Comparison with the CDCL Heuristic",
+    "section_purpose": "To evaluate whether Graph Neural Network (GNN)-based SAT solvers can learn and benefit from the Conflict-Driven Clause Learning (CDCL) heuristic by testing them on clause-augmented formula instances and by using contrastive pretraining.",
+    "key_points": [
+        "GNN models (NeuroSAT, GGNN) show significant performance improvements (e.g., 100% success rate on easy datasets) when trained on clause-augmented SAT instances compared to training on original instances, indicating that learned clauses make formulas easier for GNNs to solve.",
+        "GNN models fail to effectively handle clause-augmented instances when trained only on original instances, suggesting that GNNs do not implicitly learn the CDCL heuristic from standard training.",
+        "Contrastive pretraining (SimCLR) to align representations of original and augmented formulas yields only limited performance improvements, indicating GNNs still struggle to learn the CDCL heuristic in the latent space.",
+        "The difficulty in learning the CDCL heuristic is attributed to dynamic changes in graph structure caused by clause learning, which static GNNs cannot replicate exactly.",
+        "The results align with prior work (Chen & Yang, 2019) on the limitations of static GNNs in capturing dynamic search operations."
+    ],
+    "technical_details": {
+        "algorithms": ["CDCL (Conflict-Driven Clause Learning) heuristic", "Contrastive pretraining approach (SimCLR)"],
+        "formulas": [],
+        "architectures": ["NeuroSAT model", "GGNN (Gated Graph Neural Network) model"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of GNN models (NeuroSAT, GGNN) from Section 4.2", "Knowledge of the SAT solving tasks (T1, T2) and dataset categories (Easy, Medium, SR, 3-SAT) from Sections 5 and 4.1/4.3"],
+    "reproducibility_notes": ["Method to create clause-augmented instances from original formulas", "Implementation details for contrastive pretraining (SimCLR) and how representations of original and augmented formulas are aligned", "Training regime details for models on augmented vs. original instances (likely in Appendices C, D)"]
+}
+```

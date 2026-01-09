@@ -1,0 +1,22 @@
+Addressing Variable Dependency in GNN-based SAT Solving
+  Abstract
+  1 Introduction
+  2 Background
+    2.1 Boolean Satisfiability Problem
+    2.2 Solving SAT Problems by Graph Neural Networks
+    2.3 Solving Circuit-SAT Problems by Graph Neural Networks
+  3 Variable Dependency in SAT Solving
+  4 Our Methods
+    4.1 Problem formulation
+    4.2 The Proposed GNN Architecture
+    4.3 Training
+  5 Experimental Evaluation
+    5.1 Data preparation
+    5.2 Experimental setup and result
+  Experiments for AsymSAT Configurations
+  Experiments for SAT solving
+  6 Related Works
+    6.1 SAT Solvers
+    6.2 Symmetric Breaking in GNN-based SAT Solving
+  7 Conclusion
+  References

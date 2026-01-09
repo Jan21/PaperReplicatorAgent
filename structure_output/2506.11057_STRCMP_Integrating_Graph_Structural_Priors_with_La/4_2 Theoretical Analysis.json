@@ -1,0 +1,33 @@
+```json
+{
+    "section_title": "4.2 Theoretical Analysis",
+    "section_purpose": "To provide a theoretical foundation justifying why integrating graph structural priors into language models improves performance for combinatorial optimization tasks, based on information theory and multi-modal co-learning principles.",
+    "key_points": [
+        "Introducing additional priors to a generative model does not lower its performance upper bound and actually decreases its entropy.",
+        "A 'performance-enhancing prior' is formally defined as a prior that boosts model performance compared to models without that prior.",
+        "Generative models that neglect performance-enhancing priors will have a decreased performance upper bound.",
+        "The structural prior for combinatorial optimization problems is identified as a performance-enhancing prior for LLMs in code generation tasks."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "Definition 1: sup(P_C) = Σ_{C∈C} Σ_{c∈C} p(c) max_w p(w|c)Φ(w) - upper bound of model performance with prior set C",
+            "Definition 2: ∃ w'≠w*, p(w'|c)Φ(w')_{c∈C} > p(w*|c)Φ(w*)_{c∈C\\{c}} - condition for performance-enhancing prior",
+            "Theorem 2: sup(P_{C\\{C_pe}}) < sup(P_C) - performance bound decrease when neglecting enhancing priors"
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4.1 Methodology (for understanding the proposed approach)",
+        "Information theory and multi-modal co-learning concepts [38, 39]",
+        "Appendix A for complete proofs (referenced but not included in this section)"
+    ],
+    "reproducibility_notes": [
+        "Theoretical framework definitions (Definition 1, Definition 2)",
+        "Theorems establishing relationships between priors and performance bounds",
+        "Formal justification for why structural priors should improve CO solution quality"
+    ]
+}
+```

@@ -1,0 +1,33 @@
+```json
+{
+    "section_title": "A.3 Hyperparameters and Model Selection",
+    "section_purpose": "This section details the hyperparameter tuning process and final configurations used to train the model, explaining the selection criteria and rationale behind chosen values to ensure generalization and performance.",
+    "key_points": [
+        "Validation datasets consist of 200 instances sampled from a distribution of larger CSP instances than those used for training to promote generalization.",
+        "Model selection is based on the average number of unsatisfied constraints after 200 search iterations on the validation set.",
+        "The choice of aggregation function (SUM, MEAN, MAX) is critical, with MAX performing best on decision problems but poorly on maximization tasks.",
+        "Key hyperparameters include hidden dimension d=128, discount factor λ=0.75, and a learning rate decaying from 5e-6 to 5e-7.",
+        "Training uses a batch size of 25, with full training (500K steps) only performed on the best hyperparameter configuration after initial 100K-step trials."
+    ],
+    "technical_details": {
+        "algorithms": ["Hyperparameter tuning and model selection based on validation performance"],
+        "formulas": ["Learning rate decay: lr = 5e-6 linearly decaying to lr = 5e-7"],
+        "architectures": [],
+        "hyperparameters": {
+            "aggregation_function": "∈ {SUM, MEAN, MAX}",
+            "hidden_dimension": "d = 128",
+            "discount_factor": "λ = 0.75",
+            "learning_rate_initial": "5e-6",
+            "learning_rate_final": "5e-7",
+            "batch_size": "25",
+            "validation_steps_per_instance": "T_val = 200",
+            "validation_dataset_size": "200 instances",
+            "hyperparameter_training_steps": "100K",
+            "full_training_steps": "500K"
+        },
+        "datasets": ["Validation datasets of 200 instances sampled from modified CSP distributions (larger instances than training)"]
+    },
+    "dependencies": ["Section B (Experiment Details) for exact differences between validation and training distributions", "Section A.1 (Architecture) for context on the aggregation function", "Section 4.3 (Implementation and Hyperparameters) for foundational hyperparameter discussion"],
+    "reproducibility_notes": ["Validation set creation protocol: 200 instances from modified (larger) distribution", "Model selection metric: average number of unsatisfied constraints over validation set after 200 search iterations", "Hyperparameter values: aggregation function, d=128, λ=0.75, lr decay from 5e-6 to 5e-7, batch size 25", "Training regimen: 100K-step hyperparameter trials followed by 500K-step full training for best configuration", "Reference to Table 5 for final experiment-specific configurations"]
+}
+```

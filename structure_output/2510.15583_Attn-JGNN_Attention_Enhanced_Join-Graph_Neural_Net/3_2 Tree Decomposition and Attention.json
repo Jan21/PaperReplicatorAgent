@@ -1,0 +1,60 @@
+```json
+{
+    "section_title": "3.2 Tree Decomposition and Attention",
+    "section_purpose": "This section details the attention mechanisms integrated into the Attn-JGNN framework to efficiently capture dependencies in factor graphs after tree decomposition, addressing the scalability limitations of global attention.",
+    "key_points": [
+        "Attn-JGNN applies attention per cluster after tree decomposition, reducing computational complexity from O((n+m)^2) to O(kw^2) (k clusters, w tree-width), improving scalability.",
+        "Three tailored attention mechanisms are proposed: Hierarchical (local intra-cluster and global inter-cluster), Dynamic (adjusting number of attention heads during training), and Constraint-Aware (guiding the model to satisfy clause constraints).",
+        "Local intra-cluster attention models interactions like polarity conflicts within clauses, while global inter-cluster attention handles consistency of distant variable assignments through shared variables.",
+        "The dynamic attention mechanism starts with few heads and gradually increases them during training to balance pattern capture and expressiveness for complex clauses.",
+        "The constraint-aware mechanism uses a clause satisfaction score to adjust attention weights and adds a regularization term to the loss function, explicitly prioritizing constraint satisfaction."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Hierarchical attention mechanism for local (intra-cluster) and global (inter-cluster) dependency capture.",
+            "Dynamic attention mechanism that adjusts the number of attention heads H(t) based on training step t.",
+            "Constraint-aware mechanism that computes a clause satisfaction score and adds a regularization term to the loss."
+        ],
+        "formulas": [
+            "Scaled Dot-Product Attention: Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V (Equation 6).",
+            "Intra-cluster attention weight: α_intra = LeakyReLU((W_Q h_i)^T (W_K h_j) / sqrt(d)) for nodes in cluster C_k (Equation 7).",
+            "Intra-cluster message passing: m_{x_i→φ_j}^{(k)} = α_intra * ∏_{u∈N(x_i)\\φ_j} m_{u→x_i}^{(k)} and m_{φ_j→x_i}^{(k)} = α_intra * ∑_{C_k\\{x_i}} φ_j(C_k) * ∏_{v∈N(φ_j)\\x_i} m_{v→φ_j}^{(k)} (Equation 9).",
+            "Intra-cluster feature update: h_j = ∑_{x_i∈C_k} α_intra W_V h_i (Equation 10).",
+            "Inter-cluster attention weight: α_inter = LeakyReLU((W_Q h_{C1})^T (W_K h_{C2}) / sqrt(d)) (Equation 11).",
+            "Inter-cluster message: m_{C1→C2}(S_{12}) = α_inter * ∑_{C1\\S_{12}} (φ_1(C1) * ∏_{k∈ne(C1)\\C2} m_{k→C1}) (Equation 12).",
+            "Shared variable update: h_x = h_x^{(C1)} + α_inter W_V h_x^{(C2)} (Equation 13).",
+            "Dynamic head count: H(t) = min(H_max, H_init + floor(t/T)) (Equation 14).",
+            "Dynamic attention aggregation: α_dy = (1/H(t)) ∑_{h=1}^{H(t)} λ_h Attention(Q,K,V) (Equation 15).",
+            "Clause satisfaction score: s_i = sigmoid(∑_{x_j∈φ_i} (2b_j(x_j)-1) * polarity(x_j, φ_i)) (Equation 16).",
+            "Constraint regularization loss: L_cons = -δ ∑_{i=1}^{m} ln s_i (Equation 17).",
+            "Total loss: L_total = L_RMSE + L_cons (Equation 18).",
+            "Constraint-adjusted intra-cluster attention: α_intra = LeakyReLU(((W_q h_i)^T (W_k h_j) + γ s_i) / sqrt(d)) (Equation 19)."
+        ],
+        "architectures": [
+            "Attention-enhanced join-graph neural network (Attn-JGNN) with tree decomposition of factor graphs into clusters."
+        ],
+        "hyperparameters": {
+            "d": "dimension of attention computation (appears in denominators sqrt(d))",
+            "H_max": "maximum number of attention heads",
+            "H_init": "initial number of attention heads",
+            "T": "step interval for increasing attention heads",
+            "δ": "weight for constraint regularization loss",
+            "γ": "weight for clause satisfaction score in adjusted attention"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.2 (Iterative Join-Graph Propagation) for understanding the baseline message passing framework.",
+        "Section 2.3 (Graph Attention Networks) for background on attention mechanisms.",
+        "Section 3.1 (Attn-JGNN Framework) for the overall model architecture.",
+        "Understanding of CNF formulas, variables, clauses, and tree decomposition (from Preliminaries)."
+    ],
+    "reproducibility_notes": [
+        "Equations for all three attention mechanisms (Hierarchical, Dynamic, Constraint-Aware) including weight calculations and message passing rules.",
+        "Formulas for dynamic adjustment of attention heads H(t) and aggregation λ_h.",
+        "Clause satisfaction score calculation and its integration into the loss function L_total.",
+        "Hyperparameters: d, H_max, H_init, T, δ, γ.",
+        "Use of LeakyReLU activation in attention weight computations."
+    ]
+}
+```

@@ -1,0 +1,27 @@
+{
+  "section_title": "5.3.2 Train-time vs Test-time Scaling",
+  "section_purpose": "To compare the performance of models trained on different problem size distributions when evaluated on benchmarks of varying sizes, and to analyze the trade-offs between training on larger instances versus using test-time scaling.",
+  "key_points": [
+    "Models trained on smaller instances (SR40) can generalize to larger problems, but performance degrades as problem size increases.",
+    "Models trained on larger instances (SR100) generalize better to even larger problems (SR200) compared to models trained on smaller instances.",
+    "Test-time scaling (increasing inference steps/computation) has limits, and optimal performance on very large problems may require training on larger instances.",
+    "Recurrent GNN architectures offer a flexible tradeoff between computation and performance that can be adjusted at inference time."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["Recurrent GNN architectures"],
+    "hyperparameters": {},
+    "datasets": ["SR40 distribution", "SR100 distribution", "SR200 benchmark"]
+  },
+  "dependencies": [
+    "Section 5.3.1 (Iteration and Resampling Effects) for context on test-time scaling",
+    "Section 4.4 (Benchmarks and Data Generation) for definitions of SR40, SR100, SR200",
+    "Section 4.2 (Architecture Variants) for details on GNN architectures"
+  ],
+  "reproducibility_notes": [
+    "Specific performance metrics: SR40-trained model achieves 58.5% decision accuracy on SR200, SR100-trained model achieves 83.0% decision accuracy on SR200.",
+    "Generalization performance data from Tables 4 and 5 (not provided in the content but referenced).",
+    "Observation that SR100-trained model achieves 74.2% decision accuracy despite being trained on smaller instances."
+  ]
+}

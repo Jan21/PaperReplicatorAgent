@@ -1,0 +1,31 @@
+```json
+{
+    "section_title": "3.4.2 Learning the Reverse Process",
+    "section_purpose": "To explain the core training objective of the diffusion model applied to SAT solving, specifically how a Graph Neural Network (GNN) is trained to reverse a noise-corruption process and recover a satisfiable assignment.",
+    "key_points": [
+        "The fundamental goal is to learn the reverse process of a diffusion model, enabling the denoising of a corrupted sample back to the original data distribution.",
+        "In the context of SAT solving, a GNN is trained to progressively recover a satisfiable assignment (x0) starting from a random initial state.",
+        "The trained model defines a distribution p(x_{t-1}|x_t), used to sample an assignment x0 from a random assignment x_T.",
+        "The specific training method adopted is from Austin et al. (2021), where the network predicts the original uncorrupted input x0 directly.",
+        "This direct prediction approach provides stronger learning signals because the target x0 is fixed across all diffusion timesteps."
+    ],
+    "technical_details": {
+        "algorithms": ["Diffusion model reverse process training for denoising", "Posterior sampling using Bayes' rule based on network prediction of x0"],
+        "formulas": ["Posterior distribution: p(x_{t-1}|x_t)", "Target of the neural network: predict original uncorrupted assignment x0"],
+        "architectures": ["Graph Neural Network (GNN) as the learned denoising model"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of the categorical diffusion process described in section 3.4.1",
+        "General knowledge of diffusion models and their training paradigms",
+        "Background on GNNs from section 3.3",
+        "Concept of SAT assignments and the goal of finding a satisfiable assignment x0"
+    ],
+    "reproducibility_notes": [
+        "The specific training objective: the neural network is trained to directly predict the original uncorrupted assignment x0.",
+        "The training method reference: Austin et al. (2021).",
+        "The use of the predicted x0 to sample from the posterior p(x_{t-1}|x_t) via Bayes' rule."
+    ]
+}
+```

@@ -1,0 +1,38 @@
+```json
+{
+    "section_title": "3.4 New Branching Heuristic for Dominating-Clique Solvers",
+    "section_purpose": "To propose a novel branching heuristic for exact solvers for the dominating clique problem, replacing the traditional MRV heuristic with one based on joint information entropy derived from the probabilistic predictions of a GNN model.",
+    "key_points": [
+        "The section introduces a function f(Var_b, Θ) to measure branch quality in a search tree, using the GNN's output probability space Θ.",
+        "It adapts an existing efficient backtracking solver for dominating cliques (Algorithm 1), which originally uses the MRV (Minimum Remaining Values) heuristic.",
+        "The core improvement replaces the MRV heuristic (which minimizes |C'∩S|) with a new heuristic that selects the unsatisfied clause C where the joint information entropy of the variables in C∩S is minimized.",
+        "Two methods are proposed to calculate the joint information entropy: a fast but approximate version, and a slower but more accurate version.",
+        "The probability distributions of unassigned variables are dynamically updated during search using the softmax function (found to perform better than Z-score normalization)."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Algorithm 1: An existing backtracking algorithm for the dominating clique problem (DomClq). It maintains a potential solution D, a set of unassigned variables S, and a set of unsatisfied clauses U.",
+            "Modified Algorithm (Line 6): The key modification replaces the selection of clause C based on min |C'∩S| with a selection based on min joint information entropy of variables in C'∩S."
+        ],
+        "formulas": [
+            "Fast joint entropy calculation: ∑_{i=1}^m H(X_i) - (∏_{i=1}^m (1 - p_i)) log₂(∏_{i=1}^m (1 - p_i)). Assumes variable independence and subtracts the entropy of the 'all zero' case.",
+            "Accurate joint entropy calculation (Equation 8): ∑_{i=1}^m [ p * ( -log₂(p) + ∑_{v_r ∈ N(v_i) \\ {v_1,...,v_{i-1}} } H(X_r) ) ], where p = p_i ∏_{j=1}^{i-1} (1 - p_j) ∏_{v_k ∈ {v_{i+1},...,v_m} \\ N(v_i)} (1 - p_k). This accounts for dependencies from dominating clique properties."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.1 (New Probabilistic-Method GNN Model) for the source of the probability distributions p_i.",
+        "Section 2 (Dominating Clique and Probabilistic-Method GNN) for background on the problem and GNN framework.",
+        "The original solver by Culberson et al. [9], including the CNF encoding of a graph to variables and clauses."
+    ],
+    "reproducibility_notes": [
+        "The modified line in Algorithm 1: selecting clause C ∈ U that minimizes the joint information entropy of (C ∩ S).",
+        "The need to dynamically re-weigh (via softmax) the GNN-derived probability distributions for unassigned variables during backtracking as S, D, and U change.",
+        "The choice between the 'fast' and 'accurate' joint entropy calculation formulas.",
+        "The CNF encoding scheme: variable X_i represents vertex v_i; clause C_i = {X_j | v_j ∈ N[v_i]} ensures each vertex or a neighbor is in the solution.",
+        "Initialization of solver parameters: D = ∅, S = {X_i}_{i∈[n]}, U = {C_i}_{i∈[n]}."
+    ]
+}
+```

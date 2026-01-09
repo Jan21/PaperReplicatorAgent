@@ -1,0 +1,23 @@
+{
+  "section_title": "A.3 Details on Test-Time Rewiring",
+  "section_purpose": "To describe the graph rewiring procedure used in experiments, which modifies graph connectivity based on curvature to demonstrate that flatter graphs are easier for GNN-based SAT solvers.",
+  "key_points": [
+    "Graph rewiring modifies connectivity by adding, removing, or reweighting edges to optimize information flow.",
+    "Uses a discrete and stochastic Ricci flow guided by Balanced Forman Curvature (BFC) to increase average curvature.",
+    "Algorithm iteratively selects the edge with the most negative curvature and adds candidate edges to improve curvature.",
+    "Aims to reduce information bottlenecks, making the graph 'flatter' and easier for GNN-based solvers.",
+    "Alters SAT problem constraints but serves to show the relationship between curvature and solver performance."
+  ],
+  "technical_details": {
+    "algorithms": ["Balanced Forman Curvature Stochastic Rewiring (Algorithm 1)"],
+    "formulas": ["Improvement score Δ_kl = -(Ric(i,j) - Ric'(i,j)), where Ric(i,j) is the BFC of edge (i,j) and Ric'(i,j) is the updated curvature after adding edge (k,l)"],
+    "architectures": [],
+    "hyperparameters": {
+      "p": "probability value in [0,1] for random edge selection",
+      "N": "number of iterations"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 2.3 on Ricci Curvature of Graphs", "Prior work on graph rewiring (Topping et al. [47])", "Background on SAT problem graph representation and GNNs"],
+  "reproducibility_notes": ["Algorithm 1 pseudocode provided", "Need to compute BFC values for all edges initially", "Specify parameters p and N for the rewiring process", "Procedure for updating curvature values after edge addition", "Maintain bipartite structure between literals and clauses with no intra-partition edges"]
+}

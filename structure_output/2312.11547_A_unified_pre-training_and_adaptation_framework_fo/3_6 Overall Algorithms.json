@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.6 Overall Algorithms",
+    "section_purpose": "To summarize the three essential processes of the proposed unified framework for solving combinatorial optimization problems on graphs and provide the algorithmic overview of each process.",
+    "key_points": [
+        "The framework consists of three core processes: problem transfer, pre-training, and fine-tuning.",
+        "Problem transfer bridges various COs by converting them into Max-SAT problems and then into bipartite graphs using Algorithm 1.",
+        "Pre-training learns generalizable features from Max-SAT samples using MLP, GNN-based backbones, and classification networks (Algorithm 2).",
+        "Fine-tuning enhances generalizability through domain adaptation with an added discriminator for domain-invariant features (Algorithm 3).",
+        "The unified approach captures common knowledge across COs, unlike prior works that model specific problems individually."
+    ],
+    "technical_details": {
+        "algorithms": ["Algorithm 1: Problem Transfer via Max-SAT", "Algorithm 2: Pre-training process", "Algorithm 3: Fine-tuning process"],
+        "formulas": ["Objective function: max f(S)", "Constraint condition: g_i(S) ≤ b_i, b_i ∈ Ω"],
+        "architectures": ["MLP (Multi-Layer Perceptron)", "Feature extraction backbones based on GNNs", "Classification network", "Fine-tuning network with additional discriminator for domain classification"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.1 for CO problem definitions", "Section 3.2 for Max-SAT problem transfer details", "Section 3.3 for bipartite graph attention networks", "Section 3.4 for pre-training and fine-tuning methodologies"],
+    "reproducibility_notes": ["Algorithm 1: Steps to convert a CO graph to a bipartite graph via Max-SAT clauses", "Need MLP and GNN-based feature extraction backbone specifications", "Requires discriminator architecture for domain classification in fine-tuning", "Training procedures for pre-training (Algorithm 2) and fine-tuning (Algorithm 3)"]
+}
+```

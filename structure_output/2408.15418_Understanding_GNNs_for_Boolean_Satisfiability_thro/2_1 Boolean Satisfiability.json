@@ -1,0 +1,19 @@
+{
+  "section_title": "2.1 Boolean Satisfiability",
+  "section_purpose": "To introduce fundamental concepts and terminology related to Boolean Satisfiability, including definitions of variables, literals, clauses, CNF, assignments, and graph representations, which are essential for understanding the paper's focus on GNNs for SAT.",
+  "key_points": [
+    "Defines Boolean variables, literals, clauses, and conjunctive normal form (CNF), with clauses and formulas treated as sets for convenience.",
+    "Explains assignments as mappings from variables to {0,1} and the condition for satisfying a CNF formula: at least one literal in each clause must be true.",
+    "Introduces the literal-clause factor graph, an undirected bipartite graph connecting literals to clauses that contain them, used for representing CNF formulas.",
+    "Describes MaxSAT as an optimization variant of SAT aimed at maximizing satisfied clauses, and notes its NP-hardness even for 2-SAT instances."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": ["Notation for Boolean variables (x_i), literals, and logical connectives: disjunction (∨), conjunction (∧), negation (¬).", "Definition of complementary literal: for a literal l, \bar{l} denotes its complement (e.g., \bar{x} is ¬x and ¬\bar{x} is x)."],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Assumes basic background knowledge of propositional logic (references [2])."],
+  "reproducibility_notes": ["No specific reproducibility information; this section provides conceptual background essential for understanding subsequent technical sections."]
+}

@@ -1,0 +1,24 @@
+{
+  "section_title": "4.4 Ablation Study",
+  "section_purpose": "This section evaluates the effectiveness of key components in the methodology through ablation studies, specifically assessing the impact of using div gates versus direct division for conditional probability prediction and the benefits of the proposed two-stage training strategy.",
+  "key_points": [
+    "div gates consistently achieve lower Mean Absolute Error (MAE) compared to direct division across all settings, improving numerical stability and learning robustness.",
+    "Direct division suffers from unstable gradients and sensitivity to small denominators, leading to higher errors.",
+    "The two-stage training strategy outperforms using only stage-1 or stage-2 individually, achieving the lowest L1 loss.",
+    "Stage-2 training significantly accelerates inference, reducing time by a factor of 200 compared to stage-1, which requires multiple invocations.",
+    "Ablation results show consistent improvements for different numbers of condition nodes (1, 2, 5) in both moderate and polar conditions."
+  ],
+  "technical_details": {
+    "algorithms": ["div gate-based model for conditional probability prediction", "direct division method for comparison", "two-stage training strategy involving stage-1 (fine-grained behavior learning) and stage-2 (statistical distribution learning)"],
+    "formulas": ["MAE (Mean Absolute Error) is used as the metric for conditional probability prediction", "L1 loss is used as the metric for evaluating training strategies"],
+    "architectures": [],
+    "hyperparameters": {
+      "number_of_condition_nodes": [1, 2, 5],
+      "stage1_patterns": 100,
+      "stage2_patterns": 20000
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 3.3 Two-Stage Training Strategy", "Section 3.4 Multiple Condition Probability", "Section 4.1 Dataset Generation (for context on data patterns)"],
+  "reproducibility_notes": ["Implementation details of div gates versus direct division", "Specifics of the two-stage training procedure, including pattern counts and model invocations", "Dataset characteristics from earlier sections for generating conditional probabilities"]
+}

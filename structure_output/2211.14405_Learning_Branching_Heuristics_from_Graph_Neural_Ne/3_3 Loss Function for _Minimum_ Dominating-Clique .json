@@ -1,0 +1,29 @@
+```json
+{
+    "section_title": "3.3 Loss Function for (Minimum) Dominating-Clique Problem",
+    "section_purpose": "To design new loss functions for training a Graph Neural Network (GNN) to solve the dominating-clique and minimum dominating-clique problems, using probabilistic bounds to handle both local (clique) and global (domination) constraints.",
+    "key_points": [
+        "The maximum-clique problem has only local constraints, while the dominating-clique problem has both local (clique) and global (domination) constraints, making it a more complex target for GNN-based exact algorithms.",
+        "Instead of directly evaluating the closed-form probability P(D_S ∩ C_S) that a set S is a dominating clique, the method optimizes its upper and lower bounds simultaneously.",
+        "The derived loss function L (Equation 5) for the dominating-clique problem is the negative sum of log probabilities related to domination events (A_i) and clique non-edges (B_ij).",
+        "For the *minimum* dominating clique problem, the loss function L (Equation 6) adds a term ln(E(|S|)) to encourage smaller solutions.",
+        "An improved expectation term (Equation 7) is proposed for the minimum problem, calculated over a generated event space closer to the set of dominating cliques rather than all subsets, to more accurately target small dominating cliques."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "P(A_i) = ∏_{v_j ∈ N[v_i]} (1 - p_j) where A_i is the event that vertices in the closed neighborhood of v_i are NOT in S.",
+            "Upper bound: P(D_S ∩ C_S) ≤ P(D_S) P(C_S), and P(D_S) ≥ ∏_{i} P(¬A_i). Combined lower bound for optimization target: exp(∑_i ln(P(¬A_i)) + ∑_{non-edges} ln(P(¬B_ij))) ≤ P(D_S)P(C_S).",
+            "Lower bound: P(D_S ∩ C_S) ≥ P(D_S) + P(C_S) - 1 ≥ 2 exp(0.5 (ln P(D_S) + ln P(C_S))) - 1 ≥ 2 exp(0.5 (∑_i ln(P(¬A_i)) + ∑_{non-edges} ln(P(¬B_ij)))) - 1.",
+            "Loss function for dominating clique: L = -(∑_i ln(P(¬A_i)) + ∑_{non-edges} ln(P(¬B_ij))) [Equation 5].",
+            "Loss function for *minimum* dominating clique (basic): L = -(∑_i ln(P(¬A_i)) + ∑_{non-edges} ln(P(¬B_ij))) + ln(E(|S|)), where E(|S|) = ∑_i p_i [Equation 6].",
+            "Improved expected size term for minimum dominating clique: ∑_{i=1}^n [ p_i * ∏_{j=1}^{i-1}(1-p_j) * ∏_{v_k ∈ {v_{i+1},...,v_n} \\ N(v_i)} (1-p_k) * (1 + ∑_{v_r ∈ N(v_i) \\ {v_1,...,v_{i-1}} p_r) ] [Equation 7]. This is the expectation over a constructed event approximating dominating cliques."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of the GNN model from Section 3.1 that outputs probabilities p_i for vertices.", "Understanding of event definitions: C_S (S is a clique) and B_ij (non-edge {i,j} has both vertices in S) from earlier sections.", "Understanding of probabilistic method and bounds (like FKG inequality) referenced as (1) and (2)."],
+    "reproducibility_notes": ["The exact form of the loss function for the dominating-clique problem (Equation 5).", "The extended loss function for the minimum dominating-clique problem (Equations 6 and 7).", "The algorithm for constructing the improved event space for the expectation calculation in Equation 7 (involving random permutation and iterative set exclusion)."]
+}
+```

@@ -1,0 +1,20 @@
+{
+  "section_title": "4 Results",
+  "section_purpose": "To present and analyze experimental results comparing different variants of oracle-based stochastic local search (SLS) solvers, demonstrating performance improvements and insights from trained oracles.",
+  "key_points": [
+    "Full oracle-based algorithm outperforms uniform and hybrid variants for both MT and WalkSAT solvers across all metrics.",
+    "WalkSAT dominates the MT algorithm in performance for each variant.",
+    "Significant speed-ups are observed in median steps required, with factors of more than 8 for MT and around 5 for WalkSAT, indicating effectiveness on simpler instances.",
+    "Access to GNN-based oracle shifts performance curves for α values (around 3.0 to 3.2), increasing the average α for solved instances by 17%.",
+    "The hybrid variant loses its initial advantage quickly, highlighting the importance of continuous oracle access during solving."
+  ],
+  "technical_details": {
+    "algorithms": ["MT algorithm", "WalkSAT algorithm", "oracle-based variants (uniform, hybrid, full)"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2 for algorithms and theoretical foundations (Propositions 2.1, 2.2)", "Appendix A.2 for detailed experimental plots"],
+  "reproducibility_notes": ["Details on algorithm variants (uniform, hybrid, full) and their implementation", "Specification of loss terms (Lovász local loss and Gibbs loss) used in training", "Performance metrics reported (median steps, mean steps, α values, ratio of solved instances)"]
+}

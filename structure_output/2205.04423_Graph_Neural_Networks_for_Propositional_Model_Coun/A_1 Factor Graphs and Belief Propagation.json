@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.1 Factor Graphs and Belief Propagation",
+    "section_purpose": "This appendix section provides extended background on the key algorithmic foundation of the paper: it formally defines factor graphs and explains the Belief Propagation (BP) algorithm, detailing its message-passing rules and convergence properties.",
+    "key_points": [
+        "Belief Propagation (BP) is an approximate inference algorithm that operates on a bipartite factor graph, which partitions nodes into variable nodes and factor nodes based on the input probability distribution.",
+        "BP is exact on tree-structured factor graphs but can also be applied effectively to graphs with cycles, where it is called Loopy Belief Propagation (LBP).",
+        "After T iterations of message passing, variable beliefs (approximate marginals) and factor beliefs are computed using normalization constants Z_i and Z_j.",
+        "The Bethe Free Energy can be computed from these beliefs, connecting BP to the broader statistical physics framework.",
+        "To prevent underflow in practical implementations, message updates are performed in log-space using the log-sum-exp (LSE) function."
+    ],
+    "technical_details": {
+        "algorithms": ["Belief Propagation (BP) as an approximate inference algorithm", "Loopy Belief Propagation (LBP) for graphs with cycles", "Log-space message updates to avoid underflow"],
+        "formulas": ["Variable belief formula: b_i(x_i) = (1/Z_i) ∏_{f_j ∈ N(x_i)} m_{j→i}^{(T)}(x_i)", "Factor belief formula: b_j(x_{N(f_j)}) = (f_j(x_{N(f_j)})/Z_j) ∏_{x_i ∈ N(f_j)} m_{i→j}^{(T)}(x_i)", "Log-space message update rules using log-sum-exp (LSE) function", "LSE definition: LSE_{x_j\\x_i}(f_j(x_j)) = ln(∑_{x_j\\x_i} exp(f_j(x_j)))"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Equation 1 (the input probability distribution)", "Equation 2 (the iterative message passing rules)", "Equation 3 (the Bethe Free Energy formula)", "General understanding of probability distributions and graphical models"],
+    "reproducibility_notes": ["The log-space update formulas (Equation 15) are crucial for a stable implementation to avoid underflow.", "The definitions of variable and factor neighborhoods N(x_i) and N(f_j) are needed to construct the computational graph.", "The number of message-passing iterations T must be specified.", "The normalization procedure using Z_i and Z_j must be implemented correctly."]
+}
+```

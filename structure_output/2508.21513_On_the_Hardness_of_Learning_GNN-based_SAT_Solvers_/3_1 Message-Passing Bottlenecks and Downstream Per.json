@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.1 Message-Passing Bottlenecks and Downstream Performance",
+    "section_purpose": "This section connects the theoretical results from previous sections (on graph curvature) to explain performance limitations in GNN-based SAT solvers, specifically attributing these limitations to the oversquashing phenomenon caused by negatively curved edges in the graph.",
+    "key_points": [
+        "Edges with high negative curvature create graph bottlenecks leading to the oversquashing phenomenon in GNNs, which limits information propagation across the graph.",
+        "GNN-based SAT solvers suffer from two types of hardness: the algorithmic hardness inherent to SAT problems and the hardness of learning representations for long-range communication due to oversquashing.",
+        "For large clause density (α→∞) and large k, highly negatively curved edges are guaranteed to exist on average, causing exponentially decaying gradients in node representations.",
+        "Increasing connectivity (α) makes literals more distant on the interaction network, increasing long-range codependencies that fixed-length GNN representations cannot effectively capture.",
+        "Even for problems considered simple in terms of α (clause density), increasing k leads to worse oversquashing and worse GNN performance due to k's effect on Balanced Forman Curvature (BFC)."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Ric(i,j) ≤ -2 + δ (for infinitesimally small δ > 0 when α→∞)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Theorem 3.1 from previous section", "Theorem 4 from Topping et al. [47]", "Section 2.3 on Ricci Curvature of Graphs", "Figure 1 showing curvature behavior"],
+    "reproducibility_notes": ["Understanding of the oversquashing phenomenon as described in Topping et al. [47]", "Knowledge that message-passing functions (θ and φ) have bounded gradients", "Interpretation that negative curvature correlates with difficulty in propagating information across graph neighborhoods"]
+}
+```

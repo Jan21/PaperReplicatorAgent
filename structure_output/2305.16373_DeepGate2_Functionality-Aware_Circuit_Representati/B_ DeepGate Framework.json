@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B. DeepGate Framework",
+    "section_purpose": "To describe the DeepGate framework as a baseline, identify its key design principles and two major shortcomings that motivate the proposed improvements in DeepGate2.",
+    "key_points": [
+        "DeepGate is the first framework to embed both structural and functional information of digital circuits using GNNs on And-Inverter Graph (AIG) format.",
+        "It uses logic-1 probability as supervision to learn functionality, approximated via random simulation of truth tables.",
+        "DeepGate's GNN uses an attention-based aggregation that assigns high weights to controlling fan-ins to mimic logic computation.",
+        "Limitation 1: Logic probability supervision is insufficient as it only captures statistical information, not which PI assignments lead to specific outputs, failing to differentiate circuits with same probability.",
+        "Limitation 2: The model is inefficient for large circuits, requiring 20 rounds of forward/backward message passing due to identical initial PI embeddings, needing multiple rounds to distinguish nodes based on connections."
+    ],
+    "technical_details": {
+        "algorithms": ["GNN with attention-based aggregation function", "Message propagation in levelized sequential manner"],
+        "formulas": [],
+        "architectures": ["GNN model for circuit representation learning"],
+        "hyperparameters": {"message_passing_rounds": "20"},
+        "datasets": []
+    },
+    "dependencies": ["Basic knowledge of circuit representation learning (Section II.A)", "Understanding of And-Inverter Graph (AIG) format"],
+    "reproducibility_notes": ["Understanding of DeepGate's use of logic-1 probability as supervision", "Knowledge of the 20-round message passing design", "Awareness of the attention mechanism focusing on controlling fan-ins"]
+}
+```

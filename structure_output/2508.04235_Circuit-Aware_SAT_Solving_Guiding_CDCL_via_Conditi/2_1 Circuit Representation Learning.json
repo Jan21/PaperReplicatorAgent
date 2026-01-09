@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.1 Circuit Representation Learning",
+    "section_purpose": "To survey and categorize existing approaches to circuit representation learning in EDA, situating the paper's work within the predictive model category and justifying the choice of DeepGate4 as the backbone.",
+    "key_points": [
+        "Circuit representation learning is a key subfield in EDA focused on creating unified embeddings for multiple downstream tasks.",
+        "Two main approaches exist: predictive models (e.g., DeepGate, DeepCell, PolarGate) and contrastive models (e.g., FGNN, MGVGA, CircuitFusion, NetTAG).",
+        "Predictive models like DeepGate use asynchronous message passing with representation disentanglement to separate functionality and structure embeddings.",
+        "Contrastive models aim to align circuit embeddings based on functional similarity or create function-invariant embeddings.",
+        "For the task of predicting exact conditional probabilities, the paper selects the state-of-the-art predictive model DeepGate4 as its backbone."
+    ],
+    "technical_details": {
+        "algorithms": ["Asynchronous message passing neural network", "Representation disentanglement techniques", "Contrastive learning for functional alignment"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["General knowledge of Electronic Design Automation (EDA) and representation learning concepts introduced in Section 1 and 2."],
+    "reproducibility_notes": ["Justification for selecting DeepGate4 as the model backbone, based on its state-of-the-art performance for predictive modeling of exact conditional probabilities."]
+}
+```

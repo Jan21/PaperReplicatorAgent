@@ -1,0 +1,43 @@
+```json
+{
+    "section_title": "Frameworks of Models",
+    "section_purpose": "This section presents the algorithmic frameworks for two GNN models (MS-NSFG and MS-ESFG) designed to solve MaxSAT problems, detailing their message-passing procedures and computational flow.",
+    "key_points": [
+        "Two GNN architectures are presented: MS-NSFG for Normal Signed Factor Graphs and MS-ESFG for Extended Signed Factor Graphs.",
+        "Both frameworks follow an iterative message-passing structure between literal and clause nodes over T GNN layers.",
+        "The models start with random initialization of embeddings and end with a prediction layer followed by sigmoid activation and rounding for binary assignments.",
+        "MS-ESFG distinguishes between positive and negative edges with separate aggregation functions, while MS-NSFG uses a single adjacency matrix."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "MS-NSFG Algorithm: 1) Build adjacency matrix M, 2) Initialize random embeddings for literals and clauses, 3) Perform T message-passing iterations with clause updates via AGGL aggregation and UPDC update, and literal updates via AGGC aggregation and UPDL update, 4) Apply PREDL prediction layer, sigmoid, and rounding",
+            "MS-ESFG Algorithm: Similar to MS-NSFG but uses separate adjacency matrices (M+ and M-) for positive and negative edges, with corresponding separate aggregation functions (AGGL+/AGGL- and AGGC+/AGGC-) that are summed before updates"
+        ],
+        "formulas": [
+            "Clause update in MS-NSFG: C(k) = UPDC(C(k-1), M·AGGL(L(k-1)))",
+            "Literal update in MS-NSFG: L(k) = UPDL(L(k-1), M⊤·AGGC(C(k-1)))",
+            "Clause update in MS-ESFG: C(k) = UPDC(C(k-1), M+·AGGL+(L(k-1)) + M-·AGGL-(L(k-1)))",
+            "Literal update in MS-ESFG: L(k) = UPDL(L(k-1), (M+)⊤·AGGC+(C(k-1)) + (M-)⊤·AGGC-(C(k-1)))",
+            "Prediction and output: Φ = Round(Sigmoid(PREDL(L(T))))"
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "d": "Dimension of embeddings",
+            "T": "Number of GNN layers"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of NSFG (Normal Signed Factor Graph) and ESFG (Extended Signed Factor Graph) graph representations from earlier sections",
+        "Knowledge of GNN message-passing concepts from 'Graph Neural Networks' and 'GNN Models for MaxSAT' sections",
+        "Familiarity with MaxSAT problem formulation from 'SAT and MaxSAT' section"
+    ],
+    "reproducibility_notes": [
+        "Embedding initialization: Uniform distribution U(0,1) for both literal and clause embeddings",
+        "Need definitions of UPDC, UPDL, AGGL, AGGC functions (presumably defined elsewhere)",
+        "Need definitions of PREDL prediction function",
+        "Dimension d of embeddings and number of layers T must be specified",
+        "For MS-ESFG, separate aggregation functions for positive and negative edges must be defined"
+    ]
+}
+```

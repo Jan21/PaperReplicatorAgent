@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 BACKGROUND",
+    "section_purpose": "To introduce fundamental concepts necessary for understanding the paper: the SAT problem, the CDCL algorithm, phase selection heuristics, Graph Neural Networks (GNNs), and the Graph Transformer architecture.",
+    "key_points": [
+        "SAT is defined for formulas in Conjunctive Normal Form (CNF), and the goal of a solver is to find a satisfying assignment (SAT) or prove none exists (UNSAT). The concept of backbone variables (variables with consistent phase across all satisfying assignments) is introduced.",
+        "The CDCL (Conflict-Driven Clause Learning) algorithm is the backbone of modern SAT solvers, involving variable branching, Boolean propagation, conflict analysis, clause learning, and backtracking.",
+        "Phase selection heuristics, like Phase Saving (uses last assigned polarity) and Rephasing (resets/modifies saved phases for diversification), are crucial components in CDCL solvers, with Kissat cited as a state-of-the-art implementation.",
+        "GNNs operate on graphs via message-passing layers that iteratively update node feature vectors based on neighbor information.",
+        "The Graph Transformer architecture combines GNNs (for local structure) with Transformer self-attention (for global dependencies); GraphTrans is a specific model that inspires NeuroBack's design."
+    ],
+    "technical_details": {
+        "algorithms": ["CDCL Algorithm (branching, propagation, conflict analysis, clause learning, backtracking)"],
+        "formulas": ["CNF formula structure: conjunction of clauses, each clause a disjunction of literals. Example formula: φ = (v1 ∨ ¬v2) ∧ (v2 ∨ v3) ∧ v2"],
+        "architectures": ["GNN message-passing layer: takes graph G=(V,E,W,H) and outputs G'=(V,E,W,H') with updated node features.", "Graph Transformer: combines GNN subnet with Transformer subnet and Feed Forward Network. GraphTrans is referenced as a specific model."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of propositional logic and graph structures (assumed prerequisites). Section 3 (Related Work) will reference the GNN background for prior applications in SAT solving."],
+    "reproducibility_notes": ["Definition of CNF formulas, backbone variables, and the CDCL algorithmic steps are foundational. Understanding the Graph Transformer (GraphTrans) architecture is required for replicating the model design in NeuroBack."]
+}
+```

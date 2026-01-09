@@ -1,0 +1,44 @@
+{
+  "section_title": "B.2 Hyperparameters",
+  "section_purpose": "This section documents the hyperparameters used in the RLAF training runs across different experiments, detailing tuned parameters, constant defaults, and a warm-up schedule for learning rate.",
+  "key_points": [
+    "Hyperparameters such as learning rate (η), clip ratio (ε), and KL-penalty (β) were tuned from specified sets (e.g., η ∈ {0.0001, 0.00005, 0.00001}).",
+    "Learning rate is scheduled to warm up over the first 5 GRPO iterations and then remains constant throughout training.",
+    "Other hyperparameters (e.g., K, M, N, S, σw, batch size) were kept at constant default values based on preliminary experiments.",
+    "Table 3 provides detailed hyperparameter values for each dataset (3SAT, 3COL, CRYPTO) and solver (Glucose, March)."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["GNN with hidden dimension (d) of 256 and model depth (L) of 10."],
+    "hyperparameters": {
+      "constant": {
+        "K": 2000,
+        "M": 40,
+        "N": 100,
+        "S": 50,
+        "σw": 0.1,
+        "batch size": 20,
+        "hidden dim d": 256,
+        "model depth L": 10,
+        "weight decay": 0.0
+      },
+      "tuned_ranges": {
+        "learning rate η": [0.0001, 0.00005, 0.00001],
+        "clip ratio ε": [0.1, 0.2],
+        "KL-penalty β": [0.1, 1.0]
+      }
+    },
+    "datasets": ["3SAT", "3COL", "CRYPTO"]
+  },
+  "dependencies": [
+    "Understanding of RLAF training method from Section 2 (e.g., policy optimization).",
+    "Knowledge of GRPO iterations (likely from Section 2.4 Policy Optimization).",
+    "Experimental setup details from Section B.1 Data."
+  ],
+  "reproducibility_notes": [
+    "Exact hyperparameter values from Table 3 for each dataset and solver combination.",
+    "Learning rate warm-up schedule over the first 5 GRPO iterations.",
+    "Constant default values for hyperparameters not explicitly tuned."
+  ]
+}

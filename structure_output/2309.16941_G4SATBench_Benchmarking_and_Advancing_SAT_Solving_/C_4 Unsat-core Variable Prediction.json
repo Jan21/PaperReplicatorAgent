@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "C.4 Unsat-core Variable Prediction",
+    "section_purpose": "To evaluate the performance of GNN models (NeuroSAT and GGNN) on the unsat-core variable prediction task, specifically analyzing their generalization across different problem difficulty levels and across different SAT datasets.",
+    "key_points": [
+        "NeuroSAT and GGNN exhibit strong generalization ability on unsat-core variable prediction when trained on easy or medium-difficulty datasets, performing well across a range of problem complexities.",
+        "Both models demonstrate good generalization to datasets different from their training data, except for the CA (Circuit Analysis) dataset.",
+        "The performance discrepancy on the CA dataset is attributed to its specific characteristic of having significantly fewer unsat-core variables compared to variables not in the core, unlike other datasets where unsat-core variables are more numerous.",
+        "The variation in distribution of unsat-core to non-core variables between datasets presents a generalization challenge for the models."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["NeuroSAT", "GGNN (Gated Graph Neural Network)"],
+        "hyperparameters": {},
+        "datasets": ["CA (Circuit Analysis) dataset - noted for having significantly fewer unsat-core variables compared to other datasets"]
+    },
+    "dependencies": ["Section 4.1 Datasets (for understanding different dataset types)", "Section 4.2 GNN Baselines (for NeuroSAT and GGNN descriptions)", "Section 5.3 Unsat-core Variable Prediction (main evaluation methodology)"],
+    "reproducibility_notes": ["Need classification accuracy metrics for unsat-core variable prediction (Figures 11 and 12)", "Understanding of dataset difficulty levels (easy, medium)", "Knowledge of CA dataset's specific distribution characteristics regarding unsat-core variable counts"]
+}
+```

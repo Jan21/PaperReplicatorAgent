@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "E. Effectiveness of Training Strategies",
+    "section_purpose": "To evaluate the impact of the proposed multi-stage training strategy on the model's ability to learn gate functionality, by comparing it against a single-stage training baseline.",
+    "key_points": [
+        "The multi-stage training strategy (w/ multi-stage) significantly outperforms the single-stage strategy (w/o multi-stage), achieving an average F1-Score of 0.9434 compared to 0.7137.",
+        "The multi-stage strategy first trains the model to predict logic probability and structural correlation, then learns the more difficult functionality prediction task in a second stage.",
+        "Learning gate functionality directly is computationally expensive (cost proportional to the square of circuit size), so the multi-stage approach uses a simplified dataset (pairs with similar logic probability) to train the functionality-aware component more effectively.",
+        "Both models perform similarly on the logic probability prediction (L_prob) and reconvergence structure identification (L_rc) tasks, but the multi-stage model is much better at learning functionality, with a 51.47% lower L_func loss.",
+        "The staged approach is crucial because it provides effective supervision for learning functional similarity, which fails in the single-stage model due to the complexity and cost of the task."
+    ],
+    "technical_details": {
+        "algorithms": ["Multi-stage training strategy (two-stage training)"],
+        "formulas": ["Logic probability loss (L_prob)", "Reconvergence structure identification loss (L_rc)", "Functionality loss (L_func)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Simplified dataset for functionality learning (containing only gate pairs with similar logic probability)"]
+    },
+    "dependencies": ["Section III.C (Functionality-Aware Loss Function) for definitions of L_func and the concept of learning functionality", "Section III.E (Model Training Strategies) for the description of the multi-stage strategy", "Previous experiment sections for context on the evaluation tasks"],
+    "reproducibility_notes": ["The two-stage training procedure: first train with L_prob and L_rc, then add L_func in a second stage.", "The need to limit the functionality training dataset to gate pairs with similar logic probability to manage computational cost.", "The specific loss values (L_func = 0.0594 for the multi-stage model) and performance metrics (F1-Score) to target."]
+}
+```

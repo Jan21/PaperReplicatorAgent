@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "ABSTRACT",
+    "section_purpose": "To provide a high-level summary of the paper, including the problem addressed, the proposed solution (GraSS), its key innovations, and the main experimental results.",
+    "key_points": [
+        "Existing SAT solver selection methods rely on hand-picked features which are costly and ignore structural graph information.",
+        "GraSS is a novel solver selection method using tripartite graph representations of SAT instances and a heterogeneous Graph Neural Network (GNN).",
+        "GraSS improves upon prior GNN approaches by incorporating domain-specific knowledge, such as novel node features and positional encodings for clauses.",
+        "The method uses a tailored GNN architecture for the tripartite graphs and a runtime-sensitive loss function.",
+        "Experiments show GraSS improves runtime performance for a pool of seven solvers on industrial and SAT competition benchmarks."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph Neural Network (GNN)-based SAT solver selection"],
+        "formulas": [],
+        "architectures": ["Heterogeneous Graph Neural Network model", "GNN architecture tailored to tripartite graphs"],
+        "hyperparameters": {},
+        "datasets": ["Industrial circuit design benchmark", "Instances from the 20-year Anniversary Track of the 2022 SAT Competition"]
+    },
+    "dependencies": [],
+    "reproducibility_notes": ["The core idea of using tripartite graph representations for SAT instances.", "The concept of enriching the graph with domain-specific decisions (node features, positional encodings).", "The use of a heterogeneous GNN and a runtime-sensitive loss function.", "The experimental setup involves a pool of seven state-of-the-art solvers."]
+}
+```

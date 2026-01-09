@@ -1,0 +1,42 @@
+```json
+{
+    "section_title": "B GNN Models",
+    "section_purpose": "This appendix section provides a detailed description of the message-passing schemes and specific Graph Neural Network (GNN) architectures used within the G4SATBench benchmark.",
+    "key_points": [
+        "G4SATBench employs heterogeneous message-passing on the VCG* graph structure, using distinct functions for different edge directions and polarities.",
+        "Node embeddings (for variables and clauses) are initialized with learnable vectors and are updated iteratively via a defined message-passing equation.",
+        "The benchmark includes heterogeneous adaptations of several standard GNN models (GCN, GGNN, GIN) on two graph representations (LCG* and VCG*), while NeuroSAT is used only on LCG*.",
+        "The update process aggregates messages from neighbors based on the polarity (positive or negative occurrence) of variables within clauses."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Heterogeneous message-passing algorithm for VCG* graph defined by Equation (7)",
+            "Heterogeneous versions of GCN, GGNN, and GIN models",
+            "Original NeuroSAT algorithm (used only on LCG*)"
+        ],
+        "formulas": [
+            "Equation (7): Defines the update rules for variable node embeddings (h_v^(k)) and clause node embeddings (h_c^(k)). It involves Aggregation (AGG) and Update (UPD) functions applied to messages from neighbors filtered by polarity, processed by distinct MLPs (MLP_v^+, MLP_v^-, MLP_c^+, MLP_c^-)."
+        ],
+        "architectures": [
+            "Graph representation: VCG* (Variable-Clause Graph with polarity) and LCG* (Literal-Clause Graph)",
+            "Node types: Variable nodes and Clause nodes",
+            "Edge types: Distinguished by direction and polarity (positive or negative occurrence)",
+            "Model components: Four separate MLPs for processing messages from positive/negative edges for variable/clause nodes, an aggregation function (AGG), and an update function (UPD)"
+        ],
+        "hyperparameters": {
+            "d-dimensional embedding": "Embedding dimension d is unspecified here"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Preliminaries (Section 3) for definitions of SAT problem and graph representations (LCG*, VCG*)",
+        "Section 4.2 (GNN Baselines) for context on the baseline models being detailed"
+    ],
+    "reproducibility_notes": [
+        "The exact mathematical definitions of the AGG and UPD functions (implied by the specific GNN models like GCN, GGNN, GIN) are needed.",
+        "Initialization details: learnable vectors h_v^0 and h_c^0 for variable and clause nodes.",
+        "Architecture details: The number of layers (k iterations), the dimension d of embeddings, and the specifications of the four MLPs (MLP_v^+, MLP_v^-, MLP_c^+, MLP_c^-).",
+        "Clarification on how the 'heterogeneous versions' of GCN, GGNN, and GIN are implemented (e.g., how their AGG/UPD functions are adapted for polarity)."
+    ]
+}
+```

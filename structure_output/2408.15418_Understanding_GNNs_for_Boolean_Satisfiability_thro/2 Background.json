@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Background",
+    "section_purpose": "This section provides foundational knowledge on Boolean Satisfiability (SAT), classical algorithms for solving it, and introduces how Graph Neural Networks (GNNs) are applied to the problem, setting the stage for the paper's analysis.",
+    "key_points": [
+        "Introduces the Boolean Satisfiability (SAT) problem and its computational complexity.",
+        "Explains the 3-SAT problem, random 3-SAT instances, and the phase transition phenomenon.",
+        "Presents classic message-passing algorithms like Belief Propagation and Survey Propagation for SAT.",
+        "Describes how SAT problem instances can be represented as graphs for processing by GNNs.",
+        "Highlights the connection and analogy between message-passing in GNNs and classical message-passing SAT solvers."
+    ],
+    "technical_details": {
+        "algorithms": ["Belief Propagation", "Survey Propagation"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

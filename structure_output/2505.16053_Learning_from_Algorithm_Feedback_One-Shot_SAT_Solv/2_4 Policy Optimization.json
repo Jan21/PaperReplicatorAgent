@@ -1,0 +1,50 @@
+```json
+{
+    "section_title": "2.4 Policy Optimization",
+    "section_purpose": "This section formalizes the reinforcement learning objective for training the policy GNN and describes the specific optimization algorithm used to minimize solver cost on a distribution of SAT instances.",
+    "key_points": [
+        "The core objective is to learn policy parameters θ that minimize the expected number of decisions (solver cost) when solving SAT instances from a training distribution Ω.",
+        "The optimization is framed as a single-step Markov Decision Process where the state is the input formula φ, the action is choosing variable weights 𝒲, and the reward is the negative solver cost.",
+        "Group Relative Policy Optimization (GRPO) is used, which simplifies PPO by eliminating the need for a value network and uses group-relative advantage normalization.",
+        "The advantage for each action is calculated relative to other actions sampled for the same problem instance, normalized by mean and standard deviation.",
+        "The training objective combines a clipped policy update term with a KL divergence penalty for stability."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Group Relative Policy Optimization (GRPO) - a simplification of Proximal Policy Optimization that doesn't require a value network",
+            "Stochastic gradient ascent used to maximize the objective function"
+        ],
+        "formulas": [
+            "θ* = argmin_θ 𝔼_(φ∼Ω, 𝒲∼π_θ(φ))[Cost(φ, 𝒲)] - Main optimization objective (Equation 6)",
+            "R(φ, 𝒲) = -Cost(φ, 𝒲) - Reward defined as negative solver cost",
+            "Â_i,j = (R(φ_i, 𝒲_i,j) - mean(R_i)) / std(R_i) - Group-relative advantage (Equation 7)",
+            "r_i,j(θ) = π_θ(𝒲_i,j|φ_i) / π_(θ_(k-1))(𝒲_i,j|φ_i) - Probability ratio between new and old policies (Equation 9)",
+            "ℒ_PPO(θ|φ_i) = (1/M) Σ_j [min(r_i,j(θ)Â_i,j, clip(r_i,j(θ), 1-ε, 1+ε)Â_i,j)] - Clipped policy objective (Equation 8)",
+            "ℒ(θ|φ_i) = ℒ_PPO(θ|φ_i) - β·KL(π_θ(φ_i), π_(θ_(k-1))(φ_i)) - Full objective with KL penalty (Equation 10)"
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "ε": "clipping parameter ∈ (0,1)",
+            "β": "KL divergence penalty weight ≥ 0",
+            "N": "batch size (number of training instances sampled)",
+            "M": "number of variable parameterizations sampled per instance",
+            "K": "number of GRPO iterations"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of the policy GNN architecture from Section 2.2 and Appendix A.1/A.2",
+        "Understanding of the guided branching heuristic mechanism from Section 2.1",
+        "Basic knowledge of reinforcement learning concepts (PPO, advantage estimation)",
+        "Definition of Cost(φ, 𝒲) and Solve(φ, 𝒲) functions referenced in Equation 6"
+    ],
+    "reproducibility_notes": [
+        "The specific hyperparameter values for ε, β, N (batch size), M (samples per instance), and K (iterations)",
+        "The training distribution Ω of SAT problems",
+        "Details of the stochastic gradient ascent optimizer (learning rate, number of steps per iteration)",
+        "The cost metric definition: number of decisions required by Solve(φ, 𝒲)",
+        "Implementation details for sampling variable parameterizations 𝒲 from policy π_θ(φ)",
+        "Reference to Algorithm 4 in appendix for complete training specification"
+    ]
+}
+```

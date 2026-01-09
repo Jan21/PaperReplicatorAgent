@@ -1,0 +1,24 @@
+{
+  "section_title": "4.2.1 GNN MODEL DESIGN",
+  "section_purpose": "This section describes the architectural design of the GNN model used for phase prediction in NeuroBack, specifically addressing the modifications made to a base graph transformer architecture to handle the scale and structural requirements of SAT formulas.",
+  "key_points": [
+    "The GNN model is designed to be compact and robust to handle large SAT formulas (with millions of variables/clauses) under limited GPU memory constraints.",
+    "The base GraphTrans architecture is modified to overcome two limitations: 1) lack of explicit topological structure integration in attention, and 2) quadratic memory complexity from global self-attention.",
+    "A novel transformer subnet is introduced, combining Graph Self-Attention (GSA) and Local Self-Attention (LSA) to replace global self-attention.",
+    "GSA computes attention only for directly connected node pairs, incorporating edge/weight information for topological structure and achieving linear memory complexity in the number of edges.",
+    "LSA segments node embeddings into patches for attention computation, achieving linear memory complexity in the number of nodes."
+  ],
+  "technical_details": {
+    "algorithms": ["Graph Self-Attention (GSA): computes attention scores only for directly connected node pairs using edge and edge weight information.", "Local Self-Attention (LSA): segments each node embedding into multiple node patches and computes attention scores for each pair of node patches."],
+    "formulas": [],
+    "architectures": ["Model consists of three main components: 1) a GNN subnet with L stacked GNN blocks, 2) a transformer subnet with M GSA transformer blocks and N LSA transformer blocks, 3) an FFN layer for node classification.", "Each GNN block contains a normalization layer preceding a GNN layer, with a skip connection bridging them.", "Each transformer block (inspired by ViT-22B) integrates a normalization layer, followed by concurrent operation of an FFN layer and a GSA/LSA layer for training efficiency."],
+    "hyperparameters": {
+      "L": "number of stacked GNN blocks in GNN subnet",
+      "M": "number of GSA transformer blocks in transformer subnet",
+      "N": "number of LSA transformer blocks in transformer subnet"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Understanding of Graph Neural Networks (GNNs) and transformer architectures, particularly GraphTrans.", "Knowledge of SAT formula graph representation from Section 4.1.", "Context on phase prediction task from the start of Section 4.2."],
+  "reproducibility_notes": ["Architecture blueprint: GNN subnet (L blocks), transformer subnet (M GSA + N LSA blocks), final FFN classifier.", "Specific design choices: GSA for neighbor-only attention with edges/weights, LSA for patch-based attention within nodes.", "Block structure details: normalization before GNN/attention layers, skip connections in GNN blocks, concurrent FFN+GSA/LSA in transformer blocks."]
+}

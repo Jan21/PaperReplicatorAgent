@@ -1,0 +1,19 @@
+{
+  "section_title": "2.1 Satisfiability Problems",
+  "section_purpose": "This section introduces the foundational concepts of propositional logic, Boolean formulas in Conjunctive Normal Form (CNF), and formally defines the SAT and #SAT problems, which are the core computational tasks addressed by the paper.",
+  "key_points": [
+    "A Boolean formula is composed of Boolean variables and logical operators like negation, conjunction, and disjunction.",
+    "Boolean formulas are commonly represented in Conjunctive Normal Form (CNF), which is a conjunction of clauses, where each clause is a disjunction of literals.",
+    "The SAT (Satisfiability Problem) asks whether a variable assignment exists that satisfies a given CNF formula.",
+    "The #SAT (Propositional Model Counting Problem) aims to count the total number of satisfying assignments (models) for a CNF formula."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": []
+}

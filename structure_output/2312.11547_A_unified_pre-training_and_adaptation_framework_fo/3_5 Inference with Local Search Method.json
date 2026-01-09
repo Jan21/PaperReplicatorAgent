@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.5 Inference with Local Search Method",
+    "section_purpose": "To describe the final inference step that converts the model's probabilistic predictions into discrete, feasible combinatorial optimization solutions, particularly for problems with hard constraints.",
+    "key_points": [
+        "For Max-Cut (no hard constraints), inference is direct from predictions.",
+        "For problems with hard constraints (e.g., MIS), a heuristic local search method is required to find feasible solutions.",
+        "A 2-improvement local search algorithm is adopted, which iteratively swaps a single 1-labeled node for two 1-labeled nodes.",
+        "The local search finds valid improvements in O(|E|) time and is run for a fixed number of steps.",
+        "This step is crucial for evaluating the final performance of the overall framework on constrained CO problems."
+    ],
+    "technical_details": {
+        "algorithms": ["2-improvement local search algorithm (from citations [49,50])"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Understanding of the CO problem types being solved (Max-Cut, MIS)", "Knowledge of the model's prediction outputs from Section 3.4"],
+    "reproducibility_notes": ["The specification of using a 2-improvement local search for constrained problems.", "The condition for node swaps: v_j and v_k must be neighbors of v_i, be 1-tight, and not be connected to each other (for MIS).", "The use of fixed steps for the local search."]
+}
+```

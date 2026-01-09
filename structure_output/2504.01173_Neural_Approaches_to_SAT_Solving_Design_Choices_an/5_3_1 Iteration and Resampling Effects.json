@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5.3.1 Iteration and Resampling Effects",
+    "section_purpose": "This section analyzes how increasing the number of message-passing iterations and performing multiple inference attempts with resampling affects the performance of the neural SAT solver across different benchmarks and training methodologies.",
+    "key_points": [
+        "Increasing message-passing iterations from 25 to 125 consistently improves all performance metrics across benchmarks (SAT accuracy, decision accuracy, average gap).",
+        "Multiple inference attempts with different random initializations (resampling) further enhances performance, e.g., for SR40, decision accuracy improves from 84% with one sample to 93% with five samples at 125 iterations.",
+        "The novel 'Closest' supervision method (dynamically selecting assignments closest to current model predictions) consistently outperforms training with precalculated assignments across all datasets.",
+        "For SR40, SAT-only training with closest assignment supervision achieves the highest SAT accuracy (76%), while SAT+UNSAT training with closest assignment supervision yields the lowest average gap (0.98).",
+        "Models trained on SR40 maintain reasonable effectiveness on SR100 and 3SAT100, demonstrating cross-distribution applicability, though with expected performance degradation."
+    ],
+    "technical_details": {
+        "algorithms": ["Resampling inference: multiple inference attempts with different random initializations of node feature vectors"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {"Message-passing iterations tested": "25 to 125", "Resampling samples tested": "1 to 5", "Hidden dimension impact": "Referenced in Appendix A.1.4"},
+        "datasets": ["SR40", "SR100", "3SAT100"]
+    },
+    "dependencies": ["Section 4.2 Architecture Variants (for VCG+RNN model description)", "Section 4.3 Supervision Tasks and Objectives (for understanding 'Closest' vs 'Precalculated' assignments)", "Section 5.1 Training and Evaluation Methodology (for evaluation metrics definitions)", "Figures 2, 3, and 4 referenced but not reproduced in text"],
+    "reproducibility_notes": ["Need to implement multiple inference attempts with random initialization (resampling)", "Need to test different numbers of message-passing iterations (25-125 range)", "Must implement 'Closest' supervision method for training", "Performance metrics to track: Avg. Gap, Gap on SAT, Gap on UNSAT, SAT Accuracy, Decision Accuracy"]
+}
+```

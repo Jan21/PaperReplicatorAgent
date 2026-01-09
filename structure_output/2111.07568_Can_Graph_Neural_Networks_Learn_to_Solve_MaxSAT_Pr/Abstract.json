@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "Abstract",
+    "section_purpose": "To provide a high-level overview of the paper's research problem, approach, and contributions regarding using Graph Neural Networks (GNNs) to solve the MaxSAT problem.",
+    "key_points": [
+        "Recent work applies GNNs to NP-hard problems like SAT, bridging machine learning and symbolic reasoning, but predicted solution quality is under-investigated.",
+        "This paper studies GNNs' capability to solve MaxSAT from both theoretical and practical perspectives.",
+        "Two GNN models are built and trained on MaxSAT benchmarks, with experimental evaluation showing attractive potential.",
+        "It provides the first theoretical explanation, based on algorithmic alignment theory, for why GNNs can learn to solve MaxSAT to some extent."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["MaxSAT instances from benchmarks (unspecified)"]
+    },
+    "dependencies": [],
+    "reproducibility_notes": []
+}
+```

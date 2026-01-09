@@ -1,0 +1,27 @@
+```json
+{
+    "section_title": "Implementation Details",
+    "section_purpose": "This section describes the practical setup for implementing and training the proposed GNN models (MS-NSFG and MS-ESFG) to solve MaxSAT problems.",
+    "key_points": [
+        "The models are implemented in Python and trained using the Adam optimizer.",
+        "Experiments are conducted on specific hardware (Intel Core i7-8700 CPU and NVIDIA Tesla V100 GPU).",
+        "Key hyperparameters for reproducibility include embedding dimension, learning rate, weight decay, number of GNN layers, and batch size.",
+        "The batch processing is defined by the number of nodes per batch rather than the number of instances."
+    ],
+    "technical_details": {
+        "algorithms": ["Adam optimizer"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "embedding_dimension_d": "128",
+            "learning_rate": "2e-5",
+            "weight_decay": "1e-10",
+            "number_of_GNN_layers_T": "20",
+            "batch_size_nodes": "20000"
+        },
+        "datasets": []
+    },
+    "dependencies": ["GNN Models for MaxSAT section (to understand MS-NSFG and MS-ESFG)"],
+    "reproducibility_notes": ["Programming language: Python", "Optimizer: Adam", "Hardware specs: Intel Core i7-8700 CPU and NVIDIA Tesla V100 GPU", "Hyperparameter settings: d=128, learning rate=2e-5, weight decay=1e-10, T=20, batch size=20K nodes"]
+}
+```

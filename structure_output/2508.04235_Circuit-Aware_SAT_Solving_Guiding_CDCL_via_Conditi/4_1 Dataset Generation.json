@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.1 Dataset Generation",
+    "section_purpose": "To describe how training data is generated for the conditional probability prediction task, specifically how influence areas are defined within circuits and what circuits are used.",
+    "key_points": [
+        "The 'influence area' of a node C is defined as a local subregion affected when conditioning on C.",
+        "The influence area is constructed in three steps: identify fanin cone, find a suitable ancestor node P, then collect nodes in P's fanout cone bounded by depth.",
+        "A dataset of 10,824 AIGs from three public benchmark suites (ITC99, EPFL, OpenCore) is used, with circuits ranging from 36 to 3,214 gates.",
+        "To provide explicit conditional information to the model, 'and' and 'div' gates are inserted within each node's influence area.",
+        "For supervision, 20,000 random simulations per circuit are conducted to record full truth assignments."
+    ],
+    "technical_details": {
+        "algorithms": ["Three-step algorithm for constructing the influence area of a node: 1) identify fanin cone of C, 2) locate ancestor node P with multiple fanouts and within 10 logic levels of C, 3) collect nodes in P's fanout cone bounded to depth of 10 logic levels"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {"logic_level_bound": "10", "random_simulations_per_circuit": "20000"},
+        "datasets": ["10,824 AIGs from ITC99, EPFL, and OpenCore benchmark suites. Circuit sizes: 36 to 3,214 gates."]
+    },
+    "dependencies": ["Understanding of circuit graph structure (nodes, gates, fanin/fanout cones, logic levels)", "Concept of 'conditional probability' from Section 3"],
+    "reproducibility_notes": ["The three-step algorithm for defining the 'influence area'", "The source and size of the circuit dataset (10,824 AIGs from ITC99, EPFL, OpenCore)", "The need to insert 'and' and 'div' gates within influence areas", "The method for generating supervision labels: 20,000 random simulations per circuit to record truth assignments"]
+}
+```

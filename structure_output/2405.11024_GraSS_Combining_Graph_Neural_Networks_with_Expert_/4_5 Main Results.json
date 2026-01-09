@@ -1,0 +1,26 @@
+{
+  "section_title": "4.5 Main Results",
+  "section_purpose": "To present and analyze the key experimental results comparing the GraSS method with competing approaches on LEC and SAT datasets, focusing on performance metrics, error robustness, and feature computation times.",
+  "key_points": [
+    "GraSS outperforms baselines in average runtime and percentage of problems solved within a 500s cutoff.",
+    "GraSS exhibits improved robustness to selection errors, with lower runtime penalties when mistakes are made.",
+    "The cost of wrong predictions is substantially lower for GraSS compared to competitors, especially on the SC dataset.",
+    "GraSS performs better on hard instances, while SATzilla12 excels on easy instances.",
+    "Feature computation time for GraSS is competitive, with faster times on the LEC dataset compared to some baselines."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["Logic Equivalence Checking (LEC) dataset", "SAT Competition (SAT) dataset", "500s cutoff time for solving"]
+  },
+  "dependencies": ["Section 4.2 Datasets", "Section 4.3 Baselines", "Section 3 APPROACH", "Subsection 4.4 Metrics"],
+  "reproducibility_notes": [
+    "Datasets: LEC and SAT Competition datasets.",
+    "Cutoff time: 500 seconds for solver runtime.",
+    "Metrics: average runtime, percentage solved, cost of wrong predictions (runtime difference between predicted and optimal solver).",
+    "Feature computation times as reported in Table 4, using .cnf file format.",
+    "Instance difficulty grouping based on runtime quartiles (0-25%, 25-50%, 50-75%, 75-100%)."
+  ]
+}

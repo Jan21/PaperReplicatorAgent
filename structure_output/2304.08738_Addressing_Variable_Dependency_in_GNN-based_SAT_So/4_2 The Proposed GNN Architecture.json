@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2 The Proposed GNN Architecture",
+    "section_purpose": "This section describes the proposed GNN architecture called AsymSAT, which learns to map circuit graphs to Boolean assignments on input nodes while addressing variable dependency through sequential prediction.",
+    "key_points": [
+        "The architecture consists of graph embedding layers for message passing and SAT assignment decoding layers for sequential variable assignment prediction.",
+        "Graph embedding uses DAG-RNN framework with directional message passing (forward passes from inputs to output, backward passes from output to inputs) following topological order.",
+        "Two types of GRUs (GRU_f for forward passes and GRU_b for backward passes) handle hidden state updates, with a separate GRU_init for the initial forward pass using node type vectors.",
+        "SAT assignment decoding uses a bidirectional recurrent neural network to generate sequential predictions, making variable assignments dependent on other nodes' predictions to handle symmetry.",
+        "The sequential prediction approach mimics classic SAT solvers and addresses variable dependency that concurrent prediction methods cannot handle."
+    ],
+    "technical_details": {
+        "algorithms": ["DAG-RNN message passing framework", "Topological order message passing in directed acyclic graphs", "Bidirectional RNN for sequential variable assignment"],
+        "formulas": ["x_v^{(k+1)} = GRU(p_v, A({m_n^{(k)} | n ∈ N(v)})) - Update rule for hidden state vectors where p_v is either node type vector or previous hidden state, A is permutation-invariant aggregator", "Message encoding function M: x_n^{(k)} → m_n^{(k)} where M is a learnable function"],
+        "architectures": ["Three separate GRUs: GRU_init (first forward pass), GRU_f (remaining forward passes), GRU_b (backward passes)", "Bidirectional RNN (R layer) for sequential prediction with subsequent MLP as direction selector", "Graph embedding layers followed by SAT assignment decoding layers"],
+        "hyperparameters": {"d": "dimensional hidden state vector", "GRU types": "Three separate GRU functions", "message passing direction": "Forward (predecessors only) and backward (successors only) passes"},
+        "datasets": []
+    },
+    "dependencies": ["Section 3 (Variable Dependency in SAT Solving) for motivation about symmetric nodes and variable dependency", "Section 2.3 (Solving Circuit-SAT Problems by Graph Neural Networks) for background on GNN-based SAT solving", "Figure 1 for circuit representations", "Equation 1 referenced in text"],
+    "reproducibility_notes": ["Message passing follows topological order with forward passes from input to output and backward passes from output to input", "Three separate GRU functions with specific initialization (GRU_init) and directional usage", "Hidden state update rule using aggregator function A and message encoding function M", "Bidirectional RNN structure for sequential variable assignment", "Use of node type vectors as initial input to the network"]
+}
+```

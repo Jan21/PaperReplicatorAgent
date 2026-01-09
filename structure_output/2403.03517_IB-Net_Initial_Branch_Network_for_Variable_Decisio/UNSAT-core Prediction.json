@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "UNSAT-core Prediction",
+  "section_purpose": "This section presents and analyzes the experimental results of IB-Net's performance on the UNSAT-core prediction task, comparing it against other methodologies and discussing its effectiveness across different dataset characteristics.",
+  "key_points": [
+    "IB-Net outperforms other methodologies on the UNSAT-core prediction task across both the LEC and SAT Competition datasets.",
+    "IB-Net demonstrates strong F1 scores on the LEC dataset, indicating accurate identification of variables both inside and outside the UNSAT-core.",
+    "Other approaches perform reasonably on the SAT Competition dataset but significantly lag behind IB-Net on the LEC dataset, suggesting they struggle with the imbalance nature of the LEC dataset.",
+    "The UNSAT-core variable distribution differs greatly between datasets: over 90% of variables are in the UNSAT-core for LEC problems, while only around 40% are in the UNSAT-core for SAT Competition UNSAT problems.",
+    "IB-Net is shown to be an efficient and potent model for UNSAT-core prediction, effective on both balanced and imbalanced datasets."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["LEC dataset", "SAT Competition dataset"]
+  },
+  "dependencies": ["Section 4 (Experimental Settings) for dataset descriptions and evaluation setup", "Section 3 (IB-Net approach) for understanding the model being evaluated", "Section 5.1 (Main Results) for broader context of experimental findings"],
+  "reproducibility_notes": ["Table 3 contains the performance comparison data (though not reproduced in this section)", "Figure 3 shows the percentage of UNSAT-core variables in samples with different variable sizes for both datasets", "Need the exact F1 scores and other metrics from Table 3 to fully reproduce the comparison", "Need to understand the 'other methodologies' being compared against"]
+}
+```

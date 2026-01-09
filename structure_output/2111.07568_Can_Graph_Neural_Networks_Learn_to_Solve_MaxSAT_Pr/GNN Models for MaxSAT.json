@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "GNN Models for MaxSAT",
+    "section_purpose": "This section introduces and formalizes two specific Graph Neural Network (GNN) architectures designed for solving MaxSAT problems, building upon prior work for SAT problems, and describes the training objective.",
+    "key_points": [
+        "Presents two common factor graph representations for CNF formulas used in GNN-based SAT solvers: Node-Splitting Factor Graph (NSFG) and Edge-Splitting Factor Graph (ESFG).",
+        "Describes the message-passing process for each graph type, formalized as layer-wise update equations that aggregate and update embeddings for clause and literal nodes.",
+        "For NSFG, the update process maintains consistency between positive and negative literals of the same variable via a shared update function.",
+        "For ESFG, the process distinguishes between positive and negative literal-clause edges, using separate aggregation functions for each edge type.",
+        "The models use a binary classifier on variable embeddings to predict assignments and are trained using Binary Cross Entropy (BCE) loss, averaged over all variables per instance."
+    ],
+    "technical_details": {
+        "algorithms": ["Message-passing GNN tailored for bipartite factor graphs representing CNF formulas"],
+        "formulas": ["NSFG layer update equations: C_j^(k) = UPD_C(C_j^(k-1), AGG_L(L_i^(k-1)|(i,j) in E)); (L_i^(k), ~L_i^(k)) = UPD_L(L_i^(k-1), ~L_i^(k-1), AGG_C(C_j^(k-1)|(i,j) in E))", "ESFG layer update equations: C_j^(k) = UPD_C(C_j^(k-1), AGG_L^+(L_i^(k-1)|(i,j) in E^+), AGG_L^-(L_i^(k-1)|(i,j) in E^-)); L_i^(k) = UPD_L(L_i^(k-1), AGG_C^+(C_j^(k-1)|(i,j) in E^+), AGG_C^-(C_j^(k-1)|(i,j) in E^-))", "Binary Cross Entropy (BCE) loss function: BCE(y,p) = -(y log(p) + (1-y) log(1-p))"],
+        "architectures": ["Node-Splitting Factor Graph (NSFG) GNN: Splits variable literals (x_i, ¬x_i) into separate nodes", "Edge-Splitting Factor Graph (ESFG) GNN: Uses two edge types (E+, E-) to connect clauses with positive and negative literals separately"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 1 (Introduction) for context on prior SAT-solving GNN work", "Figure 2 for visual example of NSFG and ESFG representations", "Section 5 (Experimental Evaluation) for performance investigation"],
+    "reproducibility_notes": ["Specific factor graph construction rules (NSFG vs. ESFG)", "Formal definitions of the update (UPD) and aggregate (AGG) functions used in the GNN layers", "Implementation details of the binary classifier mapping variable embeddings to assignments", "Use of BCE loss averaged per problem instance"]
+}
+```

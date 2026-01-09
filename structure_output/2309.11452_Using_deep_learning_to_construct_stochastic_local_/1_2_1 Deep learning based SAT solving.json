@@ -1,0 +1,25 @@
+```json
+{
+  "section_title": "1.2.1 Deep learning based SAT solving",
+  "section_purpose": "To survey and position existing deep learning approaches for SAT solving, specifically focusing on stochastic local search (SLS) methods and highlighting how they differ from the oracle-based approach proposed in this paper.",
+  "key_points": [
+    "Existing literature includes GNNs used to generate initial candidates for SLS solvers, but not as oracles during solver execution.",
+    "Other work uses GNNs to learn variable selection heuristics within WalkSAT-type solvers, but these are policy-based and not oracles as defined in this paper.",
+    "The cross-entropy loss with respect to a Gibbs distribution used in this paper is also employed in a different context (Mixed Integer Program solving).",
+    "The key distinction is that prior work does not use learned models as oracles within SLS algorithms with performance guarantees."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Basic understanding of SAT problem and Stochastic Local Search (SLS) algorithms",
+    "Concept of 'oracle' as defined in Section 2.2",
+    "Reference to related papers [3], [10], [11], [17]"
+  ],
+  "reproducibility_notes": []
+}
+```

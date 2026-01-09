@@ -1,0 +1,25 @@
+```json
+{
+    "section_title": "S.7 Results for Different Numbers of Decimation Steps",
+    "section_purpose": "This section analyzes the impact of repeating the decimation process multiple times on SAT problem-solving performance, reporting results from a multi-pass decimation procedure.",
+    "key_points": [
+        "Repeating the decimation process more than twice did not yield further improvement on the test sets.",
+        "The first pass of decimation solves the majority of problems, with diminishing returns in subsequent passes.",
+        "The hyperparameters (16 random initialization samples per formula in first pass, 1 in subsequent passes) and decimation threshold were not optimized, suggesting potential for improvement.",
+        "Different problem types (SR(40), Latin Squares, Logical Circuits, Sudoku) show varying patterns of improvement across decimation passes.",
+        "The results are presented quantitatively in Table 2, showing the number and percentage of SAT problems solved after each decimation pass."
+    ],
+    "technical_details": {
+        "algorithms": ["Multi-pass decimation procedure"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "first_pass_samples": "16 random initialization samples per formula",
+            "subsequent_pass_samples": "1 random initialization sample per formula"
+        },
+        "datasets": ["SR(40) (5000 problems)", "Latin Squares 9x9 (200 problems)", "Latin Squares 8x8 (200 problems)", "Logical Circuits (344 problems)", "Sudoku 9x9 (200 problems)"]
+    },
+    "dependencies": ["Section 4: Sampling and Decimation (for understanding the decimation process)", "Section 5: Experiments (for context on experimental setup and Table 1)", "Table 1 results (for comparison)"],
+    "reproducibility_notes": ["Number of decimation passes tested (up to 3)", "Samples per formula configuration (16 for first pass, 1 for subsequent passes)", "Decimation threshold used (not optimized)", "Test datasets and their sizes (as listed in Table 2)"]
+}
+```

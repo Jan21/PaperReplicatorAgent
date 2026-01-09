@@ -1,0 +1,20 @@
+{
+  "section_title": "Queue & Score Based Branching",
+  "section_purpose": "To describe the novel methodology for integrating neural network predictions into the CDCL solver's branching process, using predicted probabilities to initialize decision scores and queues.",
+  "key_points": [
+    "The trained network infers probabilities for each variable being in the UNSAT-core before solving.",
+    "These probabilities initialize the solver's decision scores and are used to rank variables into a descending queue for branching decisions.",
+    "This approach allows the solver to prioritize variables highly related to unsatisfiability early.",
+    "The inference is performed only once per problem, adding minimal computational overhead (<1.5 seconds including preprocessing).",
+    "The method maintains solver completeness while enhancing efficiency and speed, and runs efficiently on CPUs."
+  ],
+  "technical_details": {
+    "algorithms": ["Queue and score-based branching for CDCL solver, initialized by neural network predictions"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 3 (IB-Net approach), particularly sections on neural network model and interaction with solver", "General understanding of CDCL workflow"],
+  "reproducibility_notes": ["Process of converting network output probabilities into initial decision scores and a decision queue for the solver", "Total pipeline runtime constraint (<1.5 seconds)", "Capability to run inference on CPU"]
+}

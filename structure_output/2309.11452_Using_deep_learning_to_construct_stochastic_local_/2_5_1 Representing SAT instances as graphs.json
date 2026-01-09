@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "2.5.1 Representing SAT instances as graphs",
+  "section_purpose": "To describe the LCG (Literal-Clause Graph) representation used to convert SAT instances into graphs for processing by Graph Neural Networks.",
+  "key_points": [
+    "SAT instances must be represented as graphs to be processed by GNNs, and the LCG representation is a common choice.",
+    "The LCG is a directed tripartite graph with nodes for clauses (N_C), positive literals (N_V+), and negative literals (N_V-).",
+    "Initial node embeddings are one-hot encodings indicating which of the three sets (clause, positive literal, negative literal) a node belongs to.",
+    "Edges are of two groups: (1) connections between positive and negative literal nodes for the same variable, and (2) connections between clause nodes and literal nodes based on variable occurrences in the clause.",
+    "Initial edge embeddings are one-hot encodings indicating which of the two edge groups an edge belongs to."
+  ],
+  "technical_details": {
+    "algorithms": ["Process for constructing the LCG graph from a CNF formula"],
+    "formulas": [],
+    "architectures": ["Directed tripartite graph with node sets N_C (clauses), N_V+ (positive literals), N_V- (negative literals); edge groups: literal-literal connections and clause-literal connections"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2.1 (SAT definitions and CNF form)", "Section 2.5 (Graph Neural Networks as oracle factories)"],
+  "reproducibility_notes": ["Exact graph construction: tripartite node sets, edge connections based on clause-variable relationships, and initial one-hot embeddings for nodes and edges."]
+}
+```

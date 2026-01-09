@@ -1,0 +1,26 @@
+```json
+{
+    "section_title": "3.2.2. CROSS-ATTENTION MECHANISM",
+    "section_purpose": "To describe the cross-attention mechanism designed to capture critical logical relationships (mutual exclusivity, dependency) between complementary positive and negative literal nodes in the hypergraph neural network for solving Weighted MaxSAT problems.",
+    "key_points": [
+        "The core problem involves modeling logical constraints, specifically the strong correlation and mutual exclusivity between positive and negative literal nodes (e.g., x and ¬x).",
+        "A cross-attention mechanism is introduced to dynamically assign importance weights to relationships between complementary literal pairs, adaptively capturing logical properties and enabling information exchange.",
+        "The mechanism is applied after the hypergraph convolution layer, using separate learnable projection matrices for positive and negative literal nodes to generate Query, Key, and Value representations.",
+        "The final architecture integrates this cross-attention layer with a LayerNorm, a parallel Feed-Forward Network (FFN), and residual connections, inspired by Vision Transformer design, to stabilize and enhance representations.",
+        "The network output is processed through a softmax layer to produce soft node assignments interpreted as class probabilities, specifically the probability of assigning a variable to a truth value."
+    ],
+    "technical_details": {
+        "algorithms": ["Cross-attention mechanism applied between positive and negative literal node representations", "Transformer module combining cross-attention layer, Feed-Forward Network (FFN), LayerNorm, and residual connections"],
+        "formulas": ["Equation (4): L_+^(l+1) = softmax(Q_+^(l+1) (K_+^(l+1))^T / sqrt(d_(l+1))) V_-^(l+1); L_-^(l+1) = softmax(Q_-^(l+1) (K_+^(l+1))^T / sqrt(d_(l+1))) V_+^(l+1)", "Equation (5): Projections Q, K, V defined using learnable weight matrices W_Q, W_K, W_V for positive nodes and tilde versions for negative nodes applied to literal representations L_+' and L_-'", "Final output: Y = hat{L}_{-1} (first column of softmax output hat{L}) representing probability of variable assignment"],
+        "architectures": ["Transformer module inspired by Vision Transformer (ViT-22B): includes LayerNorm, parallel cross-attention and FFN layers with residual connections, followed by another LayerNorm", "Final softmax layer reshapes iterated L^(T)' from R^(2n x 1) to R^(n x 2) before applying softmax"],
+        "hyperparameters": {
+            "d_(l+1)": "Dimension of node representations at layer l+1 (used in attention scaling)",
+            "n": "Number of variables (implied by representation dimensions R^(n x d))",
+            "T": "Total number of layers (final layer index)"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 3.2.1 (Hypergraph Convolutional Networks) for the output L^(l+1) that serves as input", "Section 3.1 (Hypergraph Modeling) for understanding the representation of literals as nodes", "Section 2.2 (Hypergraph Neural Networks) for background on hypergraph representations"],
+    "reproducibility_notes": ["Precise mathematical formulation of cross-attention (Equations 4 and 5)", "Architecture details: integration of cross-attention with LayerNorm, FFN, and residual connections", "Definition of learnable projection matrices (W_Q, W_K, W_V and their tilde counterparts)", "Post-processing steps: reshaping final layer output and applying softmax to get assignment probabilities Y"]
+}
+```

@@ -1,0 +1,35 @@
+```json
+{
+    "section_title": "C.2 Satisfiability Prediction",
+    "section_purpose": "To present and analyze the experimental results of GNN models on the satisfiability prediction task, focusing on performance across different problem difficulty levels and varying message-passing iteration counts.",
+    "key_points": [
+        "Both NeuroSAT and GGNN models show limited generalization to SAT instances larger than those seen in training, but perform relatively better on smaller instances.",
+        "Training on more challenging instances could potentially improve model generalization and performance on larger instances.",
+        "Using a training iteration value of 32 for message passing consistently yielded the best performance for both models.",
+        "Training with too small or too large iteration values degraded performance.",
+        "Models trained with 32 iterations demonstrated good generalization to testing with different iteration counts (16 and 64), highlighting the importance of selecting appropriate message-passing iterations."
+    ],
+    "technical_details": {
+        "algorithms": ["Evaluation of GNN models (NeuroSAT and GGNN) on satisfiability prediction"],
+        "formulas": [],
+        "architectures": ["NeuroSAT", "GGNN"],
+        "hyperparameters": {
+            "message_passing_iterations_tested": "Varied (too small, 16, 32, 64, too large)",
+            "optimal_training_iterations": "32"
+        },
+        "datasets": ["SR dataset", "3-SAT dataset"]
+    },
+    "dependencies": [
+        "Understanding of GNN models NeuroSAT and GGNN (from Section 4.2 or Appendix B)",
+        "Knowledge of the satisfiability prediction task (from Section 5.1)",
+        "Familiarity with the SR and 3-SAT datasets (from Section 4.1 or Appendix A)",
+        "Reference to Figures 6 and 7 for complete results"
+    ],
+    "reproducibility_notes": [
+        "Optimal message-passing iteration count for training (32 iterations)",
+        "Observation that models generalize better to similar or smaller instance sizes than training data",
+        "Need to test generalization across different iteration counts during evaluation (16, 64)",
+        "Importance of training data difficulty matching target test instance sizes"
+    ]
+}
+```

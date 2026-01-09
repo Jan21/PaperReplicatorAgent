@@ -1,0 +1,20 @@
+{
+  "section_title": "Supervised Comparison with March",
+  "section_purpose": "To compare the performance of RLAF-trained guidance policies with supervised approaches (backbone and UNSAT core predictions) when applied to the March base solver across different problem distributions.",
+  "key_points": [
+    "On satisfiable 3SAT problems, RLAF-trained policy and backbone-based guidance perform similarly with the March base solver.",
+    "Backbone-based guidance increases runtime by approximately 10% on unsatisfiable 3SAT problems, rendering it ineffective for this instance type.",
+    "RLAF-based policy does not suffer from the same performance drop on unsatisfiable 3SAT problems, maintaining efficiency.",
+    "RLAF outperforms UNSAT core prediction guidance on 3COL and CRYPTO distributions, consistent with results using the Glucose base solver.",
+    "The comparison is illustrated in Figure 7, which shows relative runtimes including the GNN forward pass overhead."
+  ],
+  "technical_details": {
+    "algorithms": ["RLAF-based guidance policy", "backbone prediction guidance", "UNSAT core prediction guidance"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["3SAT (satisfiable and unsatisfiable variants)", "3COL distribution", "CRYPTO distribution"]
+  },
+  "dependencies": ["Section 3.2 for details on supervised baselines", "Figure 7 for runtime comparison data", "Earlier sections for RLAF methodology and solver descriptions"],
+  "reproducibility_notes": ["Relative runtime measurements compared to the base solver March", "Inclusion of GNN forward pass time in total runtime calculations"]
+}

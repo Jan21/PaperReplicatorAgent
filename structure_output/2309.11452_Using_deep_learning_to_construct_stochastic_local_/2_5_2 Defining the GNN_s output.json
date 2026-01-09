@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "2.5.2 Defining the GNN's output",
+    "section_purpose": "This section defines how to transform the output features from a Graph Neural Network (GNN), specifically an Interaction Network (IN), into the specific outputs required for the stochastic local search framework: an oracle distribution over variable assignments and a functional used in the loss calculation.",
+    "key_points": [
+        "The GNN output features are one-dimensional per node after the final layer, with separate output vectors for clause nodes, positive literal nodes, and negative literal nodes.",
+        "The oracle F_θ(φ) is defined as a probability distribution over variable assignments, where each variable's value is sampled independently via a Bernoulli trial.",
+        "The Bernoulli success probability ~w_i for each variable i is calculated from the GNN's output features for the corresponding positive and negative literal nodes.",
+        "The functional μ_θ[φ], used to evaluate the loss, is defined per clause j based on a sigmoid transformation of the clause node's output feature."
+    ],
+    "technical_details": {
+        "algorithms": ["Definition of the output oracle F_θ(φ) as a product of independent Bernoulli distributions for variable assignment generation."],
+        "formulas": [
+            "Oracle probability measure: P_Fθ(φ)(x) = Π_i ( ~w_i^(x_i) * (1 - ~w_i)^(1 - x_i) )",
+            "Variable assignment probability: ~w_i = n_i^+ / (n_i^+ + n_i^-), where n_i^+, n_i^- are the GNN output features for positive and negative literal nodes for variable i.",
+            "Functional definition: μ_θ[φ](j) = ~w_j / (1 - ~w_j)",
+            "Clause node transformation: ~w_j = sigmoid( n_j^C ), where n_j^C is the GNN output feature for clause node j."
+        ],
+        "architectures": ["The GNN is an Interaction Network (IN), referenced as 'IN_θ(φ)', whose output features are processed here."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.5.1 (Representing SAT instances as graphs) for understanding the LCG representation and the node sets N_V^+, N_V^-, and clause nodes.",
+        "Section 2.4 (Learning oracle factories with the LLL loss) for context on the required outputs F_θ(φ) and μ_θ(φ) to evaluate loss (12).",
+        "Algorithm 3 (A single IN layer) for the underlying GNN architecture."
+    ],
+    "reproducibility_notes": [
+        "The exact method for calculating the oracle distribution from GNN output features: using output vectors n^C (clauses), n^+ (positive literals), n^- (negative literals).",
+        "The formula for computing variable assignment probabilities ~w_i from literal node features.",
+        "The use of the sigmoid function to transform clause node features before computing the functional μ_θ[φ]."
+    ]
+}
+```

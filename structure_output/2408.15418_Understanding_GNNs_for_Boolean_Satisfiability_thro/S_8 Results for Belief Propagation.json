@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "S.8 Results for Belief Propagation",
+    "section_purpose": "This section presents a comparative evaluation of the NeuroSAT model (without resampling and decimation) against the Belief Propagation algorithm on the same set of SAT problems used in the main paper.",
+    "key_points": [
+        "NeuroSAT significantly outperforms Belief Propagation across all SAT problem types tested.",
+        "The performance gap is particularly large on Logical Circuits, where Belief Propagation achieves near-zero accuracy (0.5%) compared to NeuroSAT (85.2%).",
+        "Belief Propagation's performance varies across problem types, with the highest accuracy (42.34%) on SR(40) problems and the lowest on Logical Circuits.",
+        "The results are from a single run of Belief Propagation with a maximum of 1000 iterations.",
+        "The NeuroSAT results are directly copied from Table 1 in the main paper and represent performance without resampling and decimation."
+    ],
+    "technical_details": {
+        "algorithms": ["Belief Propagation algorithm for Boolean Satisfiability, run for a maximum of 1000 iterations."],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {"max_iterations": 1000},
+        "datasets": ["SR(40) - 5000 problems", "Latin Squares 9x9 - 200 problems", "Latin Squares 8x8 - 200 problems", "Logical Circuits - 344 problems", "Sudoku 9x9 - 200 problems"]
+    },
+    "dependencies": ["Table 1 from the main paper (for NeuroSAT baseline results)", "Background on Belief Propagation algorithm (Section 2.2)", "NeuroSAT architecture details (Section S.2)", "Dataset descriptions (Section S.3 or 5.1)"],
+    "reproducibility_notes": ["Maximum iteration limit for Belief Propagation (1000)", "Exact problem counts for each dataset type", "The specific version of NeuroSAT used (without resampling/decimation)", "The fact that Belief Propagation was run once per problem (no resampling)"]
+}
+```

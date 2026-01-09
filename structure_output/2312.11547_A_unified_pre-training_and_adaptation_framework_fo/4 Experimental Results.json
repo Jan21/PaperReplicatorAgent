@@ -1,0 +1,26 @@
+{
+  "section_title": "4 Experimental Results",
+  "section_purpose": "To evaluate the effectiveness of the proposed framework for solving combinatorial optimization problems (Max-Cut, MIS, MDS) through experiments aimed at answering three key questions regarding transferability, incorporation of Max-SAT, and the impact of pre-training and domain adaptation strategies.",
+  "key_points": [
+    "Q1: Investigates whether Max-SAT can be leveraged to learn transferable and generalizable features for solving different CO problems on graphs.",
+    "Q2: Explores how to incorporate Max-SAT into GNN-based learning frameworks to fully utilize its information.",
+    "Q3: Examines whether different pre-training and domain adaptation strategies affect the ability to solve CO problems."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "Algorithm 2: Pre-training process using a bipartite graph from Max-SAT, involving MLP initialization, feature extraction via Bip-GNN layers, prediction mapping with FC, and loss computation.",
+      "Algorithm 3: Fine-tuning based on domain adaptation, handling source and target domains separately, using a discriminator (Dis) for domain labels, and computing a combined loss."
+    ],
+    "formulas": [
+      "Equations referenced: Eqs. (3.10) and (3.11) for clause-wise aggregation, Eqs. (3.12) and (3.13) for variable-wise aggregation, Eq. (3.14) for pre-training loss, Eq. (3.15) for fine-tuning loss."
+    ],
+    "architectures": ["MLP (Multi-Layer Perceptron) for initial node feature transformation", "Bip-GNN (Bipartite Graph Neural Network) for feature extraction", "FC (Fully Connected layer) for mapping to predictions", "Dis (Discriminator) for domain adaptation in fine-tuning"],
+    "hyperparameters": {
+      "L": "Number of pre-training or fine-tuning layers",
+      "iters": "Number of iterations"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 3 Methodology (specifically 3.2 to 3.4 for Max-SAT transformation and learning framework)", "Equations 3.10-3.15 from Section 3"],
+  "reproducibility_notes": ["Detailed steps in Algorithm 2 and Algorithm 3", "Specific number of layers L and iterations iters", "Loss functions as defined in Eqs. 3.14 and 3.15", "Initialization of node attributes for variables and clauses"]
+}

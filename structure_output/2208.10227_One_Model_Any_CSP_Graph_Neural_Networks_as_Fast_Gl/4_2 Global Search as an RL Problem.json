@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "4.2 Global Search as an RL Problem",
+    "section_purpose": "This section frames the global search for CSP solutions as a Reinforcement Learning problem, detailing how the policy GNN is deployed as a search heuristic, defining the reward structure, and describing the training methodology.",
+    "key_points": [
+        "ANYCSP is a global search heuristic that uses a policy GNN (π_θ) to generate a sequence of assignments (α^(0),...,α^(T)) for any CSP instance (I), starting from a random initial assignment.",
+        "The reward scheme (r^(t)) is designed to avoid local maxima by only giving positive reward equal to the margin of improvement when a new assignment has higher quality (satisfies more constraints) than all previous assignments in the sequence.",
+        "The search process is modeled as a Markov Decision Process M(I) where the state includes the current assignment and the best quality achieved so far, and the action space is the set of all possible assignments.",
+        "Training aims to maximize expected total discounted reward over a distribution of CSP instances (Ω) using the REINFORCE policy gradient algorithm, which is chosen due to its independence from action space size.",
+        "The global nature of the search allows any number of variables to change values simultaneously in each iteration, enabling modification of different parts of the solution concurrently."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "ANYCSP algorithm: Iteratively applies policy GNN π_θ to constraint value graph G(I, α^(t-1)) to generate soft assignment φ^(t), then samples next assignment α^(t) ~ φ^(t).",
+            "Training algorithm: REINFORCE (vanilla policy gradient ascent) without baseline or critic network, using a single trajectory per training instance."
+        ],
+        "formulas": [
+            "Reward formula: r^(t) = 0 if Q_I(α^(t)) ≤ q^(t); r^(t) = Q_I(α^(t)) - q^(t) if Q_I(α^(t)) > q^(t), where q^(t) = max_{t'<t} Q_I(α^(t')) tracks highest previous quality.",
+            "Training objective: θ* = arg max_θ E_{α∼π_θ(I)}[∑_{t=1}^{T_train} λ^{t-1} r^(t)] where λ is discount factor and T_train is training iterations."
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "T_train": "Number of search iterations during training (hyperparameter)",
+            "λ": "Discount factor λ ∈ (0,1] (hyperparameter)",
+            "T": "Number of search iterations during inference (input parameter)"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4.1 (Architecture) for details of the policy GNN π_θ",
+        "Section 3 (Preliminaries) for definition of CSP instances, constraint value graphs, and quality function Q_I",
+        "Appendix A for details on policy gradient computation",
+        "Appendix C for ablation study comparing reward schemes"
+    ],
+    "reproducibility_notes": [
+        "Reward function definition (Equation 3) that only rewards improvements over previous best quality.",
+        "Training objective (Equation 4) with discount factor λ and training iterations T_train.",
+        "Use of vanilla REINFORCE without baseline/critic, sampling single trajectory per instance.",
+        "State definition for MDP: s^(t) = (α^(t), q^(t)) containing current assignment and best quality achieved.",
+        "Initialization: α^(0) drawn uniformly at random, q^(0) = 0.",
+        "Action space: set of all possible assignments for the CSP instance.",
+        "Sampling method: independent parallel sampling of variable values from soft assignment φ^(t)."
+    ]
+}
+```

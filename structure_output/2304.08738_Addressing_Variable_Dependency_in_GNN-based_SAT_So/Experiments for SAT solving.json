@@ -1,0 +1,29 @@
+{
+  "section_title": "Experiments for SAT solving",
+  "section_purpose": "To present experimental comparisons of AsymSAT with other GNN-based SAT solvers (NeuroSAT and DG-DAGRNN) on various SAT problems, demonstrating AsymSAT's superior performance and data efficiency.",
+  "key_points": [
+    "AsymSAT outperforms NeuroSAT and DG-DAGRNN on SR(n) problems with over 90% solution rate averaged across SR(3) to SR(10), while NeuroSAT achieves only 60%.",
+    "AsymSAT is trained with multi-bit supervision, making it more data-efficient and faster converging than NeuroSAT's one-bit supervision, with comparable parameter counts (around 200K).",
+    "On V(n) problems, AsymSAT shows better generalization, especially on larger instances like V(15), maintaining around 50% solution rate, while NeuroSAT performs poorly.",
+    "AsymSAT maintains performance on larger SR(n) problems (e.g., SR(20) to SR(80)) as shown in Table 6, outperforming NeuroSAT.",
+    "The effectiveness is attributed to AsymSAT's use of RNNs to handle variable dependency in GNN-based SAT solving."
+  ],
+  "technical_details": {
+    "algorithms": ["AsymSAT model with bi-directional LSTM in the R layer", "NeuroSAT model", "DG-DAGRNN model"],
+    "formulas": [],
+    "architectures": ["GNN architecture with R layer using bi-directional LSTM for AsymSAT"],
+    "hyperparameters": {
+      "parameter_count": "around 200,000",
+      "training_data_size_SR": "8,000 problems",
+      "training_data_size_V": "1,200 problems",
+      "iterations": [5, 10, 15, 20]
+    },
+    "datasets": [
+      "SR(n) problems sampled uniformly from SR(U(3,8)) with n from 3 to 10, each containing about 200 AND gates for SR(10) and 600-800 for SR(40)",
+      "V(n) problems with n from 3 to 10, each containing around 1K AND gates for V(10)",
+      "Test sets: 1.5K SR(n) problems (n 3-10), 320 V(n) problems (n 3-10)"
+    ]
+  },
+  "dependencies": ["Section 4.2 on AsymSAT architecture", "Section 2.2 on GNN-based SAT solving for NeuroSAT background", "Understanding of SAT problems and variable dependency from Section 3"],
+  "reproducibility_notes": ["Dataset details for SR(n) and V(n) problems, including sampling methods and sizes", "Training data composition (mix of SR and V problems)", "Model architecture specifics (e.g., bi-directional LSTM in R layer)", "Performance metric definition (solution rate)", "Iteration settings for evaluation as per Table 5"]
+}

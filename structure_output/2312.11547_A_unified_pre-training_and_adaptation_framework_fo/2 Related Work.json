@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "2 Related Work",
+  "section_purpose": "To survey existing literature in two main areas: (1) learning methods for solving combinatorial optimization problems and (2) graph neural networks, establishing the paper's position relative to prior research.",
+  "key_points": [
+    "Categorizes learning methods for CO problems into four types: end-to-end, two-stage, unsupervised, and reinforcement learning approaches.",
+    "Highlights limitations of existing learning methods, particularly their narrow applicability to specific CO problems rather than general frameworks.",
+    "Describes different graph neural network architectures including GCNs, GATs, GraphSAGE, and Transformer-based models.",
+    "Points out that existing GNNs are primarily designed for node-level tasks rather than the edge-focused requirements of CO problems.",
+    "Establishes the paper's contribution as a unified framework bridging pre-training and adaptation for multiple CO problems."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["GCN (Graph Convolutional Networks)", "GAT (Graph Attention Networks)", "GraphSAGE", "Transformer-based models"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Introduction (Section 1) for understanding the problem statement and motivation"],
+  "reproducibility_notes": []
+}
+```

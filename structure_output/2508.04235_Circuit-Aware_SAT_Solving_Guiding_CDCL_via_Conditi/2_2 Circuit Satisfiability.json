@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.2 Circuit Satisfiability",
+    "section_purpose": "To review existing approaches to the Circuit Satisfiability (CSAT) problem, highlighting the limitations of current circuit-based and CNF-based solvers, and to establish the motivation for a new method that leverages circuit structure during solving.",
+    "key_points": [
+        "Circuit SAT is a variant of the Boolean Satisfiability Problem that seeks an input assignment making a Boolean circuit's output true.",
+        "Existing circuit-based solvers (like NIMO, Qute-SAT) operate directly on circuits but offer basic functionality and underperform compared to state-of-the-art CNF solvers on large benchmarks.",
+        "The standard workflow for CSAT is to translate circuits into CNF for processing by high-performance solvers (e.g., Kissat, CaDiCal), but this translation disrupts circuit structure and creates solver-unfriendly representations.",
+        "Prior improvements involve static pre-processing techniques (EDA-driven optimization, XOR extraction) to reformat problems, but these do not influence solving heuristics or the dynamic inprocessing phase.",
+        "A key limitation is that the rich structural intelligence of circuits remains untapped during the critical inprocessing phase where search decisions are dynamically adjusted."
+    ],
+    "technical_details": {
+        "algorithms": ["Circuit-level Boolean constraint propagation (NIMO)", "Conflict-driven learning optimized for circuit topologies (Qute-SAT)", "EDA-driven circuit optimization techniques", "XOR logic extraction from raw circuits"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["General understanding of SAT and NP-complete problems from Section 1 or 3.1", "Knowledge of CNF (Conjunctive Normal Form) representation"],
+    "reproducibility_notes": ["References to specific solvers and techniques (NIMO, Qute-SAT, Kissat, CaDiCal, EDA-driven optimization) for baseline comparison and context."]
+}
+```

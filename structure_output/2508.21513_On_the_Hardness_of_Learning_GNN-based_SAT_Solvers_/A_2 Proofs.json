@@ -1,0 +1,36 @@
+{
+  "section_title": "A.2 Proofs",
+  "section_purpose": "This section provides formal proofs for Proposition 3.1, Proposition 3.2, and Theorem 3.1 from the main paper, which analyze the expected curvature of edges in random k-SAT graphs under different limits of the clause-to-variable ratio α.",
+  "key_points": [
+    "Proposition 3.1 shows that as α = M/N → 0, the expected values of both κ(i,j) and Ric(i,j) approach 0 for edges in the Literal-Clause Graph.",
+    "Proposition 3.2 shows that as α → ∞, the expected value of the lower bound R̲(i,j) approaches (2/k) - 2, where k is the clause length.",
+    "Theorem 3.1 establishes an upper bound for the Balanced Forman Curvature (BFC) and proves that as α → ∞, the average BFC converges to (2/k) - 2.",
+    "The proofs leverage degree distributions, properties of bipartite graphs, and sandwiching techniques to derive limits.",
+    "The curvature bounds depend on node degrees and graph topology, with simplifications due to the bipartite nature of the LCG."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [
+      "Expected literal degree limit as α → 0: lim E[d_i] = 1, derived from a Poisson-type distribution.",
+      "Lower bound for curvature: R̲(i,j) = 2/d_i + 2/d_j - 2.",
+      "Upper bound for BFC: R̄(i,j) = 2/d_i + 2/d_j - 2 + (d_i + k - 2) / (max{k-1, M-1} * max{d_i, d_j}).",
+      "Definition of BFC for bipartite graphs: Ric(i,j) = 2/d_i + 2/d_j - 2 + (γ_max(i,j))^{-1} / max{d_i, d_j} * (|#_□^i| + |#_□^j|).",
+      "Limits for curvature expectations: as α → 0, E[κ(i,j)] = E[Ric(i,j)] = 0; as α → ∞, E[Ric(i,j)] → (2/k) - 2."
+    ],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 2.1 for background on random k-SAT problems and Literal-Clause Graph representation.",
+    "Appendix A.1.2 for definitions of Balanced Forman Curvature (BFC) and related terms.",
+    "Equations 6 and 3 from the paper for degree distributions of variables and clauses.",
+    "Proposition 3.1 and 3.2 from Section 3 for statements being proved."
+  ],
+  "reproducibility_notes": [
+    "Need the exact forms of degree distributions (Equations 6 and 3) to compute expected degrees.",
+    "Require definitions of curvature bounds (lower bound R̲ and upper bound R̄) and BFC from Appendix A.1.2.",
+    "Understanding of limit operations, expected value linearity, and sandwiching techniques for convergence proofs.",
+    "Parameters: k (clause length), N (number of variables), M (number of clauses), α = M/N."
+  ]
+}

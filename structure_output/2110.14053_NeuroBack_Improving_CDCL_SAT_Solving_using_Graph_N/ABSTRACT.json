@@ -1,0 +1,20 @@
+{
+  "section_title": "ABSTRACT",
+  "section_purpose": "The abstract summarizes the paper's main contributions: introducing NeuroBack, a practical GNN-enhanced CDCL SAT solver that uses offline inference, and presenting DataBack, a dataset for training it, along with performance improvements.",
+  "key_points": [
+    "SAT is NP-complete and important in many fields, with modern solvers based on CDCL.",
+    "Prior GNN enhancements for CDCL solvers have been ineffective or required heavy GPU resources.",
+    "NeuroBack introduces two insights: predicting variable phases common in satisfying assignments is key, and a single offline model query suffices.",
+    "NeuroBack removes GPU reliance by using offline inference on CPU, is trained on the new DataBack dataset (120,286 samples), and enhances Kissat.",
+    "NeuroBack improved Kissat, solving 5.2% and 7.4% more problems on SATCOMP-2022 and SATCOMP-2023 sets, demonstrating practical ML-enhanced SAT solving."
+  ],
+  "technical_details": {
+    "algorithms": ["CDCL (Conflict-Driven Clause Learning) algorithm"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["DataBack dataset with 120,286 data samples"]
+  },
+  "dependencies": [],
+  "reproducibility_notes": ["Requires DataBack dataset for training, implementation as enhancement to Kissat solver, and offline model inference setup."]
+}

@@ -1,0 +1,21 @@
+```json
+{
+  "section_title": "3.3 Exploring Learned Variable Weights",
+  "section_purpose": "To analyze the weight distributions learned by RLAF, investigating the correlation between policies trained with different base solvers and whether they capture predefined variable properties like backbone and UNSAT core membership.",
+  "key_points": [
+    "Variable weights learned by policies trained with different base solvers (Glucose and March) are correlated (Pearson r between 0.73 and 0.85), indicating they capture inherent structural properties of variables.",
+    "For 3COL and CRYPTO instances, variables with high weights are predominantly members of the UNSAT core, showing RLAF self-discovers weight policies correlating with handcrafted heuristics.",
+    "For 3SAT instances, there is no clear correlation between learned weight policies and backbone membership, indicating the models learn effective functions that do not resemble this handcrafted heuristic.",
+    "The analysis is performed by plotting expected variable weights for policies from two solvers and computing Pearson correlation, with visual indication of backbone/UNSAT core membership."
+  ],
+  "technical_details": {
+    "algorithms": ["Comparison of expected variable weights from policies trained with Glucose vs. March", "Pearson correlation coefficient calculation"],
+    "formulas": ["Expected variable weight: \u2115[w(x)]", "Pearson correlation coefficient (r)"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["Validation sets from 3SAT (satisfiable instances), 3COL and CRYPTO (unsatisfiable instances)", "5000 randomly selected variables from each validation set"]
+  },
+  "dependencies": ["Understanding of RLAF (Section 2)", "Base solvers Glucose and March", "Concepts of backbone and UNSAT core (likely defined in Section 3.2 or Background)", "Figure 5 (referred to for visualization)"],
+  "reproducibility_notes": ["Learned policies from training with Glucose and March", "Validation sets for each instance distribution (3SAT, 3COL, CRYPTO)", "Method to compute expected variable weights \u2115[w(x)]", "Method to determine backbone membership for 3SAT and UNSAT core membership for 3COL and CRYPTO"]
+}
+```

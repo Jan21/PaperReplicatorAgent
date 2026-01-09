@@ -1,0 +1,20 @@
+{
+  "section_title": "3.4 Training",
+  "section_purpose": "To describe the supervised training procedure for the model, focusing on the custom regret-like loss function designed to minimize solving runtime and the use of the Adam optimizer with early stopping.",
+  "key_points": [
+    "Training is supervised on a dataset of SAT instances with pre-collected runtimes for each solver.",
+    "The model outputs a probability distribution over solvers.",
+    "A regret-like loss function is used instead of cross-entropy to directly optimize for minimizing runtime by penalizing based on additional runtime from suboptimal selections.",
+    "The loss function measures the squared difference between the expected runtime and the best possible runtime across solvers.",
+    "Optimization is performed using the Adam algorithm with early stopping to prevent overfitting."
+  ],
+  "technical_details": {
+    "algorithms": ["Adam optimization algorithm"],
+    "formulas": ["Regret-like loss: L = (1/N) * sum from i=1 to N of (sum from k=1 to K of p_i^k * t_i^k - t_i^*)^2, where p_i^k is model probability for instance i and solver k, t_i^k is runtime, and t_i^* is the minimum runtime across solvers for instance i"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 3.3 Model for understanding model architecture", "Section 3.1 Problem for problem formulation", "Citation [26] for Adam algorithm reference"],
+  "reproducibility_notes": ["Exact definition of the regret-like loss function", "Use of the Adam optimizer for minimization", "Early stopping criteria (implied but not detailed in this section)", "Access to training dataset with pre-collected runtimes for each solver on SAT instances"]
+}

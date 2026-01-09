@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.1.2 Balanced Forman curvature (BFC)",
+    "section_purpose": "To define and explain the Balanced Forman Curvature (BFC), an extension of Forman-Ricci curvature designed for graphs, which overcomes limitations of the simple Forman curvature and is used in the paper's analysis of SAT problem hardness.",
+    "key_points": [
+        "The basic Forman-Ricci Curvature (FC) for an edge (i,j) in a simple graph is defined as κ_G^f(i,j) = 4 - d_i - d_j, which ignores important higher-order structures like triangles and 4-cycles.",
+        "Balanced Forman Curvature (BFC) is an extension proposed by Topping et al. that is fast to compute and accurately encodes curvature information by incorporating triangles, 4-cycles, and other combinatorial components.",
+        "BFC is defined using three key combinatorial components: the number of triangles based at the edge (♯_Δ(i,j)), the number of 4-cycles (♯_□^i(i,j)), and the complement set Q_i(j).",
+        "The BFC formula (Equation 16) combines node degrees, triangle counts, and 4-cycle counts (including the maximal number of 4-cycles traversing a common node, γ_max) into a single curvature measure.",
+        "The curvature Ric(i,j) is set to zero if either node has degree 1; otherwise, it is computed using the provided formula, which balances contributions from 1-hop neighbors, triangles, and 4-cycles."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Forman-Ricci Curvature (FC): κ_G^f(i,j) = 4 - d_i - d_j", "Balanced Forman Curvature (BFC): Ric(i,j) = (2/d_i) + (2/d_j) - 2 + 2|♯_Δ(i,j)|/max(d_i,d_j) + |♯_Δ(i,j)|/min(d_i,d_j) + (γ_max(i,j))^(-1)/max(d_i,d_j) * (|♯_□^i| + |♯_□^j|)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.3: Ricci Curvature of Graphs", "Appendix A.1: Ricci curvature of graphs (context on Ollivier Ricci curvature to understand why BFC is needed)"],
+    "reproducibility_notes": ["The precise definition of BFC components (♯_Δ, ♯_□^i, γ_max) and the condition that Ric(i,j) = 0 if min(d_i, d_j) = 1.", "The formula for computing BFC for an edge given node degrees, triangle counts, and 4-cycle counts.", "The need for the graph to be simple and unweighted for the given definitions."]
+}
+```

@@ -1,0 +1,33 @@
+```json
+{
+    "section_title": "A.1 Ricci curvature of graphs",
+    "section_purpose": "To provide definitions and intuitive explanations of the two types of graph Ricci curvature (Ollivier and Balanced Forman) used in the paper for completeness.",
+    "key_points": [
+        "Defines two specific types of graph Ricci Curvature (RC) used in the paper: Ollivier Curvature (OC) and Balanced Forman Curvature (BFC).",
+        "Provides both mathematical definitions and intuitive explanations for each curvature type.",
+        "Notes that definitions are synthesized from two referenced works (Bhattacharya & Mukherjee [5] and Topping et al. [47]).",
+        "Directs readers to the original references for more detailed information.",
+        "Serves as an appendix reference for the curvature concepts applied in the main analysis."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "Ollivier Ricci curvature (OC) definition - involves optimal transport distance (Wasserstein distance) between probability measures on neighborhoods of adjacent vertices.",
+            "Balanced Forman curvature (BFC) definition - involves counting cycles and paths in the local neighborhood structure of an edge."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "References original works [5] and [47] for full details",
+        "Assumes basic knowledge of graph theory and curvature concepts mentioned in Section 2.3",
+        "Builds on the introduction of Ricci curvature in the main paper's background"
+    ],
+    "reproducibility_notes": [
+        "Exact mathematical definitions of Ollivier and Balanced Forman curvature are needed to compute curvature values for SAT problem graphs.",
+        "Understanding of optimal transport theory for implementing OC calculation.",
+        "Understanding of local graph structure enumeration for implementing BFC calculation."
+    ]
+}
+```

@@ -1,0 +1,19 @@
+{
+  "section_title": "2 RELATED WORK",
+  "section_purpose": "This section provides a comprehensive review of prior research relevant to the paper's main task of SAT solver selection, situating the proposed GraSS method within the existing literature.",
+  "key_points": [
+    "The section surveys existing work on SAT Solver Selection, categorizing approaches like empirical hardness models and random forest methods, but notes their limitation in generalizing to new problems due to reliance on high-level, solver-independent features.",
+    "It discusses the broader field of Algorithm Selection (AS), highlighting that successful AS systems typically consider both problem and algorithm features, with GNNs emerging as a powerful tool for learning from structured problem representations.",
+    "It reviews the application of Graph Neural Networks (GNNs) specifically in SAT solving, noting their use for predicting solver runtime or solution properties directly from CNF formula graphs, which provides a basis for the paper's approach but lacks integration with solver-specific features.",
+    "The review identifies a gap: prior work either uses high-level features (lacking generalizability) or low-level GNN-based features (lacking solver-specific knowledge), motivating the GraSS approach which aims to combine both."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 1 (INTRODUCTION) for the problem statement and motivation"],
+  "reproducibility_notes": []
+}

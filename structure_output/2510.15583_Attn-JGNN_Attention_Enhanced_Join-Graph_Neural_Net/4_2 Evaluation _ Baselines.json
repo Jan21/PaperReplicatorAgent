@@ -1,0 +1,21 @@
+{
+  "section_title": "4.2 Evaluation & Baselines",
+  "section_purpose": "To describe the evaluation metrics used in the experiments and list the baselines that Attn-JGNN is compared against.",
+  "key_points": [
+    "The evaluation metric is root mean square error (RMSE) between estimated log countings and ground truth.",
+    "Neural baselines include BPNN and NSNet.",
+    "State-of-the-art approximate model counting solvers ApproxMC3 and F2 are also compared.",
+    "A time limit of 5,000 seconds is set for ApproxMC3 and F2 on each instance."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": ["Root Mean Square Error (RMSE) between estimated log countings and ground truth"],
+    "architectures": ["BPNN (neural baseline)", "NSNet (neural baseline)", "ApproxMC3 (approximate model counting solver)", "F2 (approximate model counting solver)"],
+    "hyperparameters": {
+      "time_limit_ApproxMC3_F2": "5000 seconds"
+    },
+    "datasets": []
+  },
+  "dependencies": ["Section 3.1 Attn-JGNN Framework for understanding the proposed method", "Section 2 Preliminaries for background on methods", "Section 4.1 Experiment Setup for dataset and other setup details"],
+  "reproducibility_notes": ["Use RMSE as the evaluation metric for log countings", "Compare against baselines: BPNN, NSNet, ApproxMC3, and F2", "Set time limit of 5,000 seconds for ApproxMC3 and F2 solvers"]
+}

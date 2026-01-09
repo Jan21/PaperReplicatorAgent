@@ -1,0 +1,43 @@
+```json
+{
+  "section_title": "2 Embedding Logic Formulae by GNNs",
+  "section_purpose": "This section introduces the methodology for embedding Boolean logic formulas in Conjunctive Normal Form (CNF) using Graph Neural Networks, establishing the specific GNN architecture used for logical reasoning tasks.",
+  "key_points": [
+    "Graph Neural Networks (GNNs) operate via a message-passing paradigm to learn node and graph embeddings through aggregation and combination operators.",
+    "Boolean logic formulas in CNF are embedded as bipartite graphs where nodes represent disjoint sets of literals and clauses.",
+    "A specific GNN formulation for logical reasoning is derived from the general GNN equation, featuring separate aggregation and combination functions for literal and clause nodes.",
+    "The final logical reasoning prediction is based solely on the final-state literal embeddings, as the formula's value depends on variable assignments.",
+    "The described embedding framework (Eq. 2) serves as the basis for representing SAT and 2QBF problems, forming the foundation for the paper's subsequent analysis."
+  ],
+  "technical_details": {
+    "algorithms": [
+      "General GNN message-passing algorithm with Aggregate and Combine functions",
+      "Specialized GNN for logical reasoning with separate operators for literal nodes (Aggregate_L, Combine_L) and clause nodes (Aggregate_C, Combine_C)"
+    ],
+    "formulas": [
+      "General GNN update equations: m_v^(k) = Aggregate^(k)({h_u^(k-1): u in N(v)}), h_v^(k) = Combine^(k)(h_v^(k-1), m_v^(k))",
+      "Logical reasoning GNN equations: m_v^(k) = Aggregate_L^(k)({h_Ψ^(-1)^(k-1): Ψ(v) in Φ}), h_v^(k) = Combine_L^(k)(h_v^(k-1), h_v^(-1)^(k-1), m_v^(k)), m_Ψ(v)^(k) = Aggregate_C^(k)({h_u^(k-1): u in Ψ(v)}), h_Ψ(v)^(k) = Combine_C^(k)(h_Ψ(v)^(k-1), m_Ψ(v)^(k))"
+    ],
+    "architectures": [
+      "Bipartite graph representation of CNF formulas with literal nodes and clause nodes as disjoint sets",
+      "Neighborhood relation: literal nodes connect to clause nodes containing them, and vice versa"
+    ],
+    "hyperparameters": {
+      "K": "Number of message-passing iterations"
+    },
+    "datasets": []
+  },
+  "dependencies": [
+    "Basic understanding of Graph Neural Networks and message-passing frameworks",
+    "Knowledge of Boolean logic and Conjunctive Normal Form (CNF)",
+    "Understanding of SAT (Boolean satisfiability) and 2QBF (2-quantified Boolean formula) problems"
+  ],
+  "reproducibility_notes": [
+    "The specific bipartite graph construction method for CNF formulas: literals and clauses as disjoint nodes",
+    "The separate Aggregate and Combine functions for literal vs. clause nodes (Aggregate_L, Combine_L, Aggregate_C, Combine_C)",
+    "The dependency of final prediction only on literal embeddings (not clause embeddings)",
+    "The number of message-passing iterations K",
+    "The fact that the embedding framework applies to both SAT and 2QBF problems"
+  ]
+}
+```

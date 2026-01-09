@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "5.1 Settings",
+    "section_purpose": "This section establishes the experimental framework for evaluating the proposed STRCMP method, detailing the baseline approaches, datasets, and evaluation metrics used for comparison in the MILP and SAT domains.",
+    "key_points": [
+        "The evaluation compares STRCMP against two categories of baselines: (1) Neural Combinatorial Optimization methods and (2) LLM-based Evolutionary Code Optimization frameworks.",
+        "Datasets are drawn from two combinatorial problem domains: Mixed-Integer Linear Programming (MILP) and Boolean Satisfiability (SAT), each containing multiple benchmark datasets categorized by difficulty or source.",
+        "Specific evaluation metrics are tailored to each domain and problem type (MILP metrics include solving time and primal-dual integral; SAT metrics include solving time, PAR-2, and number of timeouts).",
+        "The section references specific appendices (C, D, E) for more detailed information on baseline implementations, dataset statistics, and metric definitions.",
+        "All baseline methods and datasets are selected based on established prior works to ensure a fair and comprehensive comparison."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": [
+            "MILP Datasets (three tiers): 1) Easy: Synthetic (Set Covering, Maximum Independent Set, Multiple Knapsack). 2) Medium: MIK and CORLAT. 3) Hard: Google-inspired Load Balancing and industrial-scale Anonymous problem.",
+            "SAT Datasets (two sources): 1) SAT Competition problems (PRP, CNP). 2) Automatically generated instances via Picat (CoinsGrid, Zamkeller)."
+        ]
+    },
+    "dependencies": [
+        "Appendix C (for details on baselines and backend solvers)",
+        "Appendix D (for detailed dataset statistics)",
+        "Appendix E (for detailed metric definitions)",
+        "Prior knowledge of MILP and SAT solving domains and common evaluation practices."
+    ],
+    "reproducibility_notes": [
+        "Lists of specific baseline methods for both MILP (L2B, HEM) and SAT (NeuroSAT, AutoSAT, LLM4Solver).",
+        "Detailed composition of the evaluation datasets, including the specific problems and generation protocols.",
+        "The defined evaluation metrics for each problem domain (solving time, PD integral for MILP; PAR-2, timeouts for SAT)."
+    ]
+}
+```

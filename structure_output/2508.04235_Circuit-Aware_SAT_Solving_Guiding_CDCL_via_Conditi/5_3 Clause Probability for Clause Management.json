@@ -1,0 +1,20 @@
+{
+  "section_title": "5.3 Clause Probability for Clause Management",
+  "section_purpose": "To validate the effectiveness of using clause probabilities, computed by the CASCADE model, for filtering learnt clauses in a CDCL SAT solver, demonstrating improved performance over baseline LBD-based methods.",
+  "key_points": [
+    "Validation protocol involves extracting learnt clauses after 50,000 conflicts and filtering based on a probability threshold computed by the CASCADE model.",
+    "Evaluation on the LECUNSAT dataset (150 instances, split into 130 small and 20 hardest cases) shows consistent outperformance over the CaDiCaL baseline with LBD heuristic, especially on challenging cases.",
+    "Optimal probability threshold for clause filtering is found to be 0.9, balancing high-quality clauses (low threshold) against increased clause quantity with potential noise (high threshold).",
+    "Performance is measured using PAR-2 scores that penalize timeouts and include both solving and model inference time, demonstrating robustness.",
+    "The probability-based filtering method identifies and preserves more useful clauses than the default LBD heuristic, as supported by analysis in Appendix A5."
+  ],
+  "technical_details": {
+    "algorithms": ["Clause filtering protocol: run solver until 50,000 conflicts, extract learnt clauses, compute probabilities via CASCADE model, retain clauses below threshold", "Probability computation for clauses as defined in Section 3.1"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {"conflict_limit": 50000, "probability_thresholds": [0.8, 0.85, 0.9, 0.95]},
+    "datasets": ["LECUNSAT dataset: 150 instances total, with 130 small cases and 20 hardest cases"]
+  },
+  "dependencies": ["Section 3.1 for definition of clause probability", "Appendix A5 for analysis of probability-based metric", "CASCADE model details from earlier sections (e.g., methodology)"],
+  "reproducibility_notes": ["Run solver (CaDiCaL) until 50,000 conflicts and extract all learnt clauses", "Compute clause probabilities using the trained CASCADE model", "Apply filtering by retaining clauses with probability below a specified threshold (e.g., 0.9)", "Use the LECUNSAT dataset for evaluation, noting the split between small and hardest cases", "Compare against baseline with LBD-based clause management in CaDiCaL", "Measure performance using PAR-2 score, ensuring to account for both solving time and model inference time"]
+}

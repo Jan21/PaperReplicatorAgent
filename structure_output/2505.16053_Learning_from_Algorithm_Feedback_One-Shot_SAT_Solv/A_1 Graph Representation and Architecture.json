@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.1 Graph Representation and Architecture",
+    "section_purpose": "This section formally defines the graph representation used to encode SAT formulas for processing by Graph Neural Networks (GNNs), and describes the high-level architecture of the message-passing GNN.",
+    "key_points": [
+        "A SAT formula ϕ is represented as a bipartite 'Literal-Clause Graph' G(ϕ), following the convention established by NeuroSAT.",
+        "The graph vertices V(ϕ) consist of the set of literals Lit(ϕ) and the set of clauses Cls(ϕ).",
+        "Edges E(ϕ) include literal-clause edges (E_LC) connecting clauses to their constituent literals, and literal-literal edges (E_LL) connecting each variable to its negation.",
+        "The architecture for processing this graph is a Message-Passing Neural Network (MPNN) which computes embeddings for each literal vertex.",
+        "The computed literal embeddings are used to produce a guidance policy for the SAT solver."
+    ],
+    "technical_details": {
+        "algorithms": ["Message-Passing Neural Network (MPNN) architecture for processing the literal-clause graph."],
+        "formulas": ["G(ϕ) = (V(ϕ), E(ϕ)) where V(ϕ) = Lit(ϕ) ∪ Cls(ϕ) and E(ϕ) = E_LC(ϕ) ∪ E_LL(ϕ).", "E_LL(ϕ) = {(x, ¬x) | x ∈ X(ϕ)} connects each literal to its negation.", "E_LC(ϕ) = ∪_{C ∈ Cls(ϕ)} {(C, ℓ) | ℓ ∈ C} connects each clause to its constituent literals."],
+        "architectures": ["Literal-Clause Graph (bipartite graph representation).", "Message-Passing Neural Network (MPNN) that operates on the graph to compute literal embeddings."],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Knowledge of SAT formulas and their components (variables, literals, clauses).", "Familiarity with the overall guided SAT solver framework from Section 2.", "Understanding of Graph Neural Networks and message-passing concepts."],
+    "reproducibility_notes": ["Precise definition of the graph structure (vertices and edges) for encoding SAT formulas.", "The bipartite nature of the graph connecting literals and clauses, as well as literal pairs.", "Reference to prior work (NeuroSAT) for context on this standard representation."]
+}
+```

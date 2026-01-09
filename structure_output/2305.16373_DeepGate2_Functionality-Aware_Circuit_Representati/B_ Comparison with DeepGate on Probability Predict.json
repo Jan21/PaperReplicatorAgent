@@ -1,0 +1,19 @@
+{
+  "section_title": "B. Comparison with DeepGate on Probability Prediction",
+  "section_purpose": "This section presents a comparative evaluation between the proposed DeepGate2 model and its predecessor, DeepGate, focusing on the key metrics of prediction accuracy and runtime efficiency.",
+  "key_points": [
+    "DeepGate2 achieves a 13.08% lower probability prediction error (PE) on average compared to the original DeepGate.",
+    "DeepGate2 is significantly more efficient than DeepGate, with an average runtime speedup of 16.43x.",
+    "The performance improvements are attributed to the novel model architecture, embedding initialization strategy, and the use of a one-round GNN that performs only one forward propagation.",
+    "The new model demonstrates improved generalization ability on large-scale circuits."
+  ],
+  "technical_details": {
+    "algorithms": ["One-round GNN model performing forward propagation once", "Model with novel loss function and GNN design (DeepGate2)"],
+    "formulas": ["Probability prediction error (PE) defined by Eq. (13) in the paper"],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["Circuit D1 (used as an example for runtime comparison)"]
+  },
+  "dependencies": ["Understanding of the Probability Prediction Error (PE) metric defined in Eq. (13)", "Knowledge of the original DeepGate framework and its GNN architecture (10 forward/backward propagations)", "Familiarity with the proposed DeepGate2 methodology, including its novel loss function and one-round GNN design"],
+  "reproducibility_notes": ["The specific probability prediction error (PE) metric as defined in Eq. (13)", "The baseline runtime and PE of the original DeepGate model on the same test circuits", "Details of the novel model architecture and embedding initialization strategy contributing to the improvements"]
+}

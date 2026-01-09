@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "4. Experiment",
+    "section_purpose": "To present the experimental framework for evaluating HyperSAT, including the settings, analytical experiments, main results, and ablation studies.",
+    "key_points": [
+        "This section is an overview of the experimental evaluation, which is broken down into subsections covering settings, analysis, results, and ablation.",
+        "The actual detailed experimental configurations, benchmarks, hyperparameters, and results are contained in the subsequent subsections (4.1 to 4.4).",
+        "The section introduces the structure for validating HyperSAT's performance on Weighted MaxSAT problems.",
+        "It frames the upcoming subsections as containing the core experimental data and analysis."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3 (HyperSAT)", "Section 2.1 (Weighted MaxSAT)"],
+    "reproducibility_notes": []
+}
+```

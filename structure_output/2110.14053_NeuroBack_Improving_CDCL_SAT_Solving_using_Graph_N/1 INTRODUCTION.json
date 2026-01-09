@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 INTRODUCTION",
+    "section_purpose": "To introduce the problem of making neural approaches to CDCL SAT solving more practical by eliminating frequent online GPU-dependent inference, and to present NeuroBack as a novel solution that uses offline phase prediction to enhance phase selection heuristics.",
+    "key_points": [
+        "Mainstream CDCL SAT solvers rely on variable branching and phase selection heuristics; recent GNN approaches to improve these heuristics (like NeuroCore) are often ineffective or computationally expensive due to frequent online inference requiring GPUs.",
+        "NeuroBack proposes an offline inference approach that predicts variable phases (for backbone and majority-appearing variables) prior to solving, eliminating GPU dependency and making neural enhancement practical.",
+        "The approach is based on the generalization of backbone variables (consistent phases across all satisfying assignments) and the conjecture that knowledge from predicting backbone phases transfers to predicting phases of non-backbone variables appearing in majority assignments.",
+        "NeuroBack converts SAT formulas into graph representations, uses a Graph Transformer for binary node classification, and is trained on a new balanced dataset called DataBack containing 120,286 labeled formulas from diverse sources.",
+        "When integrated into the Kissat solver as NeuroBack-Kissat, experiments show it solves 5.2% (SATCOMP-2022) and 7.4% (SATCOMP-2023) more problems, demonstrating practical effectiveness."
+    ],
+    "technical_details": {
+        "algorithms": ["CDCL algorithm", "Offline model inference for phase prediction", "Binary node classification using GNN"],
+        "formulas": [],
+        "architectures": ["Graph Transformer architecture with lightweight self-attention mechanisms"],
+        "hyperparameters": {},
+        "datasets": ["DataBack: 120,286 labeled formulas from CNFgen, SATLIB, model counting competitions (2020-2022 MCC), and SAT competitions (2004-2021 main and random tracks)"]
+    },
+    "dependencies": ["Basic understanding of CDCL SAT solving algorithms", "Knowledge of variable branching and phase selection heuristics", "Familiarity with Graph Neural Networks (GNNs) and their application to SAT problems"],
+    "reproducibility_notes": ["Dataset DataBack is publicly available at https://huggingface.co/datasets/neuroback/DataBack", "Source code for NeuroBack model and NeuroBack-Kissat is available at https://github.com/wenxiwang/neuroback", "The approach uses offline inference, so no GPU is required during solver execution", "Model is trained on predicting phases of backbone variables and applied to predict phases of all variables"]
+}
+```

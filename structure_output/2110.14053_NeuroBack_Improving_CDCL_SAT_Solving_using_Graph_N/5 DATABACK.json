@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5 DATABACK",
+    "section_purpose": "This section describes the creation and composition of the DataBack dataset, which is used to pre-train and fine-tune the NeuroBack model for predicting backbone variable phases.",
+    "key_points": [
+        "DataBack is a new dataset of satisfiable CNF formulas labeled with the phases of their backbone variables, split into a pre-training subset (DataBack-PT) and a fine-tuning subset (DataBack-FT).",
+        "A data augmentation strategy is used to address significant label imbalance: for each formula, a dual formula is created by negating all backbone variables, which flips their phases, thereby balancing positive and negative labels and doubling the dataset size.",
+        "DataBack-PT is sourced from four diverse origins (CNFgen, SATLIB, model counting competitions, and SAT competition random tracks), containing 59,230 original formulas (118,460 augmented), and features formulas of varying sizes and backbone proportions.",
+        "DataBack-FT is sourced from the main track of SAT competitions (2004-2021), contains 913 original formulas (1,826 augmented), and its formulas are larger on average than those in DataBack-PT, aligning with the target test domain.",
+        "The CadiBack backbone extractor is used to generate labels, with label collection timeouts set at 1,000 seconds for pre-training formulas and 5,000 seconds for fine-tuning formulas, with only formulas solved within the time limit and containing at least one backbone variable included."
+    ],
+    "technical_details": {
+        "algorithms": ["CadiBack backbone extractor (Biere et al., 2023) used to label variables", "Data augmentation via dual formula creation: negating all backbone variables in a formula to flip their phases"],
+        "formulas": ["Definition of dual formula: For formula f with backbone variables b1,...,bn and label mapping L_f, the dual f' = f[b1 -> ¬b1, ..., bn -> ¬bn]. Satisfiability and backbone variables are preserved, with phases flipped: L_f'(bi) = ¬L_f(bi)."],
+        "architectures": [],
+        "hyperparameters": {"label_collection_timeout_pre_training": "1,000 seconds", "label_collection_timeout_fine_tuning": "5,000 seconds"},
+        "datasets": ["DataBack-PT: 59,230 original formulas (118,460 augmented). Sources: CNFgen (random SAT, clique-coloring, graph coloring, counting principle, parity principle), SATLIB (random SAT, graph coloring, planning, bounded model checking, Latin square, circuit fault analysis, all-interval series), Model counting competitions (2020-2022), SAT competition random tracks (2004-2021).", "DataBack-FT: 913 original formulas (1,826 augmented). Source: Main track of SAT competitions (2004-2021)."]
+    },
+    "dependencies": ["Section 2 (BACKGROUND) for CNF formula notation and backbone variable concepts", "Section 4.2 (GNN-based PHASE PREDICTION) for understanding the purpose of pre-training and fine-tuning the NeuroBack model"],
+    "reproducibility_notes": ["Specifications of the DataBack dataset: sources, original and augmented sizes, and label collection timeouts.", "Data augmentation procedure: create dual formula by negating all backbone variables to balance labels.", "Criterion for inclusion: formulas must be solved within the timeout and contain at least one backbone variable.", "Use of the CadiBack backbone extractor for labeling."]
+}
+```

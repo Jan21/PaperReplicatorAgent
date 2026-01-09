@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5.4 Effectiveness of Inprocessing Beyond Preprocessing",
+    "section_purpose": "This section aims to validate that the CASCADE inprocessing framework provides complementary benefits beyond static preprocessing techniques, demonstrating dynamic guidance capabilities during SAT solving.",
+    "key_points": [
+        "Compares two strategies: preprocessing-only vs. preprocessing combined with the CASCADE inprocessing framework.",
+        "Shows that integrating CASCADE yields substantial additional speedups even when strong preprocessing is already applied.",
+        "For SAT cases, the best CASCADE setting reduces average PAR2 from 13.39 to 2.89 (4.6x improvement).",
+        "For UNSAT cases, clause filtering reduces a metric from 304.42 to 224.95.",
+        "Highlights the complementary nature: inprocessing provides dynamic guidance during solving that static preprocessing alone cannot achieve."
+    ],
+    "technical_details": {
+        "algorithms": ["Preprocessing-only strategy", "Preprocessing + CASCADE inprocessing framework"],
+        "formulas": [],
+        "architectures": ["CASCADE framework"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Prior preprocessing techniques from Shi et al. 2025c", "Overall CASCADE framework description from earlier sections", "Understanding of PAR2 metric for SAT solving performance"],
+    "reproducibility_notes": ["Need to know the specific preprocessing techniques from Shi et al. 2025c", "Need implementation details of how CASCADE integrates with preprocessing", "Need access to Table 6 and Table 7 referenced in the text"]
+}
+```

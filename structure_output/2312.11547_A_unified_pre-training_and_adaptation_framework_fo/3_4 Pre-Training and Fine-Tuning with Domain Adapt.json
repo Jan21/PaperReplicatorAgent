@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "3.4 Pre-Training and Fine-Tuning with Domain Adaptation",
+    "section_purpose": "To introduce the two-stage training framework for the model, consisting of a pre-training stage using Max-SAT data followed by a fine-tuning stage with domain adaptation that blends Max-SAT and CO problem samples.",
+    "key_points": [
+        "The framework has two distinct training stages.",
+        "The first stage is pre-training using massive samples generated from Max-SAT problems.",
+        "The second stage is fine-tuning with a domain adaptation approach.",
+        "The fine-tuning stage specifically combines data samples from both Max-SAT and target Combinatorial Optimization (CO) problems."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-stage training framework (Pre-training + Fine-tuning with domain adaptation)"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Massive samples generated from Max-SAT", "Samples from CO problems (target domains)"]
+    },
+    "dependencies": ["Understanding of Max-SAT problems (Section 3.2)", "Preliminary methodology overview (Section 3)"],
+    "reproducibility_notes": ["Two-stage framework structure (Pre-training on Max-SAT data, fine-tuning with mixed data)", "Knowledge that fine-tuning uses a domain adaptation technique blending Max-SAT and target CO data sources."]
+}
+```

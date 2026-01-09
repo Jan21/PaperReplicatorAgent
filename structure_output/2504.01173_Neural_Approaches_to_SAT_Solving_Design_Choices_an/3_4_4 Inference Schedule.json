@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "3.4.4 Inference Schedule",
+    "section_purpose": "This section explains how the inference process in a diffusion model can be accelerated or improved by adjusting the number of denoising steps during generation, and introduces the concept of an inference schedule.",
+    "key_points": [
+        "During inference, the number of denoising steps can differ from training: fewer steps accelerate generation, while more steps may improve output quality.",
+        "The sequence of time steps used during inference is called a schedule, typically represented as (T, T-1, ..., t_0).",
+        "Standard diffusion models condition their function approximator on both the noisy sample and the time step (f_θ(x_t, t)), but the authors' model does not require time step conditioning.",
+        "Because time step conditioning is unnecessary in their approach, their inference schedule is defined solely by the number of time steps used."
+    ],
+    "technical_details": {
+        "algorithms": ["Inference schedule definition for diffusion model denoising"],
+        "formulas": ["Schedule represented as tuple (T, T-1, ..., t_0)"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.4 (Diffusion-based Assignment Generation) for context on diffusion models", "Section 5.4.1 (Connection to Assignment Prediction Training) for justification of no time step conditioning"],
+    "reproducibility_notes": ["Understanding that inference schedule is defined only by number of time steps (no time step conditioning needed)", "Knowledge that schedule flexibility allows trading off speed vs. quality"]
+}
+```

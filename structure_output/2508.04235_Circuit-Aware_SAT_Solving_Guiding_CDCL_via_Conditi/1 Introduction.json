@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "1 Introduction",
+    "section_purpose": "To introduce the Circuit Satisfiability (CSAT) problem, highlight the limitations of current CNF-based SAT solvers that discard circuit structural information, and present the novel CASCAD framework that uses GNN-predicted conditional probabilities to dynamically guide CDCL solvers.",
+    "key_points": [
+        "Circuit Satisfiability (CSAT) is crucial for EDA tasks like Logic Equivalence Checking and ATPG, but traditional methods convert circuits to CNF and use CDCL solvers, discarding structural circuit insights.",
+        "Current circuit-aware methods rely on static analysis or preprocessing and fail to provide dynamic guidance during solver execution, creating a disconnect between static structures and dynamic CDCL reasoning.",
+        "The paper introduces a probabilistic reframing: conditional probabilities of unassigned circuit variables given prior solver decisions capture the dynamic essence of CDCL reasoning.",
+        "CASCAD is a novel framework that uses a GNN to estimate gate-level conditional probabilities from circuit structures and integrates them into CDCL heuristics for phase selection and clause management.",
+        "Experiments show CASCAD reduces solving times by up to 90% with probability-guided phase selection and achieves an additional 23.5% reduction with probability-based clause filtering on EDA benchmarks."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Graph Neural Network (GNN) for estimating gate-level conditional probabilities from circuit structures"],
+        "hyperparameters": {},
+        "datasets": ["Industry-standard EDA benchmarks, specifically benchmarks from logic equivalence checking tasks"]
+    },
+    "dependencies": ["Basic understanding of Circuit Satisfiability (CSAT), Conjunctive Normal Form (CNF), Conflict-Driven Clause Learning (CDCL) algorithms, and Graph Neural Networks (GNNs)"],
+    "reproducibility_notes": ["The core idea of using conditional probabilities of circuit variables given solver state to guide CDCL heuristics.", "The two specific CDCL heuristics targeted: variable phase selection and clause management.", "The use of a GNN model trained to predict gate-level conditional probabilities from circuit structures."]
+}
+```

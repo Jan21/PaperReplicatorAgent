@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "4.1 Experimental Setting",
+    "section_purpose": "This section describes the detailed implementation, training procedures, and dataset generation methodology used for evaluating the BPGAT (Belief Propagation Graph Attention Network) model for propositional model counting.",
+    "key_points": [
+        "The BPGAT model was implemented in PyTorch and trained to minimize MSE between predicted and true log model counts (ln Z).",
+        "A specific training protocol uses Adam optimizer for 1000 epochs with a decaying learning rate, and the model architecture includes a 3-layer GAT with multi-head attention and MLPs for message transformations.",
+        "Training data consists of 1000 randomly generated CNF SAT formulae with known exact model counts computed by sharpSAT, generated using a defined random distribution process.",
+        "A fine-tuning protocol is introduced to adapt the pre-trained model to new formula distributions using only 250 labeled examples.",
+        "The dataset generation process involves random formula construction with variable/clause count ranges, clause generation with specific variable/literal selection probabilities, and satisfiability filtering."
+    ],
+    "technical_details": {
+        "algorithms": ["Adam optimizer with learning rate scheduling", "Random formula generation algorithm with uniform and geometric distributions", "Fine-tuning protocol for domain adaptation"],
+        "formulas": ["Loss function: Mean Squared Error between ln Z (true) and ln \u0176 (predicted)", "Variable-to-factor message damping parameter \u03b1 = 0.5"],
+        "architectures": ["3-layer GAT network with attention heads configuration [4, 4, 6]", "3-layer MLP \u0394 with ReLU activations for factor-to-variable messages", "3-layer feedforward MLP with ReLU for final layer (Equation 9)"],
+        "hyperparameters": {
+            "training_epochs": "1000",
+            "fine_tuning_epochs": "250",
+            "initial_learning_rate": "0.0001",
+            "fine_tuning_learning_rate": "0.000001",
+            "learning_rate_decay": "halved every 200 epochs",
+            "message_passing_iterations_T": "5",
+            "damping_parameter_alpha": "0.5",
+            "dataset_size": "1000",
+            "fine_tuning_dataset_size": "250"
+        },
+        "datasets": ["Training dataset: 1000 CNF SAT formulae with true model counts", "Variable range: nv_min=10, nv_max=30 (average 19.87)", "Clause range: nc_min=20, nc_max=50 (average 34.87)", "Clause generation: k ~ 2 + Bernoulli(0.7) + Geometric(0.4) (average 5 variables per clause)", "Literal negation probability: 0.5", "SAT filtering: Only satisfiable formulae included", "Count computation: Exact model counts computed using sharpSAT"]
+    },
+    "dependencies": ["Section 3 (Method) for understanding BPGAT architecture", "Equation 1 (for Z representation)", "Equations 9, 11, 12 (for GAT and MLP architectures)", "Supplementary material Section C.1 (for architecture selection rationale)"],
+    "reproducibility_notes": ["PyTorch implementation details", "Exact GAT architecture configuration (3 layers, attention heads [4,4,6])", "MLP architectures for message transformation and final layer", "Training hyperparameters (epochs, learning rate, optimizer, scheduler)", "Dataset generation algorithm with all parameters", "Fine-tuning protocol details", "Use of Minisat for SAT checking and sharpSAT for exact counting"]
+}
+```

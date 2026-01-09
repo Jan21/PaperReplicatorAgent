@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "3.2.1. HYPERGRAPH CONVOLUTIONAL NETWORKS",
+    "section_purpose": "To describe the core message-passing architecture of HyperSAT, detailing the specific hypergraph convolutional network (HyperGCN) layers used for learning node representations in the hypergraph model of the MaxSAT problem.",
+    "key_points": [
+        "HyperSAT uses a T-layer HyperGCN for message passing between nodes.",
+        "The layer update rule (Eq. 2) uses a normalized hypergraph Laplacian operator and a learnable weight matrix to transform node representations.",
+        "A key modification from traditional HGNN is the removal of diagonal elements from the matrix Q̃ (Eq. 3), which focuses the convolution on the influence of adjacent nodes.",
+        "This adjustment is designed to make node representation updates better reflect the higher-order relationships of the hypergraph adjacency structure."
+    ],
+    "technical_details": {
+        "algorithms": ["T-layer Hypergraph Convolutional Network (HyperGCN) for message passing."],
+        "formulas": ["Equation (2): L^{(l+1)'} = σ(D_v^{-1/2} Q̃ D_v^{-1/2} L^{(l)} R^{(l)}), where L is node representation matrix, D_v is vertex degree diagonal matrix, R^{(l)} is learnable weight matrix, σ is activation.", "Equation (3): Q̃ = H D̃_e^{-1} H^⊤ - diag(H D̃_e^{-1} H^⊤), where H is hypergraph incidence matrix, D̃_e = D_e - I."],
+        "architectures": ["Multi-layer HyperGCN with learnable input embeddings L^{(0)}."],
+        "hyperparameters": {
+            "T": "Number of HyperGCN layers",
+            "d_l": "Dimension of node representations at layer l",
+            "d_{l+1}": "Dimension of node representations at layer l+1",
+            "n": "Number of variables in the MaxSAT problem (inferred from matrix dimensions 2n x d_l)"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 3.1 (Hypergraph Modeling) for the definition of the hypergraph and its incidence matrix H.",
+        "Section 2.2 (Hypergraph Neural Networks) for context on traditional HGNN and Eq. (1) referenced for comparison."
+    ],
+    "reproducibility_notes": [
+        "The precise layer update formula (Eq. 2) must be implemented, including the definition of Q̃ from Eq. 3.",
+        "The initialization of the learnable input embedding L^{(0)} and weight matrices R^{(l)} must be specified.",
+        "The choice of nonlinear activation function σ is required.",
+        "The number of layers T and the dimensions d_l for each layer must be known."
+    ]
+}
+```

@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B.1 Combinatorial Structure Extraction",
+    "section_purpose": "This section details how to convert combinatorial optimization problems (MILP and SAT) into structured graph representations suitable for GNN processing and describes the GNN architecture and training used to extract structural priors from these graphs.",
+    "key_points": [
+        "MILP problems are encoded as weighted bipartite graphs where nodes represent constraints and variables, and edges represent non-zero constraint coefficients with corresponding features.",
+        "SAT problems in CNF form are encoded as Variable-Clause Graphs (VCG), a bipartite graph where literal nodes and clause nodes are connected based on literal inclusion in clauses.",
+        "A Graph Neural Network (GNN) with a specific message-passing formulation is used to process these graph representations and extract structural embeddings.",
+        "The GNN is trained via a supervised classification task using a cross-entropy loss function, with the goal of producing useful structural priors, not necessarily solving the original optimization problem.",
+        "Separate GNN models are implemented and trained for the SAT and MILP domains using specific architectural and training details."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph Neural Network message-passing for node embedding update (Equation 12)", "Global mean pooling for graph-level embedding aggregation (Equation 13)", "Softmax classification layer for supervised training (Equation 15)"],
+        "formulas": ["MILP formal definition: min w^T x subject to Ax ≤ b, l ≤ x ≤ u, x_j ∈ ℤ for j ∈ 𝕀 (Equation 11)", "GNN node update: v_i^(k+1) = f_v(v_i^(k), Σ g_v(v_i^(k), v_j^(k), e_ij)) (Equation 12)", "Graph pooling: h_q = Pool({v_i^(K)}) (Equation 13)", "GNN training loss: L(θ_G) = -1/N Σ_i Σ_c y_i,c log p_θ_G(c|q_i) (Equation 14)", "Class probability: p_θ_G(c|q_i) = exp(W_c^T h_q_i + b_c) / Σ_j exp(W_j^T h_q_j + b_j) (Equation 15)"],
+        "architectures": ["GNN with 3 convolutional layers (K=3)", "Node embedding dimensions: 16, 32, 64 for successive layers", "Global mean pooling after final convolutional layer", "Final softmax classification layer"],
+        "hyperparameters": {"K (convolution layers)": "3", "node_embedding_dims": "[16, 32, 64]", "optimizer": "AdamW", "learning_rate_schedule": "cosine decay"},
+        "datasets": ["MILP instances encoded as bipartite graphs using Ecole library", "SAT instances in CNF form encoded as Variable-Clause Graphs"]
+    },
+    "dependencies": ["Appendix D for dataset details", "Understanding of MILP and SAT problem formulations", "Basic knowledge of Graph Neural Networks", "Ecole library [50] for MILP graph generation", "Prior work [51] for SAT CNF representation"],
+    "reproducibility_notes": ["MILP bipartite graph construction details: constraint nodes (1D feature: b_i), variable nodes (9D features: w_j, type, l_j, u_j), edges (feature: a_i,j)", "SAT VCG construction details: bipartite graph with literal nodes and clause nodes", "Full feature specifications from Table 2 (constraint, variable, and edge features)", "GNN architecture specifics: 3 layers with specified embedding dimensions, mean pooling", "Training configuration: loss function (Eq. 14-15), AdamW optimizer, cosine decay learning rate", "Use of torch_geometric library for graph convolution"]
+}
+```

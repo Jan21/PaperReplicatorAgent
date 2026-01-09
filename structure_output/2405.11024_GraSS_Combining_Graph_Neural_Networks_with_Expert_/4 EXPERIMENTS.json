@@ -1,0 +1,31 @@
+{
+  "section_title": "4 EXPERIMENTS",
+  "section_purpose": "This section introduces the experimental evaluation of the proposed approach, describing the implementation setup and high-level training configuration used for the comparative study.",
+  "key_points": [
+    "The section begins the performance comparison of the proposed GraSS model against existing competitors in the literature.",
+    "Implementation details are provided: the model is built using PyTorch and DGL libraries.",
+    "Training configuration is specified: using a single NVIDIA Tesla V100 GPU, a learning rate of 1e-3, and a maximum of 100 epochs. The same GPU is used for inference.",
+    "The overall structure for the experimental evaluation is introduced, leading into more detailed subsections (e.g., base solvers, datasets)."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {
+      "learning_rate": "1e-3",
+      "max_epochs": "100"
+    },
+    "datasets": []
+  },
+  "dependencies": [
+    "Section 3 (APPROACH), which details the model, training, and inference procedures being evaluated.",
+    "The '4 EXPERIMENTS' subsection titles listed in the table of contents (4.1-4.6), which provide the full experimental details."
+  ],
+  "reproducibility_notes": [
+    "Use of PyTorch and DGL libraries for implementation.",
+    "Training hardware: a single NVIDIA Tesla V100 GPU.",
+    "Learning rate: 1e-3.",
+    "Maximum number of training epochs: 100.",
+    "The same GPU is used for test-time inference."
+  ]
+}

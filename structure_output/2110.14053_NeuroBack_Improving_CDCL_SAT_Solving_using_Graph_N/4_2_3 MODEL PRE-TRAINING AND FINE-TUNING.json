@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "4.2.3 MODEL PRE-TRAINING AND FINE-TUNING",
+    "section_purpose": "To describe the two-stage training process for the NeuroBack model, which involves initial pre-training on a diverse dataset followed by fine-tuning on a domain-specific dataset to improve backbone variable phase classification.",
+    "key_points": [
+        "The NeuroBack model uses a two-stage training process: pre-training on an extensive diverse dataset followed by fine-tuning on a smaller, domain-specific dataset.",
+        "Pre-training provides fundamental knowledge for classifying backbone variable phases across broad CNF formulas, while fine-tuning enhances proficiency for specific formula categories.",
+        "Binary Cross Entropy (BCE) loss is used as the loss function with AdamW optimizer and a learning rate of 10⁻⁴.",
+        "Training uses 40 epochs for pre-training and 60 epochs for fine-tuning, requiring 48 hours total on a commodity computer.",
+        "Details of the specific datasets used for pre-training (DataBack-PT) and fine-tuning (DataBack-FT) are provided in Table 1 and referenced to Section 5."
+    ],
+    "technical_details": {
+        "algorithms": ["Two-stage training: pre-training followed by fine-tuning"],
+        "formulas": ["Binary Cross Entropy (BCE) loss function"],
+        "architectures": [],
+        "hyperparameters": {
+            "learning_rate": "10⁻⁴",
+            "pre_training_epochs": "40",
+            "fine_tuning_epochs": "60",
+            "optimizer": "AdamW"
+        },
+        "datasets": [
+            "Pre-training dataset (DataBack-PT): Combined from CNFgen, SATLIB, MCCOMP, SATCOMP (random) - total 118,460 CNF formulas, avg 2,852 variables, 61,898 clauses, 35% backbone variables",
+            "Fine-tuning dataset (DataBack-FT): From SATCOMP (main) - 1,826 CNF formulas, avg 206,470 variables, 1,218,519 clauses, 23% backbone variables"
+        ]
+    },
+    "dependencies": [
+        "Section 5 (for complete dataset details)",
+        "Section 4.2.1 GNN MODEL DESIGN (model architecture)",
+        "Section 4.2.2 IMPLEMENTATION (model implementation details)"
+    ],
+    "reproducibility_notes": [
+        "Two-stage training process: pre-training on DataBack-PT followed by fine-tuning on DataBack-FT",
+        "Use Binary Cross Entropy (BCE) loss function",
+        "Use AdamW optimizer with learning rate 10⁻⁴",
+        "Train for 40 epochs during pre-training and 60 epochs during fine-tuning",
+        "Training time expectation: 48 hours on commodity computer",
+        "Dataset specifications: sizes and characteristics provided in Table 1"
+    ]
+}
+```

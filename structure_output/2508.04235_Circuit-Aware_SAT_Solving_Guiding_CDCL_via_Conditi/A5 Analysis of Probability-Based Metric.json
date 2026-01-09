@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "A5 Analysis of Probability-Based Metric",
+    "section_purpose": "To analyze the effectiveness of a novel clause filtering method that uses predicted clause probability instead of (or in combination with) the traditional LBD metric to identify and retain helpful learnt clauses.",
+    "key_points": [
+        "The analysis evaluates clauses by grouping them by LBD (1,2,3) and predicted probability, then re-inserting each group to isolate its impact.",
+        "A key finding is that for a given LBD, retaining clauses with a *lower* predicted probability (<0.8) is more beneficial for solving than retaining high-probability clauses, which can harm performance.",
+        "Clause probability distribution correlates with LBD: lower LBD clauses tend to have lower probability.",
+        "Clause probability is shown to be a more informative filtering metric than LBD alone. Filtering high-LBD (LBD=3) clauses by probability (keeping low-probability ones) yields a net positive effect, whereas baseline methods simply discard all LBD>2 clauses."
+    ],
+    "technical_details": {
+        "algorithms": ["Probability-based clause filtering method where solving pauses at a conflict threshold to extract and group learnt clauses for individual re-evaluation."],
+        "formulas": ["Probability thresholds defined as <0.8 and >=0.8 for grouping clauses."],
+        "architectures": [],
+        "hyperparameters": {"conflict_pause_threshold": "50,000"},
+        "datasets": []
+    },
+    "dependencies": ["Knowledge of learnt clauses and the LBD (Literal Block Distance) metric used in CDCL SAT solvers.", "Understanding of the probability prediction model detailed in earlier sections (3.4 Multiple Condition Probability).", "Context from Section 5.3 on clause probability for clause management."],
+    "reproducibility_notes": ["The specific conflict threshold for pausing the solver (50,000 conflicts).", "The probability thresholds used for grouping clauses (<0.8 and >=0.8).", "The method of grouping clauses first by LBD (1,2,3) and then by these probability bins.", "The evaluation protocol of independent re-insertion for each clause group to measure impact on solving time and decision count."]
+}
+```

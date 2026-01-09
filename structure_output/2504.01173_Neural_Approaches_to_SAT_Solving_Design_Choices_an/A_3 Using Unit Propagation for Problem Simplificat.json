@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "A.3 Using Unit Propagation for Problem Simplification in the Diffusion Process",
+    "section_purpose": "To describe a method for integrating unit propagation into the neural diffusion-based SAT solving process to iteratively simplify the problem and obtain solutions recursively.",
+    "key_points": [
+        "The diffusion model generates variable assignment beliefs that can be used for unit propagation.",
+        "Unit propagation is used to continuously simplify the SAT problem during the diffusion process.",
+        "The overall solving process is recursive, aiming to reduce the problem to an empty one.",
+        "Table 8 shows the impact of GNN hidden dimension size (d_model) on model accuracy and training time, though its direct relevance to unit propagation is not explained."
+    ],
+    "technical_details": {
+        "algorithms": ["unit propagation algorithm", "recursive solving process"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.4 on Diffusion-based Assignment Generation", "Section 4.1 on Data Representation and Graph Structure", "Understanding of SAT solving fundamentals from Section 3"],
+    "reproducibility_notes": ["Method for extracting variable beliefs from diffusion iterations", "Procedure for applying unit propagation to the problem using these beliefs", "Recursive solving strategy details", "Integration point between diffusion steps and unit propagation"]
+}
+```

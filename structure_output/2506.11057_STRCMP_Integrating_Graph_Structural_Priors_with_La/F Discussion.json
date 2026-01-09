@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "F Discussion",
+    "section_purpose": "To discuss the limitations of the current approach and propose directions for future research, including training challenges, distributional issues in post-training, and potential extensions to incorporate additional modal information.",
+    "key_points": [
+        "The paper uses a two-stage training procedure (GNN first, then LLM conditioned on frozen GNN embeddings) because end-to-end joint training presents significant optimization challenges.",
+        "Ablation studies show the full STRCMP model underperforms compared to variants with only SFT or only DPO, suggesting conflicts between optimization objectives during multi-stage post-training.",
+        "Future work should investigate domain-specific distributional discrepancies arising from the heterogeneous nature of combinatorial optimization problems to improve post-training alignment.",
+        "Future extensions could incorporate additional modal priors beyond graph structure (e.g., dynamic constraint patterns, solution quality metrics) using LLMs' context-aware capabilities.",
+        "LLMs could potentially autonomously identify computational bottlenecks through techniques like runtime complexity profiling or constraint violation pattern analysis."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Understanding of the two-stage training procedure described in methodology",
+        "Knowledge of STRCMP model variants (SFT Only, DPO Only) from experimental sections",
+        "Familiarity with graph neural networks (GNNs) and large language models (LLMs)",
+        "Awareness of combinatorial optimization problem domains discussed in the paper"
+    ],
+    "reproducibility_notes": [
+        "Training procedure details: two-stage approach with frozen GNN embeddings",
+        "Specific challenges with end-to-end joint training",
+        "Performance differences between full STRCMP and its variants",
+        "Types of additional modal priors that could be incorporated"
+    ]
+}
+```

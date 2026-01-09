@@ -1,0 +1,19 @@
+{
+  "section_title": "5 Experiments",
+  "section_purpose": "To describe the experimental setup including datasets and hyperparameters, and present both qualitative and quantitative results comparing the improved model to NeuroSAT.",
+  "key_points": [
+    "Description of datasets used for evaluation.",
+    "Specification of model and training hyperparameters.",
+    "Presentation of qualitative results supporting the connection to SDP.",
+    "Presentation of quantitative results comparing the curriculum-based model to the original NeuroSAT, including training efficiency."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["NeuroSAT", "our model with curriculum"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2.3 (Semidefinite Programming for Boolean Satisfiability)", "Section 2.4 (Graph Neural Networks for Boolean Satisfiability / NeuroSAT)", "Section 3 (Curriculum for Training GNNs)"],
+  "reproducibility_notes": ["Details of datasets used for training and validation", "Specific model and training hyperparameters", "Implementation of curriculum training procedure", "Validation accuracy threshold of 85% used as stopping criterion"]
+}

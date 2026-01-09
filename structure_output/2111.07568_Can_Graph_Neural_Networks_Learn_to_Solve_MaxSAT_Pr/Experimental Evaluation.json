@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Experimental Evaluation",
+    "section_purpose": "To empirically investigate and demonstrate whether Graph Neural Networks (GNNs) can learn to solve the MaxSAT problem by training and evaluating models on generated datasets.",
+    "key_points": [
+        "The experimental evidence for GNNs solving MaxSAT is still under exploration, motivating this evaluation.",
+        "Two separate GNN models are built using NSFG and ESFG representations.",
+        "Datasets are constructed using a commonly used generator for random MaxSAT instances.",
+        "Models are trained and tested in different settings for a comprehensive understanding.",
+        "Results show GNNs have attractive potential for solving MaxSAT with good performance and generalization."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": ["Two GNN models: one using NSFG representation, one using ESFG representation"],
+        "hyperparameters": {},
+        "datasets": ["Constructed using a commonly used generator for random MaxSAT instances"]
+    },
+    "dependencies": ["Preliminaries (for SAT/MaxSAT definitions)", "Graph Neural Networks (for GNN basics)", "GNN Models for MaxSAT (for NSFG and ESFG model frameworks)"],
+    "reproducibility_notes": ["Specification of the two GNN models (NSFG-based and ESFG-based)", "Details of the random MaxSAT instance generator used", "Training and testing settings applied"]
+}
+```

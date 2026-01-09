@@ -1,0 +1,32 @@
+```json
+{
+    "section_title": "3 Experiments",
+    "section_purpose": "This section describes the experimental setup for training and evaluating GNN-boosted variants of SLS SAT solvers (MT and WalkSAT) on random 3-SAT instances of varying difficulty.",
+    "key_points": [
+        "Experiments focus on random 3-SAT instances where difficulty is measured by the clause-to-variable ratio α=m/n, with special interest in the 'hard' regime where traditional solvers fail.",
+        "The training dataset consists of 396 satisfiable instances with n∈[100,200,300] and α ranging from 1 to 4.82, generated via CNFgen and verified satisfiable by Glucose3.",
+        "Key hyperparameters for the Interaction Network GNN include 5 message passing steps, fully connected layers of dimension d=200, and loss parameters z=2, β=1, γ1=1, γ2=1.",
+        "Evaluation uses 2052 test instances across the same n and α ranges, with each algorithm run up to 10^6 steps over 5 runs per instance, using multiple performance metrics.",
+        "Results indicate that GNN-boosted variants of MT and WalkSAT algorithms outperform uniform and hybrid baselines, extending the efficient solving regime to higher α values."
+    ],
+    "technical_details": {
+        "algorithms": ["Oracle-based WalkSAT algorithm", "Oracle-based MT algorithm", "ADAM optimizer with learning rate 10^-3"],
+        "formulas": ["Difficulty measure α = m/n (clause-to-variable ratio)", "Performance metric M_{1/2}(#) defined as outer median over inner median of steps to solution"],
+        "architectures": ["Interaction Network GNN with 5 message passing steps", "Fully connected layers with dimension d=200 per message passing step"],
+        "hyperparameters": {
+            "message_passing_steps": 5,
+            "layer_dimension": 200,
+            "loss_z": 2,
+            "loss_beta": 1,
+            "loss_gamma1": 1,
+            "loss_gamma2": 1,
+            "learning_rate": 0.001,
+            "batchsize": 1,
+            "epochs": 50
+        },
+        "datasets": ["Training set: 396 satisfiable random 3-SAT instances with n∈[100,200,300], α∈[1,4.82]", "Test set: 2052 random 3-SAT instances with same n and α ranges"]
+    },
+    "dependencies": ["Section 2.5 (Graph Neural Networks as oracle factories)", "Section 2.2 (Oracle-based SLS)", "Section 2.4 (Learning oracle factories with the LLL loss)", "Understanding of MT and WalkSAT algorithms"],
+    "reproducibility_notes": ["Training dataset generation details using CNFgen python library", "Satisfiability verification using Glucose3 solver via Pysat library", "Hyperparameter values for GNN architecture and loss function", "Optimizer configuration (ADAM with learning rate 10^-3, batchsize 1, 50 epochs)", "Evaluation metrics: average steps (#), median steps M_{1/2}(#), fraction solved (%)", "Computational environment: AWS g4dn.4xlarge instance with Ubuntu 20.04 Deep Learning AMI", "Implementation frameworks: JAX/JRAPH for GNN, Rust for SLS algorithms"]
+}
+```

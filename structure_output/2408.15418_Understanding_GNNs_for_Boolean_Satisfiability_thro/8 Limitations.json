@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "8 Limitations",
+    "section_purpose": "To explicitly acknowledge the constraints and boundaries of the research study, clarifying what was not addressed and pointing to areas needing further investigation.",
+    "key_points": [
+        "The model's efficacy is demonstrated only on datasets with a low number of variables and does not include 'real-world' problems.",
+        "End-to-end trained GNNs are not positioned to compete with specialized SAT solvers (like CDCL solvers) on realistic benchmarks.",
+        "The primary research aim was understanding GNNs' predictive capability for satisfiability, not competing with state-of-the-art solvers.",
+        "The precise mechanism by which the GNN optimizes embeddings during message-passing remains an open question needing further research.",
+        "The study's focus was empirical evaluation rather than the development of a precise theoretical model for the GNN's internal workings."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Introduction (for stated goals)", "Experiments section (for context on datasets and model evaluation)"],
+    "reproducibility_notes": []
+}
+```

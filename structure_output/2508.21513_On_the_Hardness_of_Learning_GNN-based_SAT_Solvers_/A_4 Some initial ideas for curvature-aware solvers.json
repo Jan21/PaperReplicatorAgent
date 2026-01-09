@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "A.4 Some initial ideas for curvature-aware solvers",
+    "section_purpose": "This appendix section presents preliminary ideas and experiments for integrating curvature information into GNN-based SAT solvers, exploring how to potentially overcome the identified hardness bottlenecks and move beyond mere hardness heuristics.",
+    "key_points": [
+        "Proposes two simple curvature-aware message-passing variants: a curvature-based edge gating mechanism and a method that uses local curvature statistics as node features.",
+        "Empirical results (Table 3) show that naive curvature injection sometimes improves performance but does not consistently provide clear advantages across all models and datasets.",
+        "A key insight is that while curvature exposes structural bottlenecks, solvers must learn to effectively use geometric information; the redundancy of curvature statistics in regular SAT problems is a weakness.",
+        "Visualizations indicate that curvature-aware methods can lead to more linearly separable learned representations, suggesting promise for future solver design.",
+        "The section positions these implementations as starting points for future research, not as definitive solutions."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Curvature Gate: Learns a gating function for each edge based on its curvature value to modulate message contributions.",
+            "Online LCP: Concatenates local curvature statistics around each node as features during each recurrent step of a GNN."
+        ],
+        "formulas": [],
+        "architectures": ["GCN (Graph Convolutional Network)", "NeuroSAT (a specific GNN-based SAT solver architecture)"],
+        "hyperparameters": {},
+        "datasets": ["3-SAT", "4-SAT", "SR", "CA (SAT benchmark datasets from citation [28])"]
+    },
+    "dependencies": ["Background on Ricci Curvature of Graphs (Section 2.3)", "Understanding of GNN-based SAT solvers and message passing (Section 2.2)", "Previous experimental setup and results (Section 4)"],
+    "reproducibility_notes": [
+        "Implementation details of the two curvature-aware message-passing schemes: Curvature Gate and Online LCP.",
+        "Training protocol and experimental settings are stated to be identical to previous experiments in the paper.",
+        "The specific SAT benchmark datasets used: 3-SAT, 4-SAT, SR, CA.",
+        "Reported accuracy metrics and standard deviations over 5 runs (from Table 3)."
+    ]
+}
+```

@@ -1,0 +1,46 @@
+```json
+{
+    "section_title": "Glucose",
+    "section_purpose": "To describe the specific modifications made to integrate the learned variable weights into the Glucose Conflict-Driven Clause Learning (CDCL) solver and explain the technical implementation details.",
+    "key_points": [
+        "The modifications are based on Glucose 4.2.1, a popular CDCL solver derived from Minisat.",
+        "The standard VSIDS/EVSIDS branching heuristic is modified by scaling the activity increment with the learned variable weight w(x).",
+        "The modification preserves the efficiency of EVSIDS by avoiding loops over all variables, adding only negligible runtime overhead.",
+        "Specific solver configurations are set: phase saving is left on, randomized decisions are disabled, and the restart parameter K is set to 0.1.",
+        "All other Glucose parameters are kept at their defaults."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Modified Variable State Independent Decaying Sum (VSIDS) / Exponential VSIDS (EVSIDS) heuristic for branching",
+            "Activity score update scaled by learned weight: activity(x) ← activity(x) + w(x)·Δ",
+            "Standard EVSIDS Δ scaling to avoid variable loops: Δ ← (1/β)·Δ"
+        ],
+        "formulas": [
+            "Conflict-triggered activity increase: activity(x) ← activity(x) + Δ (original)",
+            "Periodic activity decay: activity(x) ← β·activity(x), (0<β<1) (original, conceptual)",
+            "EVSIDS Δ scaling: Δ ← (1/β)·Δ (practical implementation)",
+            "Modified activity increase with weights: activity(x) ← activity(x) + w(x)·Δ"
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "decay_factor_β_range": "0 < β < 1 (conceptual, not an explicit default value)",
+            "rnd-freq": "0",
+            "K": "0.1"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Algorithm 2 (Decision Heuristic)",
+        "Section 2.1 (Guided Branching Heuristics) - introduces the concept of variable weights w(x)",
+        "General understanding of Conflict-Driven Clause Learning (CDCL) solvers and the VSIDS heuristic"
+    ],
+    "reproducibility_notes": [
+        "The base solver version: Glucose 4.2.1.",
+        "The specific modification to the VSIDS/EVSIDS activity update rule: scaling the increment Δ by the learned weight w(x).",
+        "Solver configuration: randomized decision frequency (rnd-freq) set to 0.",
+        "Solver configuration: restart parameter K set to 0.1.",
+        "Phase saving is left enabled.",
+        "All other parameters use Glucose defaults."
+    ]
+}
+```

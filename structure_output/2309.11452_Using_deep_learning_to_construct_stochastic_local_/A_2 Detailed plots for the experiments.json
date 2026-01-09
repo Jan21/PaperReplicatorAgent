@@ -1,0 +1,40 @@
+```json
+{
+    "section_title": "A.2 Detailed plots for the experiments",
+    "section_purpose": "To provide supplementary figures (Figs. 8 and 9) that offer detailed visual comparisons of the machine-learning-boosted algorithms against their uniform and baseline counterparts across various performance metrics.",
+    "key_points": [
+        "Figure 8 benchmarks the ML-boosted Moser-Tardos Resample algorithm against its uniform version and WalkSAT, showing metrics like mean/median steps to solution and success rate across different constraint densities.",
+        "Figure 9 benchmarks the ML-boosted WalkSAT algorithm against its uniform version using the same suite of detailed performance metrics.",
+        "The plots compare algorithms across clauses-to-variables ratio (alpha), steps taken, percentage of instances solved, and number of clauses violated.",
+        "A step limit of 10^6 is used, where reaching this limit indicates failure to find a solution.",
+        "Scatter plots compare the step counts of uniform vs. ML-boosted versions directly, colored by the constraint density alpha."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Moser-Tardos Resample algorithm (uniform version)",
+            "ML-boosted Moser-Tardos Resample algorithm",
+            "WalkSAT algorithm",
+            "ML-boosted WalkSAT algorithm"
+        ],
+        "formulas": ["Clauses to variables ratio (alpha)"],
+        "architectures": [],
+        "hyperparameters": {
+            "time_limit_steps": "10^6"
+        },
+        "datasets": ["Evaluation dataset (unspecified composition)"]
+    },
+    "dependencies": [
+        "Section 3 (Experiments) for the main experimental setup",
+        "Section 4 (Results) for the primary result summaries",
+        "Section 2.4 for understanding the ML-boosted oracle training",
+        "Section 2.3 for understanding the Moser-Tardos Resample algorithm",
+        "General knowledge of WalkSAT algorithm"
+    ],
+    "reproducibility_notes": [
+        "Definition of the evaluation dataset and its distribution of clauses-to-variables ratios (alpha).",
+        "The specific time/step limit (10^6 steps) used as the cutoff for unsolved instances.",
+        "The exact metrics plotted: mean steps, median steps, percentage solved vs. alpha, steps (uniform vs. boosted), clauses violated vs. steps, and solved ratio vs. steps.",
+        "The versions of the baseline algorithms (uniform Moser-Tardos, WalkSAT) used for comparison."
+    ]
+}
+```

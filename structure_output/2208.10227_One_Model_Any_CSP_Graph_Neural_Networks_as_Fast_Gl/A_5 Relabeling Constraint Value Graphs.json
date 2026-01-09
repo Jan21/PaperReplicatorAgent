@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "A.5 Relabeling Constraint Value Graphs",
+    "section_purpose": "This section describes the GPU-accelerated implementation for efficiently recomputing edge labels in the constraint value graph after each new variable assignment sampling step, which is a critical performance requirement for the ANYCSP model.",
+    "key_points": [
+        "The relabeling procedure is fully implemented in PyTorch and GPU-accelerated to maximize performance for the ANYCSP model's fast global search.",
+        "Edge labels L_E are computed from node labels L_V (binary encoding of assignment α) using score calculations over constraint tuples and a case distinction based on maximum scores.",
+        "The implementation supports both extension constraints (explicit allowed/disallowed tuples) and optimized handling for constraints defined by forbidden tuples (like SAT problems).",
+        "Additional support is provided for linear (in)equalities over numerical domains and 'All-Different' constraints, which cannot be expressed explicitly but can still be computed efficiently on GPU.",
+        "The core computation uses scatter operations on maintained edge lists connecting values and constraint edges to their tuples, enabling parallel updates of all edge labels."
+    ],
+    "technical_details": {
+        "algorithms": ["GPU-accelerated relabeling procedure for constraint value graphs", "Scatter operations for computing scores and maximums across tuples", "Optimized handling for constraints specified via forbidden tuples"],
+        "formulas": ["Score s(r) = Σ_{i=1}^k L_V(r_i) where r is a constraint tuple", "Maximum score m(C,v) = max_{r∈R^C, v∈r} s(r)", "Edge label L_E(C,v) = 1 if m(C,v) - L_V(v) + 1 = k, otherwise 0"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 4 (Method) for understanding the ANYCSP framework and constraint value graphs", "Understanding of CSP instances F = (X, D, C) notation", "Knowledge of edge labels L_E and node labels L_V from the model architecture"],
+    "reproducibility_notes": ["Implementation details for GPU-accelerated relabeling using PyTorch scatter operations", "Support for three constraint types: extension constraints (explicit tuples), linear (in)equalities, and All-Different constraints", "Optimization for constraints specified via forbidden tuples rather than allowed tuples", "Reference to source code for details on handling linear inequalities and All-Different constraints"]
+}
+```

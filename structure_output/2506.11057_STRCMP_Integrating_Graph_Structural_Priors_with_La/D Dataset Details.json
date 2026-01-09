@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "D Dataset Details",
+    "section_purpose": "To provide detailed specifications and characteristics of the datasets used for experimental evaluation in the SAT and MILP domains.",
+    "key_points": [
+        "The paper uses datasets from two combinatorial optimization domains: SAT (Boolean Satisfiability) and MILP (Mixed Integer Linear Programming).",
+        "SAT datasets include crafted instances from specific problem families (e.g., random 3-SAT, structured SATLIB benchmarks).",
+        "MILP datasets include instances from real-world applications (e.g., production planning, network design) and standard MIPLIB benchmark library.",
+        "Datasets vary in size and complexity (e.g., number of variables, constraints) to test scalability.",
+        "Dataset splits (training/validation/test) are defined for evaluation."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["SAT Domain datasets: includes random 3-SAT instances and structured SATLIB benchmarks.", "MILP Domain datasets: includes real-world application instances and MIPLIB benchmark instances."]
+    },
+    "dependencies": ["Section 5.1 Settings", "Section 5 Experimental Evaluation", "Section 3 Problem Statement"],
+    "reproducibility_notes": ["Specific dataset names (e.g., SATLIB benchmarks, MIPLIB instances).", "Dataset characteristics: number of variables, constraints, problem types.", "Dataset splits for training, validation, and testing."]
+}
+```

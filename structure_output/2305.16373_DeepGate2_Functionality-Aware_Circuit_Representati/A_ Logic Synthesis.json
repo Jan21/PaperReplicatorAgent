@@ -1,0 +1,20 @@
+{
+  "section_title": "A. Logic Synthesis",
+  "section_purpose": "To demonstrate the effectiveness of the DeepGate2 functionality-aware circuit learning framework in improving the efficiency of SAT-sweeping, a common logic synthesis technique, by integrating it into the SAT sweeper for better equivalence class selection based on functional similarity.",
+  "key_points": [
+    "Describes SAT-sweeping and its key components (equivalence class manager, SAT-sweeping manager, simulator, SAT solver) and process.",
+    "Introduces using DeepGate2 embeddings to guide equivalence class selection by sorting based on cosine similarity, prioritizing gates with high functional similarity for SAT solver calls.",
+    "Experiments integrate DeepGate2 into ABC's SAT sweeper '&frag', with performance evaluated on 6 industrial circuits, ensuring functional correctness via '&ecc' command.",
+    "Results show significant reductions: average 53.37% decrease in SAT calls and 49.46% reduction in runtime compared to the baseline.",
+    "The approach reduces invalid SAT calls and improves efficiency by refining candidate equivalence classes more effectively with counterexamples from non-equivalent gates."
+  ],
+  "technical_details": {
+    "algorithms": ["SAT-sweeping algorithm for logic synthesis", "Integration of DeepGate2 for equivalence class selection using cosine similarity of embeddings"],
+    "formulas": [],
+    "architectures": ["SAT-sweeping ecosystem with equivalence class manager, SAT-sweeping manager, simulator, and SAT solver"],
+    "hyperparameters": {},
+    "datasets": ["6 industrial circuits (C1 to C6) with details on primary inputs/outputs (PI/PO), logic levels (Lev), and AND-nodes (And) as listed in Table VI"]
+  },
+  "dependencies": ["DeepGate2 model from methodology section (III. METHODOLOGY)", "Understanding of SAT-sweeping and logic synthesis concepts"],
+  "reproducibility_notes": ["Integration of DeepGate2 into ABC's SAT sweeper '&frag'", "Use of cosine similarity to sort candidate equivalence classes for prioritization", "Experimental setup: 2.40GHz Intel Xeon Silver 4210R CPU, 64GB RAM, single core, less than 1GB memory per test case", "Verification of synthesized circuits using '&ecc' command in ABC for functional correctness"]
+}

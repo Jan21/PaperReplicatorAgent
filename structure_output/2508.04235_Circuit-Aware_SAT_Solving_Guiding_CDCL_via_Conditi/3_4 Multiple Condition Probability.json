@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "3.4 Multiple Condition Probability",
+    "section_purpose": "To extend the model's capability from predicting a target node's probability conditioned on a single node to handling scenarios where multiple nodes are already assigned, which is more realistic for Circuit SAT solving.",
+    "key_points": [
+        "Practical Circuit SAT scenarios require inferring a node's value given multiple assigned nodes, not just one.",
+        "Multiple condition nodes (C1, C2, ..., Ck) are combined using a chain of two-input AND gates to create a single aggregated condition node C.",
+        "This aggregation represents the joint logical condition C = C1 ∧ C2 ∧ ... ∧ Ck.",
+        "Once aggregated, the same probability estimation method (Equation 5) is applied as for a single condition to compute P(A | C).",
+        "The approach generalizes single-condition inference to multi-condition scenarios in a structurally consistent way."
+    ],
+    "technical_details": {
+        "algorithms": ["Transformation of multiple condition nodes into a single aggregated node via logical conjunction using AND gates"],
+        "formulas": ["Reference to Equation 5 for computing conditional probability P(A | C), where C is the aggregated condition"],
+        "architectures": ["Logical circuit construction using a chain of two-input AND gates"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Equation 5 (from previous section 3.3 or 3.1)", "Understanding of single-condition probability inference", "Graph construction methods from section 3.2"],
+    "reproducibility_notes": ["Method for aggregating multiple condition nodes via AND gate chain", "Application of Equation 5 to the aggregated condition node C"]
+}
+```

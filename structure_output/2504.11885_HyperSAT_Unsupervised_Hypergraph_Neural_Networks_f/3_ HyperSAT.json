@@ -1,0 +1,20 @@
+{
+  "section_title": "3. HyperSAT",
+  "section_purpose": "To introduce the overall HyperSAT framework, describing its three core modules (hypergraph modeling, neural network, and probabilistic mapping) and the workflow for solving Weighted MaxSAT problems using hypergraph neural networks.",
+  "key_points": [
+    "HyperSAT consists of three modules: hypergraph modeling to represent Weighted MaxSAT instances as hypergraphs, neural network processing for optimization, and probabilistic mapping to convert outputs to Boolean solutions.",
+    "The neural network module addresses uneven clause weights by incorporating a cross-attention mechanism to prioritize clause contributions.",
+    "An unsupervised multi-objective loss function is introduced to capture logical interplay between positive and negative literal node representations.",
+    "The workflow transforms instances into hypergraphs, processes them via the neural network, and maps probabilistic outputs to discrete solutions.",
+    "Figure 1 illustrates the complete HyperSAT workflow, integrating all modules."
+  ],
+  "technical_details": {
+    "algorithms": ["hypergraph modeling", "cross-attention mechanism", "unsupervised multi-objective loss function"],
+    "formulas": [],
+    "architectures": ["hypergraph convolutional networks"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2. Preliminaries on Weighted MaxSAT and Hypergraph Neural Networks", "Figure 1 for visual workflow reference"],
+  "reproducibility_notes": ["Specific hypergraph modeling techniques detailed in Section 3.1", "Neural network architecture components (convolution, cross-attention, loss) from Section 3.2", "Probabilistic mapping method described in Section 3.3"]
+}

@@ -1,0 +1,50 @@
+```json
+{
+    "section_title": "4.3 Baselines",
+    "section_purpose": "To describe the baseline models used for comparison against the proposed GraSS approach in the SAT solver selection experiments.",
+    "key_points": [
+        "Five distinct baseline models are introduced: the single best-performing base solver, two adapted versions of the landmark SATzilla model (07 and 12), the ArgoSmArT k-NN model, and a CNN-based method that treats CNF formulas as images.",
+        "The SATzilla adaptations are modified by removing the presolving process and only using static features that do not require probing (33 features for 07, 55 for 12).",
+        "The SATzilla12 model is implemented as 21 pairwise random forest classifiers, each trained with weighted instances based on runtime differences.",
+        "The ArgoSmArT model uses a specific set of 29 handcrafted features and a k-NN classifier with k=9.",
+        "The CNN baseline replicates a prior method that converts CNF formulas to grayscale images (128x128 pixels) and uses a specific CNN architecture trained with cross-entropy loss and Adam."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Best Base Solver selection based on average runtime on training data",
+            "SATzilla07: Linear ridge regression model predicting runtimes based on 33 global handcrafted features, converted to a selection model",
+            "SATzilla12: Random forest classification with 21 pairwise models, each trained with instance weighting",
+            "ArgoSmArT: k-nearest neighbors classification model (k=9) using 29 features",
+            "CNN: Convolutional Neural Network processing CNF formulas as grayscale images"
+        ],
+        "formulas": [
+            "Number of pairwise models for SATzilla12: 7(7 - 1) / 2 = 21",
+            "Number of sampled features per tree in SATzilla12 random forest: floor(log2(55)) + 1 = 7"
+        ],
+        "architectures": [
+            "CNN: Uses the same architecture as in Loreggia et al. [31] (exact architecture details not specified in this section)"
+        ],
+        "hyperparameters": {
+            "SATzilla12_random_forest_trees": "99",
+            "SATzilla12_sampled_features_per_tree": "7",
+            "ArgoSmArT_k_neighbors": "9",
+            "CNN_learning_rate": "1e-3",
+            "CNN_optimizer": "Adam"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4.1 Base solvers (to understand the portfolio of seven solvers)",
+        "Section 4.2 Datasets (to understand the training data mentioned)",
+        "Section 3 APPROACH (to contrast with the proposed GraSS method)",
+        "References [31, 34, 45, 46] for details of the baseline methods"
+    ],
+    "reproducibility_notes": [
+        "Specific implementations: SATzilla07 uses scikit-learn Ridge class with default settings; SATzilla12 uses RandomForestClassifier with 99 trees and 7 sampled features; ArgoSmArT uses KNeighborsClassifier with k=9; CNN uses PyTorch with Adam optimizer (lr=1e-3) and cross-entropy loss.",
+        "Feature sets: SATzilla07 uses 33 global features (original #1-33), SATzilla12 uses 55 features (original #1-55), ArgoSmArT uses 29 features.",
+        "SATzilla12 training weighting: Each training instance is weighted by the absolute difference in runtime between the two solvers being compared.",
+        "CNN input processing: CNF formulas are interpreted as text, converted to ASCII values, then to grayscale images, and resized to 128x128 pixels.",
+        "The best base solver was identified as the 'bulky' solver for both datasets based on average runtime on training data."
+    ]
+}
+```

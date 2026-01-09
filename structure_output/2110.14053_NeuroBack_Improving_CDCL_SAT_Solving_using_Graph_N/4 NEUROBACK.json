@@ -1,0 +1,20 @@
+{
+  "section_title": "4 NEUROBACK",
+  "section_purpose": "Introduces the NeuroBack framework that uses offline GNN predictions on variable phases to enhance phase selection in CDCL SAT solvers, aiming to reduce computational cost and improve effectiveness.",
+  "key_points": [
+    "NeuroBack employs offline model predictions to reduce computational cost and make CDCL SAT solving more effective.",
+    "It converts input CNF formulas into a compact and learnable graph representation.",
+    "A GNN model predicts the phases of backbone variables.",
+    "Model inference is performed only once before SAT solving and used as initialization.",
+    "The enhanced SAT solver outputs the satisfiability of the input CNF formula."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": ["GNN model for predicting phases of backbone variables (detailed in subsections)"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 2 BACKGROUND for CDCL SAT solving concepts", "Section 3 RELATED WORK for GNN context", "Figure 1 for overview", "Subsections 4.1, 4.2, 4.3 for detailed components"],
+  "reproducibility_notes": ["Graph representation method from subsection 4.1", "GNN model design and training from 4.2", "Application of phase predictions in SAT solvers from 4.3"]
+}

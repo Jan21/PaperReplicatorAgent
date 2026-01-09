@@ -1,0 +1,31 @@
+```json
+{
+    "section_title": "4.1 Experiment Setup",
+    "section_purpose": "This section describes the experimental setup for evaluating the Attn-JGNN model, including model configurations, computational resources, and benchmark datasets used for training and testing.",
+    "key_points": [
+        "Specifies the model's hyperparameters: feature dimension = 64, message-passing iterations = 5, and an attention head schedule.",
+        "Describes the model architecture as two GAT layers followed by an MLP layer in sequence.",
+        "Details the two primary benchmarks used: a subset of BIRD and selected categories from SATLIB, including dataset splits and statistics.",
+        "Explains the process for generating ground truth labels using the DSharp #SAT solver with a time limit.",
+        "Outlines the computational environment (single NVIDIA A100 GPU with 8 CPU cores)."
+    ],
+    "technical_details": {
+        "algorithms": ["Graph Attention Network (GAT) layers for message passing", "Multi-Layer Perceptron (MLP) for final processing"],
+        "formulas": [],
+        "architectures": ["Two GAT layers followed by an MLP layer in sequential connection"],
+        "hyperparameters": {
+            "feature_dimension": "64",
+            "message_passing_iterations": "5",
+            "initial_attention_heads": "4",
+            "max_attention_heads": "8",
+            "attention_head_schedule": "increase by 1 every 1000 training steps until max reached",
+            "BIRD_train_test_split": "70%/30%",
+            "SATLIB_train_val_test_split": "60%/20%/20%",
+            "DSharp_time_limit": "5000 seconds"
+        },
+        "datasets": ["BIRD benchmark subset (8 categories from DQMR networks, grid networks, SMTLIB benchmarks, ISCAS89 circuits)", "SATLIB benchmark (selected distributions: RND3SAT, BMS, CBS, GCP, SW-GCP)", "BIRD: 20-150 CNF formulas per category, formulas can have >10,000 variables/clauses", "SATLIB: 46,200 SAT instances, variables range from 100 to 600"]
+    },
+    "dependencies": ["Section 3 (Methodology) for understanding the Attn-JGNN framework", "Section 2.3 (Graph Attention Networks) for GAT layer details", "Section 3.3 (#SAT) for context on the problem being solved"],
+    "reproducibility_notes": ["Exact model architecture (2 GAT layers + 1 MLP)", "All hyperparameter values (d=64, T=5, attention head schedule)", "Benchmark datasets and specific categories used", "Dataset split ratios for training/validation/testing", "Ground truth generation method (DSharp solver with 5000s time limit)", "Computational environment specification"]
+}
+```

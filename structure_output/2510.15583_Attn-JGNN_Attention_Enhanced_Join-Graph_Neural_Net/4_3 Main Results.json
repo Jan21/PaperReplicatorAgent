@@ -1,0 +1,22 @@
+```json
+{
+  "section_title": "4.3 Main Results",
+  "section_purpose": "This section presents and analyzes the main experimental results of the Attn-JGNN model, comparing its performance against baselines on benchmark datasets and conducting ablation studies to validate the contributions of different attention mechanisms.",
+  "key_points": [
+    "Attn-JGNN achieves more accurate count estimates than NSNet, BPNN, and F2 on the BIRD benchmark, being almost three times more accurate than F2 and BPNN, though it cannot compete with ApproxMC3 in all scenarios.",
+    "Attn-JGNN demonstrates effectiveness on large, difficult cases where ApproxMC3 fails (exceeding e^100 ground truth count), with Attn-JGNN still providing close approximations even when counts exceed e^1000.",
+    "Even without the attention mechanism, Attn-JGNN outperforms NSNet, indicating the superior reasoning ability of the IJGP algorithm compared to Belief Propagation.",
+    "On the SATLIB benchmark (with randomly generated instances), Attn-JGNN still outperforms NSNet and F2 in most categories despite the difficulty in exploiting common features.",
+    "Ablation experiments confirm that all three attention mechanisms (hierarchical, constraint perception, and dynamic) contribute positively: hierarchical and constraint perception improve accuracy, while dynamic attention reduces redundant heads and training time."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": ["BIRD benchmark (from real-world model counting applications)", "SATLIB benchmark (randomly generated instances)", "Categories within benchmarks: RND3SAT, BMS, CBS, GCP, SW-GCP"]
+  },
+  "dependencies": ["Section 4.1 Experiment Setup (for understanding benchmark details)", "Section 4.2 Evaluation & Baselines (for understanding compared methods: NSNet, BPNN, F2, ApproxMC3)", "Section 3 Methodology (for understanding Attn-JGNN framework and attention mechanisms)"],
+  "reproducibility_notes": ["Performance metrics: RMSE values for each method on each benchmark category (provided in tables)", "Key comparison points: Attn-JGNN outperforms baselines on BIRD and SATLIB benchmarks", "Ablation study results: RMSE, head utilization percentage, and training time for different attention mechanism variants (GAT, GAT-H, GAT-HC, GAT-HCD)", "Runtime constraints: ApproxMC3 fails on instances with ground truth count > e^100 within 5000 seconds"]
+}
+```

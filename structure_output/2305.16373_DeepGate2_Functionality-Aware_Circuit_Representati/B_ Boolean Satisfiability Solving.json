@@ -1,0 +1,26 @@
+```json
+{
+    "section_title": "B. Boolean Satisfiability Solving",
+    "section_purpose": "This section demonstrates how DeepGate2's functionality-aware representations are used to accelerate Boolean satisfiability (SAT) solving by integrating the model's predictions into a modern SAT solver's variable decision process.",
+    "key_points": [
+        "DeepGate2 accelerates SAT solving by predicting functional similarity between logic gates and transferring this to variable behavioral similarity in the SAT instance.",
+        "The method is integrated into the CaDiCal SAT solver, using DeepGate2 embeddings to group correlated variables and assign reverse values to quickly identify conflicts.",
+        "Experiments show a substantial average runtime reduction of 40.05% across five industrial instances compared to the baseline solver.",
+        "The DeepGate2 model inference time is minimal (a few seconds) and proportional to instance size, contributing less than 10% of overall runtime on average.",
+        "The reduction effectiveness depends on instance characteristics, as evidenced by varying speedups across similarly-sized instances."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Algorithm 1: Variable Decision Function with DeepGate2. When a variable s is assigned value v, it assigns the reverse value \u00afv to all unassigned, correlated variables s' where similarity Sim(s', s) > 1 - \u03b4 to prompt early conflict detection."
+        ],
+        "formulas": ["Similarity threshold \u03b4 = 1e-5 for joint variable decision."],
+        "architectures": [],
+        "hyperparameters": {
+            "threshold_delta": "1e-5"
+        },
+        "datasets": ["Five industrial instances (I1-I5) from logic equivalence checking (LEC) tasks, with sizes ranging from 17,495 to 28,672 gates/variables."]
+    },
+    "dependencies": ["DeepGate2 model (Section III) for generating gate-level embeddings and predicting functional similarity", "One-to-one mapping between circuits and conjunctive normal form (CNF) [37]", "Existing SAT solvers (CaDiCal [15]) and variable decision heuristics [34]-[36]"],
+    "reproducibility_notes": ["Algorithm 1 for integrating DeepGate2 predictions into variable decision", "Similarity threshold value (\u03b4 = 1e-5)", "Method for translating gate functional similarity to variable behavioral similarity using circuit-to-CNF mapping", "Experimental setup details: single 2.40GHz Intel Xeon E5-2640 v4 CPU", "Benchmark instances from LEC tasks"]
+}
+```

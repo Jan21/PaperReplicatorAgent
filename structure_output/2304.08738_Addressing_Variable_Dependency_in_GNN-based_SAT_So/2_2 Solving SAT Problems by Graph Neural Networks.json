@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.2 Solving SAT Problems by Graph Neural Networks",
+    "section_purpose": "To describe the foundational GNN-based SAT solving approach of NeuroSAT, an end-to-end neural method for predicting the satisfiability of Boolean formulas in CNF.",
+    "key_points": [
+        "NeuroSAT uses a bipartite graph representation where nodes represent literals and clauses in CNF, with edges indicating clause membership.",
+        "The method is end-to-end; it takes the bipartite graph as input and outputs a single bit prediction for satisfiability.",
+        "Node embeddings are updated through iterative message-passing between literal and clause nodes.",
+        "Literal embeddings are processed by an MLP to generate individual votes, which are averaged for the final satisfiability decision.",
+        "The paper also shows that satisfying assignments can be decoded from literal embeddings using k-means clustering."
+    ],
+    "technical_details": {
+        "algorithms": ["End-to-end GNN-based SAT solving via message-passing", "k-means clustering for decoding satisfying assignments from literal embeddings"],
+        "formulas": [],
+        "architectures": ["Bipartite graph neural network with literal nodes, clause nodes, and connecting edges", "Multi-layer perceptron (MLP) for generating votes from literal embeddings"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.1 (Boolean Satisfiability Problem) for understanding CNF and SAT basics"],
+    "reproducibility_notes": ["Bipartite graph construction method for CNF formulas (nodes for literals/clauses, edges for membership)", "Use of an MLP to generate votes from literal embeddings", "Final decision via averaging of literal votes", "Potential use of k-means clustering for assignment decoding"]
+}
+```

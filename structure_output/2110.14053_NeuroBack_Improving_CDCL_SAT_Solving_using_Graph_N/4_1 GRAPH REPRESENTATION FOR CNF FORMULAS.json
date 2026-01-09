@@ -1,0 +1,21 @@
+```json
+{
+    "section_title": "4.1 GRAPH REPRESENTATION FOR CNF FORMULAS",
+    "section_purpose": "To describe the specific bipartite graph representation used to encode Conjunctive Normal Form (CNF) SAT formulas for processing by the NeuroBack Graph Neural Network, focusing on how it compacts the structure and reduces graph diameter to improve learning.",
+    "key_points": [
+        "The paper uses a compact undirected bipartite graph representation with variable and clause nodes, and edges representing variable presence in clauses with polarity features.",
+        "A key innovation is the addition of a meta node for each connected component, connected to all clause nodes, to reduce the graph's diameter and ensure more effective message passing in the GNN.",
+        "The formal graph representation includes initial features for edges (based on polarity/meta type) and nodes (based on node type).",
+        "This representation improves upon prior work (NeuroCore) by addressing potential large diameters in large-scale formulas that could hinder GNN learning."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of CNF formulas and graph representations for SAT problems (likely covered in Section 2: BACKGROUND)", "Context on GNN-based models for SAT (referenced Related Work: Kurin et al. 2020; Yolcu & Póczos 2019)"],
+    "reproducibility_notes": ["The exact graph construction procedure: create bipartite graph with variable and clause nodes, add edges for variable-clause membership with polarity (+1/-1).", "The rule for adding meta nodes: one per connected component, connected to all clause nodes in that component.", "Initialization scheme for node features H_v: meta=0, variable=1, clause=-1.", "Initialization scheme for edge features W_u,v: meta edge=0, positive polarity=1, negative polarity=-1."]
+}
+```

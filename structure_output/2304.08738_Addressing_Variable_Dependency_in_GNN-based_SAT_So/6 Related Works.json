@@ -1,0 +1,18 @@
+{
+  "section_title": "6 Related Works",
+  "section_purpose": "To situate the paper's contributions within the broader research landscape by discussing related work in SAT solvers and symmetry breaking for GNN-based SAT solving.",
+  "key_points": [
+    "The paper distinguishes its focus on variable dependency from traditional symmetry breaking techniques in SAT solving.",
+    "It reviews GNN-based SAT solving methods, noting they often lack explicit mechanisms for handling variable dependency.",
+    "It connects the concept of variable dependency to ideas like functional dependency and symmetry in classical SAT solving."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 3 (Variable Dependency in SAT Solving)", "Section 4 (Our Methods)", "Background sections (2.2, 2.3) on GNN-based SAT solving"],
+  "reproducibility_notes": []
+}

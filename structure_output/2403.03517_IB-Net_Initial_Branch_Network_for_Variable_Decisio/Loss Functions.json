@@ -1,0 +1,20 @@
+```json
+{
+    "section_title": "Loss Functions",
+    "section_purpose": "To justify the selection of Focal Loss over other common classification loss functions for addressing the class imbalance issue in the UNSAT problem within the Logic Equivalence Checking (LEC) context.",
+    "key_points": [
+        "The Cross-Entropy loss is amended to Focal loss to target the special UNSAT problem in the LEC context.",
+        "Analysis shows Focal loss delivers superior performance compared to KLDiv and Cross-Entropy losses used in previous approaches.",
+        "The performance advantage justifies adopting Focal loss as the preferred loss function for handling imbalanced data distribution."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 3.4 Training (for context on the training process and loss function usage)", "Previous knowledge of common classification loss functions (Cross-Entropy, KLDiv)"],
+    "reproducibility_notes": ["Use Focal Loss instead of Cross-Entropy or KLDiv for training, specifically for the UNSAT problem in LEC."]
+}
+```

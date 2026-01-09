@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "G.1 Optimization Performance Result",
+    "section_purpose": "This section presents additional experimental results on optimization performance, providing quantitative comparisons between STRCMP, its ablations (DPO Only, SFT Only, w/o GNN), and baseline methods (AutoSAT, EasySAT) across SAT problem benchmarks. It reports key metrics (PAR-2 score and Solving Time) and references convergence and ablation study figures.",
+    "key_points": [
+        "Presents optimization performance results for SAT domain benchmarks (CNP, CoinsGrid, PRP, Zamkeller) comparing STRCMP variants against AutoSAT and EasySAT.",
+        "Reports two key metrics: PAR-2 Score (lower is better) and Solving Time (lower is better) for each method and dataset.",
+        "Shows STRCMP (full method) generally achieves competitive or best performance, particularly notable on Zamkeller dataset with significantly better PAR-2 (270.62) and Solving Time (7990).",
+        "Provides results for STRCMP ablation variants: DPO Only, SFT Only, and without GNN, highlighting the contribution of different components.",
+        "References convergence comparison figures (Fig 8-10, 12) and ablation study figures (Fig 11) that visualize performance across iterations/evolution and component importance."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["SAT domain benchmarks used: CNP, CoinsGrid, PRP, Zamkeller"]
+    },
+    "dependencies": ["Section 5 Experimental Evaluation (for overall evaluation methodology)", "Appendix E Metric Details (for definitions of PAR-2 Score and Solving Time)", "Section 4 Proposed Solution (for understanding STRCMP method and its components: DPO, SFT, GNN)"],
+    "reproducibility_notes": ["Dataset names (CNP, CoinsGrid, PRP, Zamkeller) for SAT domain benchmarks.", "Performance metrics reported: PAR-2 Score and Solving Time for each method-dataset pair.", "Existence of ablation variants: STRCMP (DPO Only), STRCMP (SFT Only), STRCMP w/o GNN, to assess component contributions."]
+}
+```

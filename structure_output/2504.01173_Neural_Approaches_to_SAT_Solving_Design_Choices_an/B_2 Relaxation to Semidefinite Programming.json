@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "B.2 Relaxation to Semidefinite Programming",
+    "section_purpose": "To describe the transformation of the MAX-2-SAT optimization problem from a discrete integer program into a continuous semidefinite programming (SDP) formulation by lifting variables to higher-dimensional unit vectors.",
+    "key_points": [
+        "The relaxation first allows variables to take continuous real values between -1 and 1, then further lifts them to (n+1)-dimensional unit vectors.",
+        "Binary products y_i·y_j in the objective function are replaced by inner products ⟨y_i, y_j⟩ between these unit vectors.",
+        "The inner products are compactly represented as entries Y_ij of a matrix Y, with the constraint Y ⪰ 0 ensuring they correspond to valid inner products.",
+        "The SDP relaxation is formulated as maximizing Tr(WY) subject to diagonal constraints Y_ii = 1 and positive semidefiniteness Y ⪰ 0.",
+        "The diagonal constraints ensure all vectors lie on an (n+1)-dimensional unit sphere, and positive semidefiniteness guarantees a Cholesky-like factorization Y = Y^(1/2)(Y^(1/2))^T."
+    ],
+    "technical_details": {
+        "algorithms": ["Semidefinite Programming (SDP) relaxation procedure"],
+        "formulas": ["Relaxed objective: Maximize Tr(W Y)", "Constraints: Y_ii = 1 for all i ∈ {0,1,…,n}, Y ⪰ 0", "Factorization: Y = Y^(1/2)(Y^(1/2))^T", "Inner product representation: Y_ij = ⟨y_i, y_j⟩"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section B.1 (Derivation of the SDP Relaxation) for context on the original MAX-2-SAT problem and objective", "Understanding of MAX-2-SAT as an optimization variant of SAT (Section 3.1.2)", "Basic knowledge of semidefinite programming and positive semidefinite matrices"],
+    "reproducibility_notes": ["The specific SDP formulation: Maximize Tr(WY) with constraints Y_ii=1 and Y ⪰ 0", "The variable lifting procedure from scalars y_i ∈ [-1,1] to unit vectors y_i in ℝ^(n+1)", "The interpretation of matrix entries as inner products: Y_ij = ⟨y_i, y_j⟩"]
+}
+```

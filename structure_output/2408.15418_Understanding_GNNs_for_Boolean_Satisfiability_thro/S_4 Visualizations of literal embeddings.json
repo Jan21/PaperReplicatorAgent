@@ -1,0 +1,18 @@
+{
+  "section_title": "S.4 Visualizations of literal embeddings",
+  "section_purpose": "To visually present the evolution of literal embeddings over time during the message-passing process of the GNN, using dimensionality reduction.",
+  "key_points": [
+    "The embeddings of literals evolve over the course of the message-passing process.",
+    "Visualization captures 6 different time steps from a total of 30 used for a specific example.",
+    "16-dimensional literal embedding vectors are projected into 2D for visualization using the UMAP algorithm."
+  ],
+  "technical_details": {
+    "algorithms": ["UMAP (Uniform Manifold Approximation and Projection) algorithm for dimensionality reduction from 16D to 2D"],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {"number_of_message_passing_time_steps": "30"},
+    "datasets": []
+  },
+  "dependencies": ["Understanding of the GNN's message-passing process (likely from Section 2.4 or S.2)", "Concept of literal embeddings (from earlier sections or S.2)"],
+  "reproducibility_notes": ["Use UMAP algorithm for 2D projection of 16-dimensional embeddings.", "Track embeddings at multiple time steps (e.g., 6 steps from a 30-step process)."]
+}

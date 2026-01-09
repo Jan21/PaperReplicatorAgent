@@ -1,0 +1,20 @@
+{
+  "section_title": "Abstract",
+  "section_purpose": "To summarize the paper's motivation, proposed solution, and key empirical results for addressing Boolean Satisfiability problems in Electronic Design Automation using neural network assistance.",
+  "key_points": [
+    "Boolean Satisfiability problems are vital in Electronic Design Automation, particularly for Logic Equivalence Checking.",
+    "Existing neural network assistance fails in this domain due to the predominantly unsatisfiable nature and high proportion of UNSAT-core variables in SAT problems for LEC.",
+    "Proposal of IB-Net, an innovative framework using graph neural networks and novel graph encoding techniques to model unsatisfiable problems and interact with solvers.",
+    "IB-Net achieves average runtime speedups of 5.0% on industrial data and 8.3% on SAT competition data, accelerating solver performance.",
+    "This breakthrough advances efficient solving in LEC workflows."
+  ],
+  "technical_details": {
+    "algorithms": ["Graph neural networks", "Novel graph encoding techniques"],
+    "formulas": [],
+    "architectures": ["Graph neural network model (not detailed in abstract)"],
+    "hyperparameters": {},
+    "datasets": ["Industrial data", "SAT competition data"]
+  },
+  "dependencies": ["Knowledge of Boolean Satisfiability problems", "Familiarity with Electronic Design Automation and Logic Equivalence Checking", "Understanding of graph neural networks and SAT solvers"],
+  "reproducibility_notes": ["Overview of IB-Net framework and graph encoding techniques", "Mention of datasets used (industrial and SAT competition data)", "Empirical speedup results, but no specific implementation details"]
+}

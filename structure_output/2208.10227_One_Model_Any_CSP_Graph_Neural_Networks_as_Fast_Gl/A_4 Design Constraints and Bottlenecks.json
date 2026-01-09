@@ -1,0 +1,28 @@
+```json
+{
+  "section_title": "A.4 Design Constraints and Bottlenecks",
+  "section_purpose": "This section discusses the primary bottlenecks of the ANYCSP model, focusing on GPU memory limitations and implementation optimizations for message passing in the graph neural network to handle large CSP instances efficiently.",
+  "key_points": [
+    "The main bottleneck is GPU memory, which limits the maximum instance size processable by ANYCSP, determined by the memory required for message passes between values and constraints.",
+    "Space complexity analysis shows the memory requirements for constraint edges and message passing, with optimization achieved using sparse matrix operations to avoid intermediate tensors.",
+    "Implementation of custom sparse dense matrix multiplication (SPMM) in COO format with CUDA avoids expensive matrix conversions and improves efficiency compared to standard PyTorch Sparse methods.",
+    "Experimentation with attention-based aggregation (e.g., GAT) did not improve performance and introduced memory overhead, leading to a focus on basic aggregations (SUM, MEAN, MAX)."
+  ],
+  "technical_details": {
+    "algorithms": ["sparse dense matrix multiplication (SPMM)", "scatter operation from PyTorch Scatter library", "generalized SPMM in COO format with CUDA"],
+    "formulas": ["Space complexity for message passing: O(|C|·k·ℓ + |X|·ℓ·d + |C|·d) for constraint edges and messages"],
+    "architectures": [],
+    "hyperparameters": {
+      "d": 128,
+      "aggregation_functions": {"MODEL RB": "MAX", "k-COL": "MAX", "3-SAT": "MAX", "Max-k-SAT": "MEAN", "MAXCUT": "SUM"},
+      "λ": 0.75,
+      "T_train": 40,
+      "batch_size": 25,
+      "lr": 5e-6
+    },
+    "datasets": ["MODEL RB", "k-COL", "3-SAT", "Max-k-SAT", "MAXCUT"]
+  },
+  "dependencies": ["Understanding of graph neural network message passing mechanisms", "Knowledge of constraint satisfaction problem (CSP) formulations", "Previous sections on model architecture and method (e.g., Appendix A.1, Section 4)"],
+  "reproducibility_notes": ["Hyperparameter values from Table 5 for each CSP type", "Use of SPMM in COO format with CUDA to minimize memory allocation", "Avoidance of attention-based aggregations (e.g., GAT) due to memory inefficiency"]
+}
+```

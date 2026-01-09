@@ -1,0 +1,18 @@
+{
+  "section_title": "4.3 APPLYING PHASE PREDICTIONS IN SAT",
+  "section_purpose": "This section describes how the GNN-derived phase predictions are integrated into a CDCL SAT solver to enhance its phase selection heuristics.",
+  "key_points": [
+    "The primary method for integrating neural predictions is to initialize the phases of variables in the CDCL solver based on the model's predictions.",
+    "The authors implemented this approach by modifying the state-of-the-art solver Kissat to support initialization with their NeuroBack predictions.",
+    "The resulting integrated system is named NeuroBack-Kissat."
+  ],
+  "technical_details": {
+    "algorithms": ["Integration method: Initializing CDCL solver variable phases based on external neural predictions"],
+    "formulas": [],
+    "architectures": ["NeuroBack-Kissat (Kissat solver modified to accept NeuroBack phase initialization)"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Section 4.2 on GNN-based phase prediction for the source of the predictions", "Background on CDCL SAT solving (Section 2) and the Kissat solver"],
+  "reproducibility_notes": ["The specific integration method: phase initialization in the CDCL solver.", "The base solver chosen: Kissat (Biere & Fleury, 2022).", "The name of the integrated system: NeuroBack-Kissat."]
+}

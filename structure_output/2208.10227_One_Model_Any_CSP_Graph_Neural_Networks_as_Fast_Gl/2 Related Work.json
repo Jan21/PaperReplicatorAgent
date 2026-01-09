@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2 Related Work",
+    "section_purpose": "To survey existing literature on applying Graph Neural Networks (GNNs) to combinatorial problems, categorizing approaches into end-to-end solution prediction, local search modifications, and differentiable relaxations, and to position the paper's contribution within this landscape.",
+    "key_points": [
+        "End-to-end GNN approaches directly predict approximate solutions to combinatorial problems, building on work using Pointer Networks, attention mechanisms, and Q-learning for iterative construction.",
+        "A major category uses GNNs as local search heuristics within a reinforcement learning framework, iteratively improving candidate solutions through local modifications; examples include methods for SAT, MAXCUT, graph partitioning, and TSP.",
+        "A shared drawback of iterative GNN-based local search methods is their high computational cost on large instances, which slows search compared to classical algorithms.",
+        "Some approaches (e.g., ECORD) address the speed issue by using a GNN only once upfront, then switching to faster architectures (like GRUs) for the local search.",
+        "A fundamentally different approach uses soft, differentiable relaxations of combinatorial problems (e.g., for SAT and binary CSPs) that can be optimized with SGD, though these relaxed objectives may not fully capture the discrete problem's hardness."
+    ],
+    "technical_details": {
+        "algorithms": ["Policy gradient descent", "Q-learning for GNNs", "Reinforcement Learning for local search", "SGD on soft relaxations"],
+        "formulas": [],
+        "architectures": ["Pointer Networks", "Attention-based models", "Graph Neural Networks (GNNs)", "GRU-based architectures"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Basic understanding of Graph Neural Networks (GNNs)", "Familiarity with combinatorial optimization problems (e.g., TSP, MAXCUT, SAT)", "Concept of reinforcement learning for search"],
+    "reproducibility_notes": []
+}
+```

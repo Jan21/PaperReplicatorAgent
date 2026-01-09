@@ -1,0 +1,24 @@
+A Unified Pre-training and Adaptation Framework for Combinatorial Optimization on Graphs
+  1 Introduction
+  2 Related Work
+    2.1 Learning Methods for Solving CO Problems
+    2.2 Graph Neural Networks
+  3 Methodology
+    3.1 CO Problems on Graphs
+    3.2 Problem Transfer via Max-SAT Problem
+      3.2.1 From Graph to Clauses
+      3.2.2 From Clauses to Bipartite Graph
+    3.3 Learning with Bipartite Graph Attention Networks
+    3.4 Pre-Training and Fine-Tuning with Domain Adaptation
+      3.4.1 Pre-Training
+      3.4.2 Fine-Tuning with Domain Adaptation
+    3.5 Inference with Local Search Method
+    3.6 Overall Algorithms
+  4 Experimental Results
+    4.1 Experimental Setup
+    4.2 Performance of Solving COs
+    4.3 Ablation Study
+    4.4 Effects of Different Knowledge Transfer Strategies
+    4.5 Parameter Analysis
+  5 Conclusion
+  References

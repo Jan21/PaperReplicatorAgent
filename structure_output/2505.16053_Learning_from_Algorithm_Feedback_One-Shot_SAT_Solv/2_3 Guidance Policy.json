@@ -1,0 +1,41 @@
+```json
+{
+    "section_title": "2.3 Guidance Policy",
+    "section_purpose": "To describe how the output of the Graph Neural Network (GNN) is transformed into a probabilistic policy for sampling variable weights and polarities, and to explain the training and inference mechanisms using this policy.",
+    "key_points": [
+        "The GNN outputs two real numbers per variable, μ(x) and ρ(x), which parameterize distinct probability distributions for the variable's weight and polarity.",
+        "The weight policy π_θ^w(x) is defined as a Log-Normal distribution with mean parameter μ(x) and a fixed hyperparameter standard deviation σ^w.",
+        "The polarity policy π_θ^p(x) is defined as a Bernoulli distribution where the probability is derived from ρ(x) via a sigmoid function.",
+        "The complete policy π_θ(φ) is the joint independent distribution over all variables, from which a full variable parameterization W (weights and polarities) is sampled in one shot.",
+        "During training, multiple parameterizations are sampled i.i.d. for policy gradient training (GRPO), while at test time, the mode (most probable weight/polarity) is used deterministically for better average performance."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Guidance policy construction from GNN outputs.",
+            "Sampling procedure for variable parameterizations from the joint policy.",
+            "Use of Group Relative Policy Optimization (GRPO) for training (referenced)."
+        ],
+        "formulas": [
+            "Weight policy: π_θ^w(x) = LogNormal(μ(x), σ^w).",
+            "Polarity policy: π_θ^p(x) = Bernoulli(Sigmoid(ρ(x))).",
+            "Joint policy: π_θ(φ) = product over all variables of π_θ^w(x_i) × π_θ^p(x_i).",
+            "Probability density: π_θ(W|φ) = ∏_x π_θ^w(w(x)|φ) · π_θ^p(p(x)|φ)."
+        ],
+        "architectures": [],
+        "hyperparameters": {
+            "σ^w": "Fixed hyperparameter > 0 for the Log-Normal distribution standard deviation."
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 2.2 (Graph Representation and Architecture) for the GNN model N_θ that produces outputs μ(x) and ρ(x).",
+        "Section 2.4 (Policy Optimization) for details on the training signal and GRPO.",
+        "Understanding of SAT formulas and variable sets Var(φ)."
+    ],
+    "reproducibility_notes": [
+        "The exact policy definitions: Log-Normal for weights (with hyperparameter σ^w) and Bernoulli (with sigmoid) for polarities.",
+        "The procedure for sampling a full variable parameterization W: independent parallel sampling for each variable.",
+        "The critical difference between training (sampling multiple W i.i.d.) and test-time inference (using the mode of the distributions)."
+    ]
+}
+```

@@ -1,0 +1,20 @@
+{
+  "section_title": "3.3 Neural Network Model",
+  "section_purpose": "This section describes the specific neural network architecture used for predicting which variables belong to the UNSAT-core, detailing the Weighted Graph Convolutional Network (W GCN) for feature extraction and the Multi-Layer Perceptron (MLP) for final prediction.",
+  "key_points": [
+    "The model uses a Weighted GCN (W GCN) for graph feature extraction and an MLP for outputting variable UNSAT-core probabilities.",
+    "Node embeddings are initialized by concatenating node degree and literal type, then transformed via a linear layer.",
+    "The W GCN update rule combines normalized weighted adjacency information with features from negated literal nodes.",
+    "The adjacency matrix is normalized by its sum to prevent gradient explosion.",
+    "The final variable probability is computed by an MLP that processes features from a literal and its negation."
+  ],
+  "technical_details": {
+    "algorithms": ["Weighted Graph Convolutional Network (W GCN) for message passing on WLIG graph", "Multi-Layer Perceptron (MLP) for classification/probability output"],
+    "formulas": ["h_i = L_init(D_i ⊕ T_i) - Initial node embedding via linear transformation of concatenated degree and type.", "H^(l+1) = ReLU(L_out(A' H^(l) ⊕ Flip(H^(l)))) - W GCN iteration update rule.", "A' = A / (∑_i ∑_j A_ij) - Normalization of adjacency matrix.", "Flip(H) = [h_(N/2+1),..., h_N, h_1,..., h_(N/2)]^T - Operation to pair literals with their negations.", "p_i = softmax(L2 · ReLU(L1 · (h_i ⊕ h_(N+1-i)) + b_1) + b_2) - Final probability output via MLP with two linear layers and softmax."],
+    "architectures": ["W GCN followed by MLP", "Linear transformation L_init: R^(1x2) -> R^(1x2d) for initial embedding", "Linear transformation L_out: R^(1x4d) -> R^(1x2d) within W GCN", "MLP with layers L1 and L2, ReLU activation, and softmax output"],
+    "hyperparameters": {"d": "Embedding dimension parameter (half the final embedding size 2d)", "L": "Number of W GCN iterations"},
+    "datasets": []
+  },
+  "dependencies": ["Section 3.2 Graph Formulation (for WLIG graph structure and adjacency matrix A)", "Section 3.1 Overview (for overall model context)"],
+  "reproducibility_notes": ["The formulas for node embedding initialization (1), W GCN update (2), adjacency normalization (3), Flip operation (4), and final MLP probability (5).", "The architecture details: use of W GCN and MLP, specific linear transformations (L_init, L_out, L1, L2).", "Hyperparameters: embedding dimension d, number of GCN iterations L.", "The use of node degree and literal type as initial node features."]
+}

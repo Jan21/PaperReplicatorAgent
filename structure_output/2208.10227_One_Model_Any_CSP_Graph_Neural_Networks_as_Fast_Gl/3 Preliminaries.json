@@ -1,0 +1,30 @@
+```json
+{
+    "section_title": "3 Preliminaries",
+    "section_purpose": "To formally define the Constraint Satisfaction Problem (CSP) framework and introduce key terminology used throughout the paper, setting up the mathematical foundation for the method.",
+    "key_points": [
+        "A CSP instance is formally defined as a triple of variables, domains, and constraints.",
+        "Assignments can be viewed as either mappings from variables to domain elements or as subsets of 'values' (variable-domain pairs).",
+        "The quality of an assignment is defined as the fraction of constraints it satisfies, which defines the MAXCSP optimization problem.",
+        "A 'soft assignment' is introduced as a probability distribution over values for each variable, allowing for probabilistic sampling of assignments."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [
+            "CSP instance definition: I = (X, D, C) where X=variables, D=domains, C=constraints.",
+            "Constraint C = (s^C, R^C) where s^C is a tuple of variables and R^C is a relation over their domains.",
+            "Assignment quality: Q_I(α) = |{C ∈ C : α ⊧ C}| / |C| (fraction of satisfied constraints).",
+            "Soft assignment condition: φ: V → [0,1] with ∑_{ν ∈ V_X} φ(ν) = 1 for all variables X."
+        ],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [],
+    "reproducibility_notes": [
+        "Clear formal definitions of CSP instances, assignments, and quality metric are essential for reproducing the problem setup.",
+        "Understanding the distinction between the decision version (satisfiability) and the maximization version (MAXCSP) is important.",
+        "The concept of 'soft assignments' and how assignments are sampled from them (α ∼ φ) is a key probabilistic component of the method."
+    ]
+}
+```

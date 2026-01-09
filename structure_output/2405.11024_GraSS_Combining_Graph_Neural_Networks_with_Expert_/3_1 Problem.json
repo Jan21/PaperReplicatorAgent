@@ -1,0 +1,21 @@
+```json
+{
+  "section_title": "3.1 Problem",
+  "section_purpose": "This section formally defines the SAT solver selection problem that the paper addresses and introduces the training and inference setup.",
+  "key_points": [
+    "The problem is defined as selecting one solver from a fixed pool of K solvers for a given SAT instance to minimize runtime.",
+    "Training uses a dataset of SAT instances with sampled solving times from all K solvers for each instance.",
+    "The model is trained offline in a supervised manner and then used at test time to select solvers for new instances.",
+    "Performance is benchmarked by the average runtime of selected solvers over test instances."
+  ],
+  "technical_details": {
+    "algorithms": [],
+    "formulas": [],
+    "architectures": [],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": [],
+  "reproducibility_notes": ["The definition of the solver selection problem and the train/test protocol are foundational for understanding the rest of the approach."]
+}
+```

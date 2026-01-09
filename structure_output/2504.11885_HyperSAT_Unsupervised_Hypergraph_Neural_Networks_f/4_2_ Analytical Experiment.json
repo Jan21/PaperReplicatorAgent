@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2. Analytical Experiment",
+    "section_purpose": "To evaluate and compare the convergence performance of HyperSAT and HypOp unsupervised methods on the Weighted MaxSAT problem using a specific dataset.",
+    "key_points": [
+        "HyperSAT and HypOp convergence is evaluated using the primary task loss (sum of weights of unsatisfied clauses).",
+        "Both models converge within 300 epochs on the uuf250-1065 dataset.",
+        "HyperSAT achieves a significantly lower final loss (~52) compared to HypOp (~139).",
+        "HyperSAT decreases loss more quickly and achieves better overall performance than HypOp.",
+        "The results demonstrate HyperSAT's effectiveness for learning to solve Weighted MaxSAT problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": ["Primary task loss L_task from Eq. (8): sum of weights of unsatisfied clauses"],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["uuf250-1065 dataset"]
+    },
+    "dependencies": ["Section 3.3 (Probabilistic Mapping for loss calculation)", "Equation (8) referenced for loss function"],
+    "reproducibility_notes": ["Use uuf250-1065 dataset for convergence testing", "Train for up to 300 epochs", "Measure primary task loss L_task during training"]
+}
+```

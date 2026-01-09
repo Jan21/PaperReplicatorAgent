@@ -1,0 +1,45 @@
+```json
+{
+    "section_title": "B.3 MAXCUT",
+    "section_purpose": "This section describes the experimental setup, baselines, and methodological choices for evaluating the proposed GNN-based method on the MAXCUT problem, treated as a CSP instance with a reduction from 2-colorability.",
+    "key_points": [
+        "MAXCUT is modeled as a CSP instance using the same reduction as vertex coloring but with a fixed number of colors (k=2), applicable to graphs with positive edge weights.",
+        "The training data distribution consists of Erdős-Rényi graphs with 100 vertices and edge probabilities sampled uniformly from [0.05, 0.3]; validation uses the same edge probability distribution but with 500 vertices.",
+        "Classical baselines include a constructive greedy algorithm and an SDP-based approximation algorithm (Goemans and Williamson 1995), with a 3-hour timeout limiting SDP to graphs under 1000 vertices.",
+        "Neural baselines are RUNCSP (trained on the same distribution), ECORD, and ECO-DQN (trained on distributions from Barrett et al.'s Gset experiments).",
+        "The experimental setup selects a single model for each neural method using Erdős-Rényi graphs for validation, aiming to test generalization to unseen sizes and structures, unlike the per-test-group model selection used in some prior work."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Constructive greedy algorithm",
+            "SDP-based approximation algorithm (Goemans and Williamson 1995)"
+        ],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "training_graph_vertices": "n=100",
+            "training_edge_probability_range": "p ∈ [0.05, 0.3]",
+            "validation_graph_vertices": "n=500",
+            "SDP_timeout": "3 hours"
+        },
+        "datasets": [
+            "Erdős-Rényi graphs for training (n=100, p∈[0.05,0.3])",
+            "Erdős-Rényi graphs for validation (n=500, same p range)",
+            "Gset graphs for testing"
+        ]
+    },
+    "dependencies": [
+        "Section B.2 for the vertex coloring reduction method",
+        "General understanding of CSP modeling and MAXCUT problem",
+        "Related work for baseline methods (RUNCSP, ECORD, ECO-DQN)"
+    ],
+    "reproducibility_notes": [
+        "Training data distribution details: Erdős-Rényi graphs with n=100, p sampled uniformly from [0.05,0.3]",
+        "Validation data distribution: same p range, n=500",
+        "Baseline implementations: constructive greedy and SDP from Mehta (2019), neural baselines from cited papers",
+        "Neural baseline training distributions: ECO-DQN on n=200 graphs, ECORD on n=500 graphs, as per Barrett et al.",
+        "Model selection protocol: single model selected using Erdős-Rényi validation graphs",
+        "SDP timeout setting: 3 hours"
+    ]
+}
+```

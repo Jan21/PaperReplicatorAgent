@@ -1,0 +1,18 @@
+{
+  "section_title": "ABSTRACT",
+  "section_purpose": "To summarize the paper's key approach of applying neural graph networks to enhance branching heuristics in SAT-solving and to highlight reported performance improvements over standard heuristics.",
+  "key_points": [
+    "Neural graph networks with message-passing architecture and attention mechanism are used.",
+    "The branching heuristic in two SAT-solving algorithms is enhanced.",
+    "Improvements of learned neural heuristics are reported compared to two standard human-designed heuristics."
+  ],
+  "technical_details": {
+    "algorithms": ["Neural graph networks", "Message-passing architecture", "Attention mechanism"],
+    "formulas": [],
+    "architectures": ["Neural graph networks with message-passing and attention mechanism"],
+    "hyperparameters": {},
+    "datasets": []
+  },
+  "dependencies": ["Basic knowledge of SAT-solving algorithms and neural networks"],
+  "reproducibility_notes": ["The specific SAT-solving algorithms are not named in the abstract.", "No hyperparameters or dataset details are provided in the abstract."]
+}

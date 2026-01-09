@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "2.3 Solving Circuit-SAT Problems by Graph Neural Networks",
+    "section_purpose": "This section explains how Graph Neural Networks (GNNs) are adapted to solve Circuit-SAT problems, focusing on the conversion to an And-Inverter Graph (AIG) representation and describing the specific DG-DAGRNN model.",
+    "key_points": [
+        "Circuit formulations naturally provide a graph structure, making them suitable for GNN-based solving.",
+        "Any logic function can be represented using only AND and NOT gates, forming an And-Inverter Graph (AIG), a standard in EDA.",
+        "The DG-DAGRNN model uses one-hot vectors to encode node types (logic gate or circuit input) as GNN inputs.",
+        "Message-passing in DG-DAGRNN is topologically ordered and sequential (forward and backward passes), unlike NeuroSAT's concurrent updates.",
+        "Both NeuroSAT and DG-DAGRNN fail to consider variable dependency, leading to incorrect predictions on symmetric graphs."
+    ],
+    "technical_details": {
+        "algorithms": ["Message-passing with forward pass from inputs to output and backward pass in reverse order", "Topologically ordered sequential node embedding updates (DG-DAGRNN)"],
+        "formulas": [],
+        "architectures": ["DG-DAGRNN (GNN-based model for Circuit-SAT)", "And-Inverter Graph (AIG) representation"],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": ["Section 2.2 (Background on GNN-based SAT solving, specifically NeuroSAT)", "Basic understanding of Boolean logic and circuit graphs"],
+    "reproducibility_notes": ["Knowledge of representing logic functions as AIGs (AND/NOT gates only)", "DG-DAGRNN's node encoding scheme (one-hot vectors for node types)", "Understanding of ordered vs. concurrent message-passing updates"]
+}
+```

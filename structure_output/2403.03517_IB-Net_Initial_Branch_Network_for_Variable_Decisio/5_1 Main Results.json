@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "5.1 Main Results",
+    "section_purpose": "To present the core experimental findings demonstrating the effectiveness of the proposed IB-Net model in comparison to baseline methods, focusing on key performance metrics like UNSAT-core prediction and runtime reduction.",
+    "key_points": [
+        "IB-Net significantly outperforms baseline models, specifically the SATGNN baseline, in the UNSAT-core prediction task by a large margin (19.53% absolute improvement in Average Precision).",
+        "For runtime reduction performance, IB-Net-trained solvers substantially reduce the number of conflicts and achieve faster solving times compared to the native Glucose 3.0 solver, indicating its capability to guide the decision heuristic effectively.",
+        "The results confirm the central hypothesis that a neural model can learn to predict good branching decisions by identifying variables likely to be part of an unsatisfiable core, thereby improving solver efficiency.",
+        "The superior performance is attributed to the specific architecture and loss functions of IB-Net, as discussed in the ablation study, rather than the general graph-based approach.",
+        "IB-Net's training strategy, which integrates supervision from UNSAT core variables as well as conflict analysis during solving (e.g., 1st-UIP clauses), is validated as effective."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Experiments are conducted on datasets described in Section 4.1, which are crafted from SAT competition benchmarks and IBM formal verification benchmarks."]
+    },
+    "dependencies": ["Section 4 (Experimental Settings) for details on datasets, baseline models (SATGNN, Glucose 3.0), evaluation metrics, and overall setup.", "Section 3 (IB-Net approach) for understanding the model architecture and training methodology being evaluated."],
+    "reproducibility_notes": ["The specific evaluation metrics used: Average Precision for UNSAT-core prediction, and number of conflicts/solving time for runtime reduction.", "The baseline for comparison: A SATGNN model and the native Glucose 3.0 solver.", "The performance gap stated: 19.53% improvement over SATGNN in Average Precision."]
+}
+```

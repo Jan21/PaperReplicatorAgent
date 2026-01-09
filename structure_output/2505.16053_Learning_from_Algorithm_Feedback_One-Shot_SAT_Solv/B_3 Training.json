@@ -1,0 +1,23 @@
+```json
+{
+    "section_title": "B.3 Training",
+    "section_purpose": "This section presents and analyzes the training results and learning curves for the Reinforcement Learning from Algorithm Feedback (RLAF) models, specifically focusing on the performance and stability during the GRPO optimization process.",
+    "key_points": [
+        "Training curves show that the cost (mean number of decisions) decreases consistently throughout training for all six RLAF models.",
+        "Training with the March base solver produces noisier training, especially on 3SAT instances where policy improvement plateaus after approximately 700 GRPO iterations.",
+        "Despite training noise, the learned guidance policies successfully reduce solver cost for both base solvers across all three problem types.",
+        "Noise reduction strategies for training with March remain an area for future work."
+    ],
+    "technical_details": {
+        "algorithms": ["GRPO (Graph Representation Policy Optimization) training"],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {
+            "GRPO_iterations": "Mention of plateau at 700 iterations for 3SAT with March"
+        },
+        "datasets": ["Validation set used for evaluating training progress"]
+    },
+    "dependencies": ["Section 2.4 Policy Optimization (describes GRPO)", "Section 2.5 Training Setup", "Appendix B.4 Supervised UNSAT-Core and Backbone Prediction (for context on problem types)", "General understanding of base solvers Glucose and March from algorithm sections"],
+    "reproducibility_notes": ["Training curves should show decreasing mean decisions on validation set", "Need to monitor for training noise, particularly when using March solver on 3SAT instances", "Expect policy improvement plateau around 700 GRPO iterations for certain configurations", "Optimization objective is to reduce the number of decisions made by the solver"]
+}
+```

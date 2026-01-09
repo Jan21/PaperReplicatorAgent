@@ -1,0 +1,42 @@
+```json
+{
+    "section_title": "4.3 Supported Tasks, Training and Testing Settings",
+    "section_purpose": "This section defines the three core prediction tasks supported by the G4SATBench benchmark, detailing their formulation, the training objectives (including supervised and unsupervised paradigms), inference algorithms, and evaluation metrics.",
+    "key_points": [
+        "G4SATBench supports three core prediction tasks for SAT solving: satisfiability prediction (binary graph classification), satisfying assignment prediction (binary node classification), and unsat-core variable prediction (binary node classification).",
+        "Two unsupervised training paradigms are supported for the satisfying assignment prediction task, using different loss functions that are minimized only when a satisfying assignment is found, as alternatives to standard supervised binary cross-entropy loss.",
+        "Alternative inference algorithms for satisfying assignment prediction are provided, including a 2-clustering method on literal embeddings and iterative readout during message passing to generate multiple candidate assignments.",
+        "Specific evaluation metrics are defined: classification accuracy for satisfiability and unsat-core prediction, and solving accuracy (whether any predicted assignment satisfies the formula) for satisfying assignment prediction.",
+        "The section provides the mathematical formulations for model readouts (Eq. 2, 3), smooth logical operators for unsupervised training (Eq. 4), and the corresponding unsupervised loss functions (Eq. 5, 6)."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Standard readout for satisfiability prediction: Mean pooling of all literal embeddings after T message passing iterations, followed by an MLP and sigmoid.",
+            "Standard readout for variable-level tasks: For each variable, concatenate embeddings of its positive and negative literal, pass through an MLP and sigmoid.",
+            "Unsupervised inference algorithm 1 (Selsam et al., 2019): Perform 2-clustering on literal embeddings to obtain centers Δ1 and Δ2, partition literals based on a distance predicate to construct two candidate assignments.",
+            "Unsupervised inference algorithm 2 (Amizadeh et al., 2019b): Apply the readout function at each message passing iteration to generate multiple assignment predictions per instance."
+        ],
+        "formulas": [
+            "Equation (2): y_φ = σ(MLP(MEAN({h_l^(T), l ∈ φ}))). Readout for satisfiability prediction.",
+            "Equation (3): y_v = σ(MLP([h_l^(T), h_{-l}^(T)])) for variable v. Readout for variable-level tasks.",
+            "Equation (4): Smooth max S_max(x1,...,xd) = Σ_i x_i * exp(x_i/τ) / Σ_i exp(x_i/τ). Smooth min S_min(...) = Σ_i x_i * exp(-x_i/τ) / Σ_i exp(-x_i/τ). τ is temperature parameter.",
+            "Equation (5): Unsupervised loss L_φ(x) = (1 - S(x))^κ / ((1 - S(x))^κ + S(x)^κ), where S(x) is satisfiability value computed via smooth operators.",
+            "Equation (6): Alternative unsupervised loss V_c(x) = 1 - ∏_{i∈c^+}(1 - x_i) ∏_{i∈c^-} x_i. L_φ(x) = -log(∏_{c∈φ} V_c(x)) = -Σ_{c∈φ} log(V_c(x))."
+        ],
+        "architectures": ["GNN models on the LCG* graph representation. An MLP head is used for final prediction."],
+        "hyperparameters": {"temperature τ": "≥ 0 (in smooth operators)", "exponent κ": "mentioned in Eq. 5 loss"},
+        "datasets": []
+    },
+    "dependencies": [
+        "Section 4.1 (Datasets) for the SAT instances/CNF formulas φ.",
+        "Section 4.2 (GNN Baselines) for understanding the GNN models producing the embeddings h_l^(T).",
+        "Section 3 (Preliminaries) for background on SAT problems, CNF, and likely the definition of LCG*."
+    ],
+    "reproducibility_notes": [
+        "Precise formulation of the three prediction tasks (graph vs. node classification, input/output).",
+        "The exact readout equations (2) and (3) for generating predictions from GNN embeddings.",
+        "Definitions of the two unsupervised loss functions (Eq. 4-6) and the inference algorithms for candidate assignment generation.",
+        "The specific evaluation metrics: accuracy for classification tasks, solving accuracy (based on any correct assignment) for assignment prediction."
+    ]
+}
+```

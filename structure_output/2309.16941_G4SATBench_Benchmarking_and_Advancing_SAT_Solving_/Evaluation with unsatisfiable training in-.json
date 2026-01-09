@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "Evaluation with unsatisfiable training in-",
+    "section_purpose": "This section investigates the impact of training GNN models on datasets containing unsatisfiable instances, addressing a practical scenario where problem satisfiability is unknown prior to training.",
+    "key_points": [
+        "The standard evaluation focuses on satisfiable instances, but real-world training may involve unknown or mixed satisfiability.",
+        "Training NeuroSAT with unsupervised loss UNS₂ on noisy datasets (50% unsatisfiable instances) is explored.",
+        "Incorporating unsatisfiable instances does not significantly degrade NeuroSAT's performance.",
+        "This demonstrates the potential utility of UNS₂ loss for training GNNs on new datasets without prior satisfiability knowledge.",
+        "One dataset (k-Clique) was excluded as NeuroSAT fails to train on it."
+    ],
+    "technical_details": {
+        "algorithms": ["Training NeuroSAT using the unsupervised loss UNS₂"],
+        "formulas": ["Unsupervised loss function referred to as UNS₂"],
+        "architectures": ["NeuroSAT (a GNN model for SAT solving)"],
+        "hyperparameters": {},
+        "datasets": ["Mixed datasets with 50% unsatisfiable instances", "Easy Datasets: SR, 3-SAT, CA, PS, k-Domset, k-Vercov", "Medium Datasets: SR, 3-SAT, CA, PS, k-Domset, k-Vercov", "Excluded dataset: k-Clique"]
+    },
+    "dependencies": ["Section 4 (G4SATBench benchmark study)", "Section 4.2 (GNN Baselines - NeuroSAT)", "Section 5 (Benchmarking Evaluation, specifically satisfying assignment prediction)", "References to prior works (Amizadeh et al., 2019a;b; Ozolins et al., 2022)"],
+    "reproducibility_notes": ["Use unsupervised loss UNS₂ for training", "Training dataset composition: 50% unsatisfiable instances mixed in", "Performance metric: solving accuracy", "Exclude k-Clique dataset from this training regime", "Compare against baseline trained without unsatisfiable instances"]
+}
+```

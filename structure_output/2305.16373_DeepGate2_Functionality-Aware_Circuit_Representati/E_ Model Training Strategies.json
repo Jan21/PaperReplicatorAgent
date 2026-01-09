@@ -1,0 +1,43 @@
+```json
+{
+    "section_title": "E. Model Training Strategies",
+    "section_purpose": "To describe the multi-stage, multi-task training strategy used to train the one-round GNN model, which employs curriculum learning from simpler to harder tasks.",
+    "key_points": [
+        "The training employs a two-stage strategy analogous to curriculum learning: Stage 1 trains on easy tasks, Stage 2 adds a harder task.",
+        "Each stage uses multi-task learning with multiple supervised tasks.",
+        "Stage 1 tasks: Task 1 (predict logic probability) and Task 2 (identify structural correlation via reconvergence prediction).",
+        "Stage 2 adds Task 3 (functionality-aware learning) on top of Stage 1 tasks.",
+        "The strategy enables the model to first differentiate gates by probability, then learn functional similarity within probability-equivalent classes."
+    ],
+    "technical_details": {
+        "algorithms": ["Multi-stage training strategy", "Multi-task learning"],
+        "formulas": [
+            "Logic probability prediction: \\(\\hat{P}_i = MLP_{prob}(h f_i)\\)",
+            "Reconvergence prediction: \\(R_{\\langle i,j\\rangle} = MLP_{rc}(h s_i, h s_j)\\)",
+            "Task 1 loss: \\(L_{prob} = L1Loss(P_i, \\hat{P}_i)\\) where \\(P_i\\) is ground truth from random simulation",
+            "Task 2 loss: \\(L_{rc} = BCELoss(R_{\\langle i,j\\rangle}, R_{\\langle i,j\\rangle})\\) where \\(R_{\\langle i,j\\rangle}\\) is binary ground truth for common predecessor",
+            "Stage 1 loss: \\(L_{stage1} = L_{prob} * w_{prob} + L_{rc} * w_{rc}\\)",
+            "Stage 2 loss: \\(L_{stage2} = L_{prob} \\times w_{prob} + L_{rc} \\times w_{rc} + L_{func} \\times w_{func}\\)"
+        ],
+        "architectures": ["MLP_{prob} for logic probability prediction", "MLP_{rc} for reconvergence prediction"],
+        "hyperparameters": {
+            "w_{prob}": "Weight for Task 1 (logic probability) loss",
+            "w_{rc}": "Weight for Task 2 (reconvergence) loss",
+            "w_{func}": "Weight for Task 3 (functionality-aware) loss"
+        },
+        "datasets": []
+    },
+    "dependencies": [
+        "Section III-C (Functionality-Aware Loss Function) for details of Task 3",
+        "Section III-D (One-round GNN Model) for the model architecture producing embeddings h f_i and h s_i",
+        "Section III-B (Dataset Preparation) for understanding how ground truth probabilities and reconvergence labels are obtained"
+    ],
+    "reproducibility_notes": [
+        "Need the specific loss weights w_prob, w_rc, and w_func for the weighted sum.",
+        "Implementation details of MLP_prob and MLP_rc (e.g., layers, activation functions).",
+        "Definition and generation process of the ground truth for reconvergence (R_<i,j>).",
+        "Details on switching from Stage 1 to Stage 2 training (e.g., number of epochs, convergence criteria).",
+        "The exact functionality-aware loss L_func from Section III-C must be integrated."
+    ]
+}
+```

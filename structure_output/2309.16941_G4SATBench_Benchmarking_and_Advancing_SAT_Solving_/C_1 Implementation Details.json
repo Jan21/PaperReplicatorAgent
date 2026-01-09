@@ -1,0 +1,34 @@
+```json
+{
+    "section_title": "C.1 Implementation Details",
+    "section_purpose": "This section provides detailed information on the implementation and hyperparameter settings used to train and evaluate the GNN models in the G4SATBench benchmark.",
+    "key_points": [
+        "Ground truth labels for satisfiability and satisfying assignments are generated using the CaDiCaL SAT solver, and labels for unsat-core variables are generated using the DRAT-trim proof checker.",
+        "A standard GNN architecture configuration is used across models: feature dimension d=128, T=32 message passing iterations, and MLPs with two hidden ReLU layers.",
+        "Optimal hyperparameters for each GNN baseline are selected via grid search over learning rates, training epochs, weight decay, and gradient clipping norms.",
+        "Specific parameters (τ=0.1, κ=1) for the unsupervised loss functions (Equations 4 and 5) are empirically determined to yield the best results.",
+        "Performance evaluation uses three random seeds for most models, while generalization assessments for NeuroSAT and GGNN use a single seed for simplicity."
+    ],
+    "technical_details": {
+        "algorithms": ["Grid search for hyperparameter optimization", "Adam optimizer", "Unsupervised loss functions (referenced from Equation 4 and Equation 5)", "Message-passing GNN algorithms (details referenced in Table 9)"],
+        "formulas": ["Unsupervised loss parameters τ and κ, with τ set to 0.1 and κ set to 1", "Default τ decay: τ = t^{-0.4} (where t is training step)"],
+        "architectures": ["GNN models with feature dimension d=128 and T=32 message passing iterations", "MLPs with two hidden layers using ReLU activation"],
+        "hyperparameters": {
+            "feature_dimension_d": "128",
+            "message_passing_iterations_T": "32",
+            "learning_rates": "[1e-3, 5e-4, 1e-4, 5e-5, 1e-5]",
+            "training_epochs": "[50, 100, 200]",
+            "weight_decay": "[1e-6, 1e-7, 1e-8, 1e-9, 1e-10]",
+            "gradient_clipping_norms": "[0.1, 0.5, 1]",
+            "batch_size": "128, 64, or 32 (depending on GPU memory)",
+            "optimizer": "Adam",
+            "unsupervised_loss_tau": "0.1",
+            "unsupervised_loss_kappa": "1",
+            "random_seeds": "Three for benchmarking, one for NeuroSAT/GGNN generalization"
+        },
+        "datasets": []
+    },
+    "dependencies": ["Section 4 (G4SATBench benchmark setup)", "Equation 4 and Equation 5 (unsupervised loss functions)", "Table 9 (Supported GNN models and their message-passing algorithms)"],
+    "reproducibility_notes": ["Use CaDiCaL SAT solver for satisfiability/assignment labels and DRAT-trim for unsat-core variable labels.", "Standardized GNN architecture: d=128, T=32, two-layer MLP.", "Hyperparameter grid search ranges for learning rate, epochs, weight decay, and gradient clipping.", "Specific unsupervised loss parameters: τ=0.1, κ=1.", "Batch size adjusted based on GPU memory capacity (48G limit).", "Random seed strategy: three seeds for benchmarking, one seed for specific generalization tests."]
+}
+```

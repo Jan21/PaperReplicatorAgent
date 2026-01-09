@@ -1,0 +1,22 @@
+```json
+{
+    "section_title": "4.2 Performance of Solving COs",
+    "section_purpose": "This section presents experimental results evaluating the proposed framework's effectiveness on three combinatorial optimization problems (Max-Cut, MIS, MDS) to answer Q1: whether Max-SAT transfer and the pre-training/adaptation pipeline improve solving performance.",
+    "key_points": [
+        "The proposed framework achieves best results compared to other learning-based methods, demonstrating its ability to learn useful information from CO problems.",
+        "The method shows superiority, especially on large-scale Max-Cut problems (e.g., n=800, G22, G55), outperforming traditional methods that sometimes run out of memory.",
+        "For MIS and MDS on frb datasets, results are competitive and closer to solver results, showing framework effectiveness.",
+        "Traditional/heuristic methods remain competitive in Max-Cut, but the performance gap with the proposed method is small while training/inference time is much less.",
+        "The experiments answer Q1: Max-SAT provides common knowledge, and the pre-training/adaptation pipeline learns transferable features to improve solving different CO problems."
+    ],
+    "technical_details": {
+        "algorithms": [],
+        "formulas": [],
+        "architectures": [],
+        "hyperparameters": {},
+        "datasets": ["Regular graphs with 100, 200, 500, and 1000 nodes for Max-Cut", "GSET benchmark for Max-Cut", "frb datasets (frb30-15, frb40-19, frb50-23, frb59-26) for MIS and MDS"]
+    },
+    "dependencies": ["Section 3 (Methodology) describing the framework", "Section 4.1 (Experimental Setup) for baseline methods and evaluation details", "Understanding of Max-Cut, MIS, MDS problem definitions"],
+    "reproducibility_notes": ["Specific datasets used: regular graphs (100-1000 nodes), GSET benchmark, frb datasets", "Metrics reported: mean p-values, number of cuts, number of sets (MIS), number of dominated nodes (MDS)", "Baseline methods compared: EO, BLS, Greedy, HTS-DS, MWDS-CRO, GMC-A, GMC-B, RUN-CSP, PIGNN, MAX-SAT"]
+}
+```

@@ -1,0 +1,35 @@
+```json
+{
+    "section_title": "Graph Neural Networks",
+    "section_purpose": "To provide foundational background on Graph Neural Networks (GNNs), explaining their general architecture and message-passing mechanism, which sets the stage for applying them to the MaxSAT problem.",
+    "key_points": [
+        "GNNs are neural architectures that operate on graph-structured data and have proven effective across various domains.",
+        "The core of most GNNs is an iterative message-passing process where each node's embedding is updated by aggregating information from its neighbors.",
+        "This process is formalized in two steps per layer: an aggregation (or messaging) step and an update (or combining) step.",
+        "For graph-level tasks, a READOUT function is required to create a single graph embedding from all node embeddings.",
+        "Different GNN variants are characterized by their specific choices for the AGG, UPD, and READOUT functions."
+    ],
+    "technical_details": {
+        "algorithms": [
+            "Message-passing process: iterative aggregation of neighbor information followed by node embedding update."
+        ],
+        "formulas": [
+            "Equation (1): s_v^(k) = AGG^(k)({h_u^(k-1) | u in N(v)}); h_v^(k) = UPD^(k)(h_v^(k-1), s_v^(k)). Defines the k-th layer of a GNN, where s is the aggregated message from neighbors N(v) and h is the updated node embedding.",
+            "Equation (2): h_G = READOUT({h_u^(T) | u in V}). Defines the graph-level embedding readout from all node embeddings after T iterations."
+        ],
+        "architectures": [
+            "General GNN framework involving iterative aggregation (AGG) and update (UPD) functions, followed by optional graph-level readout (READOUT)."
+        ],
+        "hyperparameters": {},
+        "datasets": []
+    },
+    "dependencies": [
+        "Basic understanding of graph notation (G = <V, E>) and node neighborhoods.",
+        "Knowledge that GNNs will be applied to SAT/MaxSAT problems, introduced in previous sections."
+    ],
+    "reproducibility_notes": [
+        "The formal definition of the message-passing layer structure (Equation 1) and the graph readout (Equation 2) provides the core computational template.",
+        "The specific choices for AGG, UPD, and READOUT functions are left open, indicating these are model design decisions to be specified later."
+    ]
+}
+```

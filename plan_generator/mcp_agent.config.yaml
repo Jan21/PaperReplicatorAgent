@@ -53,8 +53,8 @@ llm_provider: "openai"
 
 # OpenAI configuration (used when llm_provider: openai)
 openai:
-  base_max_tokens: 40000
-  retry_max_tokens: 32768
+  base_max_tokens: 5000
+  retry_max_tokens: 3276
   default_model: deepseek/deepseek-v3.2
   reasoning_effort: high
 
