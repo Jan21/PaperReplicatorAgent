@@ -116,11 +116,6 @@ async def main():
     print("Pipeline Complete!")
     print("=" * 80)
     print(f"\nGenerated project location: projects/{project_name}/")
-    print("\nNext steps:")
-    print("  1. cd projects/{project_name}")
-    print("  2. Review generated files")
-    print("  3. pip install -r requirements.txt (if present)")
-    print("  4. Run tests or experiments")
 
 
 if __name__ == "__main__":

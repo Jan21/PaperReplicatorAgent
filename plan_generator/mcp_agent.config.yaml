@@ -52,12 +52,12 @@ llm_provider: "anthropic"
 openai:
   base_max_tokens: 40000
   retry_max_tokens: 32768
-  default_model: anthropic/claude-sonnet-4.5
+  default_model: EMPTY
   reasoning_effort: high
 
 # Anthropic configuration (used when llm_provider: anthropic)
 anthropic:
-  base_max_tokens: 40000
+  base_max_tokens: 64000
   retry_max_tokens: 32768
   default_model: claude-sonnet-4-5-20250929
 

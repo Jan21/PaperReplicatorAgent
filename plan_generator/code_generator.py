@@ -39,6 +39,7 @@ from .llm_utils import (
 _MODULE_DIR = Path(__file__).parent
 _CONFIG_PATH = str(_MODULE_DIR / "mcp_agent.config.yaml")
 _PROJECTS_DIR = _MODULE_DIR.parent / "projects"
+_OUTPUT_LOG = _MODULE_DIR.parent / "generator_output.log"
 
 # Create MCPApp instance
 code_gen_app = MCPApp(name="code_generator", settings=_CONFIG_PATH)
@@ -104,6 +105,34 @@ def write_files_to_project(files: List[Tuple[str, str]], project_dir: Path) -> L
             print(f"  Error writing {relative_path}: {e}")
 
     return written_files
+
+
+def extract_definitions_from_file(file_path: Path) -> List[str]:
+    """
+    Extract class and function definitions from a Python file.
+
+    Args:
+        file_path: Path to the Python file
+
+    Returns:
+        List of definition strings (e.g., "class MyClass", "def my_func")
+    """
+    definitions = []
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('class ') and ':' in line:
+                    # Extract class name
+                    class_def = line.split('(')[0].split(':')[0]
+                    definitions.append(class_def)
+                elif line.startswith('def ') and ':' in line:
+                    # Extract function name (only top-level, not indented in original)
+                    func_def = line.split('(')[0]
+                    definitions.append(func_def)
+    except Exception:
+        pass
+    return definitions
 
 
 def categorize_files_from_plan(plan_content: str) -> dict:
@@ -182,6 +211,12 @@ class GenerateCodeWorkflow(Workflow[str]):
         print(f"Code generation workflow started")
         print(f"   Project name: {project_name}")
 
+        # Initialize output log
+        with open(_OUTPUT_LOG, 'w', encoding='utf-8') as f:
+            f.write(f"=== Code Generation Log ===\n")
+            f.write(f"Project: {project_name}\n")
+            f.write(f"{'='*60}\n\n")
+
         # Setup project directory
         project_dir = _PROJECTS_DIR / project_name
         project_dir.mkdir(parents=True, exist_ok=True)
@@ -223,15 +258,31 @@ class GenerateCodeWorkflow(Workflow[str]):
             llm_class = get_llm_class()
             llm = llm_class(agent=code_gen_agent)
 
-            # Build context with previously generated files
+            # Build context with previously generated files and their definitions
             previous_files_context = ""
             if all_written_files:
-                previous_files_context = f"""
-## Previously Generated Files
-The following files have already been generated in this project:
-{chr(10).join(f'- {f}' for f in all_written_files)}
+                file_summaries = []
+                for f in all_written_files:
+                    file_path = Path(f)
+                    if file_path.suffix == '.py':
+                        defs = extract_definitions_from_file(file_path)
+                        if defs:
+                            rel_path = str(file_path.relative_to(project_dir))
+                            file_summaries.append(f"- `{rel_path}`: {', '.join(defs)}")
+                        else:
+                            rel_path = str(file_path.relative_to(project_dir))
+                            file_summaries.append(f"- `{rel_path}`")
+                    else:
+                        rel_path = str(file_path.relative_to(project_dir))
+                        file_summaries.append(f"- `{rel_path}`")
 
-Ensure your new files integrate properly with these existing files.
+                previous_files_context = f"""
+## Previously Generated Files (USE EXACT NAMES FOR IMPORTS)
+The following files exist. When importing, use the EXACT class/function names shown:
+
+{chr(10).join(file_summaries)}
+
+CRITICAL: Use these exact names in your imports. Do not guess or use variations.
 """
 
             # Build message
@@ -257,6 +308,14 @@ Use the ===FILE: path=== and ===END_FILE=== markers as specified."""
                     request_params=params
                 )
 
+                # Log full model output
+                with open(_OUTPUT_LOG, 'a', encoding='utf-8') as f:
+                    f.write(f"\n{'='*60}\n")
+                    f.write(f"BATCH: {batch_type.upper()}\n")
+                    f.write(f"{'='*60}\n\n")
+                    f.write(result)
+                    f.write(f"\n\n")
+
                 # Parse and write files
                 files = parse_generated_files(result)
 
@@ -278,6 +337,7 @@ Code Generation Complete
 ========================
 Project: {project_name}
 Location: {project_dir}
+Full LLM Output: {_OUTPUT_LOG}
 
 Generated Files ({len(all_written_files)} total):
 {chr(10).join(f'  - {f}' for f in all_written_files)}
