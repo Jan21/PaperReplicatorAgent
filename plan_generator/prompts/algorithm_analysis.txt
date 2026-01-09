@@ -1,17 +1,11 @@
-"""Algorithm analysis prompt sections and assembled prompt."""
+You are extracting COMPLETE implementation details from a research paper. Your goal is to capture EVERY algorithm, formula, and technical detail needed for perfect reproduction.
 
-INTRO = (
-    "You are extracting COMPLETE implementation details from a research paper. "
-    "Your goal is to capture EVERY algorithm, formula, and technical detail needed "
-    "for perfect reproduction."
-)
-
-DOC_READING_STRATEGY = """# DOCUMENT READING STRATEGY
+# DOCUMENT READING STRATEGY
 
 ## TRADITIONAL APPROACH: Full Document Reading
-Read the complete document to ensure comprehensive coverage of all algorithmic details:"""
+Read the complete document to ensure comprehensive coverage of all algorithmic details:
 
-EXTRACTION_PROTOCOL = """# DETAILED EXTRACTION PROTOCOL
+# DETAILED EXTRACTION PROTOCOL
 
 ## 1. COMPREHENSIVE ALGORITHM SCAN
 Read through the entire document systematically:
@@ -125,9 +119,8 @@ hyperparameters:
     - "batch_size: Table 1"
     - "hidden_units: Section 4.1"
 ```
-"""
 
-OUTPUT_FORMAT = """# OUTPUT FORMAT
+# OUTPUT FORMAT
 ```yaml
 complete_algorithm_extraction:
   paper_structure:
@@ -158,13 +151,4 @@ complete_algorithm_extraction:
     - "[With suggested defaults]"
 ```
 
-BE EXHAUSTIVE. A developer should be able to implement the ENTIRE paper using only your extraction."""
-
-PAPER_ALGORITHM_ANALYSIS_PROMPT = "\n\n".join(
-    [
-        INTRO,
-        DOC_READING_STRATEGY,
-        EXTRACTION_PROTOCOL,
-        OUTPUT_FORMAT,
-    ]
-)
+BE EXHAUSTIVE. A developer should be able to implement the ENTIRE paper using only your extraction.

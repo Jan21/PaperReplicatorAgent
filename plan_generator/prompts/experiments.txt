@@ -1,0 +1,206 @@
+You are extracting a COMPLETE summary of ALL experiments conducted in a research paper. Your goal is to document each experiment with its benchmarks, baselines, and conclusions so that a reader can understand what was tested and what was learned without reading the paper.
+
+# OBJECTIVE
+Extract detailed information about ALL experiments in the paper. I want only the experiments and not other information. For each experiment, identify
+the specific benchmarks used, the baseline methods compared against, and the key conclusions drawn.
+The output should combine structured data with descriptive text for full understanding.
+
+# DOCUMENT READING STRATEGY
+
+## Complete Document Analysis
+Read the entire document systematically, paying special attention to:
+- Experiments/Evaluation sections (main experimental setup and results)
+- Results section (findings and comparisons)
+- Ablation studies (component analysis experiments)
+- Tables and figures (quantitative comparisons)
+- Discussion section (interpretation of results)
+- Appendices (additional experiments often placed here)
+
+# EXPERIMENT EXTRACTION PROTOCOL
+
+## 1. EXPERIMENT INVENTORY
+First, identify ALL experiments in the paper:
+
+```yaml
+experiment_inventory:
+  total_experiments: "[Number]"
+  experiments:
+    - id: "exp_1"
+      name: "[Brief name/title of experiment]"
+      paper_section: "[Section where it appears]"
+      type: "[main_comparison | ablation | case_study | scalability | other]"
+
+    - id: "exp_2"
+      name: "[Next experiment name]"
+      paper_section: "[Section]"
+      type: "[Type]"
+```
+
+## 2. DETAILED EXPERIMENT SPECIFICATION
+For EACH experiment, extract the following:
+
+```yaml
+experiments:
+  exp_1:
+    # === STRUCTURED INFORMATION ===
+    name: "[Descriptive name of the experiment]"
+    paper_section: "[Where in paper]"
+    experiment_type: "[main_comparison | ablation | case_study | scalability | other]"
+
+    purpose: "[One sentence: what question does this experiment answer?]"
+
+    benchmarks:
+      - name: "[Exact benchmark name]"
+        variant: "[Specific variant/configuration if any]"
+        problem_sizes: "[Sizes tested, e.g., n=20,50,100]"
+
+      - name: "[Another benchmark]"
+        variant: "[Variant]"
+        problem_sizes: "[Sizes]"
+
+    baselines:
+      - name: "[Baseline method name]"
+        description: "[Brief description of the method]"
+        source: "[Citation or 'proposed method' if it's the paper's own]"
+
+      - name: "[Another baseline]"
+        description: "[Description]"
+        source: "[Source]"
+
+    conclusion:
+      main_finding: "[Primary conclusion in one sentence]"
+      supporting_findings:
+        - "[Additional finding 1]"
+        - "[Additional finding 2]"
+      winner: "[Which method performed best overall, if applicable]"
+
+    # === UNSTRUCTURED DESCRIPTION ===
+    detailed_description: |
+      [Provide a short paragraph free-form description of the experiment. Include:
+       - What exactly was being tested and why
+       - How the experiment was set up
+       - What the results showed in detail
+       - Any nuances, caveats, or interesting observations
+       - How this experiment supports the paper's claims
+       This should give a complete picture of the experiment to someone
+       who hasn't read the paper.]
+```
+
+## 3. ABLATION STUDIES (if present)
+Ablation studies are a special type of experiment - extract them with focus on what component is being analyzed:
+
+```yaml
+ablation_studies:
+  ablation_1:
+    name: "[Name of ablation]"
+    component_analyzed: "[What component/feature is being removed or modified]"
+
+    benchmarks:
+      - name: "[Benchmark used]"
+        problem_sizes: "[Sizes]"
+
+    variants_compared:
+      - variant: "[Full method]"
+        description: "[Complete proposed method]"
+      - variant: "[Without component X]"
+        description: "[Method with X removed]"
+      - variant: "[With alternative Y]"
+        description: "[Method with Y instead of X]"
+
+    conclusion:
+      main_finding: "[What this ablation reveals about the component]"
+      importance_of_component: "[How important is this component?]"
+
+    detailed_description: |
+      [Free-form description of the ablation study, its setup, results, and implications]
+```
+
+## 4. CROSS-EXPERIMENT ANALYSIS
+Identify relationships and patterns across experiments:
+
+```yaml
+cross_experiment_analysis:
+  benchmark_coverage:
+    - benchmark: "[Benchmark name]"
+      used_in_experiments: ["exp_1", "exp_3"]
+
+  baseline_coverage:
+    - baseline: "[Baseline name]"
+      compared_in_experiments: ["exp_1", "exp_2"]
+
+  overall_narrative:
+    "[How do the experiments together support the paper's thesis? What story do they tell?]"
+```
+
+## 5. EXPERIMENT SUMMARY TABLE
+Provide a quick-reference summary:
+
+```yaml
+summary_table:
+  - experiment: "[Name]"
+    benchmarks: "[Comma-separated list]"
+    baselines: "[Comma-separated list]"
+    key_conclusion: "[One line]"
+```
+
+# OUTPUT FORMAT
+```yaml
+complete_experiment_summary:
+  # === PAPER INFO ===
+  paper_title: "[Full title]"
+  paper_focus: "[One sentence on what the paper proposes]"
+
+  # === EXPERIMENT INVENTORY ===
+  experiment_inventory:
+    total_experiments: "[Number]"
+    main_experiments: "[Number]"
+    ablation_studies: "[Number]"
+    other_experiments: "[Number]"
+
+  # === SUMMARY TABLE ===
+  summary_table:
+    - experiment: "[Name]"
+      benchmarks: "[List]"
+      baselines: "[List]"
+      key_conclusion: "[One line]"
+    # ... for all experiments
+
+  # === DETAILED EXPERIMENTS ===
+  experiments:
+    exp_1:
+      [FULL STRUCTURED + UNSTRUCTURED SPECIFICATION]
+
+    exp_2:
+      [FULL STRUCTURED + UNSTRUCTURED SPECIFICATION]
+
+    # ... continue for all experiments
+
+  # === ABLATION STUDIES ===
+  ablation_studies:
+    [IF PRESENT, FULL ABLATION SPECIFICATIONS]
+
+  # === CROSS-EXPERIMENT ANALYSIS ===
+  cross_experiment_analysis:
+    benchmark_coverage: [...]
+    baseline_coverage: [...]
+    overall_narrative: "[How experiments together support the paper's claims]"
+
+  # === OVERALL CONCLUSIONS ===
+  overall_conclusions:
+    main_claims_validated:
+      - claim: "[Paper's claim]"
+        supported_by: "[Which experiments]"
+        strength: "[strong | moderate | weak]"
+
+    limitations_acknowledged:
+      - "[Any limitations mentioned in experiments]"
+
+    key_takeaways:
+      - "[Most important finding 1]"
+      - "[Most important finding 2]"
+      - "[Most important finding 3]"
+```
+
+IMPORTANT: For each experiment, the 'detailed_description' field should be comprehensive free-form text
+that gives a complete picture of the experiment. The structured fields provide quick reference,
+while the detailed description provides full context and nuance. I dont want other information than the experiments.

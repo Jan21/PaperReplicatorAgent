@@ -1,0 +1,294 @@
+You are extracting a COMPLETE and DETAILED specification of ALL benchmarks used in a research paper. Your goal is to provide enough detail that someone could implement these benchmarks SOLELY from your specification, without needing to read the original paper.
+
+# OBJECTIVE
+Extract every detail about ALL benchmarks mentioned in the paper. The specification
+must be comprehensive enough to enable full implementation of each benchmark, including
+problem generators, data formats, evaluation procedures, and solvers where applicable.
+
+# DOCUMENT READING STRATEGY
+
+## Complete Document Analysis
+Read the entire document systematically, paying special attention to:
+- Experiments section (benchmark descriptions, datasets used)
+- Appendices (often contain crucial implementation details)
+- Tables and figures (problem sizes, parameters, dataset statistics)
+- Supplementary materials (additional benchmark details)
+- References (sources for standard benchmarks)
+
+# BENCHMARK SPECIFICATION EXTRACTION PROTOCOL
+
+## 1. BENCHMARK IDENTIFICATION
+First, identify ALL benchmarks mentioned in the paper:
+
+```yaml
+benchmark_inventory:
+  benchmarks:
+    - name: "[Exact name of benchmark]"
+      paper_section: "[Where it's described]"
+      category: "[e.g., optimization, classification, reinforcement learning, etc.]"
+
+    - name: "[Next benchmark]"
+      paper_section: "[Where described]"
+      category: "[Category]"
+```
+
+## 2. DETAILED BENCHMARK SPECIFICATION
+For EACH benchmark identified, extract the following. BE EXHAUSTIVE - every detail matters:
+
+```yaml
+benchmark_specifications:
+  benchmark_1:
+    # === BASIC INFORMATION ===
+    name: "[Full official name]"
+    aliases: "[Any other names used in paper]"
+    source: "[Original paper/source where benchmark was introduced]"
+
+    # === AVAILABILITY ===
+    availability:
+      type: "[downloadable | requires_generator | requires_both]"
+
+      # If downloadable:
+      download_info:
+        url: "[Download URL if mentioned]"
+        dataset_name: "[Name in repository/library]"
+        library: "[e.g., torchvision, gym, OpenML, etc.]"
+        version: "[Specific version if mentioned]"
+
+      # If requires generator:
+      generator_required:
+        reason: "[Why generation is needed - random instances, specific distributions, etc.]"
+        generation_procedure: "[Step-by-step how to generate instances]"
+
+    # === PROBLEM DEFINITION ===
+    problem_definition:
+      problem_type: "[e.g., combinatorial optimization, supervised learning, etc.]"
+      input_description: "[Exact format and structure of inputs]"
+      output_description: "[Exact format and expected outputs]"
+      objective: "[What is being optimized/predicted]"
+      constraints: "[Any constraints on valid solutions]"
+
+    # === DATA FORMAT ===
+    data_format:
+      input_format:
+        structure: "[e.g., graph, matrix, vector, image, etc.]"
+        dimensions: "[Exact dimensions/sizes used]"
+        data_types: "[int, float, categorical, etc.]"
+        encoding: "[How data is represented]"
+        example: "[Concrete example if provided]"
+
+      output_format:
+        structure: "[Structure of expected output]"
+        dimensions: "[Output dimensions]"
+        data_types: "[Output data types]"
+
+    # === INSTANCE PARAMETERS ===
+    instance_parameters:
+      problem_sizes:
+        - size_name: "[e.g., 'small', 'n=20', etc.]"
+          parameters: "[Exact parameters for this size]"
+          num_instances: "[How many instances of this size]"
+
+      distributions:
+        - parameter: "[Which parameter]"
+          distribution: "[e.g., uniform[0,1], normal(0,1), etc.]"
+
+      special_cases: "[Any special instance types or edge cases]"
+
+    # === SOLVER REQUIREMENTS (if applicable) ===
+    solver_specification:
+      solver_needed: "[yes/no]"
+      solver_type: "[exact, heuristic, learned, etc.]"
+
+      # If exact solver needed:
+      exact_solver:
+        algorithm: "[Algorithm name]"
+        implementation_details: "[How to implement]"
+        complexity: "[Time/space complexity]"
+
+      # If baseline/comparison solver needed:
+      baseline_solvers:
+        - name: "[Solver name]"
+          description: "[What it does]"
+          parameters: "[Solver parameters used]"
+          source: "[Where to find implementation]"
+
+    # === EVALUATION ===
+    evaluation:
+      metrics:
+        - name: "[Metric name]"
+          formula: "[Exact formula if provided]"
+          description: "[What it measures]"
+          higher_is_better: "[true/false]"
+
+      evaluation_protocol:
+        train_test_split: "[How data is split]"
+        cross_validation: "[If used, how many folds]"
+        num_runs: "[Number of evaluation runs]"
+        statistical_tests: "[Any statistical tests used]"
+
+      reported_values:
+        - metric: "[Which metric]"
+          value: "[Reported value in paper]"
+          conditions: "[Under what conditions]"
+
+    # === IMPLEMENTATION DETAILS ===
+    implementation_notes:
+      preprocessing: "[Any data preprocessing steps]"
+      normalization: "[Normalization procedures]"
+      edge_cases: "[How to handle edge cases]"
+      random_seeds: "[Seeds used if mentioned]"
+      hardware_requirements: "[If specific hardware needed]"
+      time_limits: "[Time limits for solving if any]"
+
+    # === ADDITIONAL DETAILS ===
+    additional_details:
+      paper_specific_modifications: "[Any modifications to standard benchmark]"
+      known_issues: "[Any issues or caveats mentioned]"
+      related_benchmarks: "[Similar benchmarks mentioned]"
+```
+
+## 3. GENERATOR SPECIFICATION (for benchmarks requiring generation)
+If a benchmark requires instance generation, provide detailed generator specification:
+
+```yaml
+generator_specifications:
+  benchmark_name: "[Name]"
+
+  generator_algorithm:
+    step_1: "[First step with exact details]"
+    step_2: "[Second step]"
+    # ... continue for all steps
+
+  parameters:
+    - name: "[Parameter name]"
+      type: "[Data type]"
+      range: "[Valid range]"
+      default: "[Default value if any]"
+      description: "[What this parameter controls]"
+
+  randomization:
+    random_seed_handling: "[How seeds are used]"
+    reproducibility_notes: "[How to ensure reproducible generation]"
+
+  validation:
+    validity_checks: "[How to verify generated instance is valid]"
+    sanity_checks: "[Additional checks to perform]"
+
+  output_format:
+    file_format: "[If saved to file, what format]"
+    in_memory_format: "[Data structure in memory]"
+```
+
+## 4. SOLVER SPECIFICATION (for benchmarks requiring reference solver)
+If a benchmark requires implementing a solver for evaluation:
+
+```yaml
+solver_specifications:
+  benchmark_name: "[Name]"
+
+  solver_algorithm:
+    algorithm_name: "[Name of algorithm]"
+    algorithm_type: "[exact/heuristic/approximation]"
+
+    pseudocode: |
+      [Provide pseudocode if available in paper]
+
+    key_operations:
+      - operation: "[Key operation 1]"
+        details: "[Implementation details]"
+      - operation: "[Key operation 2]"
+        details: "[Implementation details]"
+
+  parameters:
+    - name: "[Parameter]"
+      value: "[Value used]"
+      tuning: "[How it was tuned if mentioned]"
+
+  optimizations:
+    - "[Any optimizations mentioned]"
+
+  expected_performance:
+    time_complexity: "[Complexity]"
+    solution_quality: "[Expected quality]"
+```
+
+## 5. CROSS-BENCHMARK RELATIONSHIPS
+Identify relationships between benchmarks:
+
+```yaml
+benchmark_relationships:
+  families:
+    - family_name: "[e.g., TSP variants]"
+      members: ["[benchmark1]", "[benchmark2]"]
+      shared_properties: "[What they share]"
+
+  difficulty_ordering:
+    - easier: "[Benchmark name]"
+      harder: "[Benchmark name]"
+      reason: "[Why one is harder]"
+
+  dependencies:
+    - benchmark: "[Name]"
+      depends_on: "[Other benchmark or component]"
+      reason: "[Why dependency exists]"
+```
+
+## 6. MISSING INFORMATION
+Explicitly note any information that is NOT provided in the paper but would be needed:
+
+```yaml
+missing_information:
+  benchmark_name: "[Name]"
+  missing_details:
+    - detail: "[What's missing]"
+      impact: "[How this affects implementation]"
+      suggestion: "[Possible way to resolve]"
+```
+
+# OUTPUT FORMAT
+```yaml
+complete_benchmark_specification:
+  # === SUMMARY ===
+  summary:
+    paper_title: "[Full title]"
+    total_benchmarks: "[Number]"
+    downloadable_benchmarks: "[Number]"
+    generator_required_benchmarks: "[Number]"
+    solver_required_benchmarks: "[Number]"
+
+  # === BENCHMARK INVENTORY ===
+  benchmark_inventory:
+    [LIST ALL BENCHMARKS WITH BASIC INFO]
+
+  # === DETAILED SPECIFICATIONS ===
+  detailed_specifications:
+    [FULL SPECIFICATION FOR EACH BENCHMARK]
+
+  # === GENERATOR SPECIFICATIONS ===
+  generator_specifications:
+    [FOR EACH BENCHMARK REQUIRING GENERATION]
+
+  # === SOLVER SPECIFICATIONS ===
+  solver_specifications:
+    [FOR EACH BENCHMARK REQUIRING SOLVER]
+
+  # === RELATIONSHIPS ===
+  benchmark_relationships:
+    [CROSS-BENCHMARK RELATIONSHIPS]
+
+  # === MISSING INFORMATION ===
+  missing_information:
+    [EXPLICITLY NOTE WHAT'S NOT IN THE PAPER]
+
+  # === IMPLEMENTATION CHECKLIST ===
+  implementation_checklist:
+    - benchmark: "[Name]"
+      tasks:
+        - "[ ] [Specific implementation task]"
+        - "[ ] [Another task]"
+```
+
+CRITICAL: Be EXHAUSTIVE. Extract EVERY detail about each benchmark. Include exact numbers,
+formulas, distributions, and parameters. If something is ambiguous, note it explicitly.
+The goal is that someone reading ONLY your specification can implement ALL benchmarks
+without referring back to the paper.

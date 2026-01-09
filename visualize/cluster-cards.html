@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cluster Cards View</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="index.html" class="nav-back">&larr; Back to all views</a>
+
+  <div class="header">
+    <h1>Cluster Cards View</h1>
+    <p>Click on a cluster to expand and see its contributions</p>
+  </div>
+
+  <div id="clusters"></div>
+
+  <script src="data.js"></script>
+  <script>
+    const clusterColors = [
+      'cluster-color-1', 'cluster-color-2', 'cluster-color-3', 'cluster-color-4', 'cluster-color-5',
+      'cluster-color-6', 'cluster-color-7', 'cluster-color-8', 'cluster-color-9', 'cluster-color-10'
+    ];
+
+    const container = document.getElementById('clusters');
+    const clusterNames = Object.keys(DATA).sort((a, b) =>
+      DATA[b].contributions.length - DATA[a].contributions.length
+    );
+
+    clusterNames.forEach((clusterName, idx) => {
+      const cluster = DATA[clusterName];
+      const colorClass = clusterColors[idx % clusterColors.length];
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-header ${colorClass}">
+          <span class="card-title">${cluster.canonical_name}</span>
+          <span class="card-count">${cluster.contributions.length} contributions</span>
+        </div>
+        <div class="card-content">
+          <div class="member-phrases" style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted);">
+            <strong>Types:</strong> ${cluster.member_phrases.join(', ')}
+          </div>
+          ${cluster.contributions.map(c => `
+            <div class="contribution">
+              <div class="contribution-type">${c.contribution_type}</div>
+              <div class="contribution-paper">${c.paper_name}</div>
+              <div class="contribution-innovation">${c.specific_innovation}</div>
+              ${c.problem_addressed ? `<div class="contribution-problem"><strong>Problem:</strong> ${c.problem_addressed}</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      card.querySelector('.card-header').addEventListener('click', () => {
+        card.classList.toggle('expanded');
+      });
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

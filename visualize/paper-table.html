@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Table View</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .paper-details {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .paper-details.active {
+      display: block;
+    }
+    .paper-details h3 {
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    .paper-cluster-group {
+      margin-bottom: 20px;
+    }
+    .paper-cluster-group h4 {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    tr.selected {
+      background: var(--primary-light) !important;
+    }
+    .clickable {
+      cursor: pointer;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+    }
+    .close-btn:hover {
+      color: var(--text-color);
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="nav-back">&larr; Back to all views</a>
+
+  <div class="header">
+    <h1>Paper Table View</h1>
+    <p>Click on a paper row to see all its contributions grouped by cluster</p>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <table id="paper-table">
+    <thead>
+      <tr>
+        <th>Paper</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <div id="paper-details" class="paper-details"></div>
+
+  <script src="data.js"></script>
+  <script>
+    // Build paper -> contributions map
+    const paperMap = {};
+    const clusterNames = Object.keys(DATA);
+
+    clusterNames.forEach(clusterName => {
+      DATA[clusterName].contributions.forEach(c => {
+        if (!paperMap[c.paper_name]) {
+          paperMap[c.paper_name] = { total: 0, clusters: {} };
+        }
+        paperMap[c.paper_name].total++;
+        if (!paperMap[c.paper_name].clusters[clusterName]) {
+          paperMap[c.paper_name].clusters[clusterName] = [];
+        }
+        paperMap[c.paper_name].clusters[clusterName].push(c);
+      });
+    });
+
+    const papers = Object.keys(paperMap).sort((a, b) =>
+      paperMap[b].total - paperMap[a].total
+    );
+
+    // Stats
+    const statsDiv = document.getElementById('stats');
+    const totalContribs = papers.reduce((sum, p) => sum + paperMap[p].total, 0);
+    statsDiv.innerHTML = `
+      <div class="stat">
+        <div class="stat-value">${papers.length}</div>
+        <div class="stat-label">Papers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${totalContribs}</div>
+        <div class="stat-label">Total Contributions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${(totalContribs / papers.length).toFixed(1)}</div>
+        <div class="stat-label">Avg per Paper</div>
+      </div>
+    `;
+
+    // Table
+    const tbody = document.getElementById('table-body');
+    const detailsDiv = document.getElementById('paper-details');
+    let selectedRow = null;
+
+    papers.forEach(paperName => {
+      const paper = paperMap[paperName];
+      const tr = document.createElement('tr');
+      tr.className = 'clickable';
+      tr.innerHTML = `
+        <td>${paperName}</td>
+        <td>${paper.total}</td>
+      `;
+      tr.addEventListener('click', () => {
+        if (selectedRow) selectedRow.classList.remove('selected');
+        tr.classList.add('selected');
+        selectedRow = tr;
+        showPaperDetails(paperName);
+      });
+      tbody.appendChild(tr);
+    });
+
+    function showPaperDetails(paperName) {
+      const paper = paperMap[paperName];
+      const clusters = Object.keys(paper.clusters).sort();
+
+      detailsDiv.innerHTML = `
+        <span class="close-btn" onclick="closeDetails()">&times;</span>
+        <h3>${paperName}</h3>
+        <p style="margin-bottom: 15px; color: var(--text-muted);">${paper.total} contributions across ${clusters.length} cluster(s)</p>
+        ${clusters.map(clusterName => `
+          <div class="paper-cluster-group">
+            <h4>${clusterName} (${paper.clusters[clusterName].length})</h4>
+            ${paper.clusters[clusterName].map(c => `
+              <div class="contribution">
+                <div class="contribution-type">${c.contribution_type}</div>
+                <div class="contribution-innovation">${c.specific_innovation}</div>
+                ${c.problem_addressed ? `<div class="contribution-problem"><strong>Problem:</strong> ${c.problem_addressed}</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        `).join('')}
+      `;
+      detailsDiv.classList.add('active');
+    }
+
+    function closeDetails() {
+      detailsDiv.classList.remove('active');
+      if (selectedRow) {
+        selectedRow.classList.remove('selected');
+        selectedRow = null;
+      }
+    }
+  </script>
+</body>
+</html>

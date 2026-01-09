@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treemap View</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .treemap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .treemap-cluster {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-top: 4px solid;
+    }
+    .treemap-cluster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .treemap-cluster-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .treemap-cluster-count {
+      background: var(--bg-color);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .treemap-papers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .treemap-paper {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .treemap-paper:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+      width: 90%;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .modal-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+    .modal-close:hover {
+      color: var(--text-color);
+    }
+    .size-legend {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: var(--bg-color);
+      border-radius: 8px;
+    }
+    .size-legend-title {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .size-legend-items {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .size-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+    .size-box {
+      border-radius: 4px;
+      background: var(--primary-light);
+    }
+    .size-box.s1 { width: 20px; height: 20px; }
+    .size-box.s2 { width: 25px; height: 25px; }
+    .size-box.s3 { width: 30px; height: 30px; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="nav-back">&larr; Back to all views</a>
+
+  <div class="header">
+    <h1>Treemap View</h1>
+    <p>Clusters sized by contribution count. Click on a paper chip to see its contributions.</p>
+  </div>
+
+  <div class="size-legend">
+    <div class="size-legend-title">Paper chip size = number of contributions in this cluster</div>
+    <div class="size-legend-items">
+      <div class="size-legend-item"><div class="size-box s1"></div> 1 contribution</div>
+      <div class="size-legend-item"><div class="size-box s2"></div> 2-3 contributions</div>
+      <div class="size-legend-item"><div class="size-box s3"></div> 4+ contributions</div>
+    </div>
+  </div>
+
+  <div class="treemap" id="treemap"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const clusterColors = [
+      { border: '#3b82f6', bg: '#dbeafe', text: '#1e40af' },
+      { border: '#10b981', bg: '#d1fae5', text: '#065f46' },
+      { border: '#f59e0b', bg: '#fef3c7', text: '#92400e' },
+      { border: '#ef4444', bg: '#fee2e2', text: '#991b1b' },
+      { border: '#8b5cf6', bg: '#ede9fe', text: '#5b21b6' },
+      { border: '#ec4899', bg: '#fce7f3', text: '#9d174d' },
+      { border: '#06b6d4', bg: '#cffafe', text: '#0e7490' },
+      { border: '#84cc16', bg: '#ecfccb', text: '#3f6212' },
+      { border: '#f97316', bg: '#ffedd5', text: '#9a3412' },
+      { border: '#6366f1', bg: '#e0e7ff', text: '#3730a3' }
+    ];
+
+    const clusterNames = Object.keys(DATA).sort((a, b) =>
+      DATA[b].contributions.length - DATA[a].contributions.length
+    );
+
+    const treemap = document.getElementById('treemap');
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+
+    clusterNames.forEach((clusterName, idx) => {
+      const cluster = DATA[clusterName];
+      const color = clusterColors[idx % clusterColors.length];
+
+      // Group by paper
+      const paperGroups = {};
+      cluster.contributions.forEach(c => {
+        if (!paperGroups[c.paper_name]) {
+          paperGroups[c.paper_name] = [];
+        }
+        paperGroups[c.paper_name].push(c);
+      });
+
+      const papers = Object.keys(paperGroups).sort((a, b) =>
+        paperGroups[b].length - paperGroups[a].length
+      );
+
+      const clusterDiv = document.createElement('div');
+      clusterDiv.className = 'treemap-cluster';
+      clusterDiv.style.borderColor = color.border;
+
+      clusterDiv.innerHTML = `
+        <div class="treemap-cluster-header">
+          <span class="treemap-cluster-name">${cluster.canonical_name}</span>
+          <span class="treemap-cluster-count">${cluster.contributions.length}</span>
+        </div>
+        <div class="treemap-papers">
+          ${papers.map(paperName => {
+            const count = paperGroups[paperName].length;
+            const size = count === 1 ? 'small' : count <= 3 ? 'medium' : 'large';
+            const fontSize = size === 'small' ? '0.75rem' : size === 'medium' ? '0.8rem' : '0.85rem';
+            const padding = size === 'small' ? '6px 10px' : size === 'medium' ? '8px 12px' : '10px 14px';
+            return `<div class="treemap-paper"
+              style="background: ${color.bg}; color: ${color.text}; font-size: ${fontSize}; padding: ${padding};"
+              data-paper="${paperName}"
+              data-cluster="${clusterName}"
+              title="${paperName} (${count} contribution${count > 1 ? 's' : ''})"
+            >${paperName.substring(0, 40)}${paperName.length > 40 ? '...' : ''} (${count})</div>`;
+          }).join('')}
+        </div>
+      `;
+
+      treemap.appendChild(clusterDiv);
+    });
+
+    // Click handlers for papers
+    document.querySelectorAll('.treemap-paper').forEach(el => {
+      el.addEventListener('click', () => {
+        const paperName = el.dataset.paper;
+        const clusterName = el.dataset.cluster;
+        const contributions = DATA[clusterName].contributions.filter(c => c.paper_name === paperName);
+
+        modalContent.innerHTML = `
+          <div class="modal-header">
+            <div>
+              <div class="modal-title">${paperName}</div>
+              <div class="modal-subtitle">${contributions.length} contribution(s) in "${clusterName}"</div>
+            </div>
+            <button class="modal-close">&times;</button>
+          </div>
+          ${contributions.map(c => `
+            <div class="contribution">
+              <div class="contribution-type">${c.contribution_type}</div>
+              <div class="contribution-innovation">${c.specific_innovation}</div>
+              ${c.problem_addressed ? `<div class="contribution-problem"><strong>Problem:</strong> ${c.problem_addressed}</div>` : ''}
+            </div>
+          `).join('')}
+        `;
+
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.classList.contains('modal-close')) {
+        modal.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>

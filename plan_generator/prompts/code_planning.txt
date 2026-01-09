@@ -1,19 +1,14 @@
-"""Code planning prompt sections and assembled prompt."""
+You are creating a DETAILED, COMPLETE reproduction plan by integrating comprehensive analysis results.
 
-INTRO = (
-    "You are creating a DETAILED, COMPLETE reproduction plan by integrating "
-    "comprehensive analysis results."
-)
-
-INPUT_SECTION = """# INPUT
+# INPUT
 You receive two exhaustive analyses:
 1. **Comprehensive Paper Analysis**: Complete paper structure, components, and requirements
-2. **Complete Algorithm Extraction**: All algorithms, formulas, pseudocode, and technical details"""
+2. **Complete Algorithm Extraction**: All algorithms, formulas, pseudocode, and technical details
 
-OBJECTIVE = """# OBJECTIVE
-Create an implementation plan so detailed that a developer can reproduce the ENTIRE paper without reading it."""
+# OBJECTIVE
+Create an implementation plan so detailed that a developer can reproduce the ENTIRE paper without reading it.
 
-OUTPUT_REQUIREMENT = """# CRITICAL: COMPLETE OUTPUT REQUIREMENT
+# CRITICAL: COMPLETE OUTPUT REQUIREMENT
 MANDATORY: You MUST generate ALL 5 sections completely. DO NOT stop early or truncate any section.
 
 ## Output Completeness Strategy:
@@ -34,9 +29,9 @@ MANDATORY: You MUST generate ALL 5 sections completely. DO NOT stop early or tru
 - Did you include validation_approach section?
 - Did you include environment_setup section?
 - Did you include implementation_strategy section?
-- If ANY answer is NO, continue writing until ALL sections are complete!"""
+- If ANY answer is NO, continue writing until ALL sections are complete!
 
-FILE_PRIORITY_GUIDELINES = """## File Priority Guidelines:
+## File Priority Guidelines:
 **Implementation Priority Order**:
 1. **FIRST**: Core algorithm/model files (highest priority)
 2. **SECOND**: Supporting modules and utilities
@@ -44,9 +39,9 @@ FILE_PRIORITY_GUIDELINES = """## File Priority Guidelines:
 4. **FOURTH**: Configuration and data handling
 5. **LAST**: Documentation files (README.md, requirements.txt) - These should be created AFTER core implementation
 
-Note: README and requirements.txt are maintenance files that depend on the final implementation, so plan them last but INCLUDE them in the file structure."""
+Note: README and requirements.txt are maintenance files that depend on the final implementation, so plan them last but INCLUDE them in the file structure.
 
-SYNTHESIS_PROCESS = """# DETAILED SYNTHESIS PROCESS
+# DETAILED SYNTHESIS PROCESS
 
 ## 1. MERGE ALL INFORMATION
 Combine EVERYTHING from both analyses:
@@ -82,9 +77,8 @@ Identify every technical detail that needs implementation:
   - All experimental procedures and evaluation methods
   - Any implementation hints, tricks, or special considerations mentioned
 ```
-"""
 
-OUTPUT_FORMAT = """# COMPREHENSIVE OUTPUT FORMAT
+# COMPREHENSIVE OUTPUT FORMAT
 
 ```yaml
 complete_reproduction_plan:
@@ -166,16 +160,4 @@ complete_reproduction_plan:
     [Address any missing details or ambiguities in the paper]
 ```
 
-BE EXHAUSTIVE. Every algorithm, every formula, every parameter, every file should be specified in complete detail."""
-
-CODE_PLANNING_PROMPT = "\n\n".join(
-    [
-        INTRO,
-        INPUT_SECTION,
-        OBJECTIVE,
-        OUTPUT_REQUIREMENT,
-        FILE_PRIORITY_GUIDELINES,
-        SYNTHESIS_PROCESS,
-        OUTPUT_FORMAT,
-    ]
-)
+BE EXHAUSTIVE. Every algorithm, every formula, every parameter, every file should be specified in complete detail.

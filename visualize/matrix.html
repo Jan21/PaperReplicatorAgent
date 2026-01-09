@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Heatmap View</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .matrix-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    .matrix-table {
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 8px 12px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      min-width: 40px;
+    }
+    .matrix-table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 500;
+    }
+    .matrix-table th.rotate {
+      height: 140px;
+      white-space: nowrap;
+      vertical-align: bottom;
+      padding-bottom: 10px;
+    }
+    .matrix-table th.rotate > div {
+      transform: rotate(-60deg);
+      width: 30px;
+      transform-origin: left bottom;
+    }
+    .matrix-table .paper-cell {
+      text-align: left;
+      background: var(--primary-light);
+      font-weight: 500;
+      max-width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .matrix-table .total-cell {
+      background: #f0f0f0;
+      font-weight: 600;
+    }
+    .matrix-table .row-total {
+      background: #e0e7ff;
+      font-weight: 600;
+    }
+    .heat-cell {
+      cursor: default;
+      transition: transform 0.1s;
+    }
+    .heat-cell:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      position: relative;
+    }
+    .legend {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 0.85rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+    }
+    .tooltip {
+      position: fixed;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      pointer-events: none;
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="nav-back">&larr; Back to all views</a>
+
+  <div class="header">
+    <h1>Matrix Heatmap View</h1>
+    <p>Papers (rows) vs Clusters (columns) - darker = more contributions</p>
+  </div>
+
+  <div class="legend">
+    <span>Contributions:</span>
+    <div class="legend-item"><div class="legend-box heat-0"></div> 0</div>
+    <div class="legend-item"><div class="legend-box heat-1"></div> 1</div>
+    <div class="legend-item"><div class="legend-box heat-2"></div> 2</div>
+    <div class="legend-item"><div class="legend-box heat-3"></div> 3</div>
+    <div class="legend-item"><div class="legend-box heat-4"></div> 4</div>
+    <div class="legend-item"><div class="legend-box heat-5"></div> 5+</div>
+  </div>
+
+  <div class="matrix-wrapper">
+    <table class="matrix-table" id="matrix"></table>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="data.js"></script>
+  <script>
+    const clusterNames = Object.keys(DATA).sort();
+    const paperMap = {};
+
+    // Build paper -> cluster -> count map
+    clusterNames.forEach(clusterName => {
+      DATA[clusterName].contributions.forEach(c => {
+        if (!paperMap[c.paper_name]) {
+          paperMap[c.paper_name] = {};
+          clusterNames.forEach(cn => paperMap[c.paper_name][cn] = 0);
+          paperMap[c.paper_name].total = 0;
+        }
+        paperMap[c.paper_name][clusterName]++;
+        paperMap[c.paper_name].total++;
+      });
+    });
+
+    const papers = Object.keys(paperMap).sort((a, b) =>
+      paperMap[b].total - paperMap[a].total
+    );
+
+    // Calculate cluster totals
+    const clusterTotals = {};
+    clusterNames.forEach(cn => {
+      clusterTotals[cn] = DATA[cn].contributions.length;
+    });
+
+    function getHeatClass(count) {
+      if (count === 0) return 'heat-0';
+      if (count === 1) return 'heat-1';
+      if (count === 2) return 'heat-2';
+      if (count === 3) return 'heat-3';
+      if (count === 4) return 'heat-4';
+      return 'heat-5';
+    }
+
+    // Abbreviate cluster names for header
+    function abbreviate(name) {
+      const words = name.split(/[\s&]+/);
+      if (words.length === 1) return name.substring(0, 8);
+      return words.map(w => w[0]).join('');
+    }
+
+    // Build table
+    const table = document.getElementById('matrix');
+
+    // Header row
+    let headerRow = '<tr><th class="paper-cell">Paper</th>';
+    clusterNames.forEach(cn => {
+      headerRow += `<th class="rotate"><div title="${cn}">${abbreviate(cn)}</div></th>`;
+    });
+    headerRow += '<th>Total</th></tr>';
+    table.innerHTML = headerRow;
+
+    // Data rows
+    papers.forEach(paperName => {
+      const paper = paperMap[paperName];
+      let row = `<tr><td class="paper-cell" title="${paperName}">${paperName}</td>`;
+      clusterNames.forEach(cn => {
+        const count = paper[cn];
+        row += `<td class="heat-cell ${getHeatClass(count)}" data-paper="${paperName}" data-cluster="${cn}" data-count="${count}">${count || ''}</td>`;
+      });
+      row += `<td class="row-total">${paper.total}</td></tr>`;
+      table.innerHTML += row;
+    });
+
+    // Totals row
+    let totalsRow = '<tr><td class="total-cell">Total</td>';
+    clusterNames.forEach(cn => {
+      totalsRow += `<td class="total-cell">${clusterTotals[cn]}</td>`;
+    });
+    const grandTotal = papers.reduce((sum, p) => sum + paperMap[p].total, 0);
+    totalsRow += `<td class="total-cell">${grandTotal}</td></tr>`;
+    table.innerHTML += totalsRow;
+
+    // Tooltip
+    const tooltip = document.getElementById('tooltip');
+    document.querySelectorAll('.heat-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', (e) => {
+        const paper = e.target.dataset.paper;
+        const cluster = e.target.dataset.cluster;
+        const count = e.target.dataset.count;
+        tooltip.innerHTML = `<strong>${paper}</strong><br>${cluster}: ${count} contribution(s)`;
+        tooltip.style.display = 'block';
+      });
+      cell.addEventListener('mousemove', (e) => {
+        tooltip.style.left = e.clientX + 15 + 'px';
+        tooltip.style.top = e.clientY + 15 + 'px';
+      });
+      cell.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

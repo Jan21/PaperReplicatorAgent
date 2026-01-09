@@ -1,0 +1,25 @@
+Act as an expert machine learning researcher. Analyze the provided paper and extract its primary technical contributions. 
+
+Categorize each contribution using a simple phrase. Here are several examples: 
+- Novel Architecture
+- Novel Loss Function
+- Activation Function
+- Training/Optimization Procedure
+- Data Augmentation Strategy
+- Evaluation Metric
+- New Dataset
+- Theoretical Proof/Framework
+- Novel algorithm
+- sampling Procedure
+- integration into a solver
+
+You don't need to stick to these categories. You can define a new categories as needed.
+
+Return the results in a structured JSON format with a list of dicts with the following keys:
+- "contribution_type": The category/phrase.
+- "specific_innovation": A 1-sentence description of the new component.
+- "problem_addressed": What specific issue this contribution solves.
+- "evidence_location": The section name where this is introduced.
+- "comment": [this can be empty]
+
+Output only the JSON.

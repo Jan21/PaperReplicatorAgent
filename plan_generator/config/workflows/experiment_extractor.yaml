@@ -1,0 +1,9 @@
+# Experiment Extractor Workflow
+# Single agent that extracts experiment information from research papers
+
+type: single
+
+agent:
+  name: ExperimentExtractorAgent
+  prompt: experiments  # Loads from prompts/experiments.py
+  tools: []  # No tools needed

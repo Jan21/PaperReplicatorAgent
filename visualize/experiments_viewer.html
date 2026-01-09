@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Experiments Viewer</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            color: var(--text-secondary);
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-filter input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-filter input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .paper-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .paper-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .paper-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .paper-focus {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .paper-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .badge-main {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .badge-ablation {
+            background: rgba(163, 113, 247, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .badge-other {
+            background: rgba(210, 153, 34, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .badge-total {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--bg-secondary);
+            z-index: 10;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            padding-right: 2rem;
+        }
+
+        .modal-focus {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .experiment-group {
+            margin-bottom: 2rem;
+        }
+
+        .experiment-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .group-header h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .group-count {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .experiment-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .experiment-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .experiment-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .experiment-header:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .experiment-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .experiment-section {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .experiment-toggle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+
+        .experiment-card.expanded .experiment-toggle {
+            transform: rotate(180deg);
+        }
+
+        .experiment-details {
+            display: none;
+            padding: 0 1rem 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .experiment-card.expanded .experiment-details {
+            display: block;
+        }
+
+        .detail-section {
+            margin-top: 1rem;
+        }
+
+        .detail-section h5 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-section p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .benchmarks-list, .baselines-list {
+            list-style: none;
+        }
+
+        .benchmarks-list li, .baselines-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .benchmarks-list li:last-child, .baselines-list li:last-child {
+            border-bottom: none;
+        }
+
+        .benchmark-name, .baseline-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .benchmark-variant, .baseline-desc {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .conclusion-box {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .main-finding {
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .supporting-findings {
+            list-style: disc;
+            margin-left: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .supporting-findings li {
+            margin-bottom: 0.25rem;
+        }
+
+        .winner-badge {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .papers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-overlay {
+                padding: 1rem;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Paper Experiments Viewer</h1>
+            <p>Explore experiments from research papers on neural SAT solving</p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="total-papers">0</div>
+                    <div class="stat-label">Papers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-experiments">0</div>
+                    <div class="stat-label">Experiments</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-main">0</div>
+                    <div class="stat-label">Main</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-ablation">0</div>
+                    <div class="stat-label">Ablation</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-filter">
+            <input type="text" id="search-input" placeholder="Search papers by title, focus, or experiment names...">
+        </div>
+
+        <div class="papers-grid" id="papers-grid">
+            <div class="loading">Loading experiment data...</div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2 class="modal-title" id="modal-title"></h2>
+                <p class="modal-focus" id="modal-focus"></p>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Paper data will be embedded here
+        const papersData = [];
+
+        // DOM elements
+        const papersGrid = document.getElementById('papers-grid');
+        const searchInput = document.getElementById('search-input');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modal = document.getElementById('modal');
+
+        // Parse YAML-like content from markdown files
+        function parseYamlContent(content) {
+            // Remove the ```yaml wrapper if present
+            content = content.replace(/^```yaml\s*/, '').replace(/```\s*$/, '');
+
+            const data = {
+                paper_title: '',
+                paper_focus: '',
+                experiment_inventory: {
+                    total_experiments: 0,
+                    main_experiments: 0,
+                    ablation_studies: 0,
+                    other_experiments: 0
+                },
+                experiments: {},
+                summary_table: []
+            };
+
+            // Extract paper_title
+            const titleMatch = content.match(/paper_title:\s*"([^"]+)"/);
+            if (titleMatch) data.paper_title = titleMatch[1];
+
+            // Extract paper_focus
+            const focusMatch = content.match(/paper_focus:\s*"([^"]+)"/);
+            if (focusMatch) data.paper_focus = focusMatch[1];
+
+            // Extract experiment counts
+            const totalMatch = content.match(/total_experiments:\s*["']?(\d+)["']?/);
+            const mainMatch = content.match(/main_experiments:\s*["']?(\d+)["']?/);
+            const ablationMatch = content.match(/ablation_studies:\s*["']?(\d+)["']?/);
+            const otherMatch = content.match(/other_experiments:\s*["']?(\d+)["']?/);
+
+            if (totalMatch) data.experiment_inventory.total_experiments = parseInt(totalMatch[1]);
+            if (mainMatch) data.experiment_inventory.main_experiments = parseInt(mainMatch[1]);
+            if (ablationMatch) data.experiment_inventory.ablation_studies = parseInt(ablationMatch[1]);
+            if (otherMatch) data.experiment_inventory.other_experiments = parseInt(otherMatch[1]);
+
+            // Extract experiments using regex
+            const expRegex = /exp_\d+:\s*\n([\s\S]*?)(?=\n\s*exp_\d+:|# === ABLATION|# === CROSS|$)/g;
+            let expMatch;
+            let expIndex = 1;
+
+            while ((expMatch = expRegex.exec(content)) !== null) {
+                const expContent = expMatch[1];
+                const exp = parseExperiment(expContent);
+                if (exp.name) {
+                    data.experiments[`exp_${expIndex}`] = exp;
+                    expIndex++;
+                }
+            }
+
+            return data;
+        }
+
+        function parseExperiment(content) {
+            const exp = {
+                name: '',
+                paper_section: '',
+                experiment_type: '',
+                purpose: '',
+                benchmarks: [],
+                baselines: [],
+                conclusion: {
+                    main_finding: '',
+                    supporting_findings: [],
+                    winner: ''
+                },
+                detailed_description: ''
+            };
+
+            // Extract name
+            const nameMatch = content.match(/name:\s*"([^"]+)"/);
+            if (nameMatch) exp.name = nameMatch[1];
+
+            // Extract paper_section
+            const sectionMatch = content.match(/paper_section:\s*"([^"]+)"/);
+            if (sectionMatch) exp.paper_section = sectionMatch[1];
+
+            // Extract experiment_type
+            const typeMatch = content.match(/experiment_type:\s*"?([^"\n]+)"?/);
+            if (typeMatch) exp.experiment_type = typeMatch[1].trim();
+
+            // Extract purpose
+            const purposeMatch = content.match(/purpose:\s*"([^"]+)"/);
+            if (purposeMatch) exp.purpose = purposeMatch[1];
+
+            // Extract benchmarks
+            const benchmarksSection = content.match(/benchmarks:\s*\n([\s\S]*?)(?=\n\s*baselines:|$)/);
+            if (benchmarksSection) {
+                const benchmarkRegex = /-\s*name:\s*"([^"]+)"[\s\S]*?(?:variant:\s*"([^"]+)")?[\s\S]*?(?:problem_sizes:\s*"([^"]+)")?/g;
+                let bmMatch;
+                while ((bmMatch = benchmarkRegex.exec(benchmarksSection[1])) !== null) {
+                    exp.benchmarks.push({
+                        name: bmMatch[1] || '',
+                        variant: bmMatch[2] || '',
+                        problem_sizes: bmMatch[3] || ''
+                    });
+                }
+            }
+
+            // Extract baselines
+            const baselinesSection = content.match(/baselines:\s*\n([\s\S]*?)(?=\n\s*conclusion:|$)/);
+            if (baselinesSection) {
+                const baselineRegex = /-\s*name:\s*"([^"]+)"[\s\S]*?(?:description:\s*"([^"]*)")?/g;
+                let blMatch;
+                while ((blMatch = baselineRegex.exec(baselinesSection[1])) !== null) {
+                    exp.baselines.push({
+                        name: blMatch[1] || '',
+                        description: blMatch[2] || ''
+                    });
+                }
+            }
+
+            // Extract conclusion
+            const mainFindingMatch = content.match(/main_finding:\s*"([^"]+)"/);
+            if (mainFindingMatch) exp.conclusion.main_finding = mainFindingMatch[1];
+
+            const winnerMatch = content.match(/winner:\s*"([^"]+)"/);
+            if (winnerMatch) exp.conclusion.winner = winnerMatch[1];
+
+            // Extract supporting findings
+            const supportingSection = content.match(/supporting_findings:\s*\n([\s\S]*?)(?=\n\s*winner:|$)/);
+            if (supportingSection) {
+                const findingRegex = /-\s*"([^"]+)"/g;
+                let sfMatch;
+                while ((sfMatch = findingRegex.exec(supportingSection[1])) !== null) {
+                    exp.conclusion.supporting_findings.push(sfMatch[1]);
+                }
+            }
+
+            // Extract detailed_description
+            const descMatch = content.match(/detailed_description:\s*\|\s*\n([\s\S]*?)(?=\n\s*exp_\d+:|# ===|$)/);
+            if (descMatch) {
+                exp.detailed_description = descMatch[1].trim().replace(/^\s{8}/gm, '');
+            }
+
+            return exp;
+        }
+
+        function renderPaperCard(paper, index) {
+            const inventory = paper.experiment_inventory || {};
+            return `
+                <div class="paper-card" onclick="openModal(${index})">
+                    <h3>${paper.paper_title || 'Untitled Paper'}</h3>
+                    <p class="paper-focus">${paper.paper_focus || 'No description available'}</p>
+                    <div class="paper-meta">
+                        <span class="badge badge-total">${inventory.total_experiments || 0} total</span>
+                        ${inventory.main_experiments ? `<span class="badge badge-main">${inventory.main_experiments} main</span>` : ''}
+                        ${inventory.ablation_studies ? `<span class="badge badge-ablation">${inventory.ablation_studies} ablation</span>` : ''}
+                        ${inventory.other_experiments ? `<span class="badge badge-other">${inventory.other_experiments} other</span>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function groupExperimentsByType(experiments) {
+            const groups = {
+                main_comparison: [],
+                ablation: [],
+                other: []
+            };
+
+            for (const [key, exp] of Object.entries(experiments)) {
+                const type = exp.experiment_type || 'other';
+                if (type.includes('main') || type.includes('comparison')) {
+                    groups.main_comparison.push(exp);
+                } else if (type.includes('ablation')) {
+                    groups.ablation.push(exp);
+                } else {
+                    groups.other.push(exp);
+                }
+            }
+
+            return groups;
+        }
+
+        function renderExperimentCard(exp, index) {
+            return `
+                <div class="experiment-card" id="exp-card-${index}">
+                    <div class="experiment-header" onclick="toggleExperiment(${index})">
+                        <div>
+                            <div class="experiment-name">${exp.name || 'Unnamed Experiment'}</div>
+                            <div class="experiment-section">${exp.paper_section || ''}</div>
+                        </div>
+                        <span class="experiment-toggle">&#9660;</span>
+                    </div>
+                    <div class="experiment-details">
+                        ${exp.purpose ? `
+                            <div class="detail-section">
+                                <h5>Purpose</h5>
+                                <p>${exp.purpose}</p>
+                            </div>
+                        ` : ''}
+
+                        ${exp.benchmarks && exp.benchmarks.length > 0 ? `
+                            <div class="detail-section">
+                                <h5>Benchmarks</h5>
+                                <ul class="benchmarks-list">
+                                    ${exp.benchmarks.map(b => `
+                                        <li>
+                                            <div class="benchmark-name">${b.name}</div>
+                                            ${b.variant ? `<div class="benchmark-variant">Variant: ${b.variant}</div>` : ''}
+                                            ${b.problem_sizes ? `<div class="benchmark-variant">Size: ${b.problem_sizes}</div>` : ''}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+
+                        ${exp.baselines && exp.baselines.length > 0 ? `
+                            <div class="detail-section">
+                                <h5>Baselines</h5>
+                                <ul class="baselines-list">
+                                    ${exp.baselines.map(b => `
+                                        <li>
+                                            <div class="baseline-name">${b.name}</div>
+                                            ${b.description ? `<div class="baseline-desc">${b.description}</div>` : ''}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+
+                        ${exp.conclusion && exp.conclusion.main_finding ? `
+                            <div class="detail-section">
+                                <h5>Conclusion</h5>
+                                <div class="conclusion-box">
+                                    <p class="main-finding">${exp.conclusion.main_finding}</p>
+                                    ${exp.conclusion.supporting_findings && exp.conclusion.supporting_findings.length > 0 ? `
+                                        <ul class="supporting-findings">
+                                            ${exp.conclusion.supporting_findings.map(f => `<li>${f}</li>`).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    ${exp.conclusion.winner ? `
+                                        <span class="winner-badge">Winner: ${exp.conclusion.winner}</span>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderExperimentGroups(experiments) {
+            const groups = groupExperimentsByType(experiments);
+            let html = '';
+            let globalIndex = 0;
+
+            const groupLabels = {
+                main_comparison: { label: 'Main Experiments', icon: '&#9679;' },
+                ablation: { label: 'Ablation Studies', icon: '&#9675;' },
+                other: { label: 'Other Experiments', icon: '&#9674;' }
+            };
+
+            for (const [groupKey, exps] of Object.entries(groups)) {
+                if (exps.length > 0) {
+                    const groupInfo = groupLabels[groupKey];
+                    html += `
+                        <div class="experiment-group">
+                            <div class="group-header">
+                                <h4>${groupInfo.label}</h4>
+                                <span class="group-count">${exps.length}</span>
+                            </div>
+                            ${exps.map(exp => renderExperimentCard(exp, globalIndex++)).join('')}
+                        </div>
+                    `;
+                }
+            }
+
+            return html || '<p class="no-results">No experiments found</p>';
+        }
+
+        function openModal(index) {
+            const paper = papersData[index];
+            document.getElementById('modal-title').textContent = paper.paper_title || 'Untitled Paper';
+            document.getElementById('modal-focus').textContent = paper.paper_focus || '';
+            document.getElementById('modal-body').innerHTML = renderExperimentGroups(paper.experiments || {});
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function toggleExperiment(index) {
+            const card = document.getElementById(`exp-card-${index}`);
+            card.classList.toggle('expanded');
+        }
+
+        function filterPapers(query) {
+            query = query.toLowerCase();
+            return papersData.filter(paper => {
+                const title = (paper.paper_title || '').toLowerCase();
+                const focus = (paper.paper_focus || '').toLowerCase();
+                const experiments = Object.values(paper.experiments || {})
+                    .map(e => (e.name || '').toLowerCase())
+                    .join(' ');
+                return title.includes(query) || focus.includes(query) || experiments.includes(query);
+            });
+        }
+
+        function renderPapers(papers) {
+            if (papers.length === 0) {
+                papersGrid.innerHTML = '<div class="no-results">No papers found matching your search.</div>';
+                return;
+            }
+            papersGrid.innerHTML = papers.map((paper, index) => {
+                const realIndex = papersData.indexOf(paper);
+                return renderPaperCard(paper, realIndex);
+            }).join('');
+        }
+
+        function updateStats() {
+            let totalPapers = papersData.length;
+            let totalExperiments = 0;
+            let totalMain = 0;
+            let totalAblation = 0;
+
+            papersData.forEach(paper => {
+                const inv = paper.experiment_inventory || {};
+                totalExperiments += inv.total_experiments || 0;
+                totalMain += inv.main_experiments || 0;
+                totalAblation += inv.ablation_studies || 0;
+            });
+
+            document.getElementById('total-papers').textContent = totalPapers;
+            document.getElementById('total-experiments').textContent = totalExperiments;
+            document.getElementById('total-main').textContent = totalMain;
+            document.getElementById('total-ablation').textContent = totalAblation;
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value;
+            const filtered = query ? filterPapers(query) : papersData;
+            renderPapers(filtered);
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Embedded data - will be filled by the generator script
+        const embeddedData = PAPERS_DATA_PLACEHOLDER;
+
+        // Initialize
+        function init() {
+            if (embeddedData && embeddedData.length > 0) {
+                papersData.push(...embeddedData);
+                renderPapers(papersData);
+                updateStats();
+            } else {
+                papersGrid.innerHTML = '<div class="no-results">No data loaded. Please run the data generator script.</div>';
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

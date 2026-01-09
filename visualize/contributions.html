@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contribution Visualizations</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Contribution Cluster Visualizations</h1>
+    <p>Explore 131 contributions from 21 papers, organized into 10 clusters</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">131</div>
+      <div class="stat-label">Contributions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">21</div>
+      <div class="stat-label">Papers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">10</div>
+      <div class="stat-label">Clusters</div>
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: 20px;">Choose a Visualization</h2>
+
+  <div class="viz-grid">
+    <a href="cluster-cards.html" class="viz-card">
+      <h3>1. Cluster Cards</h3>
+      <p>Expandable cards for each cluster. Click to reveal all contributions within that category.</p>
+      <span class="viz-card-focus">Focus: By Cluster</span>
+    </a>
+
+    <a href="paper-table.html" class="viz-card">
+      <h3>2. Paper Table</h3>
+      <p>Tabular view organized by paper. See how each paper contributes across different clusters.</p>
+      <span class="viz-card-focus">Focus: By Paper</span>
+    </a>
+
+    <a href="matrix.html" class="viz-card">
+      <h3>3. Matrix Heatmap</h3>
+      <p>Papers vs Clusters matrix. Quickly spot which papers are specialists or generalists.</p>
+      <span class="viz-card-focus">Focus: Cross-reference</span>
+    </a>
+
+    <a href="treemap.html" class="viz-card">
+      <h3>4. Treemap Boxes</h3>
+      <p>Visual hierarchy showing cluster sizes and paper distributions within each cluster.</p>
+      <span class="viz-card-focus">Focus: Proportions</span>
+    </a>
+
+    <a href="gallery.html" class="viz-card">
+      <h3>5. Searchable Gallery</h3>
+      <p>Filter and search all contributions. Find specific innovations by keyword, cluster, or paper.</p>
+      <span class="viz-card-focus">Focus: Search & Filter</span>
+    </a>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // Display actual stats from data
+    const clusters = Object.keys(DATA);
+    const contributions = clusters.reduce((sum, c) => sum + DATA[c].contributions.length, 0);
+    const papers = new Set(clusters.flatMap(c => DATA[c].contributions.map(x => x.paper_name))).size;
+
+    document.querySelectorAll('.stat-value')[0].textContent = contributions;
+    document.querySelectorAll('.stat-value')[1].textContent = papers;
+    document.querySelectorAll('.stat-value')[2].textContent = clusters.length;
+  </script>
+</body>
+</html>

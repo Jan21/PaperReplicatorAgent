@@ -3,6 +3,9 @@
 
 $schema: ../DeepCode/schema/mcp-agent.config.schema.json
 
+# Workflow selection: plan_generator | experiment_extractor
+workflow: contribution_extractor
+
 # Execution engine
 execution_engine: asyncio
 #execution_engine: temporal
@@ -52,7 +55,7 @@ llm_provider: "openai"
 openai:
   base_max_tokens: 40000
   retry_max_tokens: 32768
-  default_model: anthropic/claude-sonnet-4.5
+  default_model: deepseek/deepseek-v3.2
   reasoning_effort: high
 
 # Anthropic configuration (used when llm_provider: anthropic)
@@ -92,8 +95,5 @@ llm_params:
   temperature: 0.3
   max_iterations: 10
 
-# Agent tool servers (empty = no tools)
-agent_servers:
-  concept_analysis: []
-  algorithm_analysis: []
-  code_planner: []
+# Workflow configs are in config/workflows/*.yaml
+# Available workflows: plan_generator, experiment_extractor

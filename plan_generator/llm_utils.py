@@ -6,7 +6,7 @@ Provides functions for configuration and LLM settings.
 
 import os
 import yaml
-from typing import Tuple, Dict, List
+from typing import Tuple
 from pathlib import Path
 
 from mcp_agent.workflows.llm.augmented_llm_openai import OpenAIAugmentedLLM
@@ -156,18 +156,15 @@ def get_tracing_config() -> Tuple[bool, str, str]:
     return enabled, project_name, endpoint
 
 
-def get_agent_servers() -> Dict[str, List[str]]:
+def get_model_name() -> str:
     """
-    Get agent server configurations from config.
+    Get the default model name from config based on active provider.
 
     Returns:
-        dict: mapping of agent name to list of server names
+        str: Model name (e.g., 'deepseek/deepseek-v3.2', 'claude-sonnet-4-5-20250929')
     """
     config = _load_config()
-    agent_servers = config.get("agent_servers", {})
+    provider = get_llm_provider()
+    provider_config = config.get(provider, {})
 
-    return {
-        "concept_analysis": agent_servers.get("concept_analysis", []),
-        "algorithm_analysis": agent_servers.get("algorithm_analysis", []),
-        "code_planner": agent_servers.get("code_planner", []),
-    }
+    return provider_config.get("default_model", "unknown")

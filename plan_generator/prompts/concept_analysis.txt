@@ -1,19 +1,14 @@
-"""Concept analysis prompt sections and assembled prompt."""
+You are doing a COMPREHENSIVE analysis of a research paper to understand its complete structure, contributions, and implementation requirements.
 
-INTRO = (
-    "You are doing a COMPREHENSIVE analysis of a research paper to understand its "
-    "complete structure, contributions, and implementation requirements."
-)
+# OBJECTIVE
+Map out the ENTIRE paper structure and identify ALL components that need implementation for successful reproduction.
 
-OBJECTIVE = """# OBJECTIVE
-Map out the ENTIRE paper structure and identify ALL components that need implementation for successful reproduction."""
-
-DOC_READING_STRATEGY = """# DOCUMENT READING STRATEGY
+# DOCUMENT READING STRATEGY
 
 ## TRADITIONAL APPROACH: Complete Document Analysis
-Read the entire document systematically to ensure comprehensive understanding:"""
+Read the entire document systematically to ensure comprehensive understanding:
 
-ANALYSIS_PROTOCOL = """# COMPREHENSIVE ANALYSIS PROTOCOL
+# COMPREHENSIVE ANALYSIS PROTOCOL
 
 ## 1. COMPLETE PAPER STRUCTURAL ANALYSIS
 Create a full map of the document:
@@ -136,9 +131,8 @@ success_criteria:
     - "[Specific figure/table to reproduce]"
     - "[Qualitative behavior to demonstrate]"
 ```
-"""
 
-OUTPUT_FORMAT = """# OUTPUT FORMAT
+# OUTPUT FORMAT
 ```yaml
 comprehensive_paper_analysis:
   executive_summary:
@@ -167,14 +161,4 @@ comprehensive_paper_analysis:
     - "[ ] [Metric to match]"
 ```
 
-BE THOROUGH. Miss nothing. The output should be a complete blueprint for reproduction."""
-
-PAPER_CONCEPT_ANALYSIS_PROMPT = "\n\n".join(
-    [
-        INTRO,
-        OBJECTIVE,
-        DOC_READING_STRATEGY,
-        ANALYSIS_PROTOCOL,
-        OUTPUT_FORMAT,
-    ]
-)
+BE THOROUGH. Miss nothing. The output should be a complete blueprint for reproduction.

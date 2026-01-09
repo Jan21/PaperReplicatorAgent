@@ -1,5 +1,6 @@
 papers
 plan_generator/mcp_agent.secrets.yaml
+outputs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

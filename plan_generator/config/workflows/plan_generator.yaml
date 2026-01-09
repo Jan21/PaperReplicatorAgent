@@ -1,0 +1,18 @@
+# Plan Generator Workflow
+# Fan-out/fan-in workflow using ParallelLLM with 3 agents
+
+type: parallel
+
+fan_out_agents:
+  - name: ConceptAnalysisAgent
+    prompt: concept_analysis  # Loads from prompts/concept_analysis.py
+    tools: []
+
+  - name: AlgorithmAnalysisAgent
+    prompt: algorithm_analysis  # Loads from prompts/algorithm_analysis.py
+    tools: []
+
+fan_in_agent:
+  name: CodePlannerAgent
+  prompt: code_planning  # Loads from prompts/code_planning.py
+  tools: []

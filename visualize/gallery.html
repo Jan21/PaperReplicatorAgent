@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searchable Gallery View</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .filters {
+        grid-template-columns: 1fr;
+      }
+    }
+    .filter-clusters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cluster-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      background: var(--bg-color);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .cluster-checkbox:hover {
+      background: var(--primary-light);
+    }
+    .cluster-checkbox input {
+      cursor: pointer;
+    }
+    .active-filters {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .clear-filters {
+      color: var(--primary);
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .clear-filters:hover {
+      text-decoration: underline;
+    }
+    .result-count {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .gallery-card {
+      transition: opacity 0.2s;
+    }
+    .gallery-card.hidden {
+      display: none;
+    }
+    .gallery-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .gallery-card-cluster {
+      flex-shrink: 0;
+    }
+    .gallery-card-evidence {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .highlight {
+      background: #fef08a;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="nav-back">&larr; Back to all views</a>
+
+  <div class="header">
+    <h1>Searchable Gallery View</h1>
+    <p>Filter by cluster, paper, or search by keyword</p>
+  </div>
+
+  <div class="filters">
+    <div>
+      <div class="filter-group">
+        <label class="filter-label">Search by keyword</label>
+        <input type="text" class="search-input" id="search" placeholder="Type to search innovations and problems...">
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Filter by paper</label>
+        <select id="paper-filter">
+          <option value="">All papers</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Filter by cluster</label>
+      <div class="filter-clusters" id="cluster-filters"></div>
+    </div>
+  </div>
+
+  <div class="active-filters" id="active-filters"></div>
+
+  <div class="result-count" id="result-count"></div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <script src="data.js"></script>
+  <script>
+    const clusterColors = [
+      { bg: '#dbeafe', text: '#1e40af' },
+      { bg: '#d1fae5', text: '#065f46' },
+      { bg: '#fef3c7', text: '#92400e' },
+      { bg: '#fee2e2', text: '#991b1b' },
+      { bg: '#ede9fe', text: '#5b21b6' },
+      { bg: '#fce7f3', text: '#9d174d' },
+      { bg: '#cffafe', text: '#0e7490' },
+      { bg: '#ecfccb', text: '#3f6212' },
+      { bg: '#ffedd5', text: '#9a3412' },
+      { bg: '#e0e7ff', text: '#3730a3' }
+    ];
+
+    const clusterNames = Object.keys(DATA).sort();
+    const clusterColorMap = {};
+    clusterNames.forEach((cn, i) => {
+      clusterColorMap[cn] = clusterColors[i % clusterColors.length];
+    });
+
+    // Collect all contributions
+    const allContributions = [];
+    clusterNames.forEach(clusterName => {
+      DATA[clusterName].contributions.forEach(c => {
+        allContributions.push({ ...c, cluster: clusterName });
+      });
+    });
+
+    // Get unique papers
+    const papers = [...new Set(allContributions.map(c => c.paper_name))].sort();
+
+    // Populate paper filter
+    const paperFilter = document.getElementById('paper-filter');
+    papers.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p;
+      opt.textContent = p;
+      paperFilter.appendChild(opt);
+    });
+
+    // Populate cluster filters
+    const clusterFilters = document.getElementById('cluster-filters');
+    clusterNames.forEach(cn => {
+      const label = document.createElement('label');
+      label.className = 'cluster-checkbox';
+      label.innerHTML = `<input type="checkbox" value="${cn}" checked> ${cn}`;
+      clusterFilters.appendChild(label);
+    });
+
+    // Build gallery
+    const gallery = document.getElementById('gallery');
+    allContributions.forEach((c, idx) => {
+      const color = clusterColorMap[c.cluster];
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.dataset.cluster = c.cluster;
+      card.dataset.paper = c.paper_name;
+      card.dataset.index = idx;
+      card.innerHTML = `
+        <div class="gallery-card-header">
+          <div class="gallery-card-paper">${c.paper_name}</div>
+          <span class="gallery-card-cluster" style="background: ${color.bg}; color: ${color.text};">${c.cluster}</span>
+        </div>
+        <div class="gallery-card-type">${c.contribution_type}</div>
+        <div class="gallery-card-innovation" data-original="${c.specific_innovation}">${c.specific_innovation}</div>
+        ${c.problem_addressed ? `<div class="gallery-card-problem" data-original="${c.problem_addressed}"><strong>Problem:</strong> ${c.problem_addressed}</div>` : ''}
+        <div class="gallery-card-more" onclick="toggleDetails(this)">Show more</div>
+        <div class="gallery-card-details">
+          ${c.evidence_location ? `<div><strong>Evidence:</strong> ${c.evidence_location}</div>` : ''}
+          ${c.comment ? `<div><strong>Comment:</strong> ${c.comment}</div>` : ''}
+          <div><strong>Source:</strong> ${c.source_file}</div>
+        </div>
+      `;
+      gallery.appendChild(card);
+    });
+
+    function toggleDetails(btn) {
+      const card = btn.closest('.gallery-card');
+      card.classList.toggle('expanded');
+      btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Show more';
+    }
+
+    // Filter logic
+    const searchInput = document.getElementById('search');
+    const resultCount = document.getElementById('result-count');
+    const activeFiltersDiv = document.getElementById('active-filters');
+
+    function applyFilters() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedPaper = paperFilter.value;
+      const selectedClusters = Array.from(
+        document.querySelectorAll('#cluster-filters input:checked')
+      ).map(cb => cb.value);
+
+      let visibleCount = 0;
+
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        const cluster = card.dataset.cluster;
+        const paper = card.dataset.paper;
+
+        const innovationEl = card.querySelector('.gallery-card-innovation');
+        const problemEl = card.querySelector('.gallery-card-problem');
+
+        const innovation = innovationEl.dataset.original || innovationEl.textContent;
+        const problem = problemEl ? (problemEl.dataset.original || problemEl.textContent) : '';
+
+        const matchesCluster = selectedClusters.includes(cluster);
+        const matchesPaper = !selectedPaper || paper === selectedPaper;
+        const matchesSearch = !searchTerm ||
+          innovation.toLowerCase().includes(searchTerm) ||
+          problem.toLowerCase().includes(searchTerm);
+
+        if (matchesCluster && matchesPaper && matchesSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+
+          // Highlight search term
+          if (searchTerm) {
+            innovationEl.innerHTML = highlightText(innovation, searchTerm);
+            if (problemEl) {
+              problemEl.innerHTML = '<strong>Problem:</strong> ' + highlightText(problem.replace('<strong>Problem:</strong> ', ''), searchTerm);
+            }
+          } else {
+            innovationEl.innerHTML = innovation;
+            if (problemEl) {
+              problemEl.innerHTML = '<strong>Problem:</strong> ' + problem.replace('<strong>Problem:</strong> ', '');
+            }
+          }
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      resultCount.textContent = `Showing ${visibleCount} of ${allContributions.length} contributions`;
+
+      // Active filters summary
+      const filters = [];
+      if (searchTerm) filters.push(`Search: "${searchTerm}"`);
+      if (selectedPaper) filters.push(`Paper: ${selectedPaper.substring(0, 30)}...`);
+      if (selectedClusters.length < clusterNames.length) {
+        filters.push(`${selectedClusters.length} cluster(s) selected`);
+      }
+
+      if (filters.length > 0) {
+        activeFiltersDiv.innerHTML = `Active filters: ${filters.join(' | ')} <span class="clear-filters" onclick="clearFilters()">Clear all</span>`;
+      } else {
+        activeFiltersDiv.innerHTML = '';
+      }
+    }
+
+    function highlightText(text, term) {
+      if (!term) return text;
+      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function clearFilters() {
+      searchInput.value = '';
+      paperFilter.value = '';
+      document.querySelectorAll('#cluster-filters input').forEach(cb => cb.checked = true);
+      applyFilters();
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', applyFilters);
+    paperFilter.addEventListener('change', applyFilters);
+    clusterFilters.addEventListener('change', applyFilters);
+
+    // Initial apply
+    applyFilters();
+  </script>
+</body>
+</html>
