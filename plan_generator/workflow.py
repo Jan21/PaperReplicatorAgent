@@ -1,200 +1,38 @@
 """
-Code Analysis Workflow.
+Paper Analysis Workflow.
 
-This module defines the code analysis workflow that runs on either
-asyncio or Temporal depending on the execution_engine config setting.
+Config-driven workflow dispatcher that loads workflow definitions from YAML files.
 
 Usage:
     python -m plan_generator.workflow --paper-dir ./papers/my_paper
 
-Or programmatically:
-    from plan_generator.workflow import app, main
-    import asyncio
-    asyncio.run(main("/path/to/paper_dir"))
+Workflows are defined in config/workflows/*.yaml
 """
 
+import asyncio
 import os
 import sys
-import re
 import argparse
 from pathlib import Path
 
 from mcp_agent.app import MCPApp
-from mcp_agent.agents.agent import Agent
-from mcp_agent.executor.workflow import Workflow, WorkflowResult
-from mcp_agent.workflows.llm.augmented_llm import RequestParams
-from mcp_agent.workflows.parallel.parallel_llm import ParallelLLM
+
 from .tracing import setup_tracing, workflow_span
-from .prompts import (
-    PAPER_ALGORITHM_ANALYSIS_PROMPT,
-    PAPER_CONCEPT_ANALYSIS_PROMPT,
-    CODE_PLANNING_PROMPT,
-)
-from .llm_utils import (
-    get_token_limits,
-    get_llm_params,
-    get_tracing_config,
-    get_agent_servers,
-    get_llm_class,
-    setup_llm_api_keys,
-)
+from .llm_utils import get_tracing_config, setup_llm_api_keys
+from .workflows.base import get_workflow_config
+from .workflows.runner import create_workflow
 
 
-def extract_page_number(filename: str) -> int:
-    """Extract page number from filename like 'paper_page_1.txt' -> 1"""
-    match = re.search(r'_page_(\d+)\.txt$', filename)
-    if match:
-        return int(match.group(1))
-    return -1
-
-
-# Get the path to the config file in this module's directory
 _MODULE_DIR = Path(__file__).parent
 _CONFIG_PATH = str(_MODULE_DIR / "mcp_agent.config.yaml")
 
-# Create the MCPApp instance with explicit config path
-# This works with both asyncio and temporal execution engines
-app = MCPApp(name="code_analyzer", settings=_CONFIG_PATH)
-
-
-@app.workflow
-class AnalyzePaperWorkflow(Workflow[str]):
-    """
-    Workflow for analyzing research papers and generating implementation plans.
-
-    This workflow orchestrates three specialized agents:
-    - ConceptAnalysisAgent: Analyzes system architecture and conceptual framework
-    - AlgorithmAnalysisAgent: Extracts algorithms, formulas, and technical details
-    - CodePlannerAgent: Integrates outputs into a comprehensive implementation plan
-    """
-
-    @app.workflow_run
-    async def run(self, paper_dir: str) -> WorkflowResult[str]:
-        """
-        Execute the code analysis workflow.
-
-        Args:
-            paper_dir: Directory path containing the research paper page files (*_page_N.txt)
-
-        Returns:
-            WorkflowResult containing the YAML implementation plan
-        """
-        print(f"Code analysis workflow started")
-        print(f"   Paper directory: {paper_dir}")
-
-        # STEP 1: Read paper files
-        paper_content = None
-
-        try:
-            # Find all .txt page files and sort by page number
-            txt_files = []
-            for filename in os.listdir(paper_dir):
-                if filename.endswith(".txt") and "_page_" in filename:
-                    page_num = extract_page_number(filename)
-                    if page_num > 0:
-                        txt_files.append((page_num, filename))
-
-            # Sort by page number
-            txt_files.sort(key=lambda x: x[0])
-
-            # Concatenate all pages in order
-            paper_parts = []
-            for page_num, filename in txt_files:
-                file_path = os.path.join(paper_dir, filename)
-                with open(file_path, "r", encoding="utf-8") as f:
-                    paper_parts.append(f.read())
-
-            paper_content = "\n\n\n".join(paper_parts)
-
-            if paper_content:
-                print(f"Loaded {len(txt_files)} page(s) from {paper_dir} ({len(paper_content)} chars)")
-            else:
-                return WorkflowResult(value="No paper page files found")
-
-        except Exception as e:
-            print(f"Error reading paper files: {e}")
-            return WorkflowResult(value=f"Error reading paper: {e}")
-
-        # STEP 2: Configure agents from config
-        servers = get_agent_servers()
-        concept_servers = servers["concept_analysis"]
-        algorithm_servers = servers["algorithm_analysis"]
-        planner_servers = servers["code_planner"]
-
-        print(f"   Agent configurations:")
-        print(f"     ConceptAnalysis: {concept_servers or 'no tools'}")
-        print(f"     AlgorithmAnalysis: {algorithm_servers or 'no tools'}")
-        print(f"     CodePlanner: {planner_servers or 'no tools'}")
-
-        concept_analysis_agent = Agent(
-            name="ConceptAnalysisAgent",
-            instruction=PAPER_CONCEPT_ANALYSIS_PROMPT,
-            server_names=concept_servers,
-        )
-        algorithm_analysis_agent = Agent(
-            name="AlgorithmAnalysisAgent",
-            instruction=PAPER_ALGORITHM_ANALYSIS_PROMPT,
-            server_names=algorithm_servers,
-        )
-        code_planner_agent = Agent(
-            name="CodePlannerAgent",
-            instruction=CODE_PLANNING_PROMPT,
-            server_names=planner_servers,
-        )
-
-        code_aggregator_agent = ParallelLLM(
-            fan_in_agent=code_planner_agent,
-            fan_out_agents=[concept_analysis_agent, algorithm_analysis_agent],
-            llm_factory=get_llm_class(),
-        )
-
-        base_max_tokens, _ = get_token_limits()
-        temperature, max_iterations = get_llm_params()
-
-        # STEP 3: Configure request parameters
-        enhanced_params = RequestParams(
-            maxTokens=base_max_tokens,
-            temperature=temperature,
-            max_iterations=max_iterations,
-        )
-
-        # STEP 4: Construct message with paper content
-        message = f"""Analyze the research paper provided below. The paper file has been pre-loaded for you.
-
-=== PAPER CONTENT START ===
-{paper_content}
-=== PAPER CONTENT END ===
-
-Based on this paper, generate a comprehensive code reproduction plan that includes:
-
-1. Complete system architecture and component breakdown
-2. All algorithms, formulas, and implementation details
-3. Detailed file structure and implementation roadmap
-
-You may use web search (brave_web_search) if you need clarification on algorithms, methods, or concepts.
-
-The goal is to create a reproduction plan detailed enough for independent implementation."""
-
-        # STEP 5: Execute the analysis
-        print("Executing code analysis via ParallelLLM...")
-        result = await code_aggregator_agent.generate_str(
-            message=message, request_params=enhanced_params
-        )
-
-        print(f"Code analysis completed (length: {len(result)} chars)")
-        return WorkflowResult(value=result)
+app = MCPApp(name="paper_analyzer", settings=_CONFIG_PATH)
 
 
 async def run_workflow(paper_dir: str, output_file: str = None):
-    """
-    Run the analysis workflow and optionally save results.
-
-    Works with both asyncio and temporal execution engines automatically.
-    """
-    # Setup API keys from secrets
+    """Run the configured workflow and optionally save results."""
     setup_llm_api_keys()
 
-    # Initialize Phoenix tracing from config
     tracing_enabled, tracing_project, tracing_endpoint = get_tracing_config()
     setup_tracing(
         enabled=tracing_enabled,
@@ -202,25 +40,17 @@ async def run_workflow(paper_dir: str, output_file: str = None):
         endpoint=tracing_endpoint
     )
 
-    with workflow_span("analyze-paper-workflow", paper_dir=paper_dir):
-        async with app.run() as running_app:
-            executor = running_app.executor
+    workflow_name = get_workflow_config()
+    print(f"Running workflow: {workflow_name}")
 
-            # Check if we're using Temporal or asyncio executor
-            if hasattr(executor, 'execute_workflow'):
-                # Temporal executor - use execute_workflow
-                result = await executor.execute_workflow(
-                    "AnalyzePaperWorkflow",
-                    paper_dir
-                )
-            else:
-                # Asyncio executor - instantiate workflow and run directly
-                workflow = AnalyzePaperWorkflow()
-                workflow_result = await workflow.run(paper_dir)
-                result = workflow_result.value if hasattr(workflow_result, 'value') else workflow_result
+    with workflow_span(f"{workflow_name}-workflow", paper_dir=paper_dir):
+        async with app.run() as running_app:
+            workflow = create_workflow(workflow_name)
+            workflow_result = await workflow.run(paper_dir)
+            result = workflow_result.value if hasattr(workflow_result, 'value') else workflow_result
 
         print("\n" + "=" * 80)
-        print("=== ANALYSIS RESULT ===")
+        print("=== RESULT ===")
         print("=" * 80)
         print(result)
         print("=" * 80)
@@ -233,25 +63,79 @@ async def run_workflow(paper_dir: str, output_file: str = None):
         return result
 
 
+async def run_workflow_batch(papers: list[tuple[str, str]]):
+    """Run workflow for multiple papers concurrently within a single app context.
+
+    Args:
+        papers: List of (paper_dir, output_file) tuples
+
+    Returns:
+        List of (paper_dir, success, result_or_error) tuples
+    """
+    setup_llm_api_keys()
+
+    tracing_enabled, tracing_project, tracing_endpoint = get_tracing_config()
+    setup_tracing(
+        enabled=tracing_enabled,
+        project_name=tracing_project,
+        endpoint=tracing_endpoint
+    )
+
+    workflow_name = get_workflow_config()
+    print(f"Running workflow: {workflow_name}")
+
+    async def process_single(paper_dir: str, output_file: str):
+        """Process a single paper within the shared app context."""
+        with workflow_span(f"{workflow_name}-workflow", paper_dir=paper_dir):
+            try:
+                workflow = create_workflow(workflow_name)
+                workflow_result = await workflow.run(paper_dir)
+                result = workflow_result.value if hasattr(workflow_result, 'value') else workflow_result
+
+                print(f"\nWorkflow completed (length: {len(result)} chars)")
+
+                if output_file:
+                    with open(output_file, "w", encoding="utf-8") as f:
+                        f.write(result)
+                    print(f"Result saved to {output_file}")
+
+                return paper_dir, True, result
+            except Exception as e:
+                print(f"Error processing {paper_dir}: {e}")
+                return paper_dir, False, str(e)
+
+    async with app.run() as running_app:
+        tasks = [process_single(paper_dir, output_file) for paper_dir, output_file in papers]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        # Handle any exceptions from gather itself
+        processed_results = []
+        for i, result in enumerate(results):
+            if isinstance(result, Exception):
+                paper_dir = papers[i][0]
+                processed_results.append((paper_dir, False, str(result)))
+            else:
+                processed_results.append(result)
+
+        return processed_results
+
+
 if __name__ == "__main__":
     import asyncio
 
-    parser = argparse.ArgumentParser(description="Analyze research paper and generate implementation plan")
-    parser.add_argument("--paper-dir", required=True, help="Directory containing paper page files (*_page_N.txt)")
-    parser.add_argument("--output", "-o", help="Output file path for the result")
+    parser = argparse.ArgumentParser(description="Analyze research paper using configured workflow")
+    parser.add_argument("--paper-dir", required=True, help="Directory containing paper page files")
+    parser.add_argument("--output", "-o", help="Output file path")
     args = parser.parse_args()
 
-    # Verify directory exists
     if not os.path.isdir(args.paper_dir):
         print(f"Error: Directory does not exist: {args.paper_dir}")
         sys.exit(1)
 
-    # Verify it contains page files
     page_files = [f for f in os.listdir(args.paper_dir) if f.endswith('.txt') and '_page_' in f]
     if not page_files:
         print(f"Error: No page files (*_page_N.txt) found in: {args.paper_dir}")
         sys.exit(1)
 
     print(f"Found {len(page_files)} page file(s)")
-
     asyncio.run(run_workflow(args.paper_dir, args.output))
